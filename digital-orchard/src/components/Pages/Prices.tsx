@@ -45,15 +45,15 @@ export const PricesPage = () => {
   }, [stateFilter]);
 
   return (
-    <div className="pt-32 px-10 min-h-screen bg-background text-white pb-24">
+    <div className="pt-32 px-6 md:px-10 min-h-screen bg-background text-white pb-24">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12 mb-16">
           <div className="space-y-4">
-            <h1 className="display text-6xl font-black uppercase tracking-tighter">
+            <h1 className="display text-4xl md:text-6xl font-black uppercase tracking-tighter">
               {activeTab === 'commodities' ? t('prices') : 'Markets'}<span className="text-primary">.</span>
             </h1>
-            <p className="text-foreground-muted uppercase tracking-[3px] text-sm font-bold">
+            <p className="text-foreground-muted uppercase tracking-[2px] md:tracking-[3px] text-[10px] md:text-sm font-bold">
               {activeTab === 'commodities' ? 'Real-time Commodity Arbitration Feed' : 'Global Node Directory for Indian Agriculture'}
             </p>
           </div>
@@ -91,8 +91,8 @@ export const PricesPage = () => {
 
         {/* Filters Bar (Only for Markets) */}
         {activeTab === 'markets' && (
-          <div className="flex flex-wrap gap-4 mb-8 p-6 bg-[#080808] border border-white/5 items-center">
-            <div className="flex items-center gap-2 text-[10px] font-black text-white/30 uppercase tracking-widest mr-4">
+          <div className="flex flex-wrap gap-3 md:gap-4 mb-8 p-4 md:p-6 bg-[#080808] border border-white/5 items-center">
+            <div className="flex items-center gap-2 text-[9px] md:text-[10px] font-black text-white/30 uppercase tracking-widest mr-4">
               <Filter size={12} className="text-primary" />
               <span>Advanced Filters</span>
             </div>
@@ -100,7 +100,7 @@ export const PricesPage = () => {
             <select 
               value={stateFilter}
               onChange={(e) => { setStateFilter(e.target.value); setDistrictFilter(''); setCurrentPage(1); }}
-              className="bg-black border border-white/10 px-4 py-2 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest"
+              className="flex-1 md:flex-none bg-black border border-white/10 px-4 py-2 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest"
               title="Filter by State"
             >
               <option value="" className="bg-[#0D0D0D]">All States</option>
@@ -110,14 +110,14 @@ export const PricesPage = () => {
             <select 
               value={districtFilter}
               onChange={(e) => { setDistrictFilter(e.target.value); setCurrentPage(1); }}
-              className="bg-black border border-white/10 px-4 py-2 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest"
+              className="flex-1 md:flex-none bg-black border border-white/10 px-4 py-2 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest"
               title="Filter by District"
             >
               <option value="" className="bg-[#0D0D0D]">All Districts</option>
               {districts.map(d => <option key={d} value={d} className="bg-[#0D0D0D]">{d}</option>)}
             </select>
 
-            <div className="ml-auto mono text-[10px] text-primary font-black uppercase tracking-widest">
+            <div className="w-full md:w-auto md:ml-auto mono text-[9px] md:text-[10px] text-primary font-black uppercase tracking-widest text-center">
               {filteredMarkets.length} Nodes Found
             </div>
           </div>

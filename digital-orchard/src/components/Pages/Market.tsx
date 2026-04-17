@@ -45,15 +45,15 @@ export const MarketPage = () => {
   }, [filteredNodes, currentPage]);
 
   return (
-    <div className="pt-32 px-10 min-h-screen bg-background text-white pb-24">
+    <div className="pt-32 px-6 md:px-10 min-h-screen bg-background text-white pb-24">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
           <div className="space-y-4">
-            <h1 className="display text-6xl font-black uppercase tracking-tighter">
+            <h1 className="display text-4xl md:text-6xl font-black uppercase tracking-tighter">
               {t('market')}<span className="text-primary">.</span>
             </h1>
-            <p className="text-foreground-muted uppercase tracking-[3px] text-sm font-bold opacity-60">Industrial Procurement & Logistics Protocol</p>
+            <p className="text-foreground-muted uppercase tracking-[2px] md:tracking-[3px] text-[10px] md:text-sm font-bold opacity-60">Industrial Procurement & Logistics Protocol</p>
           </div>
           
           <div className="w-full md:w-96 relative group">
@@ -69,8 +69,8 @@ export const MarketPage = () => {
         </div>
 
         {/* Filters Bar */}
-        <div className="flex flex-wrap gap-4 mb-12 p-6 bg-[#080808] border border-white/5 items-center">
-          <div className="flex items-center gap-2 text-[10px] font-black text-white/30 uppercase tracking-[4px] mr-4">
+        <div className="flex flex-wrap gap-3 md:gap-4 mb-12 p-4 md:p-6 bg-[#080808] border border-white/5 items-center">
+          <div className="flex items-center gap-2 text-[9px] md:text-[10px] font-black text-white/30 uppercase tracking-[3px] md:tracking-[4px] mr-4">
             <Filter size={14} className="text-primary" />
             <span>Region Matrix</span>
           </div>
@@ -78,7 +78,7 @@ export const MarketPage = () => {
           <select 
             value={stateFilter}
             onChange={(e) => { setStateFilter(e.target.value); setDistrictFilter(''); setCurrentPage(1); }}
-            className="bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors"
+            className="flex-1 md:flex-none bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[140px] cursor-pointer hover:bg-white/5 transition-colors"
             title="Filter by State"
           >
             <option value="" className="bg-[#0D0D0D]">All States</option>
@@ -88,7 +88,7 @@ export const MarketPage = () => {
           <select 
             value={districtFilter}
             onChange={(e) => { setDistrictFilter(e.target.value); setCurrentPage(1); }}
-            className="bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors"
+            className="flex-1 md:flex-none bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[140px] cursor-pointer hover:bg-white/5 transition-colors"
             title="Filter by District"
           >
             <option value="" className="bg-[#0D0D0D]">All Districts</option>
@@ -98,14 +98,14 @@ export const MarketPage = () => {
           <select 
             value={tierFilter}
             onChange={(e) => { setTierFilter(e.target.value); setCurrentPage(1); }}
-            className="bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors"
+            className="flex-1 md:flex-none bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[140px] cursor-pointer hover:bg-white/5 transition-colors"
             title="Filter by Node Tier"
           >
             <option value="" className="bg-[#0D0D0D]">All Tiers</option>
             {tiers.map(t => <option key={t} value={t} className="bg-[#0D0D0D]">{t}</option>)}
           </select>
 
-          <div className="ml-auto mono text-[10px] text-primary font-black uppercase tracking-widest bg-primary/5 px-4 py-2 border border-primary/20">
+          <div className="w-full md:w-auto md:ml-auto mono text-[9px] md:text-[10px] text-primary font-black uppercase tracking-widest bg-primary/5 px-4 py-2 border border-primary/20 text-center">
             {filteredNodes.length.toLocaleString()} Nodes Identified
           </div>
         </div>
@@ -184,11 +184,11 @@ export const MarketPage = () => {
                           <span className="mono text-[10px] text-white/20 uppercase tracking-[3px]">UID: #{market.node_id.toString().padStart(4, '0')}</span>
                         </div>
                         
-                        <h3 className="display text-4xl font-black uppercase tracking-tighter group-hover:text-primary transition-colors">
+                        <h3 className="display text-3xl md:text-4xl font-black uppercase tracking-tighter group-hover:text-primary transition-colors">
                           {market.Market}
                         </h3>
                         
-                        <div className="flex flex-wrap gap-10">
+                        <div className="flex flex-wrap gap-x-10 gap-y-6">
                           <div className="flex items-center gap-3">
                             <MapPin size={14} className="text-primary opacity-60" />
                             <div className="flex flex-col">
@@ -204,18 +204,13 @@ export const MarketPage = () => {
                               <span className="mono text-[9px] text-white/20 uppercase">Total Arrivals</span>
                             </div>
                           </div>
-
-                          <div className="flex flex-col justify-center">
-                            <span className="text-[10px] font-black text-primary uppercase tracking-widest">Tier</span>
-                            <span className="mono text-[9px] text-white/40 uppercase">{market.node_tier}</span>
-                          </div>
                         </div>
                       </div>
 
                       <div className="flex items-center gap-6 w-full md:w-auto pt-6 md:pt-0 border-t md:border-t-0 border-white/5">
                         <div className="flex-1 md:text-right">
                           <div className="text-[10px] font-black text-primary uppercase tracking-[2px] mb-1">Alpha Bid</div>
-                          <div className="text-3xl font-black uppercase tracking-tighter text-white">
+                          <div className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-white">
                             ₹{((market.total_arrivals % 500) + 2200).toLocaleString()}
                             <span className="text-sm opacity-40 ml-1">/Q</span>
                           </div>
