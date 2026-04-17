@@ -79,6 +79,7 @@ export const MarketPage = () => {
             value={stateFilter}
             onChange={(e) => { setStateFilter(e.target.value); setDistrictFilter(''); setCurrentPage(1); }}
             className="bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors"
+            title="Filter by State"
           >
             <option value="" className="bg-[#0D0D0D]">All States</option>
             {states.map(s => <option key={s} value={s} className="bg-[#0D0D0D]">{s}</option>)}
@@ -88,6 +89,7 @@ export const MarketPage = () => {
             value={districtFilter}
             onChange={(e) => { setDistrictFilter(e.target.value); setCurrentPage(1); }}
             className="bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors"
+            title="Filter by District"
           >
             <option value="" className="bg-[#0D0D0D]">All Districts</option>
             {districts.map(d => <option key={d} value={d} className="bg-[#0D0D0D]">{d}</option>)}
@@ -97,6 +99,7 @@ export const MarketPage = () => {
             value={tierFilter}
             onChange={(e) => { setTierFilter(e.target.value); setCurrentPage(1); }}
             className="bg-black border border-white/10 px-4 py-3 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors"
+            title="Filter by Node Tier"
           >
             <option value="" className="bg-[#0D0D0D]">All Tiers</option>
             {tiers.map(t => <option key={t} value={t} className="bg-[#0D0D0D]">{t}</option>)}
@@ -219,7 +222,10 @@ export const MarketPage = () => {
                         </div>
                         
                         <div className="flex gap-3">
-                          <button className="h-14 w-14 flex items-center justify-center border border-white/10 hover:border-primary group/icon transition-all bg-white/5 active:scale-95">
+                          <button 
+                            className="h-14 w-14 flex items-center justify-center border border-white/10 hover:border-primary group/icon transition-all bg-white/5 active:scale-95"
+                            title="Add to Settlement List"
+                          >
                             <ShoppingCart size={20} className="text-white/40 group-hover:text-primary transition-colors" />
                           </button>
                           <Button className="h-14 bg-white text-black font-black uppercase tracking-[3px] text-[10px] px-8 hover:bg-primary transition-all hover:translate-x-1 active:scale-95 shadow-xl">

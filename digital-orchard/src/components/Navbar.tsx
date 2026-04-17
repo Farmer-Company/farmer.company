@@ -107,6 +107,7 @@ export const Navbar = () => {
               value={language} 
               onChange={(e) => setLanguage(e.target.value as any)}
               className="bg-transparent border-none text-[10px] font-bold text-foreground-muted uppercase tracking-[2px] outline-none cursor-pointer hover:text-white"
+              title="Select Interface Language"
             >
               <option value="en" className="bg-[#050505]">EN</option>
               <option value="hi" className="bg-[#050505]">हिन्दी</option>

@@ -101,6 +101,7 @@ export const PricesPage = () => {
               value={stateFilter}
               onChange={(e) => { setStateFilter(e.target.value); setDistrictFilter(''); setCurrentPage(1); }}
               className="bg-black border border-white/10 px-4 py-2 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest"
+              title="Filter by State"
             >
               <option value="" className="bg-[#0D0D0D]">All States</option>
               {states.map(s => <option key={s} value={s} className="bg-[#0D0D0D]">{s}</option>)}
@@ -110,6 +111,7 @@ export const PricesPage = () => {
               value={districtFilter}
               onChange={(e) => { setDistrictFilter(e.target.value); setCurrentPage(1); }}
               className="bg-black border border-white/10 px-4 py-2 mono text-[10px] text-white/60 focus:border-primary outline-none uppercase tracking-widest"
+              title="Filter by District"
             >
               <option value="" className="bg-[#0D0D0D]">All Districts</option>
               {districts.map(d => <option key={d} value={d} className="bg-[#0D0D0D]">{d}</option>)}
@@ -211,6 +213,7 @@ export const PricesPage = () => {
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 className="w-12 h-12 flex items-center justify-center border border-white/10 hover:border-primary disabled:opacity-20 disabled:hover:border-white/10 transition-all"
+                title="Previous Page"
               >
                 <ChevronLeft size={16} />
               </button>
@@ -218,6 +221,7 @@ export const PricesPage = () => {
                 disabled={currentPage === totalPages}
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 className="w-12 h-12 flex items-center justify-center border border-white/10 hover:border-primary disabled:opacity-20 disabled:hover:border-white/10 transition-all"
+                title="Next Page"
               >
                 <ChevronRight size={16} />
               </button>

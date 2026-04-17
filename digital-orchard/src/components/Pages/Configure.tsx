@@ -134,6 +134,7 @@ export const ConfigurePage = () => {
                     value={state}
                     onChange={e => setState(e.target.value)}
                     className="w-full bg-background border border-white/10 h-14 px-4 focus:border-primary outline-none appearance-none"
+                    title="Select State"
                   >
                     <option>Tamil Nadu</option>
                     <option>Karnataka</option>
@@ -204,6 +205,8 @@ export const ConfigurePage = () => {
                         value={landArea}
                         onChange={e => setLandArea(Number(e.target.value))}
                         className="w-full bg-background border border-white/10 h-14 px-4 outline-none" 
+                        title="Land Area in Hectares"
+                        placeholder="e.g., 5.5"
                       />
                     </div>
                     <div className="space-y-2">
