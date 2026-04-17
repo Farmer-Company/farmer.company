@@ -107,25 +107,25 @@ export const SocialProofSection = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/80" />
       <div className="absolute inset-0 bg-[#050505]/40" />
 
-      <div className="z-10 relative flex flex-col items-center pt-20 pb-40 px-6 gap-16">
-        <div className="h-48 w-full" />
+      <div className="z-10 relative flex flex-col items-center pt-10 md:pt-20 pb-20 md:pb-40 px-6 gap-10 md:gap-16">
+        <div className="h-20 md:h-48 w-full" />
 
         {/* Command Center: Live Ticker */}
         <div className="w-full max-w-6xl mx-auto h-12 bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 rounded-full flex items-center px-2 group hover:border-primary/30 transition-colors">
-          <div className="shrink-0 px-4 flex items-center gap-2 border-r border-white/10 h-full py-2">
+          <div className="shrink-0 px-3 md:px-4 flex items-center gap-2 border-r border-white/10 h-full py-2">
             <div className="w-2 h-2 rounded-full bg-primary animate-pulse-dot shadow-[0_0_10px_var(--primary)]" />
-            <span className="mono text-[10px] font-bold text-white uppercase tracking-widest">REAL-TIME FEED</span>
+            <span className="mono text-[8px] md:text-[10px] font-bold text-white uppercase tracking-widest">LIVE FEED</span>
           </div>
           
           <div className="flex-1 overflow-hidden relative">
-            <div className="flex gap-16 animate-marquee whitespace-nowrap">
+            <div className="flex gap-10 md:gap-16 animate-marquee whitespace-nowrap">
               {[...tickerItems, ...tickerItems].map((item, i) => (
-                <div key={i} className="mono text-[11px] text-white/60 flex items-center gap-3">
+                <div key={i} className="mono text-[10px] md:text-[11px] text-white/60 flex items-center gap-2 md:gap-3">
                   <span className="font-bold text-white">{item.commodity}</span>
-                  <span className="text-white/30">{item.market}</span>
+                  <span className="text-white/30 hidden sm:inline">{item.market}</span>
                   <span className="text-primary font-black">₹{item.price}</span>
                   <span className={item.direction === 'up' ? 'text-primary' : 'text-red-500'}>
-                    {item.direction === 'up' ? '+' : '-'}{item.change}%
+                    {item.direction === 'up' ? '↑' : '↓'}{item.change}%
                   </span>
                 </div>
               ))}
@@ -134,24 +134,24 @@ export const SocialProofSection = () => {
         </div>
 
         {/* Global Impact Grid */}
-        <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 border-y border-white/5 py-12 gap-12 text-center md:text-left">
-          <StatBox number="10,000+" label={t('farmersActive')} sub="Growth Protocol" />
-          <StatBox number="3,200+" label={t('avgPrice')} isMono sub="Price Intelligence" />
-          <StatBox number="418" label={t('cheaper')} sub="Commodities Tracked" />
-          <StatBox number="85%" label={t('middlemen')} isPrimary sub="ForecastOS Accuracy" />
+        <div className="w-full max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 border-y border-white/5 py-8 md:py-12 gap-6 md:gap-12 text-center md:text-left">
+          <StatBox number="10k+" label={t('farmersActive')} sub="Growth Protocol" />
+          <StatBox number="3.2k+" label={t('avgPrice')} isMono sub="Price Intelligence" />
+          <StatBox number="400+" label={t('cheaper')} sub="Commodities" />
+          <StatBox number="85%" label={t('middlemen')} isPrimary sub="Accuracy" />
         </div>
 
         {/* Ecosystem Grid: Players */}
-        <div className="w-full max-w-7xl mx-auto mt-20 text-center">
-          <div className="space-y-4 mb-20 max-w-2xl mx-auto">
-            <span className="mono text-[10px] text-primary font-bold uppercase tracking-[6px]">Stakeholder Access</span>
-            <h2 className="display text-6xl font-black text-white uppercase tracking-tighter leading-none">
+        <div className="w-full max-w-7xl mx-auto mt-10 md:mt-20 text-center">
+          <div className="space-y-4 mb-12 md:mb-20 max-w-2xl mx-auto">
+            <span className="mono text-[9px] md:text-[10px] text-primary font-bold uppercase tracking-[4px] md:tracking-[6px]">Stakeholder Access</span>
+            <h2 className="display text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
               A Direct Ecosystem.
             </h2>
-            <p className="text-foreground-muted text-lg font-light">Digital Orchard connects every node in the agricultural chain with zero-latency transparency.</p>
+            <p className="text-foreground-muted text-base md:text-lg font-light px-4">Digital Orchard connects every node in the agricultural chain with zero-latency transparency.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
             <PlayerCard
               role="FARMER"
               tamil="விவசாயிகள்"
@@ -180,61 +180,61 @@ export const SocialProofSection = () => {
         </div>
 
         {/* Prosperity Bento Grid */}
-        <div className="w-full max-w-[1400px] mx-auto mt-40 border-t border-white/5 pt-32">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
+        <div className="w-full max-w-[1400px] mx-auto mt-20 md:mt-40 border-t border-white/5 pt-20 md:pt-32">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-16 md:mb-20">
             <div className="space-y-4">
               <span className="text-primary font-black text-xs uppercase tracking-[5px]">Performance Protocol</span>
-              <h2 className="display text-7xl font-black uppercase tracking-tighter text-white leading-[0.85]">Orchard<br />Metrics</h2>
+              <h2 className="display text-5xl md:text-7xl font-black uppercase tracking-tighter text-white leading-[0.85]">Orchard<br />Metrics</h2>
             </div>
-            <p className="max-w-md text-foreground-muted leading-relaxed font-light text-xl">
+            <p className="max-w-md text-foreground-muted leading-relaxed font-light text-lg md:text-xl">
               Our operating system ensures every harvest is verified, every payment is instant, and every route is optimized.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-6 md:grid-rows-2 gap-px bg-white/5 border border-white/5 overflow-hidden">
-            <div className="col-span-1 md:col-span-3 row-span-1 bg-[#050505] p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
+            <div className="col-span-1 md:col-span-3 row-span-1 bg-[#050505] p-8 md:p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
               <div className="flex justify-between items-start">
-                <div className="p-3 bg-primary/10 text-primary rounded-sm"><Zap fill="currentColor" size={20} /></div>
+                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><Zap fill="currentColor" size={18} md:size={20} /></div>
                 <span className="mono text-[10px] text-white/20">PRICE-OS</span>
               </div>
-              <div className="mt-12 space-y-4">
-                <h3 className="mono text-4xl font-black text-white">3,200+</h3>
-                <p className="text-sm text-foreground-muted uppercase tracking-widest font-bold">Markets Tracked</p>
+              <div className="mt-8 md:mt-12 space-y-2 md:space-y-4">
+                <h3 className="mono text-3xl md:text-4xl font-black text-white">3,200+</h3>
+                <p className="text-[10px] md:text-sm text-foreground-muted uppercase tracking-widest font-bold">Markets Tracked</p>
               </div>
             </div>
 
-            <div className="col-span-1 md:col-span-3 row-span-1 bg-[#050505] p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
+            <div className="col-span-1 md:col-span-3 row-span-1 bg-[#050505] p-8 md:p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
               <div className="flex justify-between items-start">
-                <div className="p-3 bg-primary/10 text-primary rounded-sm"><ShieldCheck size={20} /></div>
+                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><ShieldCheck size={18} md:size={20} /></div>
                 <span className="mono text-[10px] text-white/20">FORECAST-OS</span>
               </div>
-              <div className="mt-12 space-y-4">
-                <h3 className="mono text-4xl font-black text-white">85% Accuracy</h3>
-                <p className="text-sm text-foreground-muted uppercase tracking-widest font-bold">30-Day Predictions</p>
+              <div className="mt-8 md:mt-12 space-y-2 md:space-y-4">
+                <h3 className="mono text-3xl md:text-4xl font-black text-white">85% Accuracy</h3>
+                <p className="text-[10px] md:text-sm text-foreground-muted uppercase tracking-widest font-bold">30-Day Predictions</p>
               </div>
             </div>
 
-            <div className="col-span-1 md:col-span-2 row-span-1 bg-[#050505] p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
+            <div className="col-span-1 md:col-span-2 row-span-1 bg-[#050505] p-8 md:p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
                <div className="flex justify-between items-start">
-                <div className="p-3 bg-primary/10 text-primary rounded-sm"><Activity size={20} /></div>
+                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><Activity size={18} md:size={20} /></div>
                 <span className="mono text-[10px] text-white/20">RISK-OS</span>
               </div>
-              <div className="mt-12">
+              <div className="mt-8 md:mt-12">
                 <h3 className="mono text-3xl font-black text-white">10,000+</h3>
                 <p className="text-[10px] text-foreground-muted uppercase tracking-widest font-bold mt-2">Active Portfolios</p>
               </div>
             </div>
 
-            <div className="col-span-1 md:col-span-4 row-span-1 bg-primary p-12 flex flex-col justify-between text-black">
+            <div className="col-span-1 md:col-span-4 row-span-1 bg-primary p-8 md:p-12 flex flex-col justify-between text-black">
               <div className="flex justify-between items-start">
-                <div className="p-3 bg-black text-primary rounded-sm"><MapPin size={20} /></div>
+                <div className="p-2 md:p-3 bg-black text-primary rounded-sm"><MapPin size={18} md:size={20} /></div>
                 <span className="mono text-[10px] font-bold opacity-40">VALUE-GAIN</span>
               </div>
-              <div className="mt-12 flex justify-between items-end">
+              <div className="mt-8 md:mt-12 flex justify-between items-end">
                 <div>
-                  <h3 className="display text-6xl font-black uppercase leading-none mt-4">15-20%<br />Price Jump</h3>
+                  <h3 className="display text-4xl md:text-6xl font-black uppercase leading-none mt-2 md:mt-4">15-20%<br />Price Jump</h3>
                 </div>
-                <ArrowRight size={48} strokeWidth={3} />
+                <ArrowRight size={32} md:size={48} strokeWidth={3} />
               </div>
             </div>
           </div>

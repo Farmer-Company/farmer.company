@@ -50,7 +50,7 @@ export const HeroSection = () => {
   return (
     <section
       onMouseMove={handleMouseMove}
-      className="bg-background relative overflow-hidden min-h-screen flex flex-col justify-center px-10 md:px-20 noise-bg cursor-default"
+      className="bg-background relative overflow-hidden min-h-[100svh] flex flex-col justify-center px-6 md:px-20 noise-bg cursor-default py-20"
     >
       {/* Background Decor */}
       <div className="absolute inset-0 os-grid opacity-20 pointer-events-none" />
@@ -62,13 +62,13 @@ export const HeroSection = () => {
           left: mouseX,
           top: mouseY,
         }}
-        className="absolute -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none z-0"
+        className="absolute -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0"
       />
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-primary/5 rounded-full blur-[100px] md:blur-[150px] pointer-events-none" />
 
       {/* Vertical Meta */}
-      <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden md:block z-20">
+      <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:block z-20">
         <span className="vertical-meta">EST. 2026 / FARMER.COMPANY ORCHARD OS v.ALPHA</span>
       </div>
 
@@ -79,14 +79,14 @@ export const HeroSection = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="flex flex-col gap-0 text-white italic-serif-sub min-h-[20vw]">
-            <h1 className="text-[10vw] font-black leading-[0.85] uppercase tracking-[-0.06em] select-none">
+          <div className="flex flex-col gap-0 text-white italic-serif-sub min-h-[30vw] md:min-h-[20vw]">
+            <h1 className="text-[14vw] md:text-[10vw] font-black leading-[0.85] uppercase tracking-[-0.06em] select-none">
               {line1}<br />
               <span className="text-primary">{line2}</span>
               <span className="inline-block w-[2px] h-[0.8em] bg-primary ml-2 animate-pulse align-middle" />
             </h1>
           </div>
-          <p className="pl-0 py-2 mt-12 display text-xl font-medium text-white/50 max-w-3xl uppercase tracking-[0.2em] leading-tight">
+          <p className="pl-0 py-2 mt-8 md:mt-12 display text-lg md:text-xl font-medium text-white/50 max-w-3xl uppercase tracking-[0.15em] md:tracking-[0.2em] leading-tight">
             {t('heroHeadline')}
           </p>
         </motion.div>
@@ -97,30 +97,30 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="ml-0 mt-8"
         >
-          <p className="text-2xl font-light text-foreground-muted max-w-2xl leading-relaxed">
+          <p className="text-xl md:text-2xl font-light text-foreground-muted max-w-2xl leading-relaxed">
             {t('heroSubtitle')}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-            <div className="flex flex-col gap-2 p-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-sm">
-              <span className="text-2xl">📊</span>
-              <h3 className="mono text-[10px] font-bold text-primary uppercase tracking-widest">Price Intelligence</h3>
-              <p className="text-xs text-white/40 leading-relaxed uppercase tracking-wider">Compare 3,000+ markets instantly</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-12 md:mt-16">
+            <div className="flex flex-col gap-2 p-5 md:p-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-sm">
+              <span className="text-xl md:text-2xl">📊</span>
+              <h3 className="mono text-[9px] md:text-[10px] font-bold text-primary uppercase tracking-widest">Price Intelligence</h3>
+              <p className="text-[10px] md:text-xs text-white/40 leading-relaxed uppercase tracking-wider">Compare 3,000+ markets instantly</p>
             </div>
-            <div className="flex flex-col gap-2 p-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-sm">
-              <span className="text-2xl">📈</span>
-              <h3 className="mono text-[10px] font-bold text-primary uppercase tracking-widest">90-Day Forecasts</h3>
-              <p className="text-xs text-white/40 leading-relaxed uppercase tracking-wider">Know exactly when to sell</p>
+            <div className="flex flex-col gap-2 p-5 md:p-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-sm">
+              <span className="text-xl md:text-2xl">📈</span>
+              <h3 className="mono text-[9px] md:text-[10px] font-bold text-primary uppercase tracking-widest">90-Day Forecasts</h3>
+              <p className="text-[10px] md:text-xs text-white/40 leading-relaxed uppercase tracking-wider">Know exactly when to sell</p>
             </div>
-            <div className="flex flex-col gap-2 p-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-sm">
-              <span className="text-2xl">🛒</span>
-              <h3 className="mono text-[10px] font-bold text-primary uppercase tracking-widest">Direct Marketplace</h3>
-              <p className="text-xs text-white/40 leading-relaxed uppercase tracking-wider">Sell directly without middlemen</p>
+            <div className="flex flex-col gap-2 p-5 md:p-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-sm">
+              <span className="text-xl md:text-2xl">🛒</span>
+              <h3 className="mono text-[9px] md:text-[10px] font-bold text-primary uppercase tracking-widest">Direct Marketplace</h3>
+              <p className="text-[10px] md:text-xs text-white/40 leading-relaxed uppercase tracking-wider">Sell directly without middlemen</p>
             </div>
-            <div className="flex flex-col gap-2 p-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-sm">
-              <span className="text-2xl">👨‍🌾</span>
-              <h3 className="mono text-[10px] font-bold text-primary uppercase tracking-widest">Farmer Portfolio</h3>
-              <p className="text-xs text-white/40 leading-relaxed uppercase tracking-wider">Your lifetime contribution, SKU-by-SKU</p>
+            <div className="flex flex-col gap-2 p-5 md:p-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-sm">
+              <span className="text-xl md:text-2xl">👨‍🌾</span>
+              <h3 className="mono text-[9px] md:text-[10px] font-bold text-primary uppercase tracking-widest">Farmer Portfolio</h3>
+              <p className="text-[10px] md:text-xs text-white/40 leading-relaxed uppercase tracking-wider">Your lifetime contribution, SKU-by-SKU</p>
             </div>
           </div>
         </motion.div>
@@ -141,9 +141,9 @@ export const HeroSection = () => {
       </motion.div>
 
       {/* Mobile CTAs */}
-      <div className="md:hidden mt-12 flex flex-col gap-4">
-        <Button variant="primary" onClick={() => navigate('/get-started')}>{t('getStarted')} →</Button>
-        <Button variant="outline" onClick={() => navigate('/prices')}>{t('prices')}</Button>
+      <div className="lg:hidden mt-12 flex flex-col sm:flex-row gap-4">
+        <Button variant="primary" className="flex-1 py-6" onClick={() => navigate('/get-started')}>{t('getStarted')} →</Button>
+        <Button variant="outline" className="flex-1 py-6" onClick={() => navigate('/prices')}>{t('prices')}</Button>
       </div>
     </section>
   );
