@@ -206,7 +206,7 @@ export const AuthFlow = () => {
           <p className="text-[10px] text-center text-foreground-muted leading-relaxed uppercase tracking-wider px-4">
             By Authorizing, you agree to the Digital Orchard Architecture and data integrity protocols.
           </p>
-        </div>
+          </motion.div>
       </div>
     </div>
   );
