@@ -1,0 +1,136 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Core identity and authentication record.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["farmer", "vendor", "logistics", "government", "researcher", "admin"] },
+        "fullName": { "type": "string" },
+        "language_pref": { "type": "string" },
+        "region_state": { "type": "string" },
+        "region_district": { "type": "string" },
+        "profile_public": { "type": "boolean" },
+        "verified": { "type": "boolean" },
+        "reliabilityScore": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Farmer": {
+      "title": "Farmer",
+      "description": "Extended farmer profile and land data.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Reference to users collection" },
+        "farm_name": { "type": "string" },
+        "land_area": { "type": "number" },
+        "soil_type": { "type": "string" },
+        "irrigation_type": { "type": "string" },
+        "certifications": { "type": "array", "items": { "type": "string" } },
+        "gps": { "type": "object", "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } } },
+        "village": { "type": "string" },
+        "district": { "type": "string" },
+        "state": { "type": "string" },
+        "pincode": { "type": "string" }
+      }
+    },
+    "SKU": {
+      "title": "SKU",
+      "description": "Global Master SKU Registry entry.",
+      "type": "object",
+      "properties": {
+        "skuCode": { "type": "string" },
+        "commodityId": { "type": "number" },
+        "commodityName": { "type": "string" },
+        "variety": { "type": "string" },
+        "grade": { "type": "string" },
+        "seasonYear": { "type": "number" },
+        "seasonPeriod": { "type": "string", "enum": ["Rabi", "Kharif", "Summer"] }
+      }
+    },
+    "ProductionRecord": {
+      "title": "ProductionRecord",
+      "description": "Farmer's historical production time-series.",
+      "type": "object",
+      "properties": {
+        "farmerId": { "type": "string" },
+        "skuId": { "type": "string" },
+        "skuCode": { "type": "string" },
+        "quantity": { "type": "number" },
+        "yield": { "type": "number" },
+        "harvestDate": { "type": "string", "format": "date" },
+        "plantingDate": { "type": "string", "format": "date" },
+        "carbonFootprint": { "type": "number" }
+      }
+    },
+    "Listing": {
+      "title": "Listing",
+      "description": "Active marketplace listings.",
+      "type": "object",
+      "properties": {
+        "farmerId": { "type": "string" },
+        "skuId": { "type": "string" },
+        "quantity_tonnes": { "type": "number" },
+        "asking_price": { "type": "number" },
+        "suggested_price": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "sold", "expired", "cancelled"] },
+        "expiry_date": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Marketplace transactions.",
+      "type": "object",
+      "properties": {
+        "listingId": { "type": "string" },
+        "buyerId": { "type": "string" },
+        "sellerId": { "type": "string" },
+        "price_per_kg": { "type": "number" },
+        "quantity_tonnes": { "type": "number" },
+        "total_value": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "shipped", "delivered", "cancelled", "disputed"] },
+        "paymentStatus": { "type": "string", "enum": ["pending", "paid", "refunded"] },
+        "logisticsId": { "type": "string" }
+      }
+    },
+    "PriceForecast": {
+      "title": "PriceForecast",
+      "description": "Daily predictive price data from ForecastOS.",
+      "type": "object",
+      "properties": {
+        "marketId": { "type": "number" },
+        "commodityId": { "type": "number" },
+        "forecastDate": { "type": "string", "format": "date" },
+        "predictedPrice": { "type": "number" },
+        "accuracy": { "type": "number" }
+      }
+    },
+    "Message": {
+      "title": "Message",
+      "description": "In-app communication records.",
+      "type": "object",
+      "properties": {
+        "fromId": { "type": "string" },
+        "toId": { "type": "string" },
+        "orderId": { "type": "string" },
+        "text": { "type": "string" },
+        "isRead": { "type": "boolean" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "Core users" },
+    "/farmers/{uid}": { "schema": "Farmer", "description": "Extended farmer data" },
+    "/skus/{id}": { "schema": "SKU", "description": "Global SKU registry" },
+    "/production_records/{id}": { "schema": "ProductionRecord", "description": "Farmer portfolios" },
+    "/listings/{id}": { "schema": "Listing", "description": "Active market" },
+    "/orders/{id}": { "schema": "Order", "description": "Completed trades" },
+    "/forecasts/{id}": { "schema": "PriceForecast", "description": "Predictive prices" },
+    "/messages/{id}": { "schema": "Message", "description": "CRM messaging" }
+  }
+}

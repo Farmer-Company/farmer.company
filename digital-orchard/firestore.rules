@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() { return request.auth != null; }
+    function isOwner(uid) { return isAuthenticated() && request.auth.uid == uid; }
+    function getUserData() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function role() { return getUserData().role; }
+    function isAdmin() { 
+      return isAuthenticated() && (
+        role() == 'admin' || 
+        (request.auth.token.email == "arunvith6@gmail.com" && request.auth.token.email_verified == true)
+      );
+    }
+    
+    // Validate string length helper
+    function validString(field, min, max) {
+      return request.resource.data[field] is string && 
+             request.resource.data[field].size() >= min && 
+             request.resource.data[field].size() <= max;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{uid} {
+      allow read: if isAuthenticated() && (isOwner(uid) || isAdmin());
+      allow create: if isAuthenticated() && isOwner(uid) && 
+                      request.resource.data.role in ['farmer', 'vendor', 'logistics', 'government', 'researcher'];
+      allow update: if isAuthenticated() && (isAdmin() || (isOwner(uid) && request.resource.data.role == resource.data.role));
+    }
+
+    match /farmers/{uid} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (isOwner(uid) || isAdmin());
+    }
+
+    match /skus/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /production_records/{id} {
+      allow read: if isAuthenticated() && (resource.data.farmerId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && request.resource.data.farmerId == request.auth.uid;
+      allow update: if isAuthenticated() && (resource.data.farmerId == request.auth.uid || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /listings/{id} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && role() == 'farmer';
+      allow update, delete: if isAuthenticated() && (resource.data.farmerId == request.auth.uid || isAdmin());
+    }
+
+    match /orders/{id} {
+      allow read: if isAuthenticated() && (
+        resource.data.buyerId == request.auth.uid || 
+        resource.data.sellerId == request.auth.uid || 
+        resource.data.logisticsId == request.auth.uid || 
+        isAdmin()
+      );
+      allow create: if isAuthenticated() && (role() == 'vendor' || role() == 'farmer');
+      allow update: if isAuthenticated() && (
+        isAdmin() || 
+        (resource.data.buyerId == request.auth.uid && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'paymentStatus'])) ||
+        (resource.data.sellerId == request.auth.uid && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']))
+      );
+    }
+
+    match /forecasts/{id} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /messages/{id} {
+      allow read: if isAuthenticated() && (resource.data.fromId == request.auth.uid || resource.data.toId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && request.resource.data.fromId == request.auth.uid;
+    }
+  }
+}

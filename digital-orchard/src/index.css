@@ -1,0 +1,234 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
+@import "@fontsource/dm-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "General Sans", sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--bg-secondary));
+  --color-card-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-border: hsl(var(--border));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--foreground-muted));
+  
+  /* Semantic signals */
+  --color-green: hsl(var(--green));
+  --color-red: hsl(var(--red));
+  --color-orange: hsl(var(--orange));
+
+  /* Player identity colors */
+  --color-farmer: hsl(var(--farmer));
+  --color-vendor: hsl(var(--vendor));
+  --color-logistics: hsl(var(--logistics));
+  --color-customer: hsl(var(--customer));
+
+  /* Custom animations */
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-fade-up: fade-up 0.6s ease-out forwards;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-price-tick: price-tick 0.3s ease-out forwards;
+  --animate-video-fade: video-fade 12s ease-in-out infinite;
+  --animate-scanline: scanline 8s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes fade-up {
+    0% { opacity: 0; transform: translateY(24px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  @keyframes price-tick {
+    0% { opacity: 0; transform: translateY(-6px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes video-fade {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+}
+
+:root {
+  /* Core backgrounds */
+  --background: 0 0% 2%;        /* #050505 — deep black */
+  --bg-secondary: 0 0% 5%;      /* #0D0D0D — card surfaces */
+  --bg-tertiary: 0 0% 7%;       /* #121212 — elevated panels */
+
+  /* Foreground / text */
+  --foreground: 0 0% 100%;      /* #FFFFFF — primary text */
+  --foreground-muted: 0 0% 100% / 0.4; /* rgba(255,255,255,0.4) — secondary text */
+  --foreground-dim: 0 0% 100% / 0.2;   /* placeholder / disabled */
+
+  /* Accent — Spotify Green */
+  --primary: 141 73% 42%;        /* #1DB954 — vibrant green */
+  --primary-foreground: 0 0% 100%; /* #FFFFFF — text ON green buttons */
+  --primary-dim: 141 73% 42% / 0.12;
+
+  /* Borders */
+  --border: 0 0% 100% / 0.1;     /* rgba(255,255,255,0.1) — default border */
+  --border-active: 141 73% 42%; /* #1DB954 — focused/active border */
+
+  /* Semantic signals (adjusted for theme) */
+  --green: 141 73% 42%;
+  --red: 0 84% 60%;
+  --orange: 25 95% 53%;
+
+  /* Player identity colors (preserved but adjusted) */
+  --farmer: 141 73% 42%;
+  --vendor: 199 89% 48%;
+  --logistics: 270 67% 57%;
+  --customer: 25 95% 57%;
+
+  /* shadcn/ui semantic aliases */
+  --card: var(--bg-secondary);
+  --card-foreground: var(--foreground);
+  --muted: 0 0% 5%;
+  --muted-foreground: var(--foreground-muted);
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+  --ring: var(--primary);
+  --radius: 0rem;
+
+  /* Hero-specific gradient */
+  --hero-gradient-start: #1DB954;
+  --hero-gradient-end: #191414;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Monospaced class for prices/numbers */
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* Display class for hero headlines */
+.display { font-family: 'General Sans', sans-serif; font-weight: 900; }
+
+@layer utilities {
+  .display-title {
+    font-size: clamp(80px, 20vw, 320px);
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .accent-line {
+    width: 120px;
+    height: 4px;
+    background-color: hsl(var(--primary));
+  }
+
+  .cta-orb {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .cta-orb:hover {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.2);
+  }
+
+  .vertical-meta {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: hsl(var(--foreground-muted));
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .liquid-glass-nav {
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .noise-bg {
+    position: relative;
+  }
+
+  .noise-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .os-grid {
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(29, 185, 84, 0.05), transparent);
+    animation: var(--animate-scanline);
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-primary/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

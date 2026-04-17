@@ -1,0 +1,9 @@
+{
+  "name": "Digital Orchard",
+  "description": "The Agriculture Operating System for India — price intelligence, AI forecasts, and direct marketplace access.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ],
+  "majorCapabilities": []
+}
