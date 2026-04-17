@@ -3,20 +3,6 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/src/lib/LanguageContext';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const NAV_ITEMS = [
-  { label: 'ecosystem', path: '/' },
-  { label: 'market', path: '/market' },
-  { label: 'prices', path: '/prices' },
-  { label: 'insights', path: '/insights' },
-  { label: 'configure', path: '/configure' },
-];
-
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { useLanguage } from '@/src/lib/LanguageContext';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -209,6 +195,7 @@ export const Navbar = () => {
                       value={language} 
                       onChange={(e) => setLanguage(e.target.value as any)}
                       className="bg-transparent border-none text-sm font-bold text-white uppercase tracking-[2px] outline-none"
+                      title="Select Interface Language"
                     >
                       <option value="en" className="bg-[#050505]">English</option>
                       <option value="hi" className="bg-[#050505]">Hindi</option>
