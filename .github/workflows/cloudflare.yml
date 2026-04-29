@@ -29,6 +29,6 @@ jobs:
       - name: Deploy with Wrangler
         run: npm run deploy
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: cfat_UxHOMDxiSaAf4gZ94QZoOKFSudJFrNr4hlB7T4pK7944c83e
+          CLOUDFLARE_ACCOUNT_ID: 546b4dcb9ec5801ea9f846776d8ca88c
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
