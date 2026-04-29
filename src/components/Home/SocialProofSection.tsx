@@ -11,7 +11,8 @@ import {
   Users, 
   ShoppingBag, 
   Truck, 
-  Target 
+  Target,
+  Globe
 } from 'lucide-react';
 
 const FADE_DURATION = 0.6;
@@ -67,8 +68,7 @@ const LoopingVideo = () => {
       autoPlay
       muted
       playsInline
-      className="absolute inset-0 w-full h-full object-cover"
-      style={{ opacity: 0 }}
+      className="absolute inset-0 w-full h-full object-cover opacity-0"
     />
   );
 };
@@ -151,7 +151,7 @@ export const SocialProofSection = () => {
             <p className="text-foreground-muted text-base md:text-lg font-light px-4">Digital Orchard connects every node in the agricultural chain with zero-latency transparency.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1">
             <PlayerCard
               role="FARMER"
               tamil="விவசாயிகள்"
@@ -176,6 +176,12 @@ export const SocialProofSection = () => {
               icon={<Target size={24} />}
               body="Analyse policy impact, MSP compliance, and market clusters using 25 years of clean data."
             />
+            <PlayerCard
+              role="GLOBAL BUYER"
+              tamil="உலகளாவிய வாங்குபவர்"
+              icon={<Globe size={24} />}
+              body="Source directly from Indian farms with full traceability, institutional contracts, and trade finance."
+            />
           </div>
         </div>
 
@@ -194,7 +200,7 @@ export const SocialProofSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-6 md:grid-rows-2 gap-px bg-white/5 border border-white/5 overflow-hidden">
             <div className="col-span-1 md:col-span-3 row-span-1 bg-[#050505] p-8 md:p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
               <div className="flex justify-between items-start">
-                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><Zap fill="currentColor" size={18} md:size={20} /></div>
+                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><Zap fill="currentColor" size={20} /></div>
                 <span className="mono text-[10px] text-white/20">PRICE-OS</span>
               </div>
               <div className="mt-8 md:mt-12 space-y-2 md:space-y-4">
@@ -205,7 +211,7 @@ export const SocialProofSection = () => {
 
             <div className="col-span-1 md:col-span-3 row-span-1 bg-[#050505] p-8 md:p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
               <div className="flex justify-between items-start">
-                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><ShieldCheck size={18} md:size={20} /></div>
+                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><ShieldCheck size={20} /></div>
                 <span className="mono text-[10px] text-white/20">FORECAST-OS</span>
               </div>
               <div className="mt-8 md:mt-12 space-y-2 md:space-y-4">
@@ -216,7 +222,7 @@ export const SocialProofSection = () => {
 
             <div className="col-span-1 md:col-span-2 row-span-1 bg-[#050505] p-8 md:p-12 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
                <div className="flex justify-between items-start">
-                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><Activity size={18} md:size={20} /></div>
+                <div className="p-2 md:p-3 bg-primary/10 text-primary rounded-sm"><Activity size={20} /></div>
                 <span className="mono text-[10px] text-white/20">RISK-OS</span>
               </div>
               <div className="mt-8 md:mt-12">
@@ -227,14 +233,14 @@ export const SocialProofSection = () => {
 
             <div className="col-span-1 md:col-span-4 row-span-1 bg-primary p-8 md:p-12 flex flex-col justify-between text-black">
               <div className="flex justify-between items-start">
-                <div className="p-2 md:p-3 bg-black text-primary rounded-sm"><MapPin size={18} md:size={20} /></div>
+                <div className="p-2 md:p-3 bg-black text-primary rounded-sm"><MapPin size={20} /></div>
                 <span className="mono text-[10px] font-bold opacity-40">VALUE-GAIN</span>
               </div>
               <div className="mt-8 md:mt-12 flex justify-between items-end">
                 <div>
                   <h3 className="display text-4xl md:text-6xl font-black uppercase leading-none mt-2 md:mt-4">15-20%<br />Price Jump</h3>
                 </div>
-                <ArrowRight size={32} md:size={48} strokeWidth={3} />
+                <ArrowRight size={48} strokeWidth={3} />
               </div>
             </div>
           </div>

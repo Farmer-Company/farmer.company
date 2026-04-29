@@ -30,6 +30,18 @@ export const InsightsPage = () => {
               title: 'Policy Compliance', 
               body: 'MSP for wheat increased by 5%. Ensure your trade records align with the new district-level compliance standards.', 
               type: 'Regulatory' 
+            },
+            { 
+              module: 'SupplyCRM', 
+              title: 'Export Demand Surge', 
+              body: 'High demand for Grade A Basmati from EU buyers. 3 new RFQs received in your portal.', 
+              type: 'B2B' 
+            },
+            { 
+              module: 'SupplyCRM', 
+              title: 'Compliance Alert', 
+              body: 'Certificate of Origin required for your upcoming shipment to UAE. Generate documents in one click.', 
+              type: 'Logistics' 
             }
           ].map((item, i) => (
             <div key={i} className="p-12 border border-white/10 bg-[#0D0D0D] flex flex-col md:flex-row justify-between items-start md:items-center gap-8 group hover:border-primary/50 transition-all">
@@ -77,9 +89,9 @@ export const InsightsPage = () => {
 
             <div className="space-y-6">
               {[
-                { geo: 'MH / PUNE', status: 'Stable', intensity: '82%' },
-                { geo: 'KA / BLR', status: 'High Demand', intensity: '94%' },
-                { geo: 'TN / CHE', status: 'High Volume', intensity: '61%' }
+                { geo: 'MH / PUNE', status: 'Stable', intensity: 'w-[82%]' },
+                { geo: 'KA / BLR', status: 'High Demand', intensity: 'w-[94%]' },
+                { geo: 'TN / CHE', status: 'High Volume', intensity: 'w-[61%]' }
               ].map((node, i) => (
                 <div key={i} className="space-y-2 group/node">
                   <div className="flex justify-between items-center text-[10px] mono">
@@ -88,8 +100,7 @@ export const InsightsPage = () => {
                   </div>
                   <div className="h-1 w-full bg-white/5">
                     <div 
-                      className="h-full bg-primary" 
-                      style={{ width: node.intensity }} 
+                      className={`h-full bg-primary ${node.intensity}`}
                     />
                   </div>
                 </div>

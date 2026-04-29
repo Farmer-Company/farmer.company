@@ -102,7 +102,7 @@ export const ConfigurePage = () => {
         </AnimatePresence>
 
         <div className="flex justify-between mb-12">
-          {[1, 2, 3].map(i => (
+          {[1, 2, 3, 4].map(i => (
             <div key={i} className={`h-1 flex-1 mx-1 rounded-full transition-all duration-500 ${step >= i ? 'bg-primary' : 'bg-white/10'}`} />
           ))}
         </div>
@@ -238,11 +238,65 @@ export const ConfigurePage = () => {
               <div className="flex gap-4">
                 <Button onClick={prevStep} variant="outline" className="flex-1 h-14">Back</Button>
                 <Button 
+                  onClick={() => {
+                    if (role === 'farmer' || role === 'vendor') nextStep();
+                    else handleComplete();
+                  }}
+                  disabled={isSubmitting}
+                  className="flex-[2] h-14 font-black uppercase tracking-widest"
+                >
+                  {role === 'farmer' || role === 'vendor' ? 'Next: B2B Config →' : 'Complete Implementation →'}
+                </Button>
+              </div>
+            </motion.div>
+          )}
+
+          {step === 4 && (
+            <motion.div 
+              key="step4"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="space-y-8"
+            >
+              <h2 className="text-2xl font-black uppercase tracking-tight">B2B Export Readiness</h2>
+              <p className="text-sm text-foreground-muted font-light leading-relaxed">Enable global supply features and institutional offtake agreements by providing your export details.</p>
+              
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-[2px]">IEC Code (Import Export Code)</label>
+                  <input className="w-full bg-background border border-white/10 h-14 px-4 outline-none focus:border-primary" placeholder="e.g., 0123456789" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-[2px]">Active Certifications</label>
+                  <div className="grid grid-cols-2 gap-3">
+                    {['GlobalG.A.P.', 'Organic', 'Fair Trade', 'ISO 22000'].map(cert => (
+                      <div key={cert} className="flex items-center gap-3 p-4 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors cursor-pointer">
+                        <div className="w-4 h-4 border border-primary/40 rounded-sm" />
+                        <span className="mono text-[10px] uppercase font-bold text-white/60">{cert}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-[2px]">Primary Destination Focus</label>
+                  <select className="w-full bg-background border border-white/10 h-14 px-4 outline-none appearance-none focus:border-primary" title="Export Destination">
+                    <option>United Arab Emirates</option>
+                    <option>European Union</option>
+                    <option>United States</option>
+                    <option>Southeast Asia</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <Button onClick={prevStep} variant="outline" className="flex-1 h-14">Back</Button>
+                <Button 
                   onClick={handleComplete}
                   disabled={isSubmitting}
                   className="flex-[2] h-14 font-black uppercase tracking-widest"
                 >
-                  Complete Implementation →
+                  Finalize B2B OS →
                 </Button>
               </div>
             </motion.div>

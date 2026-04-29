@@ -32,9 +32,10 @@ export const AuthFlow = () => {
     if (!name || !mobile) return;
     setError('');
     setIsSubmitting(true);
+    let appVerifier: RecaptchaVerifier | null = null;
 
     try {
-      const appVerifier = (window as any).recaptchaVerifier;
+      appVerifier = (window as any).recaptchaVerifier;
       // Ensure mobile has + prefix
       const formattedMobile = mobile.startsWith('+') ? mobile : `+${mobile.replace(/\s/g, '')}`;
       

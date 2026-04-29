@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: 'prices', path: '/prices' },
   { label: 'insights', path: '/insights' },
   { label: 'configure', path: '/configure' },
+  { label: 'supplyCRM', path: '/supply-crm' },
 ];
 
 export const Navbar = () => {

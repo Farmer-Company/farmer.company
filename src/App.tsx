@@ -18,6 +18,7 @@ import { ConfigurePage } from './components/Pages/Configure';
 import { AuthFlow } from './components/AuthFlow';
 import { LanguagePopup } from './components/LanguagePopup';
 import { LoadingScreen } from './components/LoadingScreen';
+import { SupplyCRMPage } from './components/Pages/SupplyCRM';
 import { NotFound } from './pages/NotFound';
 import { AnimatePresence } from 'framer-motion';
 import { Footer } from './components/Footer';
@@ -34,7 +35,7 @@ export default function App() {
 
   React.useEffect(() => {
     // Simulate initial sequence
-    const timer = setTimeout(() => setLoading(false), 3500);
+    const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -42,12 +43,11 @@ export default function App() {
     <Router>
       <LanguageProvider>
         <AuthProvider>
-          <AnimatePresence>
-            {loading && <LoadingScreen key="loading" />}
-          </AnimatePresence>
-          
           <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground relative">
             <ErrorBoundary>
+              <AnimatePresence>
+                {loading && <LoadingScreen key="loading" />}
+              </AnimatePresence>
               <Navbar />
               <LanguagePopup />
               <Routes>
@@ -56,6 +56,7 @@ export default function App() {
                 <Route path="/prices" element={<PricesPage />} />
                 <Route path="/insights" element={<InsightsPage />} />
                 <Route path="/configure" element={<ConfigurePage />} />
+                <Route path="/supply-crm" element={<SupplyCRMPage />} />
                 <Route path="/signin" element={<AuthFlow />} />
                 <Route path="/get-started" element={<AuthFlow />} />
                 <Route path="*" element={<NotFound />} />

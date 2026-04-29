@@ -38,6 +38,7 @@ const translations: Record<Language, Record<string, string>> = {
     routeOS: 'Logistics Optimization',
     riskOS: 'Risk Management',
     portfolioOS: 'Farmer Portfolio',
+    supplyCRM: 'Supply CRM',
   },
   hi: {
     welcome: 'Digital Orchard में आपका स्वागत है',
@@ -55,6 +56,7 @@ const translations: Record<Language, Record<string, string>> = {
     avgPrice: 'औसत फार्म गेट मूल्य',
     cheaper: 'खरीददारों के लिए सस्ता',
     middlemen: 'बिचौलिए',
+    supplyCRM: 'आपूर्ति CRM',
   },
   ta: {
     welcome: 'Digital Orchard-க்கு வரவேற்கிறோம்',
@@ -72,6 +74,7 @@ const translations: Record<Language, Record<string, string>> = {
     avgPrice: 'சராசரி பண்ணை விலை',
     cheaper: 'வாங்குபவர்களுக்கு மலிவானது',
     middlemen: 'இடைத்தரகர்கள்',
+    supplyCRM: 'வழங்கல் CRM',
   },
   kn: {
     welcome: 'Digital Orchard ಗೆ ಸ್ವಾಗತ',
