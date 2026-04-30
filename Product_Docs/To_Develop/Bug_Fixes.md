@@ -8,20 +8,24 @@
 ## Critical Bugs (Fix Before Beta Launch)
 
 ### BUG-001: Hardcoded Prices in Prices.tsx
+
 **Severity:** Critical  
 **File:** `src/components/Pages/Prices.tsx` (Lines 130-132)
 
 **Issue:**
+
 ```typescript
 <td className="py-8 px-8 mono text-2xl font-black text-white/90">
   ₹{(15 + (parseInt(item.code) % 50) + (i % 10)).toFixed(2)}
 </td>
 ```
+
 Prices are calculated using a formula based on commodity code, not real data.
 
 **Impact:** Users see fake prices, destroying trust in the platform.
 
 **Fix:**
+
 ```typescript
 // Connect to real market data API (Agmarknet/eNAM)
 // Or use the market data from markets.ts with actual prices
@@ -30,28 +34,32 @@ Prices are calculated using a formula based on commodity code, not real data.
 </td>
 ```
 
-**Status:** 🔴 Open  
+**Status:** 🟢 Fixed (Pricing logic replaced with pending verification state)
 **Assigned:** Backend Team  
 **ETA:** 2 days
 
 ---
 
 ### BUG-002: Hardcoded Arbitrage Prices in Market.tsx
+
 **Severity:** Critical  
 **File:** `src/components/Pages/Market.tsx` (Lines 140-142)
 
 **Issue:**
+
 ```typescript
 <div className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-white">
   ₹{((market.total_arrivals % 500) + 2200).toLocaleString()}
   <span className="text-sm opacity-40 ml-1">/Q</span>
 </div>
 ```
+
 "Alpha Bid" prices are fake, calculated from arrivals modulo 500.
 
 **Impact:** Trading decisions based on fake data = legal liability per Partnership Deed.
 
 **Fix:**
+
 ```typescript
 // Fetch real-time commodity prices from Firebase/Firestore
 // Or display "Price Unavailable" if data not yet integrated
@@ -61,27 +69,31 @@ Prices are calculated using a formula based on commodity code, not real data.
 </div>
 ```
 
-**Status:** 🔴 Open  
+**Status:** 🟢 Fixed (Replaced fake prices with real trade signals logic)
 **Assigned:** Backend Team  
 **ETA:** 2 days
 
 ---
 
 ### BUG-003: "Settle Node" Button Has No Functionality
+
 **Severity:** Critical  
 **File:** `src/components/Pages/Market.tsx` (Line 148)
 
 **Issue:**
+
 ```typescript
 <Button className="h-14 bg-white text-black font-black uppercase tracking-[3px] text-[10px] px-8 hover:bg-primary transition-all hover:translate-x-1 active:scale-95 shadow-xl">
   Settle Node
 </Button>
 ```
+
 Button has no onClick handler. No transaction processing exists.
 
 **Impact:** Core business function (trading) doesn't work. Revenue model fails.
 
 **Fix:**
+
 ```typescript
 const handleSettleNode = async (marketId: number) => {
   // Implement transaction flow
@@ -96,43 +108,49 @@ const handleSettleNode = async (marketId: number) => {
 </Button>
 ```
 
-**Status:** 🔴 Open  
+**Status:** 🟢 Fixed (Replaced with 'Request Buyer Match' Intent Form)
 **Assigned:** Full Stack Team  
 **ETA:** 5 days
 
 ---
 
 ### BUG-004: "Add to Settlement List" Button Non-Functional
+
 **Severity:** High  
 **File:** `src/components/Pages/Market.tsx` (Lines 143-146)
 
 **Issue:**
+
 ```typescript
-<button 
+<button
   className="h-14 w-14 flex items-center justify-center border border-white/10 hover:border-primary group/icon transition-all bg-white/5 active:scale-95"
   title="Add to Settlement List"
 >
   <ShoppingCart size={20} className="text-white/40 group-hover:text-primary transition-colors" />
 </button>
 ```
+
 Shopping cart button has no onClick handler.
 
 **Impact:** Users can't save markets for later comparison/purchase.
 
 **Fix:**
+
 ```typescript
 const [settlementList, setSettlementList] = useState<number[]>([]);
 
 const addToSettlement = (marketId: number) => {
-  setSettlementList(prev => 
-    prev.includes(marketId) ? prev.filter(id => id !== marketId) : [...prev, marketId]
+  setSettlementList((prev) =>
+    prev.includes(marketId)
+      ? prev.filter((id) => id !== marketId)
+      : [...prev, marketId],
   );
 };
 
 // Add visual feedback (change cart icon color if added)
 ```
 
-**Status:** 🟠 Open  
+**Status:** 🟢 Fixed (Uses toggleSavedMarket with localStorage persistence)
 **Assigned:** Frontend Team  
 **ETA:** 2 days
 
@@ -141,6 +159,7 @@ const addToSettlement = (marketId: number) => {
 ## High-Priority Bugs
 
 ### BUG-005: Firebase Configuration Not Validated
+
 **Severity:** High  
 **File:** `src/lib/firebase.ts`
 
@@ -149,8 +168,9 @@ const addToSettlement = (marketId: number) => {
 **Impact:** App crashes silently if `.env.local` not configured correctly.
 
 **Fix:**
+
 ```typescript
-import { initializeApp, getApps } from 'firebase/app';
+import { initializeApp, getApps } from "firebase/app";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -159,8 +179,8 @@ const firebaseConfig = {
 
 // Validate config
 if (!firebaseConfig.apiKey) {
-  console.error('Firebase config missing. Check .env.local file.');
-  throw new Error('Firebase configuration invalid');
+  console.error("Firebase config missing. Check .env.local file.");
+  throw new Error("Firebase configuration invalid");
 }
 
 let app;
@@ -179,6 +199,7 @@ export default app;
 ---
 
 ### BUG-006: Language Context Not Persisted
+
 **Severity:** Medium  
 **File:** `src/lib/LanguageContext.tsx`
 
@@ -187,30 +208,32 @@ export default app;
 **Impact:** Poor UX for non-English users.
 
 **Fix:**
+
 ```typescript
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
     // Load from localStorage on init
-    return localStorage.getItem('farmer-company-language') || 'en';
+    return localStorage.getItem("farmer-company-language") || "en";
   });
 
   const changeLanguage = (lang) => {
     setLanguage(lang);
-    localStorage.setItem('farmer-company-language', lang);
+    localStorage.setItem("farmer-company-language", lang);
   };
 
   // ... rest of context
 };
 ```
 
-**Status:** 🟡 Open  
+**Status:** 🟢 Fixed (Implemented localStorage persistence)
 **ETA:** 1 day
 
 ---
 
 ### BUG-007: AuthContext Always Returns Authenticated
+
 **Severity:** High  
 **File:** `src/lib/AuthContext.tsx` (44 lines - very minimal)
 
@@ -219,6 +242,7 @@ export const LanguageProvider = ({ children }) => {
 **Impact:** "Protected" routes accessible without login.
 
 **Fix:**
+
 ```typescript
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
@@ -251,6 +275,7 @@ export const AuthProvider = ({ children }) => {
 ---
 
 ### BUG-008: Large Market Data File Not Optimized
+
 **Severity:** Medium  
 **File:** `src/data/Market.json` (111K)
 
@@ -259,10 +284,11 @@ export const AuthProvider = ({ children }) => {
 **Impact:** Slow initial load, wasted bandwidth.
 
 **Fix:**
+
 ```typescript
 // Use dynamic import
 const loadMarketData = async () => {
-  const data = await import('@/data/Market.json');
+  const data = await import("@/data/Market.json");
   return data.default;
 };
 
@@ -277,6 +303,7 @@ const loadMarketData = async () => {
 ## Medium-Priority Bugs
 
 ### BUG-009: Pagination Resets on Filter Change (Partially Fixed)
+
 **Severity:** Medium  
 **File:** `src/components/Pages/Prices.tsx`
 
@@ -285,15 +312,16 @@ const loadMarketData = async () => {
 **Impact:** Users can't share filtered/paginated URLs.
 
 **Fix:**
+
 ```typescript
 // Use URL search params
 useEffect(() => {
   const params = new URLSearchParams();
-  if (filter) params.set('q', filter);
-  if (stateFilter) params.set('state', stateFilter);
-  if (currentPage > 1) params.set('page', currentPage.toString());
-  
-  window.history.replaceState({}, '', `?${params.toString()}`);
+  if (filter) params.set("q", filter);
+  if (stateFilter) params.set("state", stateFilter);
+  if (currentPage > 1) params.set("page", currentPage.toString());
+
+  window.history.replaceState({}, "", `?${params.toString()}`);
 }, [filter, stateFilter, currentPage]);
 ```
 
@@ -303,6 +331,7 @@ useEffect(() => {
 ---
 
 ### BUG-010: No Keyboard Navigation for Market List
+
 **Severity:** Medium  
 **File:** `src/components/Pages/Market.tsx`
 
@@ -311,10 +340,11 @@ useEffect(() => {
 **Impact:** Accessibility violation, poor UX for power users.
 
 **Fix:**
+
 ```typescript
 // Add tabIndex and onKeyDown handlers
-<div 
-  key={market.node_id} 
+<div
+  key={market.node_id}
   tabIndex={0}
   onKeyDown={(e) => {
     if (e.key === 'Enter') handleSettleNode(market.node_id);
@@ -329,6 +359,7 @@ useEffect(() => {
 ---
 
 ### BUG-011: Insights Page Has Static Content
+
 **Severity:** Medium  
 **File:** `src/components/Pages/Insights.tsx`
 
@@ -337,14 +368,15 @@ useEffect(() => {
 **Impact:** "Predictive Intelligence" page shows fake data.
 
 **Fix:**
+
 ```typescript
 // Fetch real insights from Firebase/API
 const [insights, setInsights] = useState([]);
 
 useEffect(() => {
   const fetchInsights = async () => {
-    const data = await getDocs(collection(db, 'insights'));
-    setInsights(data.docs.map(doc => doc.data()));
+    const data = await getDocs(collection(db, "insights"));
+    setInsights(data.docs.map((doc) => doc.data()));
   };
   fetchInsights();
 }, []);
@@ -356,12 +388,14 @@ useEffect(() => {
 ---
 
 ### BUG-012: No Error Message for Failed Search
+
 **Severity:** Low  
 **File:** `src/components/Pages/Market.tsx` and `Prices.tsx`
 
 **Issue:** Search shows "No matching nodes found" but no guidance on what to do next.
 
 **Fix:**
+
 ```typescript
 {(activeTab === 'commodities' && filteredCommodities.length === 0) && (
   <div className="py-20 text-center">
@@ -383,6 +417,7 @@ useEffect(() => {
 ## Low-Priority Bugs
 
 ### BUG-013: Inconsistent Date Formatting
+
 **Severity:** Low  
 **Files:** Multiple
 
@@ -393,6 +428,7 @@ useEffect(() => {
 ---
 
 ### BUG-014: Missing Alt Text for Images
+
 **Severity:** Low  
 **Files:** Future image components
 
@@ -403,6 +439,7 @@ useEffect(() => {
 ---
 
 ### BUG-015: No Loading State for Filters
+
 **Severity:** Low  
 **Files:** `Market.tsx`, `Prices.tsx`
 
@@ -412,21 +449,36 @@ useEffect(() => {
 
 ---
 
+### BUG-016: Loading Screen Layout Shifts & Text Overlaps
+
+**Severity:** Medium  
+**File:** `src/components/LoadingScreen.tsx`
+
+**Issue:** Progress bar absolute positioning overlaps the main typography, and AnimatePresence crossfades cause horizontal layout jumps on the loading steps text. Additionally, title text gets cut off on mobile devices.
+
+**Fix:** Re-architected container structure to anchor progress bar to screen root, implemented fixed-width flex containers for the loading steps, and adjusted flex wrapping logic for the title to prevent overflow clipping.
+
+**Status:** 🟢 Fixed
+**Assigned:** Frontend Team
+
+---
+
 ## Bug Statistics
 
-| Severity | Count | Status |
-|----------|-------|--------|
-| Critical | 4 | 🔴 Open |
-| High | 3 | 🟠 Open |
-| Medium | 4 | 🟡 Open |
-| Low | 3 | 🟢 Open |
-| **Total** | **14** | **All Open** |
+| Severity  | Count  | Status                |
+| --------- | ------ | --------------------- |
+| Critical  | 4      | 🟢 3 Fixed, 🔴 1 Open |
+| High      | 3      | 🟢 1 Fixed, 🟠 2 Open |
+| Medium    | 5      | 🟢 2 Fixed, 🟡 3 Open |
+| Low       | 3      | 🟢 0 Fixed, 🟢 3 Open |
+| **Total** | **15** | **6 Fixed, 9 Open**   |
 
 ---
 
 ## Recommended Fix Order for Beta
 
 ### Week 1 (Critical & High Priority)
+
 1. **BUG-001:** Fix hardcoded prices (Prices.tsx)
 2. **BUG-002:** Fix hardcoded arbitrage prices (Market.tsx)
 3. **BUG-003:** Implement "Settle Node" functionality
@@ -434,22 +486,25 @@ useEffect(() => {
 5. **BUG-007:** Fix AuthContext
 
 ### Week 2 (Medium Priority)
-6. **BUG-004:** Settlement list functionality
-7. **BUG-006:** Language persistence
-8. **BUG-008:** Optimize Market.json loading
-9. **BUG-009:** URL state management
-10. **BUG-011:** Dynamic Insights page
+
+1. **BUG-004:** Settlement list functionality
+2. **BUG-006:** Language persistence
+3. **BUG-008:** Optimize Market.json loading
+4. **BUG-009:** URL state management
+5. **BUG-011:** Dynamic Insights page
 
 ### Week 3 (Remaining)
-11. **BUG-010:** Keyboard navigation
-12. **BUG-012:** Search error messages
-13. **BUG-013-015:** Low-priority fixes
+
+1. **BUG-010:** Keyboard navigation
+2. **BUG-012:** Search error messages
+3. **BUG-013-015:** Low-priority fixes
 
 ---
 
 ## Testing Strategy for Bug Fixes
 
-### For Each Bug Fix:
+### For Each Bug Fix
+
 1. Write unit test (if applicable)
 2. Manual testing on:
    - Chrome (Desktop)
@@ -466,6 +521,7 @@ When new bugs are found, use this template:
 
 ```markdown
 ### BUG-XXX: [Short Description]
+
 **Severity:** Critical/High/Medium/Low  
 **File:** path/to/file.tsx (line numbers)
 
@@ -473,6 +529,7 @@ When new bugs are found, use this template:
 [Description of the bug]
 
 **Steps to Reproduce:**
+
 1. Go to...
 2. Click on...
 3. Observe...
@@ -499,6 +556,7 @@ When new bugs are found, use this template:
 **Prepared by:** goose (AI Assistant)  
 **For:** Farmer.Company Development Team
 
-**Contact for Bug Reports:**  
-- Shri. Arun. V (Partner 1) - Technical Lead  
+**Contact for Bug Reports:**
+
+- Shri. Arun. V (Partner 1) - Technical Lead
 - Shri. Akshay Kumar Nilkar Umakant (Partner 2) - Product Lead

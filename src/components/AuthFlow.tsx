@@ -122,7 +122,7 @@ export const AuthFlow = () => {
                     type="text" 
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Arun V"
+                    placeholder="Ramesh Kumar"
                     className="w-full bg-white/[0.03] border border-white/10 h-14 px-4 mono text-xs text-white focus:border-primary focus:outline-none transition-colors"
                   />
                 </div>

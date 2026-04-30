@@ -15,18 +15,21 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 ## 1. Revenue Stream Diversification (Beyond Trading)
 
 ### 1.1 Commission-Based Trading (Immediate Beta Implementation)
+
 - **Current Gap:** The "Settle Node" buttons in Market.tsx don't process actual transactions
 - **Suggestion:** Implement a 2-5% commission on successful trades facilitated through the platform
 - **Implementation:** Add transaction processing for Market, Prices, and SupplyCRM pages
 - **Projected Impact:** ₹50,000-₹2L monthly revenue (based on 100-500 MT traded)
 
 ### 1.2 Subscription Tiers for B2B Buyers (Beta Feature)
+
 - **Tier 1 - Basic (Free):** Access to market prices, limited RFQ (Request for Quote)
 - **Tier 2 - Professional (₹999/month):** Unlimited RFQs, priority listing, historical price data
 - **Tier 3 - Enterprise (₹4,999/month):** Dedicated account manager, API access, bulk ordering
 - **Implementation:** Enhance Configure.tsx to handle subscription management
 
 ### 1.3 Logistics & Warehousing Services (Per Partnership Deed Clause 4)
+
 - **Current Status:** Mentioned in business scope but not implemented
 - **Suggestion:** Partner with logistics providers for:
   - First-mile pickup from farms (₹5-10/kg)
@@ -35,6 +38,7 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 - **Revenue Share:** 10-15% commission on logistics bookings
 
 ### 1.4 Data-as-a-Service (DaaS) (Beta Premium Feature)
+
 - **Current Asset:** 25+ years of market data mentioned in Insights.tsx
 - **Suggestion:** Sell anonymized market intelligence reports to:
   - Financial institutions (crop loan risk assessment)
@@ -47,6 +51,7 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 ## 2. Geographic Expansion Strategy
 
 ### 2.1 Phase 1 - Strengthen South India (Beta Focus)
+
 - **Current Presence:** Tamil Nadu (Vellore), Karnataka (Bengaluru) per partner addresses
 - **Expansion Targets:**
   - Andhra Pradesh (Vijayawada, Guntur markets)
@@ -55,12 +60,14 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 - **Action:** Add 50+ markets from these states to markets.ts
 
 ### 2.2 Phase 2 - Western India (Post-Beta)
+
 - Maharashtra (Nashik, Pune, Mumbai APMC markets)
 - Gujarat (Ahmedabad, Surat)
 - Rajasthan (Jaipur, Kota)
 
 ### 2.3 Cross-Border Export Preparation (Per Partnership Deed - Import/Export Clause)
-- **Beta Preparation:** 
+
+- **Beta Preparation:**
   - Integrate with ICEGATE (Indian Customs) for export documentation
   - Partner with APEDA (Agricultural and Processed Food Products Export Development Authority)
   - Add certificate of origin generation (mentioned in Insights.tsx)
@@ -71,6 +78,7 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 ## 3. Value-Added Services for Beta
 
 ### 3.1 Quality Certification & Grading
+
 - **Problem:** Price.tsx shows prices but no quality differentiation
 - **Solution:** Implement quality-based pricing:
   - Grade A (Premium): +20-30% over modal price
@@ -79,6 +87,7 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 - **Revenue:** ₹500-₹2,000 per quality certification
 
 ### 3.2 Financial Services Integration
+
 - **Per Partnership Deed:** Partners can borrow for operations
 - **Suggestion for Beta:**
   - Partner with NBFCs for crop loans to farmers (lead generation fee: 1-2%)
@@ -86,6 +95,7 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
   - Working capital loans for traders
 
 ### 3.3 Digital Warehouse Receipts (e-NWR)
+
 - **Integration:** With WDRA (Warehousing Development and Regulatory Authority)
 - **Benefit:** Farmers can store produce and get credit against electronic receipts
 - **Revenue:** 0.5-1% transaction fee on e-NWR generation
@@ -95,16 +105,19 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 ## 4. Strategic Partnerships for Beta
 
 ### 4.1 Government Partnerships
+
 - **eNAM Integration:** Link with Electronic National Agriculture Market
 - **GeM Portal:** Register as seller for government procurement
 - **PM Kisan:** Partner for direct benefit transfers to farmers
 
 ### 4.2 Private Sector Partnerships
+
 - **FMCG Companies:** HUL, ITC, Nestle for direct sourcing (bulk orders)
 - **E-commerce:** BigBasket, Grofers for last-mile retail integration
 - **Cold Chain Operators:** Snowman, Gati Kausar for temperature-controlled logistics
 
 ### 4.3 Technology Partnerships
+
 - **Payment Gateways:** Razorpay, PhonePe for seamless transactions
 - **Cloud Infrastructure:** Cloudflare (already using wrangler) for global CDN
 - **AI/ML:** Google Gemini (already integrated per package.json) for price prediction
@@ -113,27 +126,30 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 
 ## 5. Beta Monetization Roadmap (0-6 Months)
 
-| Month | Feature | Revenue Model | Projected Revenue |
-|-------|---------|---------------|-------------------|
-| 1-2 | Basic Trading Platform | Commission (2%) | ₹20,000 |
-| 3 | Subscription Launch | Monthly recurring | ₹50,000 |
-| 4 | Logistics Integration | Commission (10%) | ₹80,000 |
-| 5 | Data Services Pilot | Report sales | ₹1,20,000 |
-| 6 | Financial Services | Lead generation | ₹2,00,000 |
+| Month | Feature                | Revenue Model     | Projected Revenue |
+| ----- | ---------------------- | ----------------- | ----------------- |
+| 1-2   | Basic Trading Platform | Commission (2%)   | ₹20,000           |
+| 3     | Subscription Launch    | Monthly recurring | ₹50,000           |
+| 4     | Logistics Integration  | Commission (10%)  | ₹80,000           |
+| 5     | Data Services Pilot    | Report sales      | ₹1,20,000         |
+| 6     | Financial Services     | Lead generation   | ₹2,00,000         |
 
 ---
 
 ## 6. Risk Mitigation for Beta
 
 ### 6.1 Payment Security
+
 - **Issue:** Trading involves high-value transactions
 - **Solution:** Escrow account system for payments (implement in SupplyCRM.tsx)
 
 ### 6.2 Quality Disputes
+
 - **Issue:** Per Partnership Deed, partners liable for losses
 - **Solution:** Third-party quality inspection before payment release
 
 ### 6.3 Regulatory Compliance
+
 - **Requirement:** Per Partnership Deed, comply with all statutory regulations
 - **Action:** Register under:
   - Companies Act (if converting to private limited)

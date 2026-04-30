@@ -60,7 +60,7 @@ Today the agricultural trade flow is fragmented across calls, WhatsApp, local ag
 
 ### Extended segment to prepare for
 
-5. Financial institutions and international asset management firms using agri-market intelligence
+1. Financial institutions and international asset management firms using agri-market intelligence
 
 ## 5. Jobs To Be Done
 
