@@ -35,7 +35,7 @@ export default function App() {
 
   React.useEffect(() => {
     // Simulate initial sequence
-    const timer = setTimeout(() => setLoading(false), 1500);
+    const timer = setTimeout(() => setLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
 
