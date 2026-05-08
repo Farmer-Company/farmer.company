@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { db, auth } from '@/src/lib/firebase';
 import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
+import { Loader2 } from 'lucide-react';
 
 export const AuthFlow = () => {
  const navigate = useNavigate();
@@ -116,8 +117,9 @@ export const AuthFlow = () => {
  className="space-y-4"
  >
  <div className="space-y-1">
- <label className="mono text-[9px] normal-case text-white/40 ml-1">Full Name</label>
+ <label htmlFor="fullName" className="mono text-[9px] normal-case text-white/40 ml-1">Full Name</label>
  <input 
+ id="fullName"
  required
  type="text" 
  value={name}
@@ -128,8 +130,9 @@ export const AuthFlow = () => {
  </div>
  
  <div className="space-y-1">
- <label className="mono text-[9px] normal-case text-white/40 ml-1">Mobile Number (with +91)</label>
+ <label htmlFor="mobile" className="mono text-[9px] normal-case text-white/40 ml-1">Mobile Number (with +91)</label>
  <input 
+ id="mobile"
  required
  type="tel" 
  value={mobile}
@@ -139,13 +142,14 @@ export const AuthFlow = () => {
  />
  </div>
 
- {error && <p className="text-[10px] text-red-500 mono normal-case">{error}</p>}
+ {error && <p role="alert" className="text-[10px] text-red-500 mono normal-case">{error}</p>}
 
  <Button 
  type="submit"
  disabled={isSubmitting}
- className="w-full h-16 bg-primary text-black font-medium normal-case mt-6"
+ className="w-full h-16 bg-primary text-black font-medium normal-case mt-6 flex items-center justify-center gap-2"
  >
+ {isSubmitting && <Loader2 className="animate-spin" size={16} />}
  <span className="mono text-xs font-medium normal-case ">
  {isSubmitting ? 'Sending Code...' : 'Send Verification Code'}
  </span>
@@ -161,8 +165,9 @@ export const AuthFlow = () => {
  className="space-y-4"
  >
  <div className="space-y-1">
- <label className="mono text-[9px] normal-case text-white/40 ml-1">Enter 6-Digit OTP</label>
+ <label htmlFor="otp" className="mono text-[9px] normal-case text-white/40 ml-1">Enter 6-Digit OTP</label>
  <input 
+ id="otp"
  required
  autoFocus
  type="text" 
@@ -174,13 +179,14 @@ export const AuthFlow = () => {
  />
  </div>
 
- {error && <p className="text-[10px] text-red-500 mono normal-case">{error}</p>}
+ {error && <p role="alert" className="text-[10px] text-red-500 mono normal-case">{error}</p>}
 
  <Button 
  type="submit"
  disabled={isSubmitting}
- className="w-full h-16 bg-primary text-black font-medium normal-case mt-6"
+ className="w-full h-16 bg-primary text-black font-medium normal-case mt-6 flex items-center justify-center gap-2"
  >
+ {isSubmitting && <Loader2 className="animate-spin" size={16} />}
  <span className="mono text-xs font-medium normal-case ">
  {isSubmitting ? 'Verifying...' : 'Complete Authorization'}
  </span>
