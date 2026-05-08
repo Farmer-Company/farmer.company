@@ -1,0 +1,3 @@
+## 2026-05-08 - Accessible Authentication Forms
+**Learning:** Combining explicit label associations (`htmlFor`/`id`), ARIA alerts (`role="alert"`) for error messages, and immediate visual feedback (like an inline loading spinner inside submit buttons) creates a robust and accessible authentication experience that benefits screen reader users and those requiring immediate visual confirmation of actions.
+**Action:** When implementing new forms, use this pattern: always associate labels with inputs via `htmlFor` and `id`, use `role="alert"` for dynamic error messages, and provide a clear, non-disruptive loading state on submit actions.
