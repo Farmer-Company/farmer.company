@@ -17,8 +17,8 @@ export const AuthFlow = () => {
 
  // Initialize Recaptcha
  useEffect(() => {
- if (!(window as any).recaptchaVerifier) {
- (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+ if (!window.recaptchaVerifier) {
+ window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
  'size': 'invisible',
  'callback': () => {
  console.log('Recaptcha resolved');
@@ -35,7 +35,7 @@ export const AuthFlow = () => {
  let appVerifier: RecaptchaVerifier | null = null;
 
  try {
- appVerifier = (window as any).recaptchaVerifier;
+ appVerifier = window.recaptchaVerifier || null;
  // Ensure mobile has + prefix
  const formattedMobile = mobile.startsWith('+') ? mobile : `+${mobile.replace(/\s/g, '')}`;
  
