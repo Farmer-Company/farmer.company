@@ -1,6 +1,6 @@
 # Digital Orchard OS Design System
 
-```yaml
+````yaml
 version: 1.0
 name: Digital Orchard OS (Carbon Engineered)
 description: "An infrastructure-first design system merging Digital Orchard OS colors with IBM Carbon flat geometry and light-weight IBM Plex Sans typography. No rounded corners, no drop shadows. Precise engineering."
@@ -645,7 +645,7 @@ A purpose-built 5-stop field-health scale, used in map overlays, condition heatm
 
 ```css
 -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif
-```
+````
 
 Two optical sizes are used:
 
@@ -1065,25 +1065,24 @@ All button and badge variants must be managed with `class-variance-authority` to
 
 ```ts
 const button = cva(
-  "inline-flex items-center justify-center rounded-full font-medium transition-all active:scale-95 disabled:cursor-not-allowed",
+  'inline-flex items-center justify-center rounded-full font-medium transition-all active:scale-95 disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
-        primary: "bg-primary text-black hover:bg-primary-pressed",
-        secondary:
-          "bg-transparent text-white border border-white/18 hover:bg-surface-hover",
-        ghost: "bg-transparent text-primary",
-        danger: "bg-red-500 text-white hover:bg-red-600",
-        disabled: "bg-surface-2 text-white/25",
+        primary: 'bg-primary text-black hover:bg-primary-pressed',
+        secondary: 'bg-transparent text-white border border-white/18 hover:bg-surface-hover',
+        ghost: 'bg-transparent text-primary',
+        danger: 'bg-red-500 text-white hover:bg-red-600',
+        disabled: 'bg-surface-2 text-white/25',
       },
       size: {
-        lg: "text-[15px] leading-5 px-5 py-2.5 h-10",
-        md: "text-[13px] leading-5 px-3.5 py-1.5 h-8",
+        lg: 'text-[15px] leading-5 px-5 py-2.5 h-10',
+        md: 'text-[13px] leading-5 px-3.5 py-1.5 h-8',
       },
     },
     defaultVariants: {
-      variant: "primary",
-      size: "lg",
+      variant: 'primary',
+      size: 'lg',
     },
   },
 );

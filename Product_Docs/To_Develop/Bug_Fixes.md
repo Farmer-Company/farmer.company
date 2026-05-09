@@ -141,9 +141,7 @@ const [settlementList, setSettlementList] = useState<number[]>([]);
 
 const addToSettlement = (marketId: number) => {
   setSettlementList((prev) =>
-    prev.includes(marketId)
-      ? prev.filter((id) => id !== marketId)
-      : [...prev, marketId],
+    prev.includes(marketId) ? prev.filter((id) => id !== marketId) : [...prev, marketId],
   );
 };
 
@@ -170,7 +168,7 @@ const addToSettlement = (marketId: number) => {
 **Fix:**
 
 ```typescript
-import { initializeApp, getApps } from "firebase/app";
+import { initializeApp, getApps } from 'firebase/app';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -179,8 +177,8 @@ const firebaseConfig = {
 
 // Validate config
 if (!firebaseConfig.apiKey) {
-  console.error("Firebase config missing. Check .env.local file.");
-  throw new Error("Firebase configuration invalid");
+  console.error('Firebase config missing. Check .env.local file.');
+  throw new Error('Firebase configuration invalid');
 }
 
 let app;
@@ -210,17 +208,17 @@ export default app;
 **Fix:**
 
 ```typescript
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from 'react';
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
     // Load from localStorage on init
-    return localStorage.getItem("farmer-company-language") || "en";
+    return localStorage.getItem('farmer-company-language') || 'en';
   });
 
   const changeLanguage = (lang) => {
     setLanguage(lang);
-    localStorage.setItem("farmer-company-language", lang);
+    localStorage.setItem('farmer-company-language', lang);
   };
 
   // ... rest of context
@@ -288,7 +286,7 @@ export const AuthProvider = ({ children }) => {
 ```typescript
 // Use dynamic import
 const loadMarketData = async () => {
-  const data = await import("@/data/Market.json");
+  const data = await import('@/data/Market.json');
   return data.default;
 };
 
@@ -317,11 +315,11 @@ const loadMarketData = async () => {
 // Use URL search params
 useEffect(() => {
   const params = new URLSearchParams();
-  if (filter) params.set("q", filter);
-  if (stateFilter) params.set("state", stateFilter);
-  if (currentPage > 1) params.set("page", currentPage.toString());
+  if (filter) params.set('q', filter);
+  if (stateFilter) params.set('state', stateFilter);
+  if (currentPage > 1) params.set('page', currentPage.toString());
 
-  window.history.replaceState({}, "", `?${params.toString()}`);
+  window.history.replaceState({}, '', `?${params.toString()}`);
 }, [filter, stateFilter, currentPage]);
 ```
 
@@ -375,7 +373,7 @@ const [insights, setInsights] = useState([]);
 
 useEffect(() => {
   const fetchInsights = async () => {
-    const data = await getDocs(collection(db, "insights"));
+    const data = await getDocs(collection(db, 'insights'));
     setInsights(data.docs.map((doc) => doc.data()));
   };
   fetchInsights();

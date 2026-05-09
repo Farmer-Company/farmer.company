@@ -73,8 +73,8 @@
 
 ```typescript
 // In App.tsx
-const MarketPage = lazy(() => import("./components/Pages/Market"));
-const PricesPage = lazy(() => import("./components/Pages/Prices"));
+const MarketPage = lazy(() => import('./components/Pages/Market'));
+const PricesPage = lazy(() => import('./components/Pages/Prices'));
 // etc.
 ```
 
@@ -113,7 +113,7 @@ const PricesPage = lazy(() => import("./components/Pages/Prices"));
 
 ```typescript
 // src/lib/config.ts
-const requiredEnvVars = ["VITE_GEMINI_API_KEY", "VITE_FIREBASE_API_KEY"];
+const requiredEnvVars = ['VITE_GEMINI_API_KEY', 'VITE_FIREBASE_API_KEY'];
 requiredEnvVars.forEach((varName) => {
   if (!import.meta.env[varName]) {
     throw new Error(`Missing required env variable: ${varName}`);
@@ -149,9 +149,9 @@ requiredEnvVars.forEach((varName) => {
 
 ```typescript
 // Enable offline persistence
-import { enableIndexedDbPersistence } from "firebase/firestore";
+import { enableIndexedDbPersistence } from 'firebase/firestore';
 enableIndexedDbPersistence(db).catch((err) => {
-  console.error("Offline persistence failed:", err);
+  console.error('Offline persistence failed:', err);
 });
 ```
 
@@ -180,8 +180,8 @@ functions/
 - **Implementation:**
 
 ```typescript
-import { getAnalytics } from "firebase/analytics";
-import { getPerformance } from "firebase/performance";
+import { getAnalytics } from 'firebase/analytics';
+import { getPerformance } from 'firebase/performance';
 const analytics = getAnalytics(app);
 const perf = getPerformance(app);
 ```
@@ -316,7 +316,7 @@ const perf = getPerformance(app);
 - **Improvement:** Use Zod for runtime type validation
 
 ```typescript
-import { z } from "zod";
+import { z } from 'zod';
 const MarketSchema = z.object({
   node_id: z.number(),
   Market: z.string(),
