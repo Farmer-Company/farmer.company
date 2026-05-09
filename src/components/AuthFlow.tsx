@@ -133,6 +133,8 @@ export const AuthFlow = () => {
  <label className="mono text-[9px] normal-case text-white/40 ml-1">Mobile Number</label>
  <div className="flex gap-2">
  <select
+ aria-label="Country Code"
+ title="Country Code"
  value={countryCode}
  onChange={(e) => setCountryCode(e.target.value)}
  className="w-[120px] bg-white/[0.03] border border-white/10 h-14 px-2 mono text-xs text-white focus:border-primary focus:outline-none transition-colors"
