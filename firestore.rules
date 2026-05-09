@@ -9,10 +9,7 @@ service cloud.firestore {
     function getUserData() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
     function role() { return getUserData().role; }
     function isAdmin() { 
-      return isAuthenticated() && (
-        role() == 'admin' || 
-        (request.auth.token.email == "arunvith6@gmail.com" && request.auth.token.email_verified == true)
-      );
+      return isAuthenticated() && role() == 'admin';
     }
     
     // Validate string length helper
