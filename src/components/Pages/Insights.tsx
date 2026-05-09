@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLanguage } from '@/src/lib/LanguageContext';
 
 export const InsightsPage = () => {
