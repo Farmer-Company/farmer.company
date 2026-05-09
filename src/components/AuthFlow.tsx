@@ -6,6 +6,23 @@ import { db, auth } from '@/src/lib/firebase';
 import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 
+const FormError = ({ error }: { error: string }) => {
+  if (!error) return null;
+  return <p className="text-[10px] text-red-500 mono normal-case">{error}</p>;
+};
+
+const SubmitButton = ({ isSubmitting, loadingText, text }: { isSubmitting: boolean; loadingText: string; text: string }) => (
+  <Button
+    type="submit"
+    disabled={isSubmitting}
+    className="w-full h-16 bg-primary text-black font-medium normal-case mt-6"
+  >
+    <span className="mono text-xs font-medium normal-case ">
+      {isSubmitting ? loadingText : text}
+    </span>
+  </Button>
+);
+
 export const AuthFlow = () => {
  const navigate = useNavigate();
  const [name, setName] = useState('');
@@ -139,17 +156,12 @@ export const AuthFlow = () => {
  />
  </div>
 
- {error && <p className="text-[10px] text-red-500 mono normal-case">{error}</p>}
-
- <Button 
- type="submit"
- disabled={isSubmitting}
- className="w-full h-16 bg-primary text-black font-medium normal-case mt-6"
- >
- <span className="mono text-xs font-medium normal-case ">
- {isSubmitting ? 'Sending Code...' : 'Send Verification Code'}
- </span>
- </Button>
+ <FormError error={error} />
+ <SubmitButton
+   isSubmitting={isSubmitting}
+   loadingText="Sending Code..."
+   text="Send Verification Code"
+ />
  </motion.form>
  ) : (
  <motion.form 
@@ -174,17 +186,12 @@ export const AuthFlow = () => {
  />
  </div>
 
- {error && <p className="text-[10px] text-red-500 mono normal-case">{error}</p>}
-
- <Button 
- type="submit"
- disabled={isSubmitting}
- className="w-full h-16 bg-primary text-black font-medium normal-case mt-6"
- >
- <span className="mono text-xs font-medium normal-case ">
- {isSubmitting ? 'Verifying...' : 'Complete Authorization'}
- </span>
- </Button>
+ <FormError error={error} />
+ <SubmitButton
+   isSubmitting={isSubmitting}
+   loadingText="Verifying..."
+   text="Complete Authorization"
+ />
 
  <button 
  type="button"
