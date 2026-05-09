@@ -1,11 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { useLanguage } from '@/src/lib/LanguageContext';
 import { commodities } from '@/src/data/commodities';
 import { markets } from '@/src/data/markets';
 import { Button } from '@/components/ui/button';
 
 export const PricesPage = () => {
- const { t } = useLanguage();
  const [selectedCommodity, setSelectedCommodity] = useState('');
  const [selectedState, setSelectedState] = useState('');
  const [email, setEmail] = useState('');
