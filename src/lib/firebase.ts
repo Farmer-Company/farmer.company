@@ -12,6 +12,9 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize App Check (Security Layer)
 if (typeof window !== 'undefined') {
+  if (import.meta.env.DEV) {
+    (window as any).FIREBASE_APPCHECK_DEBUG_TOKEN = 'AdrTqXE8BOJGBTgcpzcdeMzreQFtmH1N_H69_BaO2PRt9x_vDpg6MUZpI4b0CM8MjpyEkiX4zQg3_l10DWlrSvv8wsaZ_brOlgteKZSX87LFfoccZ1LuWmM5vyqAqB2Gq1yMZyr3LbSgEt4y7X_0fq3c2A';
+  }
  initializeAppCheck(app, {
  provider: new ReCaptchaEnterpriseProvider('6LdAdTqXHeui0dKGHucbbfqztlujZOXhAezdF8B6d'), // Site Key from token
  isTokenAutoRefreshEnabled: true
