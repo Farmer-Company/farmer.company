@@ -7,7 +7,10 @@
       "properties": {
         "uid": { "type": "string" },
         "email": { "type": "string", "format": "email" },
-        "role": { "type": "string", "enum": ["farmer", "vendor", "logistics", "government", "researcher", "admin"] },
+        "role": {
+          "type": "string",
+          "enum": ["farmer", "vendor", "logistics", "government", "researcher", "admin"]
+        },
         "fullName": { "type": "string" },
         "language_pref": { "type": "string" },
         "region_state": { "type": "string" },
@@ -30,7 +33,10 @@
         "soil_type": { "type": "string" },
         "irrigation_type": { "type": "string" },
         "certifications": { "type": "array", "items": { "type": "string" } },
-        "gps": { "type": "object", "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } } },
+        "gps": {
+          "type": "object",
+          "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } }
+        },
         "village": { "type": "string" },
         "district": { "type": "string" },
         "state": { "type": "string" },
@@ -92,7 +98,10 @@
         "price_per_kg": { "type": "number" },
         "quantity_tonnes": { "type": "number" },
         "total_value": { "type": "number" },
-        "status": { "type": "string", "enum": ["pending", "accepted", "shipped", "delivered", "cancelled", "disputed"] },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "accepted", "shipped", "delivered", "cancelled", "disputed"]
+        },
         "paymentStatus": { "type": "string", "enum": ["pending", "paid", "refunded"] },
         "logisticsId": { "type": "string" }
       }
@@ -127,7 +136,10 @@
     "/users/{uid}": { "schema": "User", "description": "Core users" },
     "/farmers/{uid}": { "schema": "Farmer", "description": "Extended farmer data" },
     "/skus/{id}": { "schema": "SKU", "description": "Global SKU registry" },
-    "/production_records/{id}": { "schema": "ProductionRecord", "description": "Farmer portfolios" },
+    "/production_records/{id}": {
+      "schema": "ProductionRecord",
+      "description": "Farmer portfolios"
+    },
     "/listings/{id}": { "schema": "Listing", "description": "Active market" },
     "/orders/{id}": { "schema": "Order", "description": "Completed trades" },
     "/forecasts/{id}": { "schema": "PriceForecast", "description": "Predictive prices" },

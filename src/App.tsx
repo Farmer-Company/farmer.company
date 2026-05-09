@@ -21,39 +21,37 @@ import { NotFound } from './pages/NotFound';
 import { Footer } from './components/Footer';
 
 const HomePage = () => (
-<main>
- <HeroSection />
- <SocialProofSection />
-</main>
+  <main>
+    <HeroSection />
+    <SocialProofSection />
+  </main>
 );
 
 export default function App() {
- return (
- <Router>
- <LanguageProvider>
- <AuthProvider>
- <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground relative">
- <ErrorBoundary>
- <Navbar />
- <Routes>
- <Route path="/" element={<HomePage />} />
- <Route path="/market" element={<MarketPage />} />
- <Route path="/prices" element={<PricesPage />} />
- <Route path="/insights" element={<InsightsPage />} />
- <Route path="/configure" element={<ConfigurePage />} />
- <Route path="/supply-crm" element={<SupplyCRMPage />} />
- <Route path="/signin" element={<AuthFlow />} />
- <Route path="/get-started" element={<AuthFlow />} />
- <Route path="*" element={<NotFound />} />
- </Routes>
- 
- <Footer />
- </ErrorBoundary>
- </div>
- </AuthProvider>
- </LanguageProvider>
- </Router>
- );
+  return (
+    <Router>
+      <LanguageProvider>
+        <AuthProvider>
+          <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground relative">
+            <ErrorBoundary>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/market" element={<MarketPage />} />
+                <Route path="/prices" element={<PricesPage />} />
+                <Route path="/insights" element={<InsightsPage />} />
+                <Route path="/configure" element={<ConfigurePage />} />
+                <Route path="/supply-crm" element={<SupplyCRMPage />} />
+                <Route path="/signin" element={<AuthFlow />} />
+                <Route path="/get-started" element={<AuthFlow />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+
+              <Footer />
+            </ErrorBoundary>
+          </div>
+        </AuthProvider>
+      </LanguageProvider>
+    </Router>
+  );
 }
-
-
