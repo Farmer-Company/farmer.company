@@ -15,8 +15,6 @@ export const HeroSection = () => {
  mouseY.set(e.clientY);
  };
 
- // No typing effect needed anymore
-
  return (
  <section
  onMouseMove={handleMouseMove}
