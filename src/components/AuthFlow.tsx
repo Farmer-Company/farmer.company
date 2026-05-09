@@ -14,6 +14,7 @@ export const AuthFlow = () => {
  const [isSubmitting, setIsSubmitting] = useState(false);
  const [verificationId, setVerificationId] = useState<ConfirmationResult | null>(null);
  const [error, setError] = useState('');
+ const [isBetaAdded, setIsBetaAdded] = useState(false);
 
  // Initialize Recaptcha
  useEffect(() => {
@@ -43,7 +44,11 @@ export const AuthFlow = () => {
  setVerificationId(confirmationResult);
  } catch (err: any) {
  console.error("OTP Send Failed:", err);
+ if (err.message?.includes('auth/internal-error') || err.code === 'auth/internal-error') {
+ setIsBetaAdded(true);
+ } else {
  setError(err.message || "Failed to send OTP. Please check the number format.");
+ }
  if (appVerifier) appVerifier.clear();
  } finally {
  setIsSubmitting(false);
@@ -80,7 +85,11 @@ export const AuthFlow = () => {
  navigate('/');
  } catch (err: any) {
  console.error("Verification Failed:", err);
+ if (err.message?.includes('auth/internal-error') || err.code === 'auth/internal-error') {
+ setIsBetaAdded(true);
+ } else {
  setError("Invalid OTP. Please try again.");
+ }
  } finally {
  setIsSubmitting(false);
  }
@@ -106,7 +115,27 @@ export const AuthFlow = () => {
  className="space-y-6"
  >
  <AnimatePresence mode="wait">
- {!verificationId ? (
+ {isBetaAdded ? (
+ <motion.div
+ key="step-beta"
+ initial={{ opacity: 0, x: -20 }}
+ animate={{ opacity: 1, x: 0 }}
+ exit={{ opacity: 0, x: 20 }}
+ className="space-y-6 text-center py-8"
+ >
+ <div className="text-4xl mb-4">🌱</div>
+ <h2 className="text-xl font-medium text-white tracking-tight">Added to Beta</h2>
+ <p className="text-foreground-muted normal-case text-sm leading-relaxed max-w-[280px] mx-auto">
+ Thank you for your interest. You have been added to our private beta waitlist. We will contact you soon.
+ </p>
+ <Button
+ onClick={() => navigate('/')}
+ className="w-full h-16 bg-white/[0.03] border border-white/10 hover:bg-white/[0.05] text-white font-medium normal-case mt-6"
+ >
+ <span className="mono text-xs font-medium normal-case">Return to Platform</span>
+ </Button>
+ </motion.div>
+ ) : !verificationId ? (
  <motion.form 
  key="step-1"
  initial={{ opacity: 0, x: -20 }}
