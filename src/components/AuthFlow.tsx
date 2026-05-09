@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { db, auth } from '@/src/lib/firebase';
 import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
+import { countries } from '@/src/lib/countries';
 
 export const AuthFlow = () => {
  const navigate = useNavigate();
  const [name, setName] = useState('');
  const [mobile, setMobile] = useState('');
+ const [countryCode, setCountryCode] = useState('+91');
  const [otp, setOtp] = useState('');
  const [isSubmitting, setIsSubmitting] = useState(false);
  const [verificationId, setVerificationId] = useState<ConfirmationResult | null>(null);
@@ -36,8 +38,8 @@ export const AuthFlow = () => {
 
  try {
  appVerifier = (window as any).recaptchaVerifier;
- // Ensure mobile has + prefix
- const formattedMobile = mobile.startsWith('+') ? mobile : `+${mobile.replace(/\s/g, '')}`;
+ const cleanMobile = mobile.replace(/\D/g, '');
+ const formattedMobile = `${countryCode}${cleanMobile}`;
  
  const confirmationResult = await signInWithPhoneNumber(auth, formattedMobile, appVerifier);
  setVerificationId(confirmationResult);
@@ -64,7 +66,7 @@ export const AuthFlow = () => {
  await setDoc(doc(db, 'users', user.uid), {
  uid: user.uid,
  displayName: name,
- phoneNumber: mobile,
+ phoneNumber: `${countryCode}${mobile}`,
  role: 'user',
  createdAt: serverTimestamp(),
  });
@@ -73,7 +75,7 @@ export const AuthFlow = () => {
  await addDoc(collection(db, 'beta_registrations'), {
  uid: user.uid,
  fullName: name,
- mobileNumber: mobile,
+ mobileNumber: `${countryCode}${mobile}`,
  timestamp: serverTimestamp(),
  });
  
@@ -128,15 +130,32 @@ export const AuthFlow = () => {
  </div>
  
  <div className="space-y-1">
- <label className="mono text-[9px] normal-case text-white/40 ml-1">Mobile Number (with +91)</label>
+ <label className="mono text-[9px] normal-case text-white/40 ml-1">Mobile Number</label>
+ <div className="flex gap-2">
+ <select
+ value={countryCode}
+ onChange={(e) => setCountryCode(e.target.value)}
+ className="w-[120px] bg-white/[0.03] border border-white/10 h-14 px-2 mono text-xs text-white focus:border-primary focus:outline-none transition-colors"
+ >
+ {countries.map((country) => (
+ <option key={country.code} value={country.dial_code} className="bg-background text-white">
+ {country.code} ({country.dial_code})
+ </option>
+ ))}
+ </select>
  <input 
  required
  type="tel" 
  value={mobile}
- onChange={(e) => setMobile(e.target.value)}
- placeholder="+91 98765 43210"
- className="w-full bg-white/[0.03] border border-white/10 h-14 px-4 mono text-xs text-white focus:border-primary focus:outline-none transition-colors"
+ onChange={(e) => {
+ const val = e.target.value.replace(/\D/g, '');
+ if (val.length <= 15) setMobile(val);
+ }}
+ placeholder="98765 43210"
+ maxLength={15}
+ className="flex-1 bg-white/[0.03] border border-white/10 h-14 px-4 mono text-xs text-white focus:border-primary focus:outline-none transition-colors"
  />
+ </div>
  </div>
 
  {error && <p className="text-[10px] text-red-500 mono normal-case">{error}</p>}
