@@ -29,7 +29,7 @@ service cloud.firestore {
     match /users/{uid} {
       allow read: if isAuthenticated() && (isOwner(uid) || isAdmin());
       allow create: if isAuthenticated() && isOwner(uid) && 
-                      request.resource.data.role in ['farmer', 'vendor', 'logistics', 'government', 'researcher'];
+                      request.resource.data.role in ['farmer', 'vendor', 'researcher'];
       allow update: if isAuthenticated() && (isAdmin() || (isOwner(uid) && request.resource.data.role == resource.data.role));
     }
 
