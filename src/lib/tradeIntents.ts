@@ -22,11 +22,15 @@ export interface TradeIntentInput {
  userId?: string | null;
 }
 
-export interface SavedTradeIntent extends TradeIntentInput {
+export interface SavedTradeIntent extends Omit<TradeIntentInput, 'contactName' | 'phone' | 'notes' | 'userId'> {
  id: string;
  createdAt: string;
  status: 'ops_review';
  persistence: TradeIntentPersistence;
+ contactName?: string;
+ phone?: string;
+ notes?: string;
+ userId?: string | null;
 }
 
 const readLocalIntents = (): SavedTradeIntent[] => {
@@ -52,7 +56,12 @@ const writeLocalIntents = (intents: SavedTradeIntent[]) => {
  return;
  }
 
- window.localStorage.setItem(LOCAL_INTENTS_KEY, JSON.stringify(intents));
+ const sanitizedIntents = intents.map((intent) => {
+   const { contactName, phone, notes, userId, ...safeIntent } = intent;
+   return safeIntent;
+ });
+
+ window.localStorage.setItem(LOCAL_INTENTS_KEY, JSON.stringify(sanitizedIntents));
 };
 
 export const getSavedTradeIntents = (): SavedTradeIntent[] => readLocalIntents();
