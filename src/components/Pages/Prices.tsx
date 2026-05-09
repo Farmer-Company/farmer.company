@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useLanguage } from '@/src/lib/LanguageContext';
 import { commodities } from '@/src/data/commodities';
-import { markets } from '@/src/data/markets';
+import { allStates } from '@/src/data/markets';
 import { Button } from '@/components/ui/button';
 
 export const PricesPage = () => {
@@ -11,7 +11,7 @@ export const PricesPage = () => {
  const [email, setEmail] = useState('');
  const [submitted, setSubmitted] = useState(false);
 
- const states = useMemo(() => [...new Set(markets.map((market) => market.State))].sort(), []);
+ const states = allStates;
 
  const handleSubmit = (e: React.FormEvent) => {
  e.preventDefault();
