@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/Home/HeroSection';
 import { SocialProofSection } from './components/Home/SocialProofSection';
@@ -29,7 +29,7 @@ const HomePage = () => (
 
 export default function App() {
  return (
- <Router>
+ <HashRouter>
  <LanguageProvider>
  <AuthProvider>
  <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground relative">
@@ -52,7 +52,7 @@ export default function App() {
  </div>
  </AuthProvider>
  </LanguageProvider>
- </Router>
+ </HashRouter>
  );
 }
 
