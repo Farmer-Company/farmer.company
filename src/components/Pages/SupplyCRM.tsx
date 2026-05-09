@@ -135,7 +135,14 @@ export const SupplyCRMPage = () => {
  );
 };
 
-const MetricBox = ({ value, label, sub, isPrimary }: any) => (
+interface MetricBoxProps {
+ value: string;
+ label: string;
+ sub: string;
+ isPrimary?: boolean;
+}
+
+const MetricBox = ({ value, label, sub, isPrimary }: MetricBoxProps) => (
  <div className="bg-[#050505] p-8 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
  <div className="space-y-1">
  <span className={`mono text-3xl font-light ${isPrimary ? 'text-primary' : 'text-white'}`}>{value}</span>
@@ -148,7 +155,14 @@ const MetricBox = ({ value, label, sub, isPrimary }: any) => (
  </div>
 );
 
-const FeatureCard = ({ icon, title, desc, action }: any) => (
+interface FeatureCardProps {
+ icon: React.ReactNode;
+ title: string;
+ desc: string;
+ action: string;
+}
+
+const FeatureCard = ({ icon, title, desc, action }: FeatureCardProps) => (
  <div className="bg-[#050505] p-10 flex flex-col justify-between group hover:bg-[#080808] transition-all relative overflow-hidden">
  <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-10 transition-opacity">
  {icon}
@@ -170,7 +184,13 @@ const FeatureCard = ({ icon, title, desc, action }: any) => (
  </div>
 );
 
-const WorkflowStep = ({ num, title, desc }: any) => (
+interface WorkflowStepProps {
+ num: string;
+ title: string;
+ desc: string;
+}
+
+const WorkflowStep = ({ num, title, desc }: WorkflowStepProps) => (
  <div className="space-y-6">
  <span className="display text-6xl font-light text-white/5 leading-none">{num}</span>
  <div className="space-y-3">
