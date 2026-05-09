@@ -29,7 +29,7 @@ export interface SavedTradeIntent extends TradeIntentInput {
  persistence: TradeIntentPersistence;
 }
 
-const readLocalIntents = (): SavedTradeIntent[] => {
+export const readLocalIntents = (): SavedTradeIntent[] => {
  if (typeof window === 'undefined') {
  return [];
  }
