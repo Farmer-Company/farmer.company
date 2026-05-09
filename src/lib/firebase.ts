@@ -12,10 +12,15 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize App Check (Security Layer)
 if (typeof window !== 'undefined') {
- initializeAppCheck(app, {
- provider: new ReCaptchaEnterpriseProvider('6LdAdTqXHeui0dKGHucbbfqztlujZOXhAezdF8B6d'), // Site Key from token
- isTokenAutoRefreshEnabled: true
- });
+  const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+  if (recaptchaSiteKey) {
+    initializeAppCheck(app, {
+      provider: new ReCaptchaEnterpriseProvider(recaptchaSiteKey),
+      isTokenAutoRefreshEnabled: true
+    });
+  } else {
+    console.warn('VITE_RECAPTCHA_SITE_KEY is not set. Firebase App Check is disabled.');
+  }
 }
 
 // Initialize Firestore with the specific database ID from config
