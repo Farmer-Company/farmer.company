@@ -1,11 +1,9 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { motion, useMotionValue } from 'motion/react';
-import { useLanguage } from '@/src/lib/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 
 export const HeroSection = () => {
- const { t } = useLanguage();
  const navigate = useNavigate();
  const mouseX = useMotionValue(0);
  const mouseY = useMotionValue(0);
