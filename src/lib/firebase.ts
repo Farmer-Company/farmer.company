@@ -1,24 +1,30 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
-import { getDatabase } from 'firebase/database';
-import firebaseConfig from '../../firebase-applet-config.json';
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
+import firebaseConfig from "../../firebase-applet-config.json";
 
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
+import {
+  initializeAppCheck,
+  ReCaptchaEnterpriseProvider,
+} from "firebase/app-check";
 
 // Initialize Firebase SDK
 const app = initializeApp(firebaseConfig);
 
 // Initialize App Check (Security Layer)
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   if (import.meta.env.DEV) {
-    (window as any).FIREBASE_APPCHECK_DEBUG_TOKEN = 'AdrTqXE8BOJGBTgcpzcdeMzreQFtmH1N_H69_BaO2PRt9x_vDpg6MUZpI4b0CM8MjpyEkiX4zQg3_l10DWlrSvv8wsaZ_brOlgteKZSX87LFfoccZ1LuWmM5vyqAqB2Gq1yMZyr3LbSgEt4y7X_0fq3c2A';
+    (window as any).FIREBASE_APPCHECK_DEBUG_TOKEN =
+      "AdrTqXE8BOJGBTgcpzcdeMzreQFtmH1N_H69_BaO2PRt9x_vDpg6MUZpI4b0CM8MjpyEkiX4zQg3_l10DWlrSvv8wsaZ_brOlgteKZSX87LFfoccZ1LuWmM5vyqAqB2Gq1yMZyr3LbSgEt4y7X_0fq3c2A";
   }
- initializeAppCheck(app, {
- provider: new ReCaptchaEnterpriseProvider('6LdAdTqXHeui0dKGHucbbfqztlujZOXhAezdF8B6d'), // Site Key from token
- isTokenAutoRefreshEnabled: true
- });
+  initializeAppCheck(app, {
+    provider: new ReCaptchaEnterpriseProvider(
+      "6LdAdTqXHeui0dKGHucbbfqztlujZOXhAezdF8B6d",
+    ), // Site Key from token
+    isTokenAutoRefreshEnabled: true,
+  });
 }
 
 // Initialize Firestore with the specific database ID from config
@@ -29,54 +35,59 @@ export const rtdb = getDatabase(app);
 
 // Firestore Error Handling
 export enum OperationType {
- CREATE = 'create',
- UPDATE = 'update',
- DELETE = 'delete',
- LIST = 'list',
- GET = 'get',
- WRITE = 'write',
+  CREATE = "create",
+  UPDATE = "update",
+  DELETE = "delete",
+  LIST = "list",
+  GET = "get",
+  WRITE = "write",
 }
 
 export interface FirestoreErrorInfo {
- error: string;
- operationType: OperationType;
- path: string | null;
- authInfo: {
- userId: string | undefined;
- email: string | null | undefined;
- emailVerified: boolean | undefined;
- isAnonymous: boolean | undefined;
- tenantId: string | null | undefined;
- providerInfo: {
- providerId: string;
- displayName: string | null;
- email: string | null;
- photoUrl: string | null;
- }[];
- }
+  error: string;
+  operationType: OperationType;
+  path: string | null;
+  authInfo: {
+    userId: string | undefined;
+    email: string | null | undefined;
+    emailVerified: boolean | undefined;
+    isAnonymous: boolean | undefined;
+    tenantId: string | null | undefined;
+    providerInfo: {
+      providerId: string;
+      displayName: string | null;
+      email: string | null;
+      photoUrl: string | null;
+    }[];
+  };
 }
 
-export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
- const errInfo: FirestoreErrorInfo = {
- error: error instanceof Error ? error.message : String(error),
- authInfo: {
- userId: auth.currentUser?.uid,
- email: auth.currentUser?.email,
- emailVerified: auth.currentUser?.emailVerified,
- isAnonymous: auth.currentUser?.isAnonymous,
- tenantId: auth.currentUser?.tenantId,
- providerInfo: auth.currentUser?.providerData.map(provider => ({
- providerId: provider.providerId,
- displayName: provider.displayName,
- email: provider.email,
- photoUrl: provider.photoURL
- })) || []
- },
- operationType,
- path
- };
- console.error('Firestore Error: ', JSON.stringify(errInfo));
- throw new Error(JSON.stringify(errInfo));
+export function handleFirestoreError(
+  error: unknown,
+  operationType: OperationType,
+  path: string | null,
+) {
+  const errInfo: FirestoreErrorInfo = {
+    error: error instanceof Error ? error.message : String(error),
+    authInfo: {
+      userId: auth.currentUser?.uid,
+      email: auth.currentUser?.email,
+      emailVerified: auth.currentUser?.emailVerified,
+      isAnonymous: auth.currentUser?.isAnonymous,
+      tenantId: auth.currentUser?.tenantId,
+      providerInfo:
+        auth.currentUser?.providerData.map((provider) => ({
+          providerId: provider.providerId,
+          displayName: provider.displayName,
+          email: provider.email,
+          photoUrl: provider.photoURL,
+        })) || [],
+    },
+    operationType,
+    path,
+  };
+  console.error("Firestore Error: ", JSON.stringify(errInfo));
+  throw new Error(JSON.stringify(errInfo));
 }
 
 export default app;
