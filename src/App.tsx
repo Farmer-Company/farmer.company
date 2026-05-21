@@ -8,6 +8,11 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/Home/HeroSection';
 import { SocialProofSection } from './components/Home/SocialProofSection';
+import { InteractiveDemo } from './components/Home/InteractiveDemo';
+import { ComparisonSection } from './components/Home/ComparisonSection';
+import { TestimonialsSection } from './components/Home/TestimonialsSection';
+import { TrustSection } from './components/Home/TrustSection';
+import { FAQSection } from './components/Home/FAQSection';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LanguageProvider } from './lib/LanguageContext';
 import { AuthProvider } from './lib/AuthContext';
@@ -17,13 +22,23 @@ import { InsightsPage } from './components/Pages/Insights';
 import { ConfigurePage } from './components/Pages/Configure';
 import { AuthFlow } from './components/AuthFlow';
 import { SupplyCRMPage } from './components/Pages/SupplyCRM';
+import { FarmersPage } from './components/Pages/FarmersPage';
+import { VendorsPage } from './components/Pages/VendorsPage';
+import { LogisticsPage } from './components/Pages/LogisticsPage';
+import { CustomersPage } from './components/Pages/CustomersPage';
 import { NotFound } from './pages/NotFound';
 import { Footer } from './components/Footer';
+import { StoryPage } from './components/Pages/Story';
 
 const HomePage = () => (
 <main>
  <HeroSection />
+ <InteractiveDemo />
+ <ComparisonSection />
  <SocialProofSection />
+ <TestimonialsSection />
+ <TrustSection />
+ <FAQSection />
 </main>
 );
 
@@ -37,11 +52,16 @@ export default function App() {
  <Navbar />
  <Routes>
  <Route path="/" element={<HomePage />} />
+ <Route path="/story" element={<StoryPage />} />
  <Route path="/market" element={<MarketPage />} />
  <Route path="/prices" element={<PricesPage />} />
  <Route path="/insights" element={<InsightsPage />} />
  <Route path="/configure" element={<ConfigurePage />} />
  <Route path="/supply-crm" element={<SupplyCRMPage />} />
+ <Route path="/farmers" element={<FarmersPage />} />
+ <Route path="/vendors" element={<VendorsPage />} />
+ <Route path="/logistics" element={<LogisticsPage />} />
+ <Route path="/customers" element={<CustomersPage />} />
  <Route path="/signin" element={<AuthFlow />} />
  <Route path="/get-started" element={<AuthFlow />} />
  <Route path="*" element={<NotFound />} />

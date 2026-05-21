@@ -19,6 +19,7 @@ const translations: Record<Language, Record<string, string>> = {
  heroSubtitle: 'One platform for real‑time market prices, AI forecasts, direct farm‑to-buyer sales, and a permanent digital portfolio for every farmer.',
  signIn: 'Sign In',
  getStarted: 'Join Beta – Free',
+ story: 'Our Story',
  market: 'Market',
  prices: 'Prices',
  insights: 'Insights',

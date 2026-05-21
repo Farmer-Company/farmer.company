@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { rtdb } from '@/src/lib/firebase';
 import { ref, onValue } from 'firebase/database';
 import { useLanguage } from '@/src/lib/LanguageContext';
+import { Link } from 'react-router-dom';
 import { 
  Activity, 
  ShieldCheck, 
@@ -12,7 +13,8 @@ import {
  ShoppingBag, 
  Truck, 
  Target,
- Globe
+ Globe,
+ Sprout
 } from 'lucide-react';
 
 const FADE_DURATION = 0.6;
@@ -136,17 +138,19 @@ export const SocialProofSection = () => {
  {/* Global Impact Grid */}
  <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-12 border-y border-white/5 py-8 md:py-12">
  {/* Row 1 */}
- <div>
- <p className="mono text-[10px] text-primary font-medium normal-case mb-6 px-4">BETA INFRASTRUCTURE — LIVE NOW</p>
+ <div className="bg-primary/[0.02] border border-primary/10 rounded-2xl p-6 md:p-8">
+ <p className="mono text-[10px] text-primary font-medium normal-case mb-6 px-4 flex items-center gap-2">
+  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> BETA INFRASTRUCTURE — LIVE NOW
+ </p>
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center md:text-left">
- <StatBox number="6,944" label="Markets Mapped" sub="" />
+ <StatBox number="6,944" label="Markets Mapped (Click to view)" sub="" link="/market" />
  <StatBox number="250+" label="Commodities Tracked" isMono sub="" />
  <StatBox number="Tamil Nadu" label="Active Pilot Region" sub="" />
  <StatBox number="Alpha" label="Current Build Stage" isPrimary sub="" />
  </div>
  </div>
  {/* Row 2 */}
- <div className="opacity-50 border-t border-dashed border-white/20 pt-8 relative">
+ <div className="opacity-60 border border-dashed border-white/10 rounded-2xl p-6 md:p-8 relative bg-white/[0.01]">
  <p className="mono text-[10px] text-foreground-muted font-medium normal-case mb-6 px-4">BUILDING TOWARD — ROADMAP</p>
  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center md:text-left">
  <StatBox number="85%" label="Target Forecast Accuracy" sub="" />
@@ -171,18 +175,21 @@ export const SocialProofSection = () => {
  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1">
  <PlayerCard
  role="FARMER"
+    link="/farmers"
  tamil="விவசாயிகள்"
  icon={<Users size={24} />}
  body="Know what to grow before you plant. List your harvest, set your price, sell directly to verified buyers — with no commission agent between you and the money."
  />
  <PlayerCard
  role="VENDOR"
+    link="/vendors"
  tamil="விற்பனையாளர்கள்"
  icon={<ShoppingBag size={24} />}
  body="Source verified, traceable produce directly from farmers. Use the Supply CRM to manage repeat orders and price intelligence to eliminate procurement markup."
  />
  <PlayerCard
  role="LOGISTICS"
+    link="/logistics"
  tamil="தளவாட பங்காளர்கள்"
  icon={<Truck size={24} />}
  body="Guaranteed transaction volumes. Price-aware route optimisation. Match with farm pickups before they're dispatched — zero empty miles, predictable revenue."
@@ -194,7 +201,8 @@ export const SocialProofSection = () => {
  body="Analyse MSP compliance, policy impact, and market clusters using the largest clean agricultural dataset in India. District-level granularity, 25+ years of arrivals data."
  />
  <PlayerCard
- role="GLOBAL BUYER"
+ role="CUSTOMER"
+    link="/customers"
  tamil="உலகளாவிய வாங்குபவர்"
  icon={<Globe size={24} />}
  body="Source directly from verified Indian farms. Institutional offtake contracts, phytosanitary compliance, letter of credit facilitation — all inside one supply protocol."
@@ -202,7 +210,57 @@ export const SocialProofSection = () => {
  </div>
  </div>
 
- {/* Built From The Field */}
+ 
+  {/* AgriOS Intelligence Layer */}
+  <div className="w-full max-w-[1400px] mx-auto mt-20 md:mt-32 grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#050505] border border-primary/20 p-8 md:p-16 relative overflow-hidden group">
+    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+    <div className="space-y-8 text-left relative z-10">
+      <div className="flex items-center gap-3">
+        <div className="p-3 bg-primary/10 text-primary rounded-sm"><Sprout size={24} /></div>
+        <span className="mono text-[10px] text-primary font-medium normal-case">NEW MODULE</span>
+      </div>
+      <h2 className="text-[34px] md:text-[40px] font-semibold text-white tracking-[-0.02em] leading-[1.1]">
+        AgriOS Intelligence.<br />
+        Grow clean, earn more.
+      </h2>
+      <div className="space-y-4 text-foreground-muted text-[17px] font-normal leading-[1.47]">
+        <p>We're integrating AI for Low-Pesticide Agriculture to create the ultimate Farm Intelligence Score.</p>
+        <ul className="space-y-4 mt-4">
+          <li className="flex items-start gap-3">
+            <span className="text-primary mt-1">✓</span>
+            <div>
+              <strong className="text-white block">Pest & Weed Detection Engine</strong>
+              <span className="text-sm">Identify threats via smartphone camera; deploy spot treatments instead of blanket sprays.</span>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-primary mt-1">✓</span>
+            <div>
+              <strong className="text-white block">Input Optimization Dashboard</strong>
+              <span className="text-sm">Benchmark fertilizer/pesticide use to qualify for premium vendor pricing.</span>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-primary mt-1">✓</span>
+            <div>
+              <strong className="text-white block">Surplus-to-Biocontrol Loop</strong>
+              <span className="text-sm">Routing unsold organic matter to biocontrol and composting centers.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div className="pt-4 border-t border-white/10">
+        <p className="text-[14px] text-white/80 font-medium">Earn 15-25% premium for certified clean crops.</p>
+      </div>
+    </div>
+    <div className="relative h-full min-h-[300px] md:min-h-[500px] bg-[#021f0d] flex items-center justify-center border border-white/5 rounded-sm overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
+      <div className="w-[200px] h-[200px] rounded-full bg-primary/10 blur-[60px]" />
+      <p className="text-white/40 mono text-sm px-8 text-center relative z-10">[AI Computer Vision Target — Live Crop Feed]</p>
+    </div>
+  </div>
+
+  {/* Built From The Field */}
  <div className="w-full max-w-[1400px] mx-auto mt-20 md:mt-32 grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#050505] border border-white/5 p-8 md:p-16">
  <div className="space-y-8 text-left">
  <h2 className="text-[34px] md:text-[40px] font-semibold text-white tracking-[-0.02em] leading-[1.1]">
@@ -229,9 +287,9 @@ export const SocialProofSection = () => {
  </div>
  </div>
  </div>
- <div className="relative h-full min-h-[300px] md:min-h-[500px] bg-[#021f0d] flex items-center justify-center border border-white/5 rounded-sm overflow-hidden">
- <p className="text-white/30 mono text-sm px-8 text-center">[Field photography — Tamil Nadu operations]</p>
- {/* Placeholder for field photo */}
+ <div className="relative h-full min-h-[300px] md:min-h-[500px] bg-[#021f0d] flex items-center justify-center border border-white/5 rounded-sm overflow-hidden group">
+ <img src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?auto=format&fit=crop&w=1200&q=80" alt="Farmer in Tamil Nadu" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700" />
+ <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
  </div>
  </div>
 
@@ -303,19 +361,31 @@ export const SocialProofSection = () => {
  );
 };
 
-const StatBox = ({ number, label, isMono, isPrimary, sub }: any) => (
- <div className="flex flex-col gap-2 p-6">
- <span className={`${isMono ? 'mono' : 'display'} text-6xl font-light ${isPrimary ? 'text-primary' : 'text-white'} tracking-tight leading-none`}>
- {number}
- </span>
- <div className="space-y-1">
- <p className="text-[10px] font-medium text-foreground-muted normal-case ">{label}</p>
- <p className="text-[9px] text-white/20 normal-case ">{sub}</p>
- </div>
- </div>
-);
+const StatBox = ({ number, label, isMono, isPrimary, sub, link }: any) => {
+  const content = (
+    <>
+      <span className={`${isMono ? 'mono' : 'display'} text-6xl font-light ${isPrimary ? 'text-primary' : 'text-white'} tracking-tight leading-none group-hover:text-primary transition-colors`}>
+        {number}
+      </span>
+      <div className="space-y-1">
+        <p className="text-[10px] font-medium text-foreground-muted normal-case ">{label}</p>
+        <p className="text-[9px] text-white/20 normal-case ">{sub}</p>
+      </div>
+    </>
+  );
 
-const PlayerCard = ({ role, tamil, icon, body }: any) => (
+  return link ? (
+    <Link to={link} className="flex flex-col gap-2 p-6 group hover:bg-white/5 rounded-xl transition-colors border border-transparent hover:border-white/10 cursor-pointer">
+      {content}
+    </Link>
+  ) : (
+    <div className="flex flex-col gap-2 p-6">
+      {content}
+    </div>
+  );
+};
+
+const PlayerCard = ({ role, tamil, icon, body, link }: any) => (
  <div className="bg-[#050505] p-12 flex flex-col gap-8 text-left group transition-all duration-300 hover:bg-[#111111] border-white/5 border relative overflow-hidden">
  
  <div className="absolute bottom-0 right-0 w-12 h-12 flex items-center justify-center text-white/5 group-hover:text-primary/20 transition-colors">
@@ -337,9 +407,10 @@ const PlayerCard = ({ role, tamil, icon, body }: any) => (
  </p>
 
  <div className="pt-8 block mt-auto">
- <button className="text-[14px] font-medium text-primary hover:text-white transition-colors">
- Protocol Access →
- </button>
+ <Link to={link || "#"} className="text-[14px] font-medium text-primary hover:text-white transition-colors group-hover:underline">
+      Protocol Access →
+    </Link>
+    <p className="text-[10px] text-white/40 mt-2">Create your free {role.toLowerCase()} profile</p>
  </div>
  </div>
 );
