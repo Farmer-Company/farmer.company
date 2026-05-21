@@ -30,10 +30,10 @@ export const InteractiveDemo = () => {
             INTERACTIVE PROTOCOL
           </span>
           <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tighter uppercase leading-[1.05] mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
-            Calculate your <span className="text-[#4ADE80]">true yield.</span>
+            Calculate your <span className="text-[#4ADE80]">true yield across the chain.</span>
           </h2>
           <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: '"Inter", sans-serif' }}>
-            Stop guessing your margins. See exactly how much value is lost to fragmented supply chains—and how much you recover by plugging into the Global Agri OS.
+            See exactly how much value is lost to commission agents, middlemen and fragmented logistics—and how much you recover by plugging into the Digital Orchard protocol.
           </p>
         </div>
 
@@ -130,12 +130,11 @@ export const InteractiveDemo = () => {
           >
             <div className="space-y-6 text-white/60 text-lg font-normal leading-[1.6]" style={{ fontFamily: '"Inter", sans-serif' }}>
               <p>
-                The Global Agri OS completely bypasses the legacy fragmented systems. 
-                Instead of bleeding margins to aggregators (10%), commission agents (8%), and local wholesalers (15%)...
+                In the traditional chain, 30–40% of value disappears into 3–5 layers of intermediaries, delays and wastage.
               </p>
               <p>
                 <strong className="text-white block mt-6 mb-2 text-2xl font-bold tracking-tight">Direct institutional sync.</strong>
-                Execute smart contracts directly with regional supermarkets, global exporters, or institutional FMCG processors. We handle the automated logistics, quality verification, and cryptographic payment escrows.
+                With Digital Orchard, supply moves directly between verified farms, processors, FMCG brands and retailers while we handle logistics, quality verification and escrow-backed payments.
               </p>
             </div>
 

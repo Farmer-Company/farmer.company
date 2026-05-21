@@ -115,7 +115,7 @@ export const HeroSection = () => {
             className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest"
             style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
           >
-            Farmer.Company Ecosystem
+            2026 · Global Supply Chain Protocol
           </span>
           
           <h1 
@@ -125,25 +125,44 @@ export const HeroSection = () => {
               fontSize: 'clamp(40px, 6vw, 72px)'
             }}
           >
-            THE AGRICULTURAL OPERATING SYSTEM<span className="text-[#4ADE80]">.</span>
+            THE OPERATING SYSTEM FOR FOOD & FMCG<span className="text-[#4ADE80]">.</span>
           </h1>
           
           <p 
-            className="text-white/70 text-[14px] leading-relaxed max-w-[512px]"
+            className="text-white text-lg md:text-xl font-medium leading-relaxed max-w-[700px]"
             style={{ fontFamily: '"Inter", sans-serif' }}
           >
-            Connecting Farmers, Vendors, Logistics & Customers. Zero Middlemen. 
-            Master your supply chain with real-time price intelligence and direct trade.
+            Connecting farmers, FMCG brands, logistics and global buyers in a single, real-time protocol—starting in India, built for the world.
           </p>
 
-          <button 
-            onClick={() => navigate('/get-started')}
-            className="mt-6 flex items-center justify-center gap-3 bg-[#4ADE80] text-[#070b0a] uppercase font-bold text-[13px] tracking-wider rounded-full px-8 py-4 hover:bg-[#38c96f] transition-all duration-300 transform hover:scale-105 group"
+          <p 
+            className="text-white/70 text-[14px] leading-relaxed max-w-[600px]"
             style={{ fontFamily: '"Inter", sans-serif' }}
           >
-            Get Started
-            <ArrowRight size={18} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+            Zero middlemen. Live price intelligence. Guaranteed, escrow-backed payments at the farm gate.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full md:w-auto">
+            <button 
+              onClick={() => navigate('/get-started')}
+              className="w-full sm:w-auto flex items-center justify-center gap-3 bg-[#4ADE80] text-[#070b0a] uppercase font-bold text-[13px] tracking-wider rounded-sm px-10 py-4 hover:bg-white transition-all duration-300 transform hover:scale-105 group"
+              style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+            >
+              Join Beta — Free
+              <ArrowRight size={18} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button 
+              onClick={() => navigate('/market')}
+              className="w-full sm:w-auto flex items-center justify-center gap-3 bg-white/5 border border-white/20 text-white uppercase font-bold text-[13px] tracking-wider rounded-sm px-10 py-4 hover:bg-white/10 transition-all duration-300"
+              style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+            >
+              Explore Live Markets
+            </button>
+          </div>
+          
+          <p className="text-white/40 text-[11px] font-medium tracking-wide mt-2 text-center md:text-left">
+            For farmers, vendors, logistics, FMCG brands, retailers and researchers. One protocol, different dashboards.
+          </p>
         </motion.div>
       </div>
     </section>

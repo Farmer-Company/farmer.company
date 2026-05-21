@@ -14,7 +14,7 @@ export const TrustSection = () => {
             Institutional grade. Built for the farm.
           </h2>
           <p className="text-foreground-muted text-[17px] font-normal leading-[1.5]">
-            Digital Orchard isn't just an app; it's a secure protocol. We protect your data, guarantee your payments, and operate with complete transparency.
+            Digital Orchard is a secure protocol for smallholders, cooperatives, logistics fleets, FMCG brands, retailers and researchers. We protect your data, guarantee your payments, and operate with complete transparency.
           </p>
         </div>
 
@@ -26,7 +26,7 @@ export const TrustSection = () => {
             </div>
             <h3 className="text-2xl text-white font-medium mb-4">Zero Commission. Ever.</h3>
             <p className="text-white/60 mb-6 leading-[1.6]">
-              Digital Orchard charges exactly ₹0 commission on farmer sales. You keep 100% of the farm gate price you negotiate.
+              Digital Orchard charges exactly ₹0 commission on farmer sales. You keep 100% of the farm gate price you negotiate. Our incentives are aligned with both farmers and food companies: we earn from enterprise tools, logistics optimisation and research APIs—not from taking a cut of the crop price.
             </p>
             <div className="pt-6 border-t border-white/10">
               <h4 className="text-white/80 text-sm font-medium mb-2">How we sustain the platform:</h4>
@@ -87,6 +87,7 @@ export const TrustSection = () => {
                 <p>Before writing a line of code, we farmed and traded our own crops.</p>
                 <p>Digital Orchard is led by a farmer and the son of a farmer who have lived the volatility of yields, prices, and payments first-hand.</p>
                 <p>We know what data farmers actually need because we've stood at the farm gate, bargained with commission agents, and moved produce through the same broken system we're now rebuilding from the ground up.</p>
+                <p>The same protocol that fixes this for one village in Tamil Nadu is being designed to scale to FMCG supply chains across India—and, over time, food systems in every geography that faces the same structural problems.</p>
               </div>
             </div>
             <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-6">

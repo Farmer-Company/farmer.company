@@ -167,7 +167,7 @@ export const SocialProofSection = () => {
  <div className="space-y-4 mb-12 md:mb-20 max-w-2xl mx-auto">
  <span className="mono text-[9px] md:text-[10px] text-primary font-medium normal-case md:">Stakeholder Access</span>
  <h2 className="text-[34px] md:text-[56px] font-semibold text-white tracking-[-0.02em] leading-none">
- A Direct Ecosystem.
+ A Direct Food & FMCG Ecosystem.
  </h2>
  <p className="text-foreground-muted text-[17px] font-normal px-4 leading-[1.47]">Digital Orchard connects every node in the agricultural chain with zero-latency transparency.</p>
  </div>
@@ -178,34 +178,34 @@ export const SocialProofSection = () => {
     link="/farmers"
  tamil="விவசாயிகள்"
  icon={<Users size={24} />}
- body="Know what to grow before you plant. List your harvest, set your price, sell directly to verified buyers — with no commission agent between you and the money."
+ body="Know what to grow before you plant. List your harvest, set your price, and sell directly to verified buyers—FMCG, retailers, exporters—without commission agents in the middle."
  />
  <PlayerCard
  role="VENDOR"
     link="/vendors"
  tamil="விற்பனையாளர்கள்"
  icon={<ShoppingBag size={24} />}
- body="Source verified, traceable produce directly from farmers. Use the Supply CRM to manage repeat orders and price intelligence to eliminate procurement markup."
+ body="Source verified, traceable produce directly from farms. Use the Supply CRM to manage repeat orders and price intelligence to eliminate opaque procurement markups."
  />
  <PlayerCard
  role="LOGISTICS"
     link="/logistics"
  tamil="தளவாட பங்காளர்கள்"
  icon={<Truck size={24} />}
- body="Guaranteed transaction volumes. Price-aware route optimisation. Match with farm pickups before they're dispatched — zero empty miles, predictable revenue."
+ body="Guaranteed transaction volumes. Price-aware route optimisation. Match with farm, warehouse and retail pickups before they’re dispatched—zero empty miles, predictable revenue."
  />
  <PlayerCard
  role="RESEARCHER"
  tamil="ஆராய்ச்சியாளர்கள்"
  icon={<Target size={24} />}
- body="Analyse MSP compliance, policy impact, and market clusters using the largest clean agricultural dataset in India. District-level granularity, 25+ years of arrivals data."
+ body="Analyse MSP compliance, policy impact, market clusters and FMCG supply chains using the largest clean agricultural dataset in India, with district-level granularity and 25+ years of arrivals data."
  />
  <PlayerCard
- role="CUSTOMER"
+ role="FMCG & GLOBAL BUYERS"
     link="/customers"
  tamil="உலகளாவிய வாங்குபவர்"
  icon={<Globe size={24} />}
- body="Source directly from verified Indian farms. Institutional offtake contracts, phytosanitary compliance, letter of credit facilitation — all inside one supply protocol."
+ body="Source directly from verified Indian farms and processors. Institutional offtake contracts, compliance, and letters of credit—all inside one protocol that unifies data from field to shelf."
  />
  </div>
  </div>
@@ -221,36 +221,36 @@ export const SocialProofSection = () => {
       </div>
       <h2 className="text-[34px] md:text-[40px] font-semibold text-white tracking-[-0.02em] leading-[1.1]">
         AgriOS Intelligence.<br />
-        Grow clean, earn more.
+        Clean-input scoring for global food & FMCG.
       </h2>
       <div className="space-y-4 text-foreground-muted text-[17px] font-normal leading-[1.47]">
-        <p>We're integrating AI for Low-Pesticide Agriculture to create the ultimate Farm Intelligence Score.</p>
+        <p>We’re integrating AI for low-pesticide agriculture to build a Farm Intelligence Score that can travel across borders, labels and brands.</p>
         <ul className="space-y-4 mt-4">
           <li className="flex items-start gap-3">
             <span className="text-primary mt-1">✓</span>
             <div>
               <strong className="text-white block">Pest & Weed Detection Engine</strong>
-              <span className="text-sm">Identify threats via smartphone camera; deploy spot treatments instead of blanket sprays.</span>
+              <span className="text-sm">Identify threats via smartphone camera; use spot treatments instead of blanket sprays.</span>
             </div>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-primary mt-1">✓</span>
             <div>
               <strong className="text-white block">Input Optimization Dashboard</strong>
-              <span className="text-sm">Benchmark fertilizer/pesticide use to qualify for premium vendor pricing.</span>
+              <span className="text-sm">Benchmark fertilizer and pesticide use to qualify for premium FMCG and export pricing.</span>
             </div>
           </li>
           <li className="flex items-start gap-3">
             <span className="text-primary mt-1">✓</span>
             <div>
               <strong className="text-white block">Surplus-to-Biocontrol Loop</strong>
-              <span className="text-sm">Routing unsold organic matter to biocontrol and composting centers.</span>
+              <span className="text-sm">Route unsold organic matter to biocontrol and composting partners instead of landfills.</span>
             </div>
           </li>
         </ul>
       </div>
       <div className="pt-4 border-t border-white/10">
-        <p className="text-[14px] text-white/80 font-medium">Earn 15-25% premium for certified clean crops.</p>
+        <p className="text-[14px] text-white/80 font-medium">Earn a 15–25% premium for certified clean crops—anchored in verifiable field data that FMCG brands and regulators can trust.</p>
       </div>
     </div>
     <div className="relative h-full min-h-[300px] md:min-h-[500px] bg-[#021f0d] flex items-center justify-center border border-white/5 rounded-sm overflow-hidden">
@@ -301,7 +301,8 @@ export const SocialProofSection = () => {
  <h2 className="text-[40px] md:text-[56px] font-semibold tracking-[-0.02em] text-white leading-[1.07]">Orchard<br />Metrics</h2>
  </div>
  <p className="max-w-md text-foreground-muted leading-[1.47] font-normal text-[17px]">
- Our operating system ensures every harvest is verified, every payment is instant, and every route is optimized.
+ <strong className="text-white">India-first, planet-ready.</strong><br/>
+ We’re proving the protocol in Tamil Nadu and pan-India market data before turning it into a global food and FMCG operating system.
  </p>
  </div>
 

@@ -72,12 +72,13 @@ export const Footer = () => {
  <div className="flex flex-col gap-6">
  <h4 className="text-[11px] font-medium normal-case text-white/90">Products</h4>
  <div className="flex flex-col gap-3 text-[11px] font-medium text-white/40">
- <a href="#" className="hover:text-white transition-colors">Direct Marketplace</a>
+ <a href="#" className="hover:text-white transition-colors">Direct Trade Marketplace</a>
  <a href="#" className="hover:text-white transition-colors">Price Intelligence</a>
  <a href="#" className="hover:text-white transition-colors">AI Crop Forecasts</a>
  <a href="#" className="hover:text-white transition-colors">Farmer ID Portfolio</a>
- <a href="#" className="hover:text-white transition-colors">Logistics Network</a>
- <a href="#" className="hover:text-white transition-colors">Agricultural APIs</a>
+ <a href="#" className="hover:text-white transition-colors">Logistics & Route OS</a>
+ <a href="#" className="hover:text-white transition-colors">Supply Chain APIs</a>
+ <a href="#" className="hover:text-white transition-colors">OS for FMCG & Retail (Coming Soon)</a>
  </div>
  </div>
 
