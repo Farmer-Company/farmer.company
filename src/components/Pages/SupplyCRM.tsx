@@ -15,120 +15,137 @@ import {
 
 export const SupplyCRMPage = () => {
  return (
- <div className="pt-24 pb-20 px-6 min-h-screen bg-background">
+ <div className="pt-32 pb-20 px-6 min-h-screen bg-black relative overflow-hidden">
+ {/* Background Gradients */}
+ <div className="absolute inset-0 bg-gradient-to-b from-[#4ADE80]/5 to-transparent pointer-events-none" />
+ <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#4ADE80]/5 blur-[150px] rounded-full pointer-events-none" />
+
  {/* Hero Section */}
- <section className="max-w-7xl mx-auto mb-20">
+ <section className="max-w-7xl mx-auto mb-32 relative z-10">
  <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
- <div className="space-y-6 max-w-2xl">
- <div className="flex items-center gap-3">
- <span className="px-3 py-1 bg-primary/10 text-primary text-[10px] font-medium normal-case rounded-full border border-primary/20">
- B2B Protocol
+ <motion.div 
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="space-y-8 max-w-3xl"
+ >
+ <div className="flex items-center gap-4">
+ <span className="px-3 py-1.5 bg-[#4ADE80]/10 text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest rounded-sm border border-[#4ADE80]/20" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ Institutional Protocol
  </span>
- <span className="text-white/20 mono text-[10px]">Institutional Grade</span>
+ <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Global Trade Enabled</span>
  </div>
- <h1 className="display text-5xl md:text-7xl font-light text-white normal-case tracking-tight leading-[0.85]">
- Supply CRM
+ <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tighter uppercase leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+ Supply <span className="text-[#4ADE80]">CRM</span>
  </h1>
- <p className="text-foreground-muted text-lg md:text-xl font-light leading-relaxed">
- Manage your farm as a global supply node. Direct contracting, trade finance, compliance, and multi‑buyer relationship management – all in one protocol.
+ <p className="text-white/60 text-lg md:text-xl font-normal leading-relaxed" style={{ fontFamily: '"Inter", sans-serif' }}>
+ Manage your supply node as a global enterprise. Direct institutional contracting, automated compliance, and real-time escrow settlement—all within a single cryptographic protocol.
  </p>
- <div className="flex flex-wrap gap-4 pt-4">
- <button className="px-8 py-4 bg-primary text-black font-medium normal-case text-xs flex items-center gap-3 hover:bg-primary/90 transition-all hover:translate-y-[-2px] hover:shadow-[0_8px_30px_rgb(29,185,84,0.3)]">
- Access Global Procurement Network <ArrowRight size={16} />
+ <div className="flex flex-wrap gap-4 pt-6">
+ <button className="px-8 py-4 bg-[#4ADE80] text-black font-bold uppercase tracking-wider text-[11px] flex items-center gap-3 hover:bg-white transition-colors rounded-sm" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ Access Procurement Network <ArrowRight size={16} />
  </button>
  </div>
- </div>
- <div className="hidden lg:block w-px h-48 bg-white/5" />
+ </motion.div>
  </div>
  </section>
 
  {/* Metrics Row */}
- <section className="max-w-7xl mx-auto mb-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 border border-white/5 overflow-hidden">
+ <motion.section 
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="max-w-7xl mx-auto mb-32 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 border border-white/5 overflow-hidden rounded-sm relative z-10"
+  style={{ backdropFilter: 'blur(10px)', boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.05)' }}
+ >
  <MetricBox value="Private Beta" label="Access Status" sub="Applications open" />
- <MetricBox value="12" label="Countries in Buyer Network" sub="EU, Gulf, SEA, US" />
- <MetricBox value="Institutional" label="Contract Standard" sub="Digital signatures, milestone tracking" />
- <MetricBox value="Zero" label="Middlemen in the Chain" isPrimary sub="Farm → Buyer direct" />
- </section>
+ <MetricBox value="12" label="Countries in Network" sub="EU, Gulf, SEA, US" />
+ <MetricBox value="Institutional" label="Contract Standard" sub="Digital signatures" />
+ <MetricBox value="Zero" label="Intermediaries" isPrimary sub="Farm → Buyer direct" />
+ </motion.section>
 
  {/* Core Features Grid */}
- <section className="max-w-7xl mx-auto mb-32">
- <div className="flex items-center gap-4 mb-12">
- <div className="h-px flex-1 bg-white/5" />
- <h2 className="mono text-[10px] text-white/40 normal-case font-medium">Institutional Modules</h2>
- <div className="h-px flex-1 bg-white/5" />
+ <section className="max-w-7xl mx-auto mb-40 relative z-10">
+ <div className="flex items-center gap-6 mb-16">
+ <div className="h-px flex-1 bg-white/10" />
+ <h2 className="text-[11px] text-white/40 font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Protocol Modules</h2>
+ <div className="h-px flex-1 bg-white/10" />
  </div>
 
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 bg-white/5 border border-white/5">
+ <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 bg-white/5 border border-white/5 rounded-sm overflow-hidden" style={{ boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.05)' }}>
  <FeatureCard 
- icon={<Globe className="text-primary" size={24} />}
- title="Buyer Portfolio"
- desc="Verified global counterparties with credit ratings, payment history, and KYB onboarding. Every buyer on the network is pre-qualified before they can send an RFQ."
- action="Add Global Buyer"
+ icon={<Globe className="text-[#4ADE80]" size={24} />}
+ title="Global Counterparties"
+ desc="Access verified institutional buyers with public credit ratings, payment history, and KYB. Every buyer is cryptographically verified before they issue an RFQ."
+ action="View Network"
  />
  <FeatureCard 
- icon={<FileText className="text-primary" size={24} />}
- title="Contract Lifecycle"
- desc="Institutional offtake agreements with digital signatures, version control, and milestone tracking. Built to international trade standards."
- action="Draft Contract"
+ icon={<FileText className="text-[#4ADE80]" size={24} />}
+ title="Smart Contracts"
+ desc="Execute institutional offtake agreements with digital signatures, automated milestone tracking, and self-executing escrow releases."
+ action="Review Standards"
  />
  <FeatureCard 
- icon={<ShieldCheck className="text-primary" size={24} />}
- title="Global Compliance"
- desc="Auto-generate phytosanitary certificates, Certificate of Origin, and commercial invoices for any destination. EU, US, and Gulf standards pre-loaded."
- action="Compliance Check"
+ icon={<ShieldCheck className="text-[#4ADE80]" size={24} />}
+ title="Automated Compliance"
+ desc="Auto-generate Phytosanitary Certificates, Certificates of Origin, and Commercial Invoices instantly. EU, US, and Gulf protocols natively integrated."
+ action="Verify Compliance"
  />
  <FeatureCard 
- icon={<TrendingUp className="text-primary" size={24} />}
- title="Matching Engine"
- desc="Publish supply availabilities and receive institutional RFQs from pre-approved buyers. Algorithmic matching on commodity, grade, volume, and delivery window."
- action="Post Availability"
+ icon={<TrendingUp className="text-[#4ADE80]" size={24} />}
+ title="Algorithmic Matching"
+ desc="Publish supply metrics and receive institutional RFQs instantly. The OS matches based on commodity grade, volume, and predictive delivery windows."
+ action="Simulate Match"
  />
  <FeatureCard 
- icon={<Truck className="text-primary" size={24} />}
- title="Logistics & Finance"
- desc="Letter of Credit facilitation, invoice factoring, and real-time container tracking via Maersk and MSC integration. Trade finance without the bank relationship overhead."
- action="Shipment Workflow"
+ icon={<Truck className="text-[#4ADE80]" size={24} />}
+ title="Escrow & Logistics"
+ desc="Letter of Credit facilitation and real-time Maersk/MSC tracking via API. Execute international trade finance without legacy banking overhead."
+ action="Track Shipment"
  />
  <FeatureCard 
- icon={<BarChart3 className="text-primary" size={24} />}
- title="Supply Analytics"
- desc="Margin analysis, counterparty risk scores, and forecast accuracy per commodity and region. Know which buyers pay fastest and which markets give best realisation."
- action="View Performance"
+ icon={<BarChart3 className="text-[#4ADE80]" size={24} />}
+ title="Yield Analytics"
+ desc="Real-time margin analysis, dynamic counterparty risk scoring, and forecast accuracy metrics. Optimize your yield against predictive market data."
+ action="View Dashboards"
  />
  </div>
  </section>
 
  {/* Workflow Section */}
- <section className="max-w-7xl mx-auto mb-32 bg-[#050505] border border-white/5 p-8 md:p-16 relative overflow-hidden">
- <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+ <section className="max-w-7xl mx-auto mb-40 bg-black border border-white/10 p-10 md:p-20 relative overflow-hidden rounded-sm" style={{ boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.05)' }}>
+ <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#4ADE80]/5 blur-[150px] rounded-full pointer-events-none" />
  
  <div className="relative z-10">
- <h2 className="display text-4xl md:text-5xl font-light text-white normal-case tracking-tight mb-16">
- Institutional Supply Workflow
+ <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block mb-6" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ EXECUTION PROTOCOL
+ </span>
+ <h2 className="text-4xl md:text-5xl font-extrabold text-white uppercase tracking-tighter mb-20" style={{ fontFamily: '"Inter", sans-serif' }}>
+ Institutional Workflow
  </h2>
  
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
- <WorkflowStep num="01" title="Onboard" desc="Complete export readiness profile and upload certifications." />
- <WorkflowStep num="02" title="Publish" desc="Post volume, grades, and target price to the procurement network." />
- <WorkflowStep num="03" title="Negotiate" desc="Receive institutional RFQs and settle contract terms digitally." />
- <WorkflowStep num="04" title="Fulfill" desc="Generate compliance docs and track shipment to destination." />
+ <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+ <WorkflowStep num="01" title="Initialize" desc="Complete export readiness profile and upload required institutional certifications." />
+ <WorkflowStep num="02" title="Broadcast" desc="Publish verified volume, grades, and smart contract terms to the global network." />
+ <WorkflowStep num="03" title="Sync" desc="Receive direct institutional RFQs and digitally sign offtake agreements." />
+ <WorkflowStep num="04" title="Execute" desc="Generate compliance docs, load containers, and trigger automatic escrow release." />
  </div>
  </div>
  </section>
 
  {/* Final CTA */}
- <section className="max-w-3xl mx-auto text-center py-20">
- <div className="w-16 h-16 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center mx-auto mb-8">
- <ShieldCheck className="text-primary" size={32} />
+ <section className="max-w-3xl mx-auto text-center py-20 relative z-10">
+ <div className="w-20 h-20 bg-[#4ADE80]/10 border border-[#4ADE80]/20 rounded-full flex items-center justify-center mx-auto mb-10 shadow-[0_0_50px_rgba(74,222,128,0.1)]">
+ <ShieldCheck className="text-[#4ADE80]" size={36} />
  </div>
- <h2 className="display text-3xl md:text-5xl font-light text-white normal-case tracking-tight mb-6">
- Apply for Supply CRM Access
+ <h2 className="text-4xl md:text-6xl font-extrabold text-white uppercase tracking-tighter mb-8" style={{ fontFamily: '"Inter", sans-serif' }}>
+ Request Node Access
  </h2>
- <p className="text-foreground-muted text-lg font-light mb-10">
- Supply CRM is in private beta. We onboard verified exporters, large-scale farmers, and institutional buyers in cohorts. Apply below — we'll review your supply profile and respond within 48 hours.
+ <p className="text-white/60 text-lg font-normal leading-relaxed mb-12" style={{ fontFamily: '"Inter", sans-serif' }}>
+ The Global Agri OS is currently in private beta. We are onboarding verified exporters, commercial farms, and institutional buyers in limited cohorts. Apply below for network clearance.
  </p>
- <button className="px-10 py-5 bg-white text-black font-medium normal-case text-xs hover:bg-primary transition-all rounded-sm shadow-2xl">
- Request B2B Access
+ <button className="px-12 py-5 bg-white text-black font-bold uppercase tracking-widest text-[11px] hover:bg-[#4ADE80] transition-colors rounded-sm shadow-2xl" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ Initialize Application
  </button>
  </section>
  </div>
@@ -136,46 +153,46 @@ export const SupplyCRMPage = () => {
 };
 
 const MetricBox = ({ value, label, sub, isPrimary }: any) => (
- <div className="bg-[#050505] p-8 flex flex-col justify-between group hover:bg-primary/[0.02] transition-colors">
- <div className="space-y-1">
- <span className={`mono text-3xl font-light ${isPrimary ? 'text-primary' : 'text-white'}`}>{value}</span>
- <p className="text-[10px] font-medium text-white/40 normal-case leading-tight">{label}</p>
+ <div className="bg-black/50 p-10 flex flex-col justify-between group hover:bg-[#4ADE80]/5 transition-colors">
+ <div className="space-y-2">
+ <span className={`text-4xl font-extrabold tracking-tighter ${isPrimary ? 'text-[#4ADE80]' : 'text-white'}`} style={{ fontFamily: '"Inter", sans-serif' }}>{value}</span>
+ <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{label}</p>
  </div>
- <div className="mt-4 flex items-center gap-2">
- <div className={`w-1 h-1 rounded-full ${isPrimary ? 'bg-primary' : 'bg-white/20'}`} />
- <span className="mono text-[8px] text-white/20 normal-case ">{sub}</span>
+ <div className="mt-8 flex items-center gap-3">
+ <div className={`w-1.5 h-1.5 rounded-full ${isPrimary ? 'bg-[#4ADE80]' : 'bg-white/20'}`} />
+ <span className="text-[10px] text-white/40 uppercase tracking-widest font-bold" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{sub}</span>
  </div>
  </div>
 );
 
 const FeatureCard = ({ icon, title, desc, action }: any) => (
- <div className="bg-[#050505] p-10 flex flex-col justify-between group hover:bg-[#080808] transition-all relative overflow-hidden">
- <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-10 transition-opacity">
+ <div className="bg-black/80 p-12 flex flex-col justify-between group hover:bg-black transition-all relative overflow-hidden">
+ <div className="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
  {icon}
  </div>
- <div className="space-y-6">
- <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-sm group-hover:bg-primary/10 transition-colors">
+ <div className="space-y-8">
+ <div className="w-14 h-14 bg-white/5 flex items-center justify-center rounded-sm group-hover:bg-[#4ADE80]/10 border border-transparent group-hover:border-[#4ADE80]/20 transition-colors">
  {icon}
  </div>
- <div className="space-y-3">
- <h3 className="text-xl font-medium text-white normal-case tracking-tight">{title}</h3>
- <p className="text-sm font-light text-foreground-muted leading-relaxed">{desc}</p>
+ <div className="space-y-4">
+ <h3 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>{title}</h3>
+ <p className="text-base text-white/50 leading-relaxed font-normal" style={{ fontFamily: '"Inter", sans-serif' }}>{desc}</p>
  </div>
  </div>
- <div className="mt-10">
- <button className="flex items-center gap-2 text-[10px] font-medium text-primary normal-case border-b border-primary/20 pb-1 hover:border-primary transition-all">
- {action} <Plus size={12} />
+ <div className="mt-12">
+ <button className="flex items-center gap-2 text-[11px] font-bold text-[#4ADE80] uppercase tracking-widest border-b border-[#4ADE80]/20 pb-1 hover:border-[#4ADE80] transition-all" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ {action} <Plus size={14} />
  </button>
  </div>
  </div>
 );
 
 const WorkflowStep = ({ num, title, desc }: any) => (
- <div className="space-y-6">
- <span className="display text-6xl font-light text-white/5 leading-none">{num}</span>
- <div className="space-y-3">
- <h4 className="text-xl font-medium text-white normal-case tracking-tight">{title}</h4>
- <p className="text-sm font-light text-foreground-muted leading-relaxed">{desc}</p>
+ <div className="space-y-6 relative">
+ <span className="text-8xl font-extrabold text-white/5 tracking-tighter leading-none block -ml-2" style={{ fontFamily: '"Inter", sans-serif' }}>{num}</span>
+ <div className="space-y-4 relative z-10 -mt-10">
+ <h4 className="text-xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>{title}</h4>
+ <p className="text-sm text-white/50 leading-relaxed font-normal" style={{ fontFamily: '"Inter", sans-serif' }}>{desc}</p>
  </div>
  </div>
 );

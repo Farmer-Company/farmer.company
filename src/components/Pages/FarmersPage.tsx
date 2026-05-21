@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { Sprout, TrendingUp, ShieldCheck, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sprout, TrendingUp, ShieldCheck, MapPin, CheckCircle, Users, Tractor, BarChart3, Sun, CloudRain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,65 +9,143 @@ export const FarmersPage = () => {
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-20 px-6">
-      <div className="max-w-7xl mx-auto space-y-20">
+      <div className="max-w-7xl mx-auto space-y-32">
         
-        {/* Header */}
+        {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="max-w-3xl space-y-6"
+          className="max-w-4xl space-y-8"
         >
-          <span className="mono text-[10px] text-primary font-medium">FOR FARMERS / விவசாயிகள்</span>
-          <h1 className="text-5xl md:text-7xl font-light text-white tracking-tight leading-[1.05]">
-            Grow what sells.<br />
-            <span className="text-primary">Keep the profits.</span>
+          <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+            FOR FARMERS & FPOS / விவசாயிகள்
+          </span>
+          <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-white leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+            The Global Cultivation <span className="text-[#4ADE80]">Protocol.</span>
           </h1>
-          <p className="text-xl text-white/60 leading-relaxed">
-            Stop losing 60% of your value to middlemen. Digital Orchard gives you the demand forecast before you plant, and connects you directly to vendors who pay premium prices for clean produce.
+          <p className="text-xl text-white/70 leading-relaxed max-w-3xl" style={{ fontFamily: '"Inter", sans-serif' }}>
+            Predict demand. Cultivate precision. Keep the margins.
+            <br/><br/>
+            Digital Orchard puts satellite-backed intelligence, predictive pricing, and global direct-trade capabilities in the hands of every farmer. Bypass the mandi, meet global FMCG standards, and command the premium you deserve.
           </p>
-          <Button variant="primary" className="mt-4" onClick={() => navigate('/get-started')}>
-            Join as a Farmer
-          </Button>
+          <div className="flex flex-wrap gap-4 pt-4">
+            <Button variant="primary" size="lg" onClick={() => navigate('/get-started')} className="uppercase font-bold tracking-wider rounded-full px-8">
+              Join the Network
+            </Button>
+            <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/5 uppercase font-bold tracking-wider rounded-full px-8" onClick={() => navigate('/story')}>
+              Learn About FPO Hubs
+            </Button>
+          </div>
         </motion.div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <FeatureCard 
-            icon={<TrendingUp size={24} />}
-            title="₹18 vs ₹10/kg"
-            desc="Skip the mandi. Earn significantly more by selling directly to verified vendors on our marketplace."
-          />
-          <FeatureCard 
-            icon={<Sprout size={24} />}
-            title="Demand Forecasting"
-            desc="Know exactly what the market will need 90 days from now. Plant the right crop at the right time."
-          />
-          <FeatureCard 
-            icon={<ShieldCheck size={24} />}
-            title="AgriOS Intelligence"
-            desc="Use your smartphone to detect pests. Use fewer chemicals and earn a premium for verified clean crops."
-          />
-          <FeatureCard 
-            icon={<MapPin size={24} />}
-            title="Farm Pickups"
-            desc="No more transport hassles. Our logistics partners pick up directly from your farm gate."
-          />
+        {/* Pillars of Value */}
+        <div className="space-y-12">
+          <div className="border-b border-white/10 pb-4">
+            <h2 className="text-3xl font-light tracking-tight text-white" style={{ fontFamily: '"Inter", sans-serif' }}>Cultivation OS</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <FeatureCard 
+              icon={<TrendingUp size={24} />}
+              title="Global Price Access"
+              desc="Skip the mandi. Earn significantly more by selling directly to verified global FMCG vendors and enterprise processors on our marketplace."
+            />
+            <FeatureCard 
+              icon={<Sprout size={24} />}
+              title="Demand Forecasting"
+              desc="Know exactly what the market will need 90 days from now based on macroeconomic data. Plant the right crop at the right time."
+            />
+            <FeatureCard 
+              icon={<ShieldCheck size={24} />}
+              title="Verified Clean Premium"
+              desc="Use our AI to optimize chemical usage. Earn up to a 25% premium from buyers for maintaining a high Farm Intelligence Score."
+            />
+            <FeatureCard 
+              icon={<MapPin size={24} />}
+              title="Farm-Gate Logistics"
+              desc="No more transport exploitation. Our automated logistics network dispatches trucks directly to your farm gate upon sale."
+            />
+          </div>
         </div>
 
         {/* AgriOS Highlight */}
-        <div className="bg-[#050505] border border-white/5 p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center rounded-sm">
-          <div className="flex-1 space-y-6">
-            <h2 className="text-3xl font-semibold text-white">The Farm Intelligence Score</h2>
-            <p className="text-white/60">
-              When you use our AI to spot-treat pests instead of blanket-spraying chemicals, your Farm Intelligence Score goes up. Vendors pay up to 25% more for produce with a high clean score. It's that simple.
+        <div className="bg-[#050505] border border-white/5 p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center rounded-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#4ADE80]/5 to-transparent pointer-events-none" />
+          
+          <div className="flex-1 space-y-6 relative z-10">
+            <h2 className="text-3xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>The Farm Intelligence Score</h2>
+            <p className="text-white/60 leading-relaxed">
+              Every action you take in the AgriOS app—from pest-spotting with computer vision to localized weather-based irrigation—contributes to your verified digital ledger. High-scoring farms unlock priority bidding from international buyers and lower-interest capital from financial partners.
             </p>
+            <ul className="space-y-3 pt-4">
+              <li className="flex items-center gap-3 text-sm text-white/70"><CheckCircle size={16} className="text-[#4ADE80]" /> Satellite soil monitoring integration</li>
+              <li className="flex items-center gap-3 text-sm text-white/70"><CheckCircle size={16} className="text-[#4ADE80]" /> AI-based disease diagnosis</li>
+              <li className="flex items-center gap-3 text-sm text-white/70"><CheckCircle size={16} className="text-[#4ADE80]" /> Automated ledger compliance</li>
+            </ul>
           </div>
-          <div className="w-full md:w-1/3 aspect-square bg-[#0a0a0a] border border-white/10 flex items-center justify-center relative overflow-hidden">
-             <div className="absolute inset-0 bg-primary/10 blur-[50px] rounded-full" />
+          
+          <div className="w-full md:w-1/3 aspect-square bg-black border border-white/10 flex items-center justify-center relative overflow-hidden rounded-xl">
+             <div className="absolute inset-0 bg-[#4ADE80]/10 blur-[50px] rounded-full" />
              <div className="text-center relative z-10">
-               <span className="text-6xl text-primary font-light display block mb-2">92</span>
-               <span className="text-[10px] mono text-white/40">VERIFIED CLEAN SCORE</span>
+               <span className="text-7xl text-[#4ADE80] font-light block mb-2" style={{ fontFamily: '"Inter", sans-serif' }}>92</span>
+               <span className="text-[11px] font-bold text-white/50 tracking-widest uppercase" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Verified Clean Score</span>
              </div>
+          </div>
+        </div>
+
+        {/* OS Modules */}
+        <div className="space-y-12">
+          <div className="border-b border-white/10 pb-4">
+            <h2 className="text-3xl font-light tracking-tight text-white" style={{ fontFamily: '"Inter", sans-serif' }}>Modules for Growth</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+            <ModuleBlock 
+              title="AgriOS Mobile App"
+              items={[
+                "Available in 12+ regional languages with voice-first interfaces.",
+                "Daily localized weather, soil moisture predictions, and pest alerts.",
+                "One-click listing of estimated harvest volumes to the global marketplace."
+              ]}
+            />
+            <ModuleBlock 
+              title="Direct Contracting"
+              items={[
+                "Sign smart contracts with enterprise buyers before you even sow the seeds.",
+                "Lock in minimum guarantee prices to hedge against spot market crashes.",
+                "Escrow-backed payments ensure you get paid the day the truck leaves your farm."
+              ]}
+            />
+            <ModuleBlock 
+              title="Capital & Credit Hub"
+              items={[
+                "Your Farm Intelligence Score acts as a digital credit profile.",
+                "Access low-interest loans from institutional partners based on your verified contracts.",
+                "Subsidized crop insurance integrated directly into the platform."
+              ]}
+            />
+            <ModuleBlock 
+              title="FPO Management Suite"
+              items={[
+                "Aggregate output from hundreds of smallholders to fulfill massive FMCG orders.",
+                "Manage member payouts, input subsidies, and shared machinery booking.",
+                "Transparent ledger for state alliance audits."
+              ]}
+            />
+          </div>
+        </div>
+
+        {/* Bottom CTAs */}
+        <div className="flex flex-col items-center text-center space-y-8 py-20 border-t border-white/5">
+          <h2 className="text-4xl font-extrabold text-white uppercase tracking-tighter" style={{ fontFamily: '"Inter", sans-serif' }}>
+            Reclaim your value.
+          </h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button variant="primary" size="lg" onClick={() => navigate('/get-started')} className="uppercase font-bold tracking-wider rounded-full px-8">
+              Download AgriOS
+            </Button>
+            <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/5 uppercase font-bold tracking-wider rounded-full px-8" onClick={() => navigate('/story')}>
+              View Success Stories
+            </Button>
           </div>
         </div>
 
@@ -77,11 +155,26 @@ export const FarmersPage = () => {
 };
 
 const FeatureCard = ({ icon, title, desc }: any) => (
-  <div className="bg-[#050505] p-8 border border-white/5 space-y-6 group hover:border-primary/30 transition-colors rounded-sm">
-    <div className="text-primary">{icon}</div>
-    <div>
-      <h3 className="text-lg font-medium text-white mb-2">{title}</h3>
+  <div className="bg-[#050505] p-8 border border-white/5 space-y-6 group hover:border-[#4ADE80]/30 transition-colors rounded-sm flex flex-col"
+       style={{ boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.05)' }}>
+    <div className="text-[#4ADE80]">{icon}</div>
+    <div className="flex-1">
+      <h3 className="text-lg font-bold text-white mb-3 tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>{title}</h3>
       <p className="text-sm text-white/50 leading-relaxed">{desc}</p>
     </div>
+  </div>
+);
+
+const ModuleBlock = ({ title, items }: { title: string, items: string[] }) => (
+  <div className="space-y-4">
+    <h3 className="text-xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>{title}</h3>
+    <ul className="space-y-3">
+      {items.map((item, i) => (
+        <li key={i} className="flex items-start gap-3 text-sm text-white/60 leading-relaxed">
+          <div className="mt-1 min-w-4 text-[#4ADE80]"><CheckCircle size={14} /></div>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
   </div>
 );

@@ -82,10 +82,12 @@ export const TrustSection = () => {
               <span className="mono text-[10px] text-white/40 font-medium normal-case tracking-widest mb-4 block">
                 THE TEAM
               </span>
-              <h3 className="text-3xl text-white font-medium mb-6">Built by Traders.</h3>
-              <p className="text-white/60 leading-[1.6]">
-                Before writing a line of code, we traded. We know what data farmers actually need because we've sat across the table from them, negotiated at farm gate, and moved produce through the same broken system we're now replacing.
-              </p>
+              <h3 className="text-3xl text-white font-medium mb-6">Built by Farmers, Not Consultants.</h3>
+              <div className="text-white/60 leading-[1.6] space-y-4">
+                <p>Before writing a line of code, we farmed and traded our own crops.</p>
+                <p>Digital Orchard is led by a farmer and the son of a farmer who have lived the volatility of yields, prices, and payments first-hand.</p>
+                <p>We know what data farmers actually need because we've stood at the farm gate, bargained with commission agents, and moved produce through the same broken system we're now rebuilding from the ground up.</p>
+              </div>
             </div>
             <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-6">
               <TeamMember name="Arun K." role="Founder, Operations" img="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80" />
@@ -95,20 +97,7 @@ export const TrustSection = () => {
           </div>
         </div>
 
-        {/* Partners */}
-        <div className="mt-24 pt-16 border-t border-white/5 text-center">
-          <span className="mono text-[10px] text-white/40 font-medium normal-case tracking-widest mb-8 block">
-            ECOSYSTEM PARTNERS
-          </span>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            {/* Placeholder logos */}
-            <div className="text-xl font-bold font-serif">TAMIL AGRI UNIV</div>
-            <div className="text-xl font-bold tracking-tighter">FARM-FINANCE</div>
-            <div className="text-xl font-bold font-mono">LOGISTIX_PRO</div>
-            <div className="text-xl font-bold">STATE FPO ALLIANCE</div>
-            <div className="text-xl font-bold italic">AGRI-RESEARCH INST</div>
-          </div>
-        </div>
+
       </div>
     </section>
   );

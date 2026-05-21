@@ -6,8 +6,8 @@ import { Calculator, ArrowRight, TrendingUp, IndianRupee } from 'lucide-react';
 const CROPS = [
   { id: 'tomato', name: 'Tomato', avgCurrentPrice: 12, orchardPrice: 22, unit: 'kg' },
   { id: 'onion', name: 'Onion', avgCurrentPrice: 18, orchardPrice: 28, unit: 'kg' },
-  { id: 'potato', name: 'Potato', avgCurrentPrice: 15, orchardPrice: 24, unit: 'kg' },
-  { id: 'mango', name: 'Mango (Alphonso)', avgCurrentPrice: 40, orchardPrice: 75, unit: 'kg' },
+  { id: 'wheat', name: 'Wheat', avgCurrentPrice: 21, orchardPrice: 29, unit: 'kg' },
+  { id: 'mango', name: 'Mango (Export)', avgCurrentPrice: 40, orchardPrice: 75, unit: 'kg' },
 ];
 
 export const InteractiveDemo = () => {
@@ -20,49 +20,55 @@ export const InteractiveDemo = () => {
   const increasePercent = Math.round((savings / traditionalRevenue) * 100);
 
   return (
-    <section id="interactive-demo" className="w-full py-24 md:py-32 bg-[#050505] border-t border-white/5 relative overflow-hidden">
-      <div className="absolute inset-0 bg-primary/5 opacity-50 pointer-events-none" />
-      <div className="absolute -top-[200px] -right-[200px] w-[600px] h-[600px] bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
+    <section id="interactive-demo" className="w-full py-24 md:py-32 bg-black border-t border-white/5 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#4ADE80]/5 to-transparent pointer-events-none" />
+      <div className="absolute -top-[200px] -right-[200px] w-[600px] h-[600px] bg-[#4ADE80]/10 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="mono text-[10px] text-primary font-medium normal-case tracking-widest mb-4 block">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest mb-4 block" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
             INTERACTIVE PROTOCOL
           </span>
-          <h2 className="text-[34px] md:text-[48px] font-semibold text-white tracking-[-0.02em] leading-[1.1] mb-6">
-            Calculate your true yield.
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tighter uppercase leading-[1.05] mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
+            Calculate your <span className="text-[#4ADE80]">true yield.</span>
           </h2>
-          <p className="text-foreground-muted text-[17px] font-normal leading-[1.5]">
-            Stop guessing your margins. See exactly how much value is lost to commission agents and middlemen—and how much you recover by plugging into Digital Orchard.
+          <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: '"Inter", sans-serif' }}>
+            Stop guessing your margins. See exactly how much value is lost to fragmented supply chains—and how much you recover by plugging into the Global Agri OS.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Calculator UI */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-[#0A0A0A] border border-white/10 p-8 md:p-10 rounded-2xl shadow-2xl relative"
+            className="p-8 md:p-12 relative overflow-hidden rounded-sm"
+            style={{ 
+              background: 'rgba(255, 255, 255, 0.02)', 
+              backdropFilter: 'blur(12px)',
+              boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.05)'
+            }}
           >
-            <div className="absolute top-0 right-8 transform -translate-y-1/2 bg-primary text-black px-4 py-1 font-bold text-sm rounded-sm flex items-center gap-2">
-              <Calculator size={16} /> Impact Calculator
+            <div className="absolute top-0 right-8 transform -translate-y-1/2 bg-[#4ADE80] text-black px-4 py-1 font-bold text-[11px] uppercase tracking-widest rounded-sm flex items-center gap-2" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+              <Calculator size={14} /> Protocol Simulator
             </div>
 
-            <div className="space-y-8 mt-4">
+            <div className="space-y-10 mt-4">
               <div>
-                <label className="block text-sm font-medium text-white/60 mb-3 uppercase tracking-wider">Select Commodity</label>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <label className="block text-[11px] font-bold text-white/40 mb-4 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Select Commodity</label>
+                <div className="grid grid-cols-2 gap-3">
                   {CROPS.map(crop => (
                     <button
                       key={crop.id}
                       onClick={() => setSelectedCrop(crop)}
-                      className={`py-3 px-2 text-sm font-medium rounded-lg border transition-all ${
+                      className={`py-4 px-3 text-sm font-bold tracking-tight rounded-sm transition-all ${
                         selectedCrop.id === crop.id 
-                        ? 'bg-primary/10 border-primary text-primary' 
-                        : 'bg-transparent border-white/10 text-white hover:border-white/30'
+                        ? 'bg-[#4ADE80]/10 border-[#4ADE80]/50 text-[#4ADE80] border' 
+                        : 'bg-black/50 border border-white/10 text-white/70 hover:border-white/30'
                       }`}
+                      style={{ fontFamily: '"Inter", sans-serif' }}
                     >
                       {crop.name}
                     </button>
@@ -71,9 +77,9 @@ export const InteractiveDemo = () => {
               </div>
 
               <div>
-                <div className="flex justify-between mb-3">
-                  <label className="block text-sm font-medium text-white/60 uppercase tracking-wider">Harvest Volume ({selectedCrop.unit})</label>
-                  <span className="text-primary font-mono font-medium">{volume.toLocaleString()} {selectedCrop.unit}</span>
+                <div className="flex justify-between mb-4">
+                  <label className="block text-[11px] font-bold text-white/40 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Contract Volume ({selectedCrop.unit})</label>
+                  <span className="text-[#4ADE80] font-mono font-medium">{volume.toLocaleString()} {selectedCrop.unit}</span>
                 </div>
                 <input 
                   type="range" 
@@ -82,31 +88,32 @@ export const InteractiveDemo = () => {
                   step="100" 
                   value={volume}
                   onChange={(e) => setVolume(Number(e.target.value))}
-                  className="w-full accent-primary h-1 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                  style={{ accentColor: '#4ADE80' }}
                 />
-                <div className="flex justify-between text-xs text-white/40 mt-2 font-mono">
+                <div className="flex justify-between text-[10px] text-white/40 mt-3 font-mono">
                   <span>100</span>
                   <span>10,000</span>
                 </div>
               </div>
 
-              <div className="pt-8 border-t border-white/10 space-y-4">
-                <div className="flex justify-between items-center text-white/60">
-                  <span>Traditional Mandi Revenue</span>
+              <div className="pt-8 border-t border-white/10 space-y-5">
+                <div className="flex justify-between items-center text-white/50" style={{ fontFamily: '"Inter", sans-serif' }}>
+                  <span className="font-medium text-sm">Legacy Mandi Revenue</span>
                   <span className="font-mono text-lg">₹{traditionalRevenue.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between items-center text-primary">
-                  <span className="font-semibold flex items-center gap-2">
-                    <IndianRupee size={18} /> Digital Orchard Revenue
+                <div className="flex justify-between items-center text-[#4ADE80]">
+                  <span className="font-bold flex items-center gap-2 text-sm uppercase tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+                    <IndianRupee size={16} /> Protocol Revenue
                   </span>
-                  <span className="font-mono text-2xl font-bold">₹{orchardRevenue.toLocaleString()}</span>
+                  <span className="font-mono text-3xl font-bold">₹{orchardRevenue.toLocaleString()}</span>
                 </div>
                 
-                <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mt-6 flex items-start gap-4">
-                  <TrendingUp className="text-primary mt-1 flex-shrink-0" size={24} />
+                <div className="bg-[#4ADE80]/5 border border-[#4ADE80]/20 rounded-sm p-5 mt-8 flex items-start gap-4">
+                  <TrendingUp className="text-[#4ADE80] mt-1 flex-shrink-0" size={20} />
                   <div>
-                    <p className="text-white font-medium">You recover <span className="text-primary font-bold">₹{savings.toLocaleString()}</span></p>
-                    <p className="text-sm text-white/50 mt-1">That's a {increasePercent}% increase in your net realization, simply by bypassing 3 layers of middlemen.</p>
+                    <p className="text-white font-medium tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Recovered Margin: <span className="text-[#4ADE80] font-bold">₹{savings.toLocaleString()}</span></p>
+                    <p className="text-sm text-white/50 mt-2 leading-relaxed">That's a {increasePercent}% increase in net realization by bypassing 3 layers of fragmented intermediaries.</p>
                   </div>
                 </div>
               </div>
@@ -121,50 +128,49 @@ export const InteractiveDemo = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
-            <div className="space-y-4 text-foreground-muted text-[17px] font-normal leading-[1.6]">
+            <div className="space-y-6 text-white/60 text-lg font-normal leading-[1.6]" style={{ fontFamily: '"Inter", sans-serif' }}>
               <p>
-                Our infrastructure completely bypasses the traditional APMC Mandi system. 
-                Instead of handing your crop to a local aggregator who takes a 10% cut, 
-                then a commission agent who takes another 8%, and a wholesaler who takes 15%...
+                The Global Agri OS completely bypasses the legacy fragmented systems. 
+                Instead of bleeding margins to aggregators (10%), commission agents (8%), and local wholesalers (15%)...
               </p>
               <p>
-                <strong className="text-white block mt-6 mb-2 text-xl font-medium">You sell directly to the final buyer.</strong>
-                Whether that's a regional supermarket chain, a global exporter, or an institutional kitchen. We handle the logistics, quality verification, and guarantee the payment.
+                <strong className="text-white block mt-6 mb-2 text-2xl font-bold tracking-tight">Direct institutional sync.</strong>
+                Execute smart contracts directly with regional supermarkets, global exporters, or institutional FMCG processors. We handle the automated logistics, quality verification, and cryptographic payment escrows.
               </p>
             </div>
 
-            <ul className="space-y-6 mt-8">
-              <li className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                  1
+            <ul className="space-y-6 mt-10">
+              <li className="flex gap-5">
+                <div className="w-10 h-10 rounded-full bg-[#4ADE80]/10 flex items-center justify-center text-[#4ADE80] shrink-0 font-bold font-mono text-sm border border-[#4ADE80]/20">
+                  01
                 </div>
                 <div>
-                  <h4 className="text-white font-medium text-lg">Instant Price Discovery</h4>
-                  <p className="text-white/60 text-sm mt-1">Check real-time prices across 3,000+ markets before you harvest.</p>
+                  <h4 className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Predictive Price Discovery</h4>
+                  <p className="text-white/50 text-sm mt-1 leading-relaxed">Access real-time commodity indices across 3,000+ global markets before harvesting.</p>
                 </div>
               </li>
-              <li className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                  2
+              <li className="flex gap-5">
+                <div className="w-10 h-10 rounded-full bg-[#4ADE80]/10 flex items-center justify-center text-[#4ADE80] shrink-0 font-bold font-mono text-sm border border-[#4ADE80]/20">
+                  02
                 </div>
                 <div>
-                  <h4 className="text-white font-medium text-lg">Create Farm Listing</h4>
-                  <p className="text-white/60 text-sm mt-1">Upload photos, volume, and quality specs. Set your own price.</p>
+                  <h4 className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Verified Quality Ledgers</h4>
+                  <p className="text-white/50 text-sm mt-1 leading-relaxed">Upload computer-vision verified crop specs to the institutional procurement network.</p>
                 </div>
               </li>
-              <li className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                  3
+              <li className="flex gap-5">
+                <div className="w-10 h-10 rounded-full bg-[#4ADE80]/10 flex items-center justify-center text-[#4ADE80] shrink-0 font-bold font-mono text-sm border border-[#4ADE80]/20">
+                  03
                 </div>
                 <div>
-                  <h4 className="text-white font-medium text-lg">Guaranteed Payout</h4>
-                  <p className="text-white/60 text-sm mt-1">Buyer pays into escrow. You get paid the moment the truck is loaded.</p>
+                  <h4 className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Automated Escrow</h4>
+                  <p className="text-white/50 text-sm mt-1 leading-relaxed">Institutional funds are locked in escrow. Capital is released the second the digital Bill of Lading is signed.</p>
                 </div>
               </li>
             </ul>
 
-            <Button variant="primary" className="mt-8 gap-2 px-8">
-              Try the full Sandbox Demo <ArrowRight size={16} />
+            <Button variant="primary" className="mt-10 gap-2 px-8 uppercase font-bold tracking-wider rounded-full h-12">
+              Launch Sandbox Demo <ArrowRight size={16} />
             </Button>
           </motion.div>
         </div>
