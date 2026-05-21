@@ -13,9 +13,14 @@ export const HeroSection = () => {
     if (!video) return;
 
     const videoSrc = 'https://stream.mux.com/tLkHO1qZoaaQOUeVWo8hEBeGQfySP02EPS02BmnNFyXys.m3u8';
+    let hls: Hls | null = null;
+
+    const handleSafariPlay = () => {
+      video.play().catch(e => console.log('Autoplay prevented', e));
+    };
 
     if (Hls.isSupported()) {
-      const hls = new Hls({
+      hls = new Hls({
         enableWorker: false, // Ensures stability in sandboxed environments
       });
       hls.loadSource(videoSrc);
@@ -23,24 +28,26 @@ export const HeroSection = () => {
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         video.play().catch(e => console.log('Autoplay prevented', e));
       });
-      return () => {
-        hls.destroy();
-      };
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       // For Safari native HLS support
       video.src = videoSrc;
-      video.addEventListener('loadedmetadata', () => {
-        video.play().catch(e => console.log('Autoplay prevented', e));
-      });
+      video.addEventListener('loadedmetadata', handleSafariPlay);
     }
+
+    return () => {
+      if (hls) {
+        hls.destroy();
+      }
+      video.removeEventListener('loadedmetadata', handleSafariPlay);
+    };
   }, []);
 
   return (
-    <section className="relative w-full min-h-[100dvh] overflow-hidden bg-[#070b0a] flex items-center justify-center pt-20">
+    <section className="relative w-full min-h-[100dvh] overflow-hidden bg-[#070b0a] flex items-center justify-center pt-16 md:pt-20 noise-bg">
       {/* Background Video */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
         autoPlay
         loop
         muted
@@ -48,59 +55,58 @@ export const HeroSection = () => {
       />
 
       {/* Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#070b0a] via-[#070b0a]/50 to-transparent z-0 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#070b0a] via-transparent to-transparent z-0 pointer-events-none" />
+      {/* Left-to-right fade for desktop readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#070b0a] via-[#070b0a]/80 to-transparent hidden md:block z-0 pointer-events-none" />
+      {/* Centered dark overlay for mobile readability */}
+      <div className="absolute inset-0 bg-[#070b0a]/75 md:hidden z-0 pointer-events-none" />
+      {/* Bottom fade into the rest of the page */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#070b0a] via-[#070b0a]/30 to-transparent z-0 pointer-events-none" />
 
-      {/* Grid Lines (25%, 50%, 75%) */}
+      {/* Grid Lines (25%, 50%, 75%) with subtle vertical fade-out */}
       <div className="absolute inset-0 z-0 hidden md:block pointer-events-none">
-        <div className="absolute top-0 bottom-0 left-[25%] w-px bg-white/10" />
-        <div className="absolute top-0 bottom-0 left-[50%] w-px bg-white/10" />
-        <div className="absolute top-0 bottom-0 left-[75%] w-px bg-white/10" />
+        <div className="absolute top-0 bottom-0 left-[25%] w-px bg-gradient-to-b from-white/12 via-white/5 to-transparent" />
+        <div className="absolute top-0 bottom-0 left-[50%] w-px bg-gradient-to-b from-white/12 via-white/5 to-transparent" />
+        <div className="absolute top-0 bottom-0 left-[75%] w-px bg-gradient-to-b from-white/12 via-white/5 to-transparent" />
       </div>
 
-      {/* Central Glow (Cyan/Dark Green hue) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] aspect-square pointer-events-none z-0">
-        <svg viewBox="0 0 100 100" className="w-full h-full opacity-40">
-          <defs>
-            <filter id="glow-blur" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="25" />
-            </filter>
-          </defs>
-          <ellipse cx="50" cy="20" rx="30" ry="10" fill="#4ADE80" filter="url(#glow-blur)" />
-          <ellipse cx="50" cy="20" rx="40" ry="15" fill="#0EA5E9" filter="url(#glow-blur)" opacity="0.3" />
-        </svg>
-      </div>
+      {/* Central Glow (Cyan/Dark Green hue using a clip-free CSS Radial Gradient) */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] aspect-square pointer-events-none z-0 opacity-55 blur-[130px]"
+        style={{
+          background: 'radial-gradient(ellipse at center, rgba(74, 222, 128, 0.16) 0%, rgba(14, 165, 233, 0.06) 45%, transparent 70%)',
+          transform: 'translate(-50%, -20%)',
+        }}
+      />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex flex-col justify-center items-center md:items-start pt-12 md:pt-0 text-center md:text-left">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex flex-col justify-center items-center md:items-start pt-6 md:pt-0 text-center md:text-left">
         
         {/* Liquid Glass Card */}
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: -40 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="relative w-[160px] h-[160px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] flex flex-col justify-center items-center p-4 md:p-6 text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] mb-4 md:mb-8 rounded-sm -translate-y-4 md:-translate-y-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative w-[130px] h-[130px] sm:w-[155px] sm:h-[155px] md:w-[220px] md:h-[220px] flex flex-col justify-center items-center p-3 md:p-6 text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] mb-6 md:mb-8 rounded-sm"
           style={{
-            background: 'rgba(255, 255, 255, 0.01)',
-            backgroundBlendMode: 'luminosity',
-            backdropFilter: 'blur(4px)',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
+            backdropFilter: 'blur(12px)',
           }}
         >
-          {/* Border Effect via pseudo-element simulation */}
+          {/* Border Effect with theme color tint on top edge highlight */}
           <div className="absolute inset-0 pointer-events-none rounded-sm"
                style={{
-                 padding: '1.4px',
-                 background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 100%)',
+                 padding: '1.2px',
+                 background: 'linear-gradient(180deg, rgba(74, 222, 128, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%)',
                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                  WebkitMaskComposite: 'xor',
                  maskComposite: 'exclude',
                }}
           />
-          <div className="text-white/60 text-[12px] md:text-[14px] mb-2 md:mb-3 tracking-widest font-mono">[ 2026 ]</div>
-          <h3 className="text-white text-[15px] sm:text-[16px] md:text-[18px] leading-snug mb-2 md:mb-3">
-            <span style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400 }} className="text-[18px] sm:text-[20px] md:text-[24px]">Global Supply Chain</span> Protocol
+          <div className="text-white/60 text-[10px] md:text-[14px] mb-1.5 md:mb-3 tracking-widest font-mono">[ 2026 ]</div>
+          <h3 className="text-white text-[13px] sm:text-[15px] md:text-[18px] leading-snug mb-1.5 md:mb-3 px-1">
+            <span style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400 }} className="text-[15px] sm:text-[19px] md:text-[24px]">Global Supply Chain</span> Protocol
           </h3>
-          <p className="text-white/40 text-[9px] md:text-[11px] uppercase tracking-wider font-mono">Connecting Ecosystems</p>
+          <p className="text-white/40 text-[8px] md:text-[11px] uppercase tracking-wider font-mono">Connecting Ecosystems</p>
         </motion.div>
 
         {/* Hero Typography */}
