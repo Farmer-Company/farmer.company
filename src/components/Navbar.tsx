@@ -9,7 +9,7 @@ const STAKEHOLDER_NAV = [
   { label: 'For Farmers', path: '/farmers' },
   { label: 'For Vendors', path: '/vendors' },
   { label: 'For Logistics', path: '/logistics' },
-  { label: 'For Researchers', path: '/story' },
+  { label: 'For Researchers', path: '/researchers' },
   { label: 'Global Buyers', path: '/customers' },
 ];
 

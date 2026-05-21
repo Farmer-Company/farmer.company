@@ -29,6 +29,7 @@ import { CustomersPage } from './components/Pages/CustomersPage';
 import { NotFound } from './pages/NotFound';
 import { Footer } from './components/Footer';
 import { StoryPage } from './components/Pages/Story';
+import { ResearchersPage } from './components/Pages/ResearchersPage';
 
 const HomePage = () => (
 <main>
@@ -53,6 +54,7 @@ export default function App() {
  <Routes>
  <Route path="/" element={<HomePage />} />
  <Route path="/story" element={<StoryPage />} />
+ <Route path="/researchers" element={<ResearchersPage />} />
  <Route path="/market" element={<MarketPage />} />
  <Route path="/prices" element={<PricesPage />} />
  <Route path="/insights" element={<InsightsPage />} />
