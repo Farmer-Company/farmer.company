@@ -8,7 +8,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground font-display font-semibold rounded-none px-7 py-3 text-base tracking-tight hover:bg-primary/90 transition-colors duration-150 border-0",
+        primary: "bg-primary text-[#050505] font-display font-semibold rounded-none px-7 py-3 text-base tracking-tight hover:bg-primary/90 transition-colors duration-150 border-0",
         secondary: "bg-surface-2 text-ink hover:bg-surface-1 rounded-none px-7 py-3 text-base border-0",
         ghost: "bg-transparent text-ink-muted hover:text-ink hover:bg-surface-2 rounded-none px-7 py-3 text-base border-0",
         danger: "border border-red/40 text-red font-sans rounded-none px-5 py-2 text-sm hover:bg-red/10 transition-colors duration-150 bg-transparent",
