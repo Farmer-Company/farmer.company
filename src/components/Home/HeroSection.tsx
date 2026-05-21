@@ -36,7 +36,7 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-[#070b0a] flex items-center justify-center pt-20">
+    <section className="relative w-full min-h-[100dvh] overflow-hidden bg-[#070b0a] flex items-center justify-center pt-20">
       {/* Background Video */}
       <video
         ref={videoRef}
@@ -76,15 +76,14 @@ export const HeroSection = () => {
         
         {/* Liquid Glass Card */}
         <motion.div 
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: -50 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: -40 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="relative w-[200px] h-[200px] flex flex-col justify-center items-center p-6 text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] mb-8 rounded-sm"
+          className="relative w-[160px] h-[160px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] flex flex-col justify-center items-center p-4 md:p-6 text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] mb-4 md:mb-8 rounded-sm -translate-y-4 md:-translate-y-8"
           style={{
             background: 'rgba(255, 255, 255, 0.01)',
             backgroundBlendMode: 'luminosity',
             backdropFilter: 'blur(4px)',
-            transform: 'translateY(-50px)'
           }}
         >
           {/* Border Effect via pseudo-element simulation */}
@@ -97,11 +96,11 @@ export const HeroSection = () => {
                  maskComposite: 'exclude',
                }}
           />
-          <div className="text-white/60 text-[14px] mb-3 tracking-widest font-mono">[ 2026 ]</div>
-          <h3 className="text-white text-[18px] leading-snug mb-3">
-            <span style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400, fontSize: '22px' }}>Global Supply Chain</span> Protocol
+          <div className="text-white/60 text-[12px] md:text-[14px] mb-2 md:mb-3 tracking-widest font-mono">[ 2026 ]</div>
+          <h3 className="text-white text-[15px] sm:text-[16px] md:text-[18px] leading-snug mb-2 md:mb-3">
+            <span style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400 }} className="text-[18px] sm:text-[20px] md:text-[24px]">Global Supply Chain</span> Protocol
           </h3>
-          <p className="text-white/40 text-[11px] uppercase tracking-wider font-mono">Connecting Ecosystems</p>
+          <p className="text-white/40 text-[9px] md:text-[11px] uppercase tracking-wider font-mono">Connecting Ecosystems</p>
         </motion.div>
 
         {/* Hero Typography */}
@@ -122,14 +121,14 @@ export const HeroSection = () => {
             className="text-white font-extrabold uppercase tracking-tighter leading-[1.05]"
             style={{ 
               fontFamily: '"Inter", sans-serif',
-              fontSize: 'clamp(40px, 6vw, 72px)'
+              fontSize: 'clamp(32px, 7vw, 88px)'
             }}
           >
-            THE AGRICULTURAL OPERATING SYSTEM<span className="text-[#4ADE80]">.</span>
+            THE AGRICULTURAL <br className="hidden lg:block" />OPERATING SYSTEM<span className="text-[#4ADE80]">.</span>
           </h1>
           
           <p 
-            className="text-white/70 text-[14px] leading-relaxed max-w-[512px] mt-5"
+            className="text-white/70 text-sm sm:text-base md:text-lg leading-relaxed w-full max-w-[90%] sm:max-w-lg md:max-w-xl mt-4 md:mt-6"
             style={{ fontFamily: '"Inter", sans-serif' }}
           >
             Connecting Farmers, Vendors, Logistics & Customers. Zero Middlemen. Master your supply chain with real-time price intelligence and direct trade.
