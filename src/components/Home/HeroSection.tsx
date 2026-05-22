@@ -1,12 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -140,16 +141,78 @@ export const HeroSection = () => {
             Autonomous AI orchestration for global supply chains—starting from the farm gate. Master your ecosystem with predictive pricing, automated matchmaking, and verifiable direct trade.
           </p>
 
+          <p 
+            className="text-white/90 text-[15px] md:text-[17px] font-medium leading-relaxed w-full max-w-[90%] sm:max-w-lg md:max-w-xl mt-2 border-l-2 border-[#4ADE80] pl-4"
+            style={{ fontFamily: '"Inter", sans-serif' }}
+          >
+            For Farmers, Vendors, Logistics fleets, Researchers and Global Buyers who want direct, escrow-backed agri trade with AI agents managing the complexity.
+          </p>
+
           <button 
-            onClick={() => navigate('/get-started')}
+            onClick={() => setIsModalOpen(true)}
             className="mt-8 flex items-center justify-center gap-3 bg-[#4ADE80] text-[#070b0a] uppercase font-bold text-[13px] tracking-wider rounded-full px-8 py-4 hover:bg-[#38c96f] transition-all duration-300 transform hover:scale-105 group"
             style={{ fontFamily: '"Inter", sans-serif' }}
           >
-            Get Started
+            Get Started — Choose Your Role
             <ArrowRight size={18} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
           </button>
+          
+          <p className="mt-4 text-white/50 text-[12px]" style={{ fontFamily: '"Inter", sans-serif' }}>
+            Early access for Tamil Nadu farmers, logistics fleets and FMCG partners.
+          </p>
         </motion.div>
       </div>
+
+      {/* Role Chooser Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              className="bg-[#0f0f0f] border border-white/10 rounded-xl p-6 md:p-8 w-full max-w-md relative shadow-2xl"
+            >
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 text-white/50 hover:text-white"
+              >
+                <X size={20} />
+              </button>
+              
+              <h3 className="text-xl font-bold text-white mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>Select your role to continue</h3>
+              
+              <div className="flex flex-col gap-3">
+                <button onClick={() => navigate('/farmers')} className="flex justify-between items-center w-full p-4 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#4ADE80]/50 rounded-lg text-left transition-all group">
+                  <span className="text-white font-medium">I am a Farmer / FPO</span>
+                  <ArrowRight size={16} className="text-white/30 group-hover:text-[#4ADE80] group-hover:translate-x-1 transition-all" />
+                </button>
+                <button onClick={() => navigate('/customers')} className="flex justify-between items-center w-full p-4 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#4ADE80]/50 rounded-lg text-left transition-all group">
+                  <span className="text-white font-medium">I am a Buyer / FMCG</span>
+                  <ArrowRight size={16} className="text-white/30 group-hover:text-[#4ADE80] group-hover:translate-x-1 transition-all" />
+                </button>
+                <button onClick={() => navigate('/vendors')} className="flex justify-between items-center w-full p-4 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#4ADE80]/50 rounded-lg text-left transition-all group">
+                  <span className="text-white font-medium">I am a Vendor</span>
+                  <ArrowRight size={16} className="text-white/30 group-hover:text-[#4ADE80] group-hover:translate-x-1 transition-all" />
+                </button>
+                <button onClick={() => navigate('/logistics')} className="flex justify-between items-center w-full p-4 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#4ADE80]/50 rounded-lg text-left transition-all group">
+                  <span className="text-white font-medium">I run Logistics</span>
+                  <ArrowRight size={16} className="text-white/30 group-hover:text-[#4ADE80] group-hover:translate-x-1 transition-all" />
+                </button>
+                <button onClick={() => navigate('/researchers')} className="flex justify-between items-center w-full p-4 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#4ADE80]/50 rounded-lg text-left transition-all group">
+                  <span className="text-white font-medium">I am a Researcher / Analyst</span>
+                  <ArrowRight size={16} className="text-white/30 group-hover:text-[#4ADE80] group-hover:translate-x-1 transition-all" />
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

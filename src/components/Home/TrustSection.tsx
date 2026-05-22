@@ -75,25 +75,18 @@ export const TrustSection = () => {
           </div>
         </div>
 
-        {/* Team & Partners */}
+        {/* Team Story */}
         <div className="pt-16 border-t border-white/5">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            <div className="lg:col-span-1">
-              <span className="mono text-[10px] text-white/40 font-medium normal-case tracking-widest mb-4 block">
-                THE TEAM
-              </span>
-              <h3 className="text-3xl text-white font-medium mb-6">Built by Farmers, Not Consultants.</h3>
-              <div className="text-white/60 leading-[1.6] space-y-4">
-                <p>Before writing a line of code, we farmed and traded our own crops.</p>
-                <p>Digital Orchard is led by a farmer and the son of a farmer who have lived the volatility of yields, prices, and payments first-hand.</p>
-                <p>We know what data farmers actually need because we've stood at the farm gate, bargained with commission agents, and moved produce through the same broken system we're now rebuilding from the ground up.</p>
-                <p>The same protocol that fixes this for one village in Tamil Nadu is being designed to scale to FMCG supply chains across India—and, over time, food systems in every geography that faces the same structural problems.</p>
-              </div>
-            </div>
-            <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-6">
-              <TeamMember name="Arun K." role="Founder, Operations" img="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=400&q=80" />
-              <TeamMember name="Priya S." role="Head of Agri-Data" img="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" />
-              <TeamMember name="Vikram R." role="Protocol Engineer" img="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" />
+          <div className="max-w-3xl mx-auto text-center">
+            <span className="mono text-[10px] text-white/40 font-medium normal-case tracking-widest mb-4 block">
+              THE TEAM
+            </span>
+            <h3 className="text-3xl text-white font-medium mb-6">Built by Farmers, Not Consultants.</h3>
+            <div className="text-white/60 leading-[1.6] space-y-4 text-left">
+              <p>Before writing a line of code, we farmed and traded our own crops.</p>
+              <p>Digital Orchard is led by a farmer and the son of a farmer who have lived the volatility of yields, prices, and payments first-hand.</p>
+              <p>We know what data farmers actually need because we've stood at the farm gate, bargained with commission agents, and moved produce through the same broken system we're now rebuilding from the ground up.</p>
+              <p>The same protocol that fixes this for one village in Tamil Nadu is being designed to scale to FMCG supply chains across India—and, over time, food systems in every geography that faces the same structural problems.</p>
             </div>
           </div>
         </div>

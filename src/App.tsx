@@ -9,6 +9,9 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/Home/HeroSection';
 import { SocialProofSection } from './components/Home/SocialProofSection';
 import { InteractiveDemo } from './components/Home/InteractiveDemo';
+import { RoleStripSection } from './components/Home/RoleStripSection';
+import { EcosystemSection } from './components/Home/EcosystemSection';
+import { AgentSection } from './components/Home/AgentSection';
 import { ComparisonSection } from './components/Home/ComparisonSection';
 import { TestimonialsSection } from './components/Home/TestimonialsSection';
 import { TrustSection } from './components/Home/TrustSection';
@@ -36,6 +39,9 @@ const HomePage = () => (
 <main>
  <HeroSection />
  <InteractiveDemo />
+ <RoleStripSection />
+ <EcosystemSection />
+ <AgentSection />
  <ComparisonSection />
  <SocialProofSection />
  <TestimonialsSection />
