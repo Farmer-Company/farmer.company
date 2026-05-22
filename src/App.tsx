@@ -30,6 +30,7 @@ import { NotFound } from './pages/NotFound';
 import { Footer } from './components/Footer';
 import { StoryPage } from './components/Pages/Story';
 import { ResearchersPage } from './components/Pages/ResearchersPage';
+import { AgentsPage } from './components/Pages/AgentsPage';
 
 const HomePage = () => (
 <main>
@@ -55,6 +56,7 @@ export default function App() {
  <Route path="/" element={<HomePage />} />
  <Route path="/story" element={<StoryPage />} />
  <Route path="/researchers" element={<ResearchersPage />} />
+ <Route path="/agents" element={<AgentsPage />} />
  <Route path="/market" element={<MarketPage />} />
  <Route path="/prices" element={<PricesPage />} />
  <Route path="/insights" element={<InsightsPage />} />

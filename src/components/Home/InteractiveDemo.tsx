@@ -168,7 +168,26 @@ export const InteractiveDemo = () => {
               </li>
             </ul>
 
-            <Button variant="primary" className="mt-10 gap-2 px-8 uppercase font-bold tracking-wider rounded-full h-12">
+            {/* Agent Log Simulation */}
+            <div className="mt-12 bg-[#050505] border border-white/10 rounded-lg p-5 font-mono text-sm space-y-3 relative overflow-hidden group">
+              <div className="flex items-center gap-2 mb-2 border-b border-white/5 pb-3">
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                <span className="text-[10px] text-white/40 uppercase tracking-widest">Live Agent Stream</span>
+              </div>
+              <div className="space-y-2">
+                <motion.div initial={{ opacity: 0, x: -5 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="text-white/50">
+                  <span className="text-primary">{`> `}</span>Demand Agent forecasts 18% increase in onion demand in Q3.
+                </motion.div>
+                <motion.div initial={{ opacity: 0, x: -5 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 1.5 }} className="text-white/50">
+                  <span className="text-primary">{`> `}</span>Matchmaking Agent proposes contract between TN FPO and European FMCG.
+                </motion.div>
+                <motion.div initial={{ opacity: 0, x: -5 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 2.8 }} className="text-white/50">
+                  <span className="text-primary">{`> `}</span>Awaiting human confirmation on pricing parameters...
+                </motion.div>
+              </div>
+            </div>
+
+            <Button variant="primary" className="mt-8 gap-2 px-8 uppercase font-bold tracking-wider rounded-full h-12">
               Launch Sandbox Demo <ArrowRight size={16} />
             </Button>
           </motion.div>

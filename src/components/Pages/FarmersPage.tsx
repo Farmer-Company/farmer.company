@@ -67,6 +67,61 @@ export const FarmersPage = () => {
           </div>
         </div>
 
+        {/* Farmer Advisor Agent Highlight */}
+        <div className="bg-primary/5 border border-primary/20 p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center rounded-sm relative overflow-hidden mt-12 mb-12">
+          <div className="flex-1 space-y-6 relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full text-xs font-mono uppercase tracking-widest mb-2">
+              <Sprout size={14} /> AI Cultivation Coach
+            </div>
+            <h2 className="text-3xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+              The Farmer Advisor Agent.
+            </h2>
+            <p className="text-white/80 text-lg leading-relaxed font-medium">
+              Your AI cultivation coach — in your language, on your phone.
+            </p>
+            <p className="text-white/60 leading-relaxed">
+              No more guessing. The Advisor Agent uses satellite data, localized weather, and global demand forecasts to tell you exactly when to sow, how much to irrigate, and when to pause pesticides. Voice-first interaction ensures you can simply talk to it in regional languages.
+            </p>
+            <ul className="space-y-3 pt-4 font-mono text-sm">
+              <li className="flex items-center gap-3 text-white/70">
+                <span className="text-primary">{`>`}</span> "Pause irrigation. Heavy rain predicted in 14 hours."
+              </li>
+              <li className="flex items-center gap-3 text-white/70">
+                <span className="text-primary">{`>`}</span> "Optimal sowing window for Tomato opens next Tuesday."
+              </li>
+              <li className="flex items-center gap-3 text-white/70">
+                <span className="text-primary">{`>`}</span> "Chemical usage logged. Verified Clean status maintained."
+              </li>
+            </ul>
+          </div>
+          
+          <div className="w-full md:w-5/12 bg-black border border-white/10 p-6 rounded-xl relative shadow-2xl">
+            <div className="absolute -top-4 -left-4 bg-primary text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm">
+              Voice Interface Active
+            </div>
+            <div className="space-y-4 mt-2">
+              <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-white/40 text-xs font-mono">Today's Action</span>
+                  <Sun size={14} className="text-yellow-500" />
+                </div>
+                <p className="text-white text-sm">High heat stress detected. Recommend 20% increase in drip irrigation for block B.</p>
+                <div className="flex gap-2 mt-4">
+                  <button className="flex-1 bg-primary text-black text-xs font-bold py-2 rounded-sm uppercase tracking-wide">Execute</button>
+                  <button className="flex-1 bg-white/10 text-white text-xs font-bold py-2 rounded-sm uppercase tracking-wide hover:bg-white/20 transition-colors">Ask Why</button>
+                </div>
+              </div>
+              <div className="bg-white/5 p-4 rounded-lg border border-white/10 opacity-70">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-white/40 text-xs font-mono">Market Alert</span>
+                  <TrendingUp size={14} className="text-primary" />
+                </div>
+                <p className="text-white/80 text-sm">FMCG Buyer XYZ is offering a 15% premium for zero-residue onions. Contract available.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* AgriOS Highlight */}
         <div className="bg-[#050505] border border-white/5 p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center rounded-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#4ADE80]/5 to-transparent pointer-events-none" />

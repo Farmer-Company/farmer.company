@@ -14,6 +14,7 @@ const STAKEHOLDER_NAV = [
 ];
 
 const PLATFORM_NAV = [
+  { label: 'AI Agents', path: '/agents' },
   { label: 'Market Data', path: '/market' },
   { label: 'Prices', path: '/prices' },
   { label: 'Insights', path: '/insights' },

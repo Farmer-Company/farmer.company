@@ -137,7 +137,7 @@ export const HeroSection = () => {
             className="text-white/70 text-sm sm:text-base md:text-lg leading-relaxed w-full max-w-[90%] sm:max-w-lg md:max-w-xl mt-4 md:mt-6"
             style={{ fontFamily: '"Inter", sans-serif' }}
           >
-            Connecting Farmers, Vendors, Logistics & Customers. Zero Middlemen. Master your supply chain with real-time price intelligence and direct trade.
+            Autonomous AI orchestration for global supply chains—starting from the farm gate. Master your ecosystem with predictive pricing, automated matchmaking, and verifiable direct trade.
           </p>
 
           <button 
