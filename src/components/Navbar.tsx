@@ -20,6 +20,7 @@ const PLATFORM_NAV = [
   { label: 'Insights', path: '/insights' },
   { label: 'Configure', path: '/configure' },
   { label: 'Supply CRM', path: '/supply-crm' },
+  { label: 'UI Showcase', path: '/demo' },
 ];
 
 export const Navbar = () => {

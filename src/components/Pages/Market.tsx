@@ -180,10 +180,10 @@ export const MarketPage = () => {
 
  setSavedIntentCount(getSavedTradeIntents().length);
  setIntentStatus(
- savedIntent.persistence === 'firestore'
- ? 'Intent sent to the ops queue. The team can now validate and match this lead.'
- : 'Intent saved locally for assisted follow-up. Firebase write was unavailable, so the lead stays on this device.'
- );
+  savedIntent.persistence === 'firestore'
+  ? 'Intent sent to the ops queue. The team can now validate and match this lead.'
+  : `Intent saved locally for assisted follow-up. Firebase write failed, so the lead stays on this device.${savedIntent.failureReason ? ` Reason: ${savedIntent.failureReason}` : ''}`
+  );
  setIntentForm(null);
  setIsSubmittingIntent(false);
  };

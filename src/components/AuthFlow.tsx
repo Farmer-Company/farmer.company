@@ -3,15 +3,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '@/src/lib/firebase';
-import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, setDoc, doc, getDoc } from 'firebase/firestore';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 import { countries } from '@/src/lib/countries';
+import type { UserRole } from '@/src/lib/os-types';
+
+type BetaRole = Exclude<UserRole, 'admin'>;
+
+const betaRoles: { value: BetaRole; label: string }[] = [
+  { value: 'farmer', label: 'Farmer / Seller' },
+  { value: 'vendor', label: 'Buyer / Vendor' },
+  { value: 'logistics', label: 'Logistics Partner' },
+  { value: 'researcher', label: 'Researcher / Analyst' },
+  { value: 'government', label: 'Government / Institution' },
+];
 
 export const AuthFlow = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [countryCode, setCountryCode] = useState('+91');
+  const [role, setRole] = useState<BetaRole>('farmer');
   const [otp, setOtp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [verificationId, setVerificationId] = useState<ConfirmationResult | null>(null);
@@ -61,28 +73,49 @@ export const AuthFlow = () => {
     try {
       const result = await verificationId.confirm(otp);
       const user = result.user;
+      const cleanMobile = mobile.replace(/\D/g, '');
+      const formattedMobile = `${countryCode}${cleanMobile}`;
+      const userRef = doc(db, 'users', user.uid);
+      const userSnap = await getDoc(userRef);
 
-      // Create/Update User Profile
-      await setDoc(doc(db, 'users', user.uid), {
-        uid: user.uid,
-        displayName: name,
-        phoneNumber: `${countryCode}${mobile}`,
-        role: 'user',
-        createdAt: serverTimestamp(),
-      });
+      if (userSnap.exists()) {
+        await setDoc(userRef, {
+          uid: user.uid,
+          fullName: name.trim(),
+          email: user.email || '',
+          phoneNumber: formattedMobile,
+          updatedAt: serverTimestamp(),
+        }, { merge: true });
+      } else {
+        await setDoc(userRef, {
+          uid: user.uid,
+          fullName: name.trim(),
+          email: user.email || '',
+          phoneNumber: formattedMobile,
+          role,
+          verified: false,
+          createdAt: serverTimestamp(),
+        });
+      }
 
       // Save to Beta Registrations
       await addDoc(collection(db, 'beta_registrations'), {
         uid: user.uid,
-        fullName: name,
-        mobileNumber: `${countryCode}${mobile}`,
+        fullName: name.trim(),
+        mobileNumber: formattedMobile,
+        role,
         timestamp: serverTimestamp(),
       });
       
       navigate('/');
     } catch (err: any) {
       console.error("Verification Failed:", err);
-      setError("Invalid OTP. Please try again.");
+      const authErrorCode = typeof err?.code === 'string' ? err.code : '';
+      setError(
+        authErrorCode.startsWith('auth/')
+          ? "Invalid OTP. Please try again."
+          : "Verification worked, but profile setup could not be saved. Please retry in a moment."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -219,6 +252,22 @@ export const AuthFlow = () => {
                         className="flex-1 bg-white/[0.02] border border-white/10 h-14 px-4 mono text-sm text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-300"
                       />
                     </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="mono text-[10px] uppercase tracking-wider text-white/50 ml-1">Beta Role</label>
+                    <select
+                      value={role}
+                      onChange={(e) => setRole(e.target.value as BetaRole)}
+                      className="w-full bg-white/[0.02] border border-white/10 h-14 px-4 mono text-sm text-white focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-300 cursor-pointer"
+                      title="Select beta role"
+                    >
+                      {betaRoles.map((option) => (
+                        <option key={option.value} value={option.value} className="bg-background text-white">
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   {error && (

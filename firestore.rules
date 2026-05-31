@@ -22,15 +22,102 @@ service cloud.firestore {
              request.resource.data[field].size() <= max;
     }
 
+    function betaRoles() {
+      return ['farmer', 'vendor', 'logistics', 'government', 'researcher'];
+    }
+
+    function validMaybeString(field, max) {
+      return !(field in request.resource.data) ||
+        (request.resource.data[field] is string && request.resource.data[field].size() <= max);
+    }
+
+    function validMaybeNumber(field) {
+      return !(field in request.resource.data) ||
+        request.resource.data[field] == null ||
+        request.resource.data[field] is number;
+    }
+
+    function validUserCreate(uid) {
+      return request.resource.data.keys().hasOnly([
+          'uid', 'fullName', 'email', 'phoneNumber', 'role', 'verified',
+          'language_pref', 'region_state', 'region_district',
+          'profile_public', 'createdAt'
+        ]) &&
+        request.resource.data.uid == uid &&
+        request.resource.data.role in betaRoles() &&
+        validString('fullName', 1, 120) &&
+        validMaybeString('email', 254) &&
+        validString('phoneNumber', 8, 20) &&
+        request.resource.data.createdAt is timestamp;
+    }
+
+    function validUserOwnerUpdate(uid) {
+      return request.resource.data.uid == uid &&
+        request.resource.data.role == resource.data.role &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'fullName', 'email', 'phoneNumber', 'language_pref',
+          'region_state', 'region_district', 'profile_public', 'updatedAt'
+        ]) &&
+        validMaybeString('fullName', 120) &&
+        validMaybeString('email', 254) &&
+        validMaybeString('phoneNumber', 20);
+    }
+
+    function validBetaRegistration() {
+      return request.resource.data.keys().hasOnly([
+          'uid', 'fullName', 'mobileNumber', 'role', 'timestamp'
+        ]) &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.role in betaRoles() &&
+        validString('fullName', 1, 120) &&
+        validString('mobileNumber', 8, 20) &&
+        request.resource.data.timestamp is timestamp;
+    }
+
+    function validTradeIntent() {
+      return request.resource.data.keys().hasOnly([
+          'type', 'marketId', 'marketName', 'state', 'district',
+          'commodityName', 'quantityTonnes', 'contactName', 'phone',
+          'targetPrice', 'notes', 'source', 'userId', 'createdAt', 'status'
+        ]) &&
+        request.resource.data.userId == request.auth.uid &&
+        request.resource.data.type in ['buy', 'sell'] &&
+        request.resource.data.source in ['market_page', 'prices_page'] &&
+        request.resource.data.status == 'ops_review' &&
+        request.resource.data.marketId is number &&
+        validString('marketName', 1, 120) &&
+        validString('state', 1, 80) &&
+        validString('district', 1, 80) &&
+        validString('commodityName', 1, 120) &&
+        request.resource.data.quantityTonnes is number &&
+        request.resource.data.quantityTonnes > 0 &&
+        validString('contactName', 1, 120) &&
+        validString('phone', 8, 20) &&
+        validMaybeNumber('targetPrice') &&
+        validMaybeString('notes', 1000) &&
+        request.resource.data.createdAt is timestamp;
+    }
+
     // ===============================================================
     // Rules
     // ===============================================================
 
     match /users/{uid} {
       allow read: if isAuthenticated() && (isOwner(uid) || isAdmin());
-      allow create: if isAuthenticated() && isOwner(uid) && 
-                      request.resource.data.role in ['farmer', 'vendor', 'logistics', 'government', 'researcher'];
-      allow update: if isAuthenticated() && (isAdmin() || (isOwner(uid) && request.resource.data.role == resource.data.role));
+      allow create: if isAuthenticated() && isOwner(uid) && validUserCreate(uid);
+      allow update: if isAuthenticated() && (isAdmin() || (isOwner(uid) && validUserOwnerUpdate(uid)));
+    }
+
+    match /beta_registrations/{id} {
+      allow read: if isAuthenticated() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && validBetaRegistration();
+      allow update, delete: if isAdmin();
+    }
+
+    match /trade_intents/{id} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && validTradeIntent();
+      allow update, delete: if isAdmin();
     }
 
     match /farmers/{uid} {

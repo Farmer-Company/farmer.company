@@ -1,4 +1,4 @@
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebase';
 
 const LOCAL_INTENTS_KEY = 'farmer-company-trade-intents';
@@ -27,6 +27,7 @@ export interface SavedTradeIntent extends TradeIntentInput {
  createdAt: string;
  status: 'ops_review';
  persistence: TradeIntentPersistence;
+ failureReason?: string;
 }
 
 const readLocalIntents = (): SavedTradeIntent[] => {
@@ -69,9 +70,9 @@ export const createTradeIntent = async (
 
  try {
  const docRef = await addDoc(collection(db, 'trade_intents'), {
- ...baseRecord,
- createdAt: Timestamp.now().toDate().toISOString(),
- });
+  ...baseRecord,
+  createdAt: serverTimestamp(),
+  });
 
  const savedIntent: SavedTradeIntent = {
  ...baseRecord,
@@ -81,12 +82,15 @@ export const createTradeIntent = async (
 
  writeLocalIntents([savedIntent, ...readLocalIntents()].slice(0, 50));
  return savedIntent;
- } catch {
- const savedIntent: SavedTradeIntent = {
- ...baseRecord,
- id: `local-${Date.now()}`,
- persistence: 'local',
- };
+ } catch (error) {
+  const failureReason = error instanceof Error ? error.message : String(error);
+  console.warn('Trade intent Firestore write failed; saving local fallback.', error);
+  const savedIntent: SavedTradeIntent = {
+  ...baseRecord,
+  id: `local-${Date.now()}`,
+  persistence: 'local',
+  failureReason,
+  };
 
  writeLocalIntents([savedIntent, ...readLocalIntents()].slice(0, 50));
  return savedIntent;

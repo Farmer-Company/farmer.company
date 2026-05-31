@@ -34,6 +34,7 @@ import { Footer } from './components/Footer';
 import { StoryPage } from './components/Pages/Story';
 import { ResearchersPage } from './components/Pages/ResearchersPage';
 import { AgentsPage } from './components/Pages/AgentsPage';
+import { DemoPage } from './components/Pages/DemoPage';
 
 const HomePage = () => (
 <main>
@@ -74,6 +75,7 @@ export default function App() {
  <Route path="/customers" element={<CustomersPage />} />
  <Route path="/signin" element={<AuthFlow />} />
  <Route path="/get-started" element={<AuthFlow />} />
+ <Route path="/demo" element={<DemoPage />} />
  <Route path="*" element={<NotFound />} />
  </Routes>
  
