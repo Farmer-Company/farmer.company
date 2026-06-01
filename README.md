@@ -13,6 +13,7 @@
 - **Styling**: Tailwind CSS v4 + IBM Carbon Engineered Design System
 - **Routing**: React Router DOM v7
 - **Database/Auth**: Firebase
+- **Deployment**: GitHub Pages
 
 ## Project Structure
 
@@ -57,6 +58,8 @@ To build the production bundle:
 ```bash
 npm run build
 ```
+
+The `main` branch deploys to GitHub Pages through `.github/workflows/static.yml`.
 
 ## Documentation
 
