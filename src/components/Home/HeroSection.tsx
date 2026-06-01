@@ -72,11 +72,7 @@ export const HeroSection = () => {
 
       {/* Central Glow (Cyan/Dark Green hue using a clip-free CSS Radial Gradient) */}
       <div 
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] aspect-square pointer-events-none z-0 opacity-55 blur-[130px]"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(74, 222, 128, 0.16) 0%, rgba(14, 165, 233, 0.06) 45%, transparent 70%)',
-          transform: 'translate(-50%, -20%)',
-        }}
+        className="absolute top-0 left-1/2 w-full max-w-[800px] aspect-square pointer-events-none z-0 opacity-55 blur-[130px] hero-central-glow"
       />
 
       {/* Main Content */}
@@ -87,25 +83,13 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative w-[130px] h-[130px] sm:w-[155px] sm:h-[155px] md:w-[220px] md:h-[220px] flex flex-col justify-center items-center p-3 md:p-6 text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] mb-6 md:mb-8 rounded-sm"
-          style={{
-            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
-            backdropFilter: 'blur(12px)',
-          }}
+          className="relative w-[130px] h-[130px] sm:w-[155px] sm:h-[155px] md:w-[220px] md:h-[220px] flex flex-col justify-center items-center p-3 md:p-6 text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] mb-6 md:mb-8 rounded-sm hero-glass-card"
         >
           {/* Border Effect with theme color tint on top edge highlight */}
-          <div className="absolute inset-0 pointer-events-none rounded-sm"
-               style={{
-                 padding: '1.2px',
-                 background: 'linear-gradient(180deg, rgba(74, 222, 128, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%)',
-                 WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                 WebkitMaskComposite: 'xor',
-                 maskComposite: 'exclude',
-               }}
-          />
+          <div className="absolute inset-0 pointer-events-none rounded-sm hero-glass-card-border" />
           <div className="text-white/60 text-[10px] md:text-[14px] mb-1.5 md:mb-3 tracking-widest font-mono">[ 2026 ]</div>
           <h3 className="text-white text-[13px] sm:text-[15px] md:text-[18px] leading-snug mb-1.5 md:mb-3 px-1">
-            <span style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic', fontWeight: 400 }} className="text-[15px] sm:text-[19px] md:text-[24px]">Global Supply Chain</span> Protocol
+            <span className="font-serif-italic text-[15px] sm:text-[19px] md:text-[24px]">Global Supply Chain</span> Protocol
           </h3>
           <p className="text-white/40 text-[8px] md:text-[11px] uppercase tracking-wider font-mono">Connecting Ecosystems</p>
         </motion.div>
@@ -117,47 +101,31 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-col items-center md:items-start gap-5 max-w-3xl"
         >
-          <span 
-            className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest"
-            style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
-          >
+          <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest font-plus-jakarta">
             FARMER.COMPANY ECOSYSTEM
           </span>
           
-          <h1 
-            className="text-white font-extrabold uppercase tracking-tighter leading-[1.05]"
-            style={{ 
-              fontFamily: '"Inter", sans-serif',
-              fontSize: 'clamp(32px, 7vw, 88px)'
-            }}
-          >
+          <h1 className="text-white font-extrabold uppercase tracking-tighter leading-[1.05] hero-title">
             THE AGRICULTURAL <br className="hidden lg:block" />OPERATING SYSTEM<span className="text-[#4ADE80]">.</span>
           </h1>
           
-          <p 
-            className="text-white/70 text-sm sm:text-base md:text-lg leading-relaxed w-full max-w-[90%] sm:max-w-lg md:max-w-xl mt-4 md:mt-6"
-            style={{ fontFamily: '"Inter", sans-serif' }}
-          >
+          <p className="text-white/70 text-sm sm:text-base md:text-lg leading-relaxed w-full max-w-[90%] sm:max-w-lg md:max-w-xl mt-4 md:mt-6 font-inter">
             Autonomous AI orchestration for global supply chains—starting from the farm gate. Master your ecosystem with predictive pricing, automated matchmaking, and verifiable direct trade.
           </p>
 
-          <p 
-            className="text-white/90 text-[15px] md:text-[17px] font-medium leading-relaxed w-full max-w-[90%] sm:max-w-lg md:max-w-xl mt-2 border-l-2 border-[#4ADE80] pl-4"
-            style={{ fontFamily: '"Inter", sans-serif' }}
-          >
+          <p className="text-white/90 text-[15px] md:text-[17px] font-medium leading-relaxed w-full max-w-[90%] sm:max-w-lg md:max-w-xl mt-2 border-l-2 border-[#4ADE80] pl-4 font-inter">
             For Farmers, Vendors, Logistics fleets, Researchers and Global Buyers who want direct, escrow-backed agri trade with AI agents managing the complexity.
           </p>
 
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="mt-8 flex items-center justify-center gap-3 bg-[#4ADE80] text-[#070b0a] uppercase font-bold text-[13px] tracking-wider rounded-full px-8 py-4 hover:bg-[#38c96f] transition-all duration-300 transform hover:scale-105 group"
-            style={{ fontFamily: '"Inter", sans-serif' }}
+            className="mt-8 flex items-center justify-center gap-3 bg-[#4ADE80] text-[#070b0a] uppercase font-bold text-[13px] tracking-wider rounded-full px-8 py-4 hover:bg-[#38c96f] transition-all duration-300 transform hover:scale-105 group font-inter"
           >
             Get Started — Choose Your Role
             <ArrowRight size={18} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
           </button>
           
-          <p className="mt-4 text-white/50 text-[12px]" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <p className="mt-4 text-white/50 text-[12px] font-inter">
             Early access for Tamil Nadu farmers, logistics fleets and FMCG partners.
           </p>
         </motion.div>
@@ -181,11 +149,13 @@ export const HeroSection = () => {
               <button 
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-4 right-4 text-white/50 hover:text-white"
+                aria-label="Close modal"
+                title="Close modal"
               >
                 <X size={20} />
               </button>
               
-              <h3 className="text-xl font-bold text-white mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>Select your role to continue</h3>
+              <h3 className="text-xl font-bold text-white mb-6 font-inter">Select your role to continue</h3>
               
               <div className="flex flex-col gap-3">
                 <button onClick={() => navigate('/farmers')} className="flex justify-between items-center w-full p-4 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#4ADE80]/50 rounded-lg text-left transition-all group">

@@ -110,3 +110,42 @@ body {
   letter-spacing: 2px;
   color: var(--color-ink-tertiary);
 }
+
+/* Hero Section Custom Styles (Replaces inline styles) */
+.hero-central-glow {
+  background: radial-gradient(ellipse at center, rgba(74, 222, 128, 0.16) 0%, rgba(14, 165, 233, 0.06) 45%, transparent 70%);
+  transform: translate(-50%, -20%);
+}
+
+.hero-glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(12px);
+}
+
+.hero-glass-card-border {
+  padding: 1.2px;
+  background: linear-gradient(180deg, rgba(74, 222, 128, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.font-serif-italic {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.font-plus-jakarta {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.hero-title {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(32px, 7vw, 88px);
+}
+
