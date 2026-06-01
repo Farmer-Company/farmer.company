@@ -6,6 +6,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
+import { LocationPanel } from './components/LocationPanel';
 import { HeroSection } from './components/Home/HeroSection';
 import { SocialProofSection } from './components/Home/SocialProofSection';
 import { InteractiveDemo } from './components/Home/InteractiveDemo';
@@ -59,6 +60,7 @@ export default function App() {
  <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground relative">
  <ErrorBoundary>
  <Navbar />
+ <LocationPanel />
  <Routes>
  <Route path="/" element={<HomePage />} />
  <Route path="/story" element={<StoryPage />} />

@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { db, auth } from '@/src/lib/firebase';
 import { collection, addDoc, serverTimestamp, setDoc, doc, getDoc } from 'firebase/firestore';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
+import { encodeDigipin } from '@/src/lib/digipin';
+import { MapPin } from 'lucide-react';
 import { countries } from '@/src/lib/countries';
 import type { UserRole } from '@/src/lib/os-types';
 
@@ -28,6 +30,7 @@ export const AuthFlow = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [verificationId, setVerificationId] = useState<ConfirmationResult | null>(null);
   const [error, setError] = useState('');
+  const [locationData, setLocationData] = useState<{ lat: number, lon: number, accuracy: number, address: string, pin: string } | null>(null);
 
   // Initialize Recaptcha
   useEffect(() => {
@@ -38,6 +41,40 @@ export const AuthFlow = () => {
           console.log('Recaptcha resolved');
         }
       });
+    }
+  }, []);
+
+  // Capture Location for DIGIPIN
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+        let address = "Location captured";
+        
+        try {
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&email=contact@farmer.company`);
+          if (res.ok) {
+            const data = await res.json();
+            address = data.display_name || address;
+          }
+        } catch (e) {
+          // ignore
+        }
+        
+        // determine pin length based on accuracy
+        let pinLen = 8;
+        if (accuracy <= 1.5) pinLen = 16;
+        else if (accuracy <= 50) pinLen = 14;
+        else if (accuracy <= 1000) pinLen = 12;
+        else if (accuracy <= 30000) pinLen = 10;
+
+        const pin = encodeDigipin(lat, lon, pinLen);
+        setLocationData({ lat, lon, accuracy, address, pin });
+      }, (err) => {
+        console.log("Location not provided:", err);
+      }, { enableHighAccuracy: true });
     }
   }, []);
 
@@ -85,6 +122,15 @@ export const AuthFlow = () => {
           email: user.email || '',
           phoneNumber: formattedMobile,
           updatedAt: serverTimestamp(),
+          ...(locationData && {
+            digipin: locationData.pin,
+            location: {
+              lat: locationData.lat,
+              lon: locationData.lon,
+              accuracy: locationData.accuracy,
+              address: locationData.address
+            }
+          })
         }, { merge: true });
       } else {
         await setDoc(userRef, {
@@ -95,6 +141,15 @@ export const AuthFlow = () => {
           role,
           verified: false,
           createdAt: serverTimestamp(),
+          ...(locationData && {
+            digipin: locationData.pin,
+            location: {
+              lat: locationData.lat,
+              lon: locationData.lon,
+              accuracy: locationData.accuracy,
+              address: locationData.address
+            }
+          })
         });
       }
 
@@ -105,6 +160,10 @@ export const AuthFlow = () => {
         mobileNumber: formattedMobile,
         role,
         timestamp: serverTimestamp(),
+        ...(locationData && {
+          digipin: locationData.pin,
+          address: locationData.address
+        })
       });
       
       navigate('/');
@@ -269,6 +328,18 @@ export const AuthFlow = () => {
                       ))}
                     </select>
                   </div>
+
+                  {locationData && (
+                    <div className="space-y-2 mt-4">
+                      <label className="mono text-[10px] uppercase tracking-wider text-primary ml-1 flex items-center gap-1">
+                        <MapPin size={10} /> Verified Location (DIGIPIN)
+                      </label>
+                      <div className="w-full bg-primary/5 border border-primary/20 h-14 px-4 flex flex-col justify-center">
+                        <span className="mono text-sm text-primary tracking-widest">{locationData.pin}</span>
+                        <span className="text-[9px] text-white/40 truncate">{locationData.address}</span>
+                      </div>
+                    </div>
+                  )}
 
                   {error && (
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[11px] text-red-400 mono px-1">

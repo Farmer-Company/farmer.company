@@ -37,6 +37,19 @@ service cloud.firestore {
         request.resource.data[field] is number;
     }
 
+    function validEmail(field) {
+      return request.resource.data[field] is string &&
+        request.resource.data[field].size() >= 5 &&
+        request.resource.data[field].size() <= 254 &&
+        request.resource.data[field].matches("^[^@ ]+@[^@ ]+\\.[^@ ]+$");
+    }
+
+    function validMaybeUid(field) {
+      return !(field in request.resource.data) ||
+        request.resource.data[field] == null ||
+        (isAuthenticated() && request.resource.data[field] == request.auth.uid);
+    }
+
     function validUserCreate(uid) {
       return request.resource.data.keys().hasOnly([
           'uid', 'fullName', 'email', 'phoneNumber', 'role', 'verified',
@@ -98,6 +111,39 @@ service cloud.firestore {
         request.resource.data.createdAt is timestamp;
     }
 
+    function validCommodityInterest() {
+      return request.resource.data.keys().hasOnly([
+          'commodityName', 'commodityCode', 'state', 'district', 'intentType',
+          'volumeBand', 'contactName', 'organization', 'email', 'phone', 'notes',
+          'source', 'userId', 'feedStatus', 'pageUrl', 'referrer', 'userAgent',
+          'locale', 'timezone', 'screenSize', 'createdAt', 'status'
+        ]) &&
+        request.resource.data.source == 'prices_page' &&
+        request.resource.data.status == 'ops_review' &&
+        request.resource.data.intentType in ['sell', 'buy', 'monitor', 'research'] &&
+        request.resource.data.feedStatus in ['pilot_validation', 'queued'] &&
+        request.resource.data.volumeBand in [
+          'Under 5 MT', '5-25 MT', '25-100 MT', '100+ MT', 'Monitoring only'
+        ] &&
+        validString('commodityName', 1, 120) &&
+        validMaybeString('commodityCode', 20) &&
+        validString('state', 1, 80) &&
+        validMaybeString('district', 80) &&
+        validString('contactName', 1, 120) &&
+        validMaybeString('organization', 160) &&
+        validEmail('email') &&
+        validString('phone', 8, 24) &&
+        validMaybeString('notes', 1000) &&
+        validMaybeUid('userId') &&
+        validMaybeString('pageUrl', 500) &&
+        validMaybeString('referrer', 500) &&
+        validMaybeString('userAgent', 300) &&
+        validMaybeString('locale', 40) &&
+        validMaybeString('timezone', 80) &&
+        validMaybeString('screenSize', 40) &&
+        request.resource.data.createdAt is timestamp;
+    }
+
     // ===============================================================
     // Rules
     // ===============================================================
@@ -118,6 +164,11 @@ service cloud.firestore {
       allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
       allow create: if isAuthenticated() && validTradeIntent();
       allow update, delete: if isAdmin();
+    }
+
+    match /commodity_interests/{id} {
+      allow read, update, delete: if isAdmin();
+      allow create: if validCommodityInterest();
     }
 
     match /farmers/{uid} {
