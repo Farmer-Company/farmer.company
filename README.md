@@ -60,6 +60,7 @@ npm run build
 ```
 
 The `main` branch deploys to GitHub Pages through `.github/workflows/static.yml`.
+The production custom domain is `farmer.company`.
 
 ## Documentation
 
