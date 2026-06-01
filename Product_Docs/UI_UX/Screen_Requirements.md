@@ -87,4 +87,4 @@
 - [x] Cross-browser compatibility confirmed
 - [x] Linting and type-checking pass without critical errors
 - [x] Performance metrics (LCP, CLS, FID) within acceptable limits
-- [x] Production hosting and deployment pipeline (e.g. Cloudflare Pages) configured
+- [ ] Production hosting and deployment pipeline configured

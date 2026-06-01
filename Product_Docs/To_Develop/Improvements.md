@@ -271,16 +271,8 @@ const perf = getPerformance(app);
 
 ### 7.1 CI/CD Pipeline
 
-- **Current Status:** Manual deployment via `npm run deploy`
-- **Improvement:** GitHub Actions workflow
-
-```yaml
-# .github/workflows/deploy.yml
-- name: Deploy to Cloudflare
-  run: npm run deploy
-  env:
-    CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-```
+- **Current Status:** Production deployment provider not configured
+- **Improvement:** Add a GitHub Actions workflow after choosing a hosting provider
 
 ### 7.2 Environment Management
 
@@ -296,7 +288,7 @@ const perf = getPerformance(app);
 - **Tools:**
   - Sentry for error tracking
   - LogRocket for session replay
-  - Cloudflare Analytics for traffic
+  - Web analytics for traffic
 
 ---
 

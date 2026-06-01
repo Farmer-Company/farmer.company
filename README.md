@@ -13,7 +13,6 @@
 - **Styling**: Tailwind CSS v4 + IBM Carbon Engineered Design System
 - **Routing**: React Router DOM v7
 - **Database/Auth**: Firebase
-- **Deployment**: Cloudflare Pages
 
 ## Project Structure
 
@@ -51,20 +50,12 @@
 
    The app will be accessible at `http://localhost:3000`.
 
-## Deployment
-
-This application is configured for deployment via Cloudflare Pages.
+## Production Build
 
 To build the production bundle:
 
 ```bash
 npm run build
-```
-
-To deploy using Wrangler:
-
-```bash
-npm run deploy
 ```
 
 ## Documentation

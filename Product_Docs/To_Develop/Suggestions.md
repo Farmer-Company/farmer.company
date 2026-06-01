@@ -119,7 +119,7 @@ Based on the Partnership Deed between Shri. Arun. V (70% stake) and Shri. Akshay
 ### 4.3 Technology Partnerships
 
 - **Payment Gateways:** Razorpay, PhonePe for seamless transactions
-- **Cloud Infrastructure:** Cloudflare (already using wrangler) for global CDN
+- **Cloud Infrastructure:** Select a hosting and CDN provider for global delivery
 - **AI/ML:** Google Gemini (already integrated per package.json) for price prediction
 
 ---
