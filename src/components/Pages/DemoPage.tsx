@@ -20,18 +20,8 @@ export const DemoPage = () => {
   return (
     <div className="min-h-screen bg-[#070b0a] text-white pt-24 pb-16 noise-bg relative overflow-hidden">
       {/* Background radial highlights */}
-      <div 
-        className="absolute top-0 left-1/4 w-[500px] h-[500px] pointer-events-none z-0 opacity-20 blur-[120px]"
-        style={{
-          background: 'radial-gradient(circle, rgba(74, 222, 128, 0.2) 0%, transparent 70%)',
-        }}
-      />
-      <div 
-        className="absolute bottom-0 right-1/4 w-[600px] h-[600px] pointer-events-none z-0 opacity-15 blur-[150px]"
-        style={{
-          background: 'radial-gradient(circle, rgba(234, 217, 143, 0.15) 0%, transparent 70%)',
-        }}
-      />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] pointer-events-none z-0 opacity-20 blur-[120px] demo-bg-glow-1" />
+      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] pointer-events-none z-0 opacity-15 blur-[150px] demo-bg-glow-2" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}
@@ -81,11 +71,7 @@ export const DemoPage = () => {
             Frosted glass button with a custom dynamic distortion filter. Best utilized on visual backgrounds.
           </p>
 
-          <div className="relative p-12 rounded-lg bg-cover bg-center border border-white/5 flex flex-col md:flex-row items-center justify-around gap-8"
-               style={{ 
-                 backgroundImage: 'url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop")',
-                 minHeight: '220px'
-               }}>
+          <div className="relative p-12 rounded-lg bg-cover bg-center border border-white/5 flex flex-col md:flex-row items-center justify-around gap-8 min-h-[220px] demo-unsplash-bg">
             {/* Visual Glass Overlay to make contrast look premium */}
             <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
 
@@ -199,15 +185,17 @@ export const DemoPage = () => {
             {/* Control Panel */}
             <div className="space-y-6 bg-black/40 border border-white/5 p-6 rounded-lg">
               <div>
-                <label className="block text-xs uppercase tracking-wider text-white/50 mb-2 font-mono">
+                <label htmlFor="custom-text-input" className="block text-xs uppercase tracking-wider text-white/50 mb-2 font-mono">
                   Button Text Label
                 </label>
                 <input 
+                  id="custom-text-input"
                   type="text" 
                   value={customText}
                   onChange={(e) => setCustomText(e.target.value)}
                   className="w-full bg-[#050505] border border-white/10 rounded px-4 py-2 text-sm text-white focus:outline-none focus:border-[#4ADE80]"
                   maxLength={30}
+                  placeholder="Enter button text"
                 />
               </div>
 
@@ -237,10 +225,12 @@ export const DemoPage = () => {
 
               {customType === 'metal' ? (
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-white/50 mb-2 font-mono">
+                  <label htmlFor="metal-variant-select" className="block text-xs uppercase tracking-wider text-white/50 mb-2 font-mono">
                     Metal Color Variant
                   </label>
                   <select 
+                    id="metal-variant-select"
+                    title="Metal Color Variant"
                     value={metalVariant}
                     onChange={(e: any) => setMetalVariant(e.target.value)}
                     className="w-full bg-[#050505] border border-white/10 rounded px-4 py-2 text-sm text-white focus:outline-none focus:border-[#4ADE80]"
@@ -278,12 +268,9 @@ export const DemoPage = () => {
             </div>
 
             {/* Live Preview Pane */}
-            <div className="bg-[#050505] border border-white/10 rounded-lg p-6 flex flex-col justify-between items-center min-h-[250px] relative overflow-hidden"
-                 style={{
-                   backgroundImage: customType === 'liquid' ? 'url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop")' : 'none',
-                   backgroundSize: 'cover',
-                   backgroundPosition: 'center',
-                 }}>
+            <div className={`bg-[#050505] border border-white/10 rounded-lg p-6 flex flex-col justify-between items-center min-h-[250px] relative overflow-hidden bg-cover bg-center ${
+              customType === 'liquid' ? 'demo-unsplash-bg' : ''
+            }`}>
               {customType === 'liquid' && <div className="absolute inset-0 bg-black/75 pointer-events-none" />}
               
               <div className="text-xs uppercase tracking-wider text-white/30 font-mono z-10">

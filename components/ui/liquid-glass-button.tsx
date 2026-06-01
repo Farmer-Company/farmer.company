@@ -117,8 +117,7 @@ function LiquidButton({
         transition-all 
         dark:shadow-[0_0_8px_rgba(0,0,0,0.03),0_2px_6px_rgba(0,0,0,0.08),inset_3px_3px_0.5px_-3.5px_rgba(255,255,255,0.09),inset_-3px_-3px_0.5px_-3.5px_rgba(255,255,255,0.85),inset_1px_1px_1px_-0.5px_rgba(255,255,255,0.6),inset_-1px_-1px_1px_-0.5px_rgba(255,255,255,0.6),inset_0_0_6px_6px_rgba(255,255,255,0.12),inset_0_0_2px_2px_rgba(255,255,255,0.06),0_0_12px_rgba(0,0,0,0.15)]" />
         <div
-          className="absolute top-0 left-0 isolate -z-10 h-full w-full overflow-hidden rounded-md"
-          style={{ backdropFilter: 'url("#container-glass")' }}
+          className="absolute top-0 left-0 isolate -z-10 h-full w-full overflow-hidden rounded-md liquid-glass-filter"
         />
 
         <div className="pointer-events-none z-10 ">
@@ -245,53 +244,24 @@ const colorVariants: Record<
  
 const metalButtonVariants = (
   variant: ColorVariant = "default",
-  isPressed: boolean,
-  isHovered: boolean,
-  isTouchDevice: boolean,
 ) => {
   const colors = colorVariants[variant];
-  const transitionStyle = "all 250ms cubic-bezier(0.1, 0.4, 0.2, 1)";
  
   return {
     wrapper: cn(
-      "relative inline-flex transform-gpu rounded-md p-[1.25px] will-change-transform",
+      "relative inline-flex transform-gpu rounded-md p-[1.25px] will-change-transform metal-button-wrapper",
       colors.outer,
     ),
-    wrapperStyle: {
-      transform: isPressed
-        ? "translateY(2.5px) scale(0.99)"
-        : "translateY(0) scale(1)",
-      boxShadow: isPressed
-        ? "0 1px 2px rgba(0, 0, 0, 0.15)"
-        : isHovered && !isTouchDevice
-          ? "0 4px 12px rgba(0, 0, 0, 0.12)"
-          : "0 3px 8px rgba(0, 0, 0, 0.08)",
-      transition: transitionStyle,
-      transformOrigin: "center center",
-    },
     inner: cn(
-      "absolute inset-[1px] transform-gpu rounded-lg will-change-transform",
+      "absolute inset-[1px] transform-gpu rounded-lg will-change-transform metal-button-inner",
       colors.inner,
     ),
-    innerStyle: {
-      transition: transitionStyle,
-      transformOrigin: "center center",
-      filter:
-        isHovered && !isPressed && !isTouchDevice ? "brightness(1.05)" : "none",
-    },
     button: cn(
-      "relative z-10 m-[1px] rounded-md inline-flex h-11 transform-gpu cursor-pointer items-center justify-center overflow-hidden rounded-md px-6 py-2 text-sm leading-none font-semibold will-change-transform outline-none",
+      "relative z-10 m-[1px] rounded-md inline-flex h-11 transform-gpu cursor-pointer items-center justify-center overflow-hidden rounded-md px-6 py-2 text-sm leading-none font-semibold will-change-transform outline-none metal-button",
       colors.button,
       colors.textColor,
       colors.textShadow,
     ),
-    buttonStyle: {
-      transform: isPressed ? "scale(0.97)" : "scale(1)",
-      transition: transitionStyle,
-      transformOrigin: "center center",
-      filter:
-        isHovered && !isPressed && !isTouchDevice ? "brightness(1.02)" : "none",
-    },
   };
 };
  
@@ -321,12 +291,7 @@ export const MetalButton = React.forwardRef<
   }, []);
  
   const buttonText = children || "Button";
-  const variants = metalButtonVariants(
-    variant,
-    isPressed,
-    isHovered,
-    isTouchDevice,
-  );
+  const variants = metalButtonVariants(variant);
  
   const handleInternalMouseDown = () => {
     setIsPressed(true);
@@ -354,12 +319,21 @@ export const MetalButton = React.forwardRef<
   };
  
   return (
-    <div className={variants.wrapper} style={variants.wrapperStyle}>
-      <div className={variants.inner} style={variants.innerStyle}></div>
+    <div 
+      className={variants.wrapper} 
+      data-pressed={isPressed} 
+      data-hovered={isHovered && !isTouchDevice}
+    >
+      <div 
+        className={variants.inner} 
+        data-pressed={isPressed} 
+        data-hovered={isHovered && !isTouchDevice}
+      ></div>
       <button
         ref={ref}
         className={cn(variants.button, className)}
-        style={variants.buttonStyle}
+        data-pressed={isPressed}
+        data-hovered={isHovered && !isTouchDevice}
         {...props}
         onMouseDown={handleInternalMouseDown}
         onMouseUp={handleInternalMouseUp}

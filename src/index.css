@@ -54,10 +54,10 @@ body {
   letter-spacing: var(--tracking-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  user-select: none;
 }
 
 /* OS UI Elements */
@@ -119,6 +119,7 @@ body {
 
 .hero-glass-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -126,6 +127,7 @@ body {
   padding: 1.2px;
   background: linear-gradient(180deg, rgba(74, 222, 128, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -148,4 +150,64 @@ body {
   font-family: "Inter", sans-serif;
   font-size: clamp(32px, 7vw, 88px);
 }
+
+/* Demo Page Custom Styles */
+.demo-bg-glow-1 {
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.2) 0%, transparent 70%);
+}
+
+.demo-bg-glow-2 {
+  background: radial-gradient(circle, rgba(234, 217, 143, 0.15) 0%, transparent 70%);
+}
+
+.demo-unsplash-bg {
+  background-image: url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop");
+}
+
+/* Liquid Glass & Metal Button Styles (Replaces inline styles) */
+.liquid-glass-filter {
+  -webkit-backdrop-filter: url("#container-glass");
+  backdrop-filter: url("#container-glass");
+}
+
+.metal-button-wrapper {
+  transition: all 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+  transform-origin: center center;
+  will-change: transform;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+.metal-button-wrapper[data-pressed="true"] {
+  transform: translateY(2.5px) scale(0.99);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+.metal-button-wrapper[data-hovered="true"][data-pressed="false"] {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.metal-button-inner {
+  transition: all 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+  transform-origin: center center;
+  will-change: transform;
+  filter: none;
+}
+.metal-button-inner[data-hovered="true"][data-pressed="false"] {
+  filter: brightness(1.05);
+}
+
+.metal-button {
+  transition: all 250ms cubic-bezier(0.1, 0.4, 0.2, 1);
+  transform-origin: center center;
+  will-change: transform;
+  transform: scale(1);
+  filter: none;
+}
+.metal-button[data-pressed="true"] {
+  transform: scale(0.97);
+}
+.metal-button[data-hovered="true"][data-pressed="false"] {
+  filter: brightness(1.02);
+}
+
+
 
