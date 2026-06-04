@@ -99,13 +99,13 @@ export const InteractiveDemo = () => {
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-[11px] font-bold uppercase tracking-widest mb-4 block transition-colors duration-500" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif', color: accentColor }}>
+          <span className="text-[11px] font-bold uppercase tracking-widest mb-4 block transition-colors duration-500" style={{ color: accentColor }}>
             INTERACTIVE PROTOCOL
           </span>
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tighter uppercase leading-[1.05] mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tighter uppercase leading-[1.05] mb-6" >
             Calculate your <span className="transition-colors duration-500" style={{ color: accentColor }}>true value.</span>
           </h2>
-          <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto" >
             See exactly how much value is lost to fragmented intermediaries, and how much you recover by plugging into the Digital Orchard protocol.
           </p>
         </div>
@@ -124,7 +124,7 @@ export const InteractiveDemo = () => {
               boxShadow: `inset 0 1px 1px rgba(255,255,255,0.05), 0 0 40px ${accentColor}10`
             }}
           >
-            <div className="absolute top-0 right-8 transform -translate-y-1/2 text-black px-4 py-1 font-bold text-[11px] uppercase tracking-widest rounded-sm flex items-center gap-2 transition-colors duration-500" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif', backgroundColor: accentColor }}>
+            <div className="absolute top-0 right-8 transform -translate-y-1/2 text-black px-4 py-1 font-bold text-[11px] uppercase tracking-widest rounded-sm flex items-center gap-2 transition-colors duration-500" style={{ backgroundColor: accentColor }}>
               <Calculator size={14} /> Protocol Simulator
             </div>
 
@@ -146,7 +146,7 @@ export const InteractiveDemo = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-white/40 mb-4 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Select Commodity</label>
+                <label className="block text-[11px] font-bold text-white/40 mb-4 uppercase tracking-widest" >Select Commodity</label>
                 <div className="grid grid-cols-2 gap-3">
                   {CROPS.map(crop => (
                     <button
@@ -171,7 +171,7 @@ export const InteractiveDemo = () => {
 
               <div>
                 <div className="flex justify-between mb-4">
-                  <label className="block text-[11px] font-bold text-white/40 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Contract Volume ({selectedCrop.unit})</label>
+                  <label className="block text-[11px] font-bold text-white/40 uppercase tracking-widest" >Contract Volume ({selectedCrop.unit})</label>
                   <span className="font-mono font-medium transition-colors duration-500" style={{ color: accentColor }}>{volume.toLocaleString()} {selectedCrop.unit}</span>
                 </div>
                 <input 
@@ -258,7 +258,7 @@ export const InteractiveDemo = () => {
                 <div className="bg-white/5 border border-white/10 rounded-sm p-5 flex items-start gap-4">
                   <TrendingUp className="mt-1 flex-shrink-0 transition-colors duration-500" size={20} style={{ color: accentColor }} />
                   <div>
-                    <p className="text-white font-medium tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+                    <p className="text-white font-medium tracking-tight" >
                       {role === 'buyer' ? 'Savings Generated: ' : 'Recovered Margin: '}
                       <span className="font-bold transition-colors duration-500" style={{ color: accentColor }}>₹{diff.toLocaleString()}</span>
                     </p>
@@ -280,7 +280,7 @@ export const InteractiveDemo = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
-            <div className="space-y-6 text-white/60 text-lg font-normal leading-[1.6]" style={{ fontFamily: '"Inter", sans-serif' }}>
+            <div className="space-y-6 text-white/60 text-lg font-normal leading-[1.6]" >
               <p>
                 In the traditional chain, 30–40% of value disappears into layers of intermediaries, empty logistics miles, and wastage.
               </p>
@@ -296,7 +296,7 @@ export const InteractiveDemo = () => {
                   01
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Predictive Price Discovery</h4>
+                  <h4 className="text-white font-bold text-lg tracking-tight" >Predictive Price Discovery</h4>
                   <p className="text-white/50 text-sm mt-1 leading-relaxed">Access real-time commodity indices across 3,000+ global markets before harvesting.</p>
                 </div>
               </li>
@@ -305,7 +305,7 @@ export const InteractiveDemo = () => {
                   02
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Verified Quality Ledgers</h4>
+                  <h4 className="text-white font-bold text-lg tracking-tight" >Verified Quality Ledgers</h4>
                   <p className="text-white/50 text-sm mt-1 leading-relaxed">Upload computer-vision verified crop specs to the institutional procurement network.</p>
                 </div>
               </li>
@@ -314,7 +314,7 @@ export const InteractiveDemo = () => {
                   03
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-lg tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Automated Escrow</h4>
+                  <h4 className="text-white font-bold text-lg tracking-tight" >Automated Escrow</h4>
                   <p className="text-white/50 text-sm mt-1 leading-relaxed">Institutional funds are locked in escrow. Capital is released the second the digital Bill of Lading is signed.</p>
                 </div>
               </li>
