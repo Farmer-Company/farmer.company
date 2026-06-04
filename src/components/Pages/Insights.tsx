@@ -13,21 +13,21 @@ export const InsightsPage = () => {
 
  <div className="max-w-7xl mx-auto relative z-10">
  <div className="space-y-6 max-w-4xl mb-16">
- <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block" >
+ <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
  PREDICTIVE INTELLIGENCE
  </span>
- <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter leading-[1.05]" >
+ <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
  {t('insights')} <span className="text-[#4ADE80]">Protocol.</span>
  </h1>
- <p className="text-white/60 text-lg md:text-xl font-normal leading-relaxed" >
+ <p className="text-white/60 text-lg md:text-xl font-normal leading-relaxed" style={{ fontFamily: '"Inter", sans-serif' }}>
  Algorithmic price forecasting powered by 25 years of institutional arrivals data. Use live predictive signals to optimize harvest timing and maximize yield realization.
  </p>
  </div>
 
- <div className="mt-8 p-5 bg-[#4ADE80]/10 border border-[#4ADE80]/20 text-[#4ADE80] text-sm font-medium leading-relaxed mb-12 rounded-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] flex items-start gap-4" >
+ <div className="mt-8 p-5 bg-[#4ADE80]/10 border border-[#4ADE80]/20 text-[#4ADE80] text-sm font-medium leading-relaxed mb-12 rounded-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] flex items-start gap-4" style={{ fontFamily: '"Inter", sans-serif' }}>
  <Activity size={20} className="shrink-0 mt-0.5" />
  <div>
- <strong className="block mb-1 tracking-tight text-[#4ADE80]">Live Intelligence Active</strong>
+ <strong className="block mb-1 tracking-tight text-[#4ADE80]" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif', textTransform: 'uppercase', fontSize: '11px', fontWeight: 'bold' }}>Live Intelligence Active</strong>
  The feed below represents live algorithmic advisories. Institutional models update continuously as verified global price feeds sync with the OS.
  </div>
  </div>
@@ -79,14 +79,14 @@ export const InsightsPage = () => {
  {item.icon}
  </div>
  <div className="flex flex-col">
- <span className="text-[10px] font-bold text-[#4ADE80] uppercase tracking-widest" >{item.module}</span>
- <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-0.5" >{item.type}</span>
+ <span className="text-[10px] font-bold text-[#4ADE80] uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{item.module}</span>
+ <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-0.5" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{item.type}</span>
  </div>
  </div>
- <h3 className="text-2xl md:text-3xl font-extrabold tracking-tighter text-white group-hover:text-[#4ADE80] transition-colors leading-[1.2]" >
+ <h3 className="text-2xl md:text-3xl font-extrabold tracking-tighter text-white group-hover:text-[#4ADE80] transition-colors leading-[1.2]" style={{ fontFamily: '"Inter", sans-serif' }}>
  {item.title}
  </h3>
- <p className="text-white/60 text-sm md:text-base font-normal leading-relaxed" >
+ <p className="text-white/60 text-sm md:text-base font-normal leading-relaxed" style={{ fontFamily: '"Inter", sans-serif' }}>
  {item.body}
  </p>
  </div>
@@ -105,41 +105,41 @@ export const InsightsPage = () => {
  >
  <div className="flex items-center gap-3 mb-10">
  <BarChart3 className="text-[#4ADE80]" size={24} />
- <h3 className="text-[11px] font-bold text-[#4ADE80] uppercase tracking-widest" >
+ <h3 className="text-[11px] font-bold text-[#4ADE80] uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
  Live Arbitrage Opportunities
  </h3>
  </div>
  
  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
  <div className="space-y-4 p-6 bg-black/40 border border-white/5 rounded-sm">
- <span className="text-[11px] font-bold text-white/60 uppercase tracking-widest" >Tomato</span>
+ <span className="text-[11px] font-bold text-white/60 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Tomato</span>
  <div className="space-y-2">
- <p className="text-sm font-bold text-white tracking-tight" >
+ <p className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
  LOW: <span className="text-[#4ADE80]">KOLAR (₹800/q)</span>
  </p>
- <p className="text-sm font-bold text-white tracking-tight" >
+ <p className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
  MAX: <span className="text-red-400">AZADPUR (₹1,300/q)</span>
  </p>
  </div>
  </div>
  <div className="space-y-4 p-6 bg-black/40 border border-white/5 rounded-sm">
- <span className="text-[11px] font-bold text-white/60 uppercase tracking-widest" >Onion</span>
+ <span className="text-[11px] font-bold text-white/60 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Onion</span>
  <div className="space-y-2">
- <p className="text-sm font-bold text-white tracking-tight" >
+ <p className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
  LOW: <span className="text-[#4ADE80]">LASALGAON (₹1,200/q)</span>
  </p>
- <p className="text-sm font-bold text-white tracking-tight" >
+ <p className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
  MAX: <span className="text-red-400">AZADPUR (₹1,600/q)</span>
  </p>
  </div>
  </div>
  <div className="space-y-4 p-6 bg-black/40 border border-white/5 rounded-sm">
- <span className="text-[11px] font-bold text-white/60 uppercase tracking-widest" >Potato</span>
+ <span className="text-[11px] font-bold text-white/60 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Potato</span>
  <div className="space-y-2">
- <p className="text-sm font-bold text-white tracking-tight" >
+ <p className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
  LOW: <span className="text-[#4ADE80]">KOLAR (₹600/q)</span>
  </p>
- <p className="text-sm font-bold text-white tracking-tight" >
+ <p className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
  MAX: <span className="text-red-400">NASHIK (₹750/q)</span>
  </p>
  </div>
@@ -151,7 +151,7 @@ export const InsightsPage = () => {
  <div className="lg:col-span-1 space-y-8">
  <div className="p-10 bg-black/80 border border-white/10 rounded-sm space-y-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] backdrop-blur-md">
  <div className="space-y-3">
- <h4 className="text-2xl font-extrabold tracking-tighter text-white leading-none uppercase" >
+ <h4 className="text-2xl font-extrabold tracking-tighter text-white leading-none uppercase" style={{ fontFamily: '"Inter", sans-serif' }}>
  Intelligence<br />Node Status
  </h4>
  <div className="w-16 h-1 bg-[#4ADE80] rounded-full" />
@@ -164,7 +164,7 @@ export const InsightsPage = () => {
  { geo: 'TN / CHE', status: 'Live Feed', intensity: 'w-[100%]', isActive: true }
  ].map((node, i) => (
  <div key={i} className="space-y-3 group/node">
- <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest" >
+ <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
  <span className="text-white/40 group-hover/node:text-[#4ADE80] transition-colors">{node.geo}</span>
  <span className={`${node.isActive ? 'text-[#4ADE80]' : 'text-white/60'}`}>{node.status}</span>
  </div>
@@ -178,7 +178,7 @@ export const InsightsPage = () => {
  </div>
 
  <div className="pt-6 border-t border-white/10 mt-6">
- <p className="text-xs text-white/50 font-medium leading-relaxed" >
+ <p className="text-xs text-white/50 font-medium leading-relaxed" style={{ fontFamily: '"Inter", sans-serif' }}>
  Regional intelligence nodes activate dynamically as cryptographically verified price feeds synchronize with the global OS.
  </p>
  </div>
