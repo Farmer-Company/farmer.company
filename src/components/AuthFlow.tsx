@@ -14,7 +14,7 @@ type BetaRole = Exclude<UserRole, 'admin'>;
 
 const betaRoles: { value: BetaRole; label: string }[] = [
   { value: 'farmer', label: 'Farmer / Seller' },
-  { value: 'vendor', label: 'Buyer / Vendor' },
+  { value: 'vendor', label: 'Retailer / Buyer / Vendor' },
   { value: 'logistics', label: 'Logistics Partner' },
   { value: 'researcher', label: 'Researcher / Analyst' },
   { value: 'government', label: 'Government / Institution' },

@@ -18,12 +18,15 @@ export const CustomersPage = () => {
           className="space-y-6"
         >
           <span className="text-[#A78BFA] text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
-            FOR BUYERS, FMCG & PROCESSORS
+            FOR GLOBAL BUYERS, FMCG & PROCESSORS
           </span>
           <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-white leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
             Direct sourcing.<br />
             <span className="text-[#A78BFA]">Traceable at scale.</span>
           </h1>
+          <p className="max-w-3xl text-white/60 text-lg leading-relaxed">
+            Built for enterprise procurement, FMCG supply teams, processors, exporters, and institutional buyers that need verified farm supply, compliance documents, and traceable offtake contracts.
+          </p>
         </motion.div>
 
         {/* 1. What you get in 10 seconds */}
@@ -35,13 +38,13 @@ export const CustomersPage = () => {
             <div className="bg-[#050505] border border-white/10 p-8 rounded-lg flex items-start gap-4">
               <div className="mt-1 text-[#A78BFA]"><CheckCircle size={20} /></div>
               <p className="text-white/80 text-lg leading-relaxed">
-                Source verified quality produce directly from farms, completely bypassing opaque middlemen.
+                Source verified quality produce directly from farms, FPOs, and processors with transparent supply context.
               </p>
             </div>
             <div className="bg-[#050505] border border-white/10 p-8 rounded-lg flex items-start gap-4">
               <div className="mt-1 text-[#A78BFA]"><CheckCircle size={20} /></div>
               <p className="text-white/80 text-lg leading-relaxed">
-                Automate your procurement at scale with escrow-backed smart contracts and real-time ledger tracking.
+                Manage institutional offtake with quality rules, compliance records, logistics coordination, and digital agreements.
               </p>
             </div>
           </div>
@@ -57,21 +60,21 @@ export const CustomersPage = () => {
               <div className="w-12 h-12 rounded-full bg-[#A78BFA]/10 border border-[#A78BFA]/30 flex items-center justify-center text-[#A78BFA] font-bold font-mono">1</div>
               <h3 className="text-white font-bold text-lg">Describe your needs</h3>
               <p className="text-white/60 text-sm leading-relaxed">
-                Input your required SKUs, volumes, and strict quality specifications.
+                Input required commodities, SKUs, volumes, certifications, and quality specifications.
               </p>
             </div>
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-full bg-[#A78BFA]/10 border border-[#A78BFA]/30 flex items-center justify-center text-[#A78BFA] font-bold font-mono">2</div>
-              <h3 className="text-white font-bold text-lg">Connect Buyer Agent (Optional)</h3>
+              <h3 className="text-white font-bold text-lg">Connect Buyer Agent</h3>
               <p className="text-white/60 text-sm leading-relaxed">
-                Let the AI scan thousands of farms to find exact matches for your procurement band.
+                Let the agent scan verified farms and processors for the right quality, timing, and price band.
               </p>
             </div>
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-full bg-[#A78BFA]/10 border border-[#A78BFA]/30 flex items-center justify-center text-[#A78BFA] font-bold font-mono">3</div>
-              <h3 className="text-white font-bold text-lg">Execute contracts</h3>
+              <h3 className="text-white font-bold text-lg">Execute offtake</h3>
               <p className="text-white/60 text-sm leading-relaxed">
-                Review the matched farms and sign escrow-backed digital agreements.
+                Review matched supply, approve terms, coordinate logistics, and track compliance documents.
               </p>
             </div>
           </div>
@@ -101,7 +104,7 @@ export const CustomersPage = () => {
                 <h3 className="font-bold text-white">Co-pilot</h3>
               </div>
               <p className="text-sm text-white/50 leading-relaxed">
-                Your Buyer Agent curates the best farm matches and drafts contracts; you approve.
+                Your Buyer Agent curates farm matches, drafts RFQs, and suggests contract terms; you approve.
               </p>
             </div>
 
@@ -112,7 +115,7 @@ export const CustomersPage = () => {
                 <h3 className="font-bold text-white">Autopilot</h3>
               </div>
               <p className="text-sm text-white/50 leading-relaxed">
-                For experienced buyers. Your Agent auto-purchases commodities when they hit your exact price and quality thresholds.
+                For experienced buyers. Your agent can reserve commodities when they hit your exact price, quality, and delivery thresholds.
               </p>
             </div>
 

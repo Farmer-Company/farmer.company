@@ -30,6 +30,7 @@ import { FarmersPage } from './components/Pages/FarmersPage';
 import { VendorsPage } from './components/Pages/VendorsPage';
 import { LogisticsPage } from './components/Pages/LogisticsPage';
 import { CustomersPage } from './components/Pages/CustomersPage';
+import { RetailersPage } from './components/Pages/RetailersPage';
 import { NotFound } from './pages/NotFound';
 import { Footer } from './components/Footer';
 import { StoryPage } from './components/Pages/Story';
@@ -74,6 +75,7 @@ export default function App() {
  <Route path="/farmers" element={<FarmersPage />} />
  <Route path="/vendors" element={<VendorsPage />} />
  <Route path="/logistics" element={<LogisticsPage />} />
+ <Route path="/retailers" element={<RetailersPage />} />
  <Route path="/customers" element={<CustomersPage />} />
  <Route path="/signin" element={<AuthFlow />} />
  <Route path="/get-started" element={<AuthFlow />} />

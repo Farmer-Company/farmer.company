@@ -114,7 +114,7 @@ export const HeroSection = () => {
           </p>
 
           <p className="text-white/90 text-[15px] md:text-[17px] font-medium leading-relaxed w-full max-w-[90%] sm:max-w-lg md:max-w-xl mt-2 border-l-2 border-[#4ADE80] pl-4 font-inter">
-            For Farmers, Vendors, Logistics fleets, Researchers and Global Buyers who want direct, escrow-backed agri trade with AI agents managing the complexity.
+            For Farmers, Retailers, MSMEs, Vendors, Logistics fleets, Researchers and Global Buyers who want direct, escrow-backed agri trade with AI agents managing the complexity.
           </p>
 
           <button 

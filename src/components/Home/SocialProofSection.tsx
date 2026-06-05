@@ -11,6 +11,7 @@ import {
  Zap, 
  Users, 
  ShoppingBag, 
+ Building2,
  Truck, 
  Target,
  Globe,
@@ -172,7 +173,7 @@ export const SocialProofSection = () => {
  <p className="text-foreground-muted text-[17px] font-normal px-4 leading-[1.47]">Digital Orchard connects every node in the agricultural chain with zero-latency transparency.</p>
  </div>
 
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-1">
+ <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-1">
  <PlayerCard
  role="FARMER"
     link="/farmers"
@@ -188,6 +189,13 @@ export const SocialProofSection = () => {
  body="Source verified, traceable produce directly from farms. Use the Supply CRM to manage repeat orders and price intelligence to eliminate opaque procurement markups."
  />
  <PlayerCard
+ role="RETAILERS"
+    link="/retailers"
+ tamil="Retailers & MSMEs"
+ icon={<Building2 size={24} />}
+ body="For kirana stores, supermarkets, restaurants, processors and Instacart Business-style buyers: source bulk farm supply, schedule repeat orders, and manage invoices."
+ />
+ <PlayerCard
  role="LOGISTICS"
     link="/logistics"
  tamil="தளவாட பங்காளர்கள்"
@@ -201,11 +209,11 @@ export const SocialProofSection = () => {
  body="Analyse MSP compliance, policy impact, market clusters and FMCG supply chains using the largest clean agricultural dataset in India, with district-level granularity and 25+ years of arrivals data."
  />
  <PlayerCard
- role="FMCG & GLOBAL BUYERS"
+ role="FMCG & ENTERPRISE BUYERS"
     link="/customers"
  tamil="உலகளாவிய வாங்குபவர்"
  icon={<Globe size={24} />}
- body="Source directly from verified Indian farms and processors. Institutional offtake contracts, compliance, and letters of credit—all inside one protocol that unifies data from field to shelf."
+ body="Source directly from verified Indian farms and processors. Institutional offtake contracts, compliance, and letters of credit - all inside one protocol that unifies data from field to shelf."
  />
  </div>
  </div>
@@ -387,7 +395,7 @@ const StatBox = ({ number, label, isMono, isPrimary, sub, link }: any) => {
 };
 
 const PlayerCard = ({ role, tamil, icon, body, link }: any) => (
- <div className="bg-[#050505] p-12 flex flex-col gap-8 text-left group transition-all duration-300 hover:bg-[#111111] border-white/5 border relative overflow-hidden">
+ <div className="bg-[#050505] p-8 md:p-10 flex flex-col gap-8 text-left group transition-all duration-300 hover:bg-[#111111] border-white/5 border relative overflow-hidden">
  
  <div className="absolute bottom-0 right-0 w-12 h-12 flex items-center justify-center text-white/5 group-hover:text-primary/20 transition-colors">
  <ArrowRight size={24} />
@@ -398,7 +406,7 @@ const PlayerCard = ({ role, tamil, icon, body, link }: any) => (
  {icon}
  </div>
  <div>
- <h3 className="text-[28px] font-semibold text-white tracking-[-0.02em]">{role}</h3>
+ <h3 className="text-[24px] font-semibold text-white tracking-[-0.02em] leading-tight">{role}</h3>
  <p className="text-[10px] font-medium text-primary opacity-60 normal-case mt-2">{tamil}</p>
  </div>
  </div>

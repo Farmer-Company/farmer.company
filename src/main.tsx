@@ -5,11 +5,6 @@ import './index.css';
 
 // Global protections to disable selection, copying, right-clicking, dragging, and inspect-shortcuts
 if (typeof window !== 'undefined') {
-  // Redirect HTTP to HTTPS in production
-  if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost' && !window.location.hostname.includes('127.0.0.1')) {
-    window.location.replace('https://' + window.location.hostname + window.location.pathname + window.location.search + window.location.hash);
-  }
-
   // Prevent context menu (right click)
   document.addEventListener('contextmenu', (e) => {
     e.preventDefault();

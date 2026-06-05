@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Tractor, ShoppingCart, Store, Truck, Microscope } from 'lucide-react';
+import { ArrowRight, Building2, Tractor, ShoppingCart, Store, Truck, Microscope } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const ROLES = [
@@ -18,6 +18,14 @@ const ROLES = [
     outcomes: ['Source verified quality directly from farms.', 'Automate your procurement at scale.'],
     path: '/customers',
     color: '#A78BFA'
+  },
+  {
+    id: 'retailer',
+    title: 'I run Retail / Grocery Platform',
+    icon: Building2,
+    outcomes: ['Onboard farmers and FPOs as suppliers.', 'Procure lots and trigger logistics in one workflow.'],
+    path: '/retailers',
+    color: '#C084FC'
   },
   {
     id: 'vendor',
@@ -61,7 +69,7 @@ export const RoleStripSection = () => {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {ROLES.map((role) => {
             const Icon = role.icon;
             return (

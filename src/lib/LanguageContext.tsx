@@ -29,7 +29,7 @@ const translations: Record<Language, Record<string, string>> = {
  cheaper: 'Commodities Tracked',
  middlemen: '30‑Day Forecast Accuracy',
  role_farmer: 'Farmer',
- role_vendor: 'Vendor / Buyer',
+ role_vendor: 'Retailer / Buyer / Vendor',
  role_logistics: 'Logistics Partner',
  role_government: 'Government',
  role_researcher: 'Researcher',

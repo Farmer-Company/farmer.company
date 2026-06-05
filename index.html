@@ -3,6 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://farmer.company/" />
+    <script>
+      (function () {
+        var productionHosts = ['farmer.company', 'www.farmer.company'];
+        var currentHost = window.location.hostname;
+
+        if (
+          window.location.protocol === 'http:' &&
+          productionHosts.indexOf(currentHost) !== -1
+        ) {
+          window.location.replace(
+            'https://' +
+              window.location.host +
+              window.location.pathname +
+              window.location.search +
+              window.location.hash
+          );
+        }
+      })();
+    </script>
     <title>Digital Orchard — Operating System for Indian Agriculture</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.cdnfonts.com" />
@@ -13,4 +33,3 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

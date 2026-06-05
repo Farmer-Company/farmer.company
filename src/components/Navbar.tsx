@@ -10,6 +10,7 @@ const STAKEHOLDER_NAV = [
   { label: 'For Vendors', path: '/vendors' },
   { label: 'For Logistics', path: '/logistics' },
   { label: 'For Researchers', path: '/researchers' },
+  { label: 'Retailers & MSMEs', path: '/retailers' },
   { label: 'Global Buyers', path: '/customers' },
 ];
 
@@ -68,7 +69,7 @@ export const Navbar = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center gap-6 pointer-events-auto"
+            className="flex items-center gap-4 pointer-events-auto"
           >
             {STAKEHOLDER_NAV.map((item) => {
               const isActive = location.pathname === item.path;
@@ -76,7 +77,7 @@ export const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-[14px] font-normal tracking-tight transition-colors duration-300 ${
+                  className={`text-[13px] font-normal tracking-tight transition-colors duration-300 ${
                     isActive ? 'text-white font-medium' : 'text-white/60 hover:text-white'
                   }`}
                 >
@@ -90,7 +91,7 @@ export const Navbar = () => {
               onMouseEnter={() => setIsPlatformOpen(true)}
               onMouseLeave={() => setIsPlatformOpen(false)}
             >
-              <button className="text-[14px] font-normal tracking-tight text-white/60 hover:text-white transition-colors duration-300 flex items-center gap-1 py-4">
+              <button className="text-[13px] font-normal tracking-tight text-white/60 hover:text-white transition-colors duration-300 flex items-center gap-1 py-4">
                 {t('Platform')} <ChevronDown size={14} className={`transition-transform ${isPlatformOpen ? 'rotate-180' : ''}`} />
               </button>
 

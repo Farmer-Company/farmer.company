@@ -164,7 +164,7 @@ export const ConfigurePage = () => {
  <div className="grid grid-cols-1 gap-4">
  {[
  { id: 'farmer', icon: '👨‍🌾', label: 'Farmer' },
- { id: 'vendor', icon: '🛒', label: 'Vendor / Buyer' },
+ { id: 'vendor', icon: '🛒', label: 'Retailer / Buyer / Vendor' },
  { id: 'logistics', icon: '🚛', label: 'Logistics Partner' },
  { id: 'government', icon: '🏛️', label: 'Government / Researcher' }
  ].map(item => (
@@ -230,7 +230,7 @@ export const ConfigurePage = () => {
  {role === 'vendor' && (
  <>
  <div className="space-y-2">
- <label className="text-[10px] font-medium text-foreground-muted normal-case ">Commodities you buy</label>
+ <label className="text-[10px] font-medium text-foreground-muted normal-case ">Commodities you procure</label>
  <input className="w-full bg-background border border-white/10 h-14 px-4 outline-none" placeholder="Onion, Potato, Rice" />
  </div>
  </>
