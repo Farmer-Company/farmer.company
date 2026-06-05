@@ -27,7 +27,7 @@ export const LocationPanel = () => {
     address: string,
     isOffline: boolean
   } | null>(null);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if ("geolocation" in navigator) {

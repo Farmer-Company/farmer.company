@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Calculator, ArrowRight, TrendingUp, IndianRupee, ShieldCheck } from 'lucide-react';
+import { Calculator, TrendingUp, ShieldCheck } from 'lucide-react';
 
 const CROPS = [
   { id: 'tomato', name: 'Tomato', basePrice: 20, unit: 'kg' },
@@ -24,19 +23,17 @@ export const InteractiveDemo = () => {
   // Calculate states based on role
   let legacyRevenue = 0;
   let protocolRevenue = 0;
-  let metricLabel = '';
   let legacyBars = [];
   let protocolBars = [];
   let accentColor = '';
 
   if (role === 'farmer') {
     accentColor = '#4ADE80';
-    metricLabel = 'Net Farm Realization';
     const legacyCut = 0.60;
     legacyRevenue = baseValue * legacyCut;
     
-    let protocolCut = 0.85;
-    let premium = isCleanVerified ? 1.15 : 1.0;
+    const protocolCut = 0.85;
+    const premium = isCleanVerified ? 1.15 : 1.0;
     protocolRevenue = (baseValue * premium) * protocolCut;
 
     legacyBars = [
@@ -51,7 +48,6 @@ export const InteractiveDemo = () => {
     ];
   } else if (role === 'buyer') {
     accentColor = '#A78BFA';
-    metricLabel = 'Total Procurement Cost';
     const legacyMarkup = 1.30; // Buyers pay 30% more due to intermediaries
     legacyRevenue = baseValue * legacyMarkup;
     
@@ -69,7 +65,6 @@ export const InteractiveDemo = () => {
     ];
   } else if (role === 'logistics') {
     accentColor = '#FBBF24';
-    metricLabel = 'Fleet Profitability';
     // Base logistics value
     const logBase = baseValue * 0.15; 
     
@@ -106,7 +101,7 @@ export const InteractiveDemo = () => {
             Calculate your <span className="transition-colors duration-500" style={{ color: accentColor }}>true value.</span>
           </h2>
           <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: '"Inter", sans-serif' }}>
-            See exactly how much value is lost to fragmented intermediaries, and how much you recover by plugging into the Digital Orchard protocol.
+            See how much value disappears in fragmented chains and what farmers, buyers, and logistics teams recover when trade moves through the protocol.
           </p>
         </div>
 
@@ -117,7 +112,7 @@ export const InteractiveDemo = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="p-8 md:p-12 relative overflow-hidden rounded-sm transition-all duration-500"
+            className="p-8 md:p-12 relative overflow-visible rounded-sm transition-all duration-500"
             style={{ 
               background: 'rgba(255, 255, 255, 0.02)', 
               backdropFilter: 'blur(12px)',

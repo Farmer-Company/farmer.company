@@ -22,6 +22,10 @@ const FAQS = [
   {
     question: "Will this use a lot of mobile data?",
     answer: "No. The AgriOS app is built specifically for rural connectivity. It is 'offline-first', meaning you can view previously loaded prices without internet. Creating a farm listing takes less data than sending a single WhatsApp photo."
+  },
+  {
+    question: "How is my farm data used?",
+    answer: "Your private farm and trade data is used to power your own listings, price intelligence, logistics matching and settlement records. Aggregated research data is anonymized before it is used for market intelligence, policy analysis or enterprise APIs."
   }
 ];
 
@@ -42,6 +46,16 @@ export const FAQSection = () => {
           {FAQS.map((faq, idx) => (
             <FAQItem key={idx} question={faq.question} answer={faq.answer} />
           ))}
+        </div>
+
+        <div className="mt-14 border border-primary/20 bg-primary/[0.03] rounded-xl p-7 md:p-8">
+          <span className="mono text-[10px] text-primary font-medium normal-case tracking-widest mb-3 block">
+            FIELD NOTES - COMING SOON
+          </span>
+          <h3 className="text-2xl text-white font-semibold tracking-tight mb-3">Operational updates from the Tamil Nadu pilot.</h3>
+          <p className="text-white/55 leading-relaxed">
+            Field Notes will publish market intelligence, pilot updates, crop movement observations and protocol learnings. Publishing begins Q3 2026.
+          </p>
         </div>
       </div>
     </section>

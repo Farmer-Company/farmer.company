@@ -8,12 +8,13 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { LocationPanel } from './components/LocationPanel';
 import { HeroSection } from './components/Home/HeroSection';
-import { SocialProofSection } from './components/Home/SocialProofSection';
 import { InteractiveDemo } from './components/Home/InteractiveDemo';
 import { RoleStripSection } from './components/Home/RoleStripSection';
 import { EcosystemSection } from './components/Home/EcosystemSection';
 import { AgentSection } from './components/Home/AgentSection';
 import { ComparisonSection } from './components/Home/ComparisonSection';
+import { NetworkMetricsSection } from './components/Home/NetworkMetricsSection';
+import { AgriOSIntelligenceSection } from './components/Home/AgriOSIntelligenceSection';
 import { TestimonialsSection } from './components/Home/TestimonialsSection';
 import { TrustSection } from './components/Home/TrustSection';
 import { FAQSection } from './components/Home/FAQSection';
@@ -42,11 +43,12 @@ const HomePage = () => (
 <main>
  <HeroSection />
  <InteractiveDemo />
- <RoleStripSection />
  <EcosystemSection />
+ <RoleStripSection />
  <AgentSection />
  <ComparisonSection />
- <SocialProofSection />
+ <NetworkMetricsSection />
+ <AgriOSIntelligenceSection />
  <TestimonialsSection />
  <TrustSection />
  <FAQSection />

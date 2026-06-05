@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const ROLES = [
   {
     id: 'farmer',
-    title: 'I am a Farmer / FPO',
+    title: 'Farmer / FPO',
     icon: Tractor,
     outcomes: ['Know what to grow before you plant.', 'Lock prices with escrow-backed contracts.'],
     path: '/farmers',
@@ -13,7 +13,7 @@ const ROLES = [
   },
   {
     id: 'buyer',
-    title: 'I am a Buyer / Processor / FMCG',
+    title: 'Buyer / Processor / FMCG',
     icon: ShoppingCart,
     outcomes: ['Source verified quality directly from farms.', 'Automate your procurement at scale.'],
     path: '/customers',
@@ -21,7 +21,7 @@ const ROLES = [
   },
   {
     id: 'retailer',
-    title: 'I run Retail / Grocery Platform',
+    title: 'Retail / Grocery',
     icon: Building2,
     outcomes: ['Onboard farmers and FPOs as suppliers.', 'Procure lots and trigger logistics in one workflow.'],
     path: '/retailers',
@@ -29,7 +29,7 @@ const ROLES = [
   },
   {
     id: 'vendor',
-    title: 'I am a Vendor / Service Provider',
+    title: 'Vendor / Service Provider',
     icon: Store,
     outcomes: ['Access aggregated demand from local farms.', 'Manage inventory with AI predictions.'],
     path: '/vendors',
@@ -37,7 +37,7 @@ const ROLES = [
   },
   {
     id: 'logistics',
-    title: 'I run Logistics',
+    title: 'Logistics',
     icon: Truck,
     outcomes: ['Get pre-matched loads to reduce empty miles.', 'Real-time cold chain monitoring.'],
     path: '/logistics',
@@ -45,7 +45,7 @@ const ROLES = [
   },
   {
     id: 'researcher',
-    title: 'I am a Researcher / Policy Analyst',
+    title: 'Researcher / Policy',
     icon: Microscope,
     outcomes: ['Access anonymized, real-time market data.', 'Model policy impacts on the supply chain.'],
     path: '/researchers',
@@ -57,7 +57,7 @@ export const RoleStripSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full bg-[#050505] py-20 border-b border-white/5">
+    <section id="role-selector" className="w-full bg-[#050505] py-20 border-b border-white/5 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         
         <div className="text-center mb-12">

@@ -1,108 +1,91 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Shield, Lock, CreditCard, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, CreditCard, Lock, Shield } from 'lucide-react';
 
 export const TrustSection = () => {
   return (
     <section className="py-24 md:py-32 bg-background relative border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="mono text-[10px] text-primary font-medium normal-case tracking-widest mb-4 block">
-            TRUST & SECURITY
+            TRUST, SECURITY & BUSINESS MODEL
           </span>
           <h2 className="text-[34px] md:text-[48px] font-semibold text-white tracking-[-0.02em] leading-[1.1] mb-6">
-            Institutional grade. Built for the farm.
+            Trust, security and how we make money.
           </h2>
           <p className="text-foreground-muted text-[17px] font-normal leading-[1.5]">
-            Digital Orchard is a secure protocol for smallholders, cooperatives, logistics fleets, FMCG brands, retailers and researchers. We protect your data, guarantee your payments, and operate with complete transparency.
+            The protocol is built to protect farmers, buyers, fleets and researchers without hiding the business model behind crop commissions.
           </p>
         </div>
 
-        {/* Security & Commission Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-          <div className="bg-[#050505] border border-white/10 p-8 md:p-12 rounded-2xl">
-            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+          <div className="bg-[#050505] border border-white/10 p-8 md:p-12 rounded-lg">
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-8">
               <Shield size={24} />
             </div>
-            <h3 className="text-2xl text-white font-medium mb-4">Zero Commission. Ever.</h3>
+            <h3 className="text-2xl text-white font-medium mb-4">Zero commission on farmer sales</h3>
             <p className="text-white/60 mb-6 leading-[1.6]">
-              Digital Orchard charges exactly ₹0 commission on farmer sales. You keep 100% of the farm gate price you negotiate. Our incentives are aligned with both farmers and food companies: we earn from enterprise tools, logistics optimisation and research APIs—not from taking a cut of the crop price.
+              Farmers pay Rs 0 commission on crop sales. Platform revenue comes from enterprise software, logistics routing and research APIs, not from taking a cut at the farm gate.
             </p>
-            <div className="pt-6 border-t border-white/10">
-              <h4 className="text-white/80 text-sm font-medium mb-2">How we sustain the platform:</h4>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2 text-white/50 text-sm">
-                  <CheckCircle2 size={16} className="text-primary/50 shrink-0 mt-0.5" />
-                  SaaS fees for Enterprise Buyers (Supply CRM)
+            <ul className="space-y-3 pt-6 border-t border-white/10">
+              {[
+                'SaaS fees for enterprise buyers and Supply CRM teams',
+                'Logistics optimization and routing fees',
+                'API access for agricultural researchers and institutions',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2 text-white/50 text-sm">
+                  <CheckCircle2 size={16} className="text-primary/60 shrink-0 mt-0.5" />
+                  <span>{item}</span>
                 </li>
-                <li className="flex items-start gap-2 text-white/50 text-sm">
-                  <CheckCircle2 size={16} className="text-primary/50 shrink-0 mt-0.5" />
-                  Logistics optimization routing fees
-                </li>
-                <li className="flex items-start gap-2 text-white/50 text-sm">
-                  <CheckCircle2 size={16} className="text-primary/50 shrink-0 mt-0.5" />
-                  API access for agricultural researchers
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
           </div>
 
-          <div className="bg-[#050505] border border-white/10 p-8 md:p-12 rounded-2xl">
-            <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center text-white mb-8">
+          <div className="bg-[#050505] border border-white/10 p-8 md:p-12 rounded-lg">
+            <div className="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center text-white mb-8">
               <Lock size={24} />
             </div>
-            <h3 className="text-2xl text-white font-medium mb-4">Escrow-Backed Payments</h3>
+            <h3 className="text-2xl text-white font-medium mb-4">Escrow-backed payments</h3>
             <p className="text-white/60 mb-6 leading-[1.6]">
-              No more chasing buyers for 45 days. Our RBI-compliant escrow system ensures the money is locked before you harvest.
+              Buyer funds are locked before pickup. Payment is released after verified pickup and digital documentation, addressing the 15-45 day settlement pain point.
             </p>
-            <div className="pt-6 border-t border-white/10">
-              <h4 className="text-white/80 text-sm font-medium mb-2">Security Guarantees:</h4>
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2 text-white/50 text-sm">
-                  <CreditCard size={16} className="text-white/30 shrink-0 mt-0.5" />
-                  100% Payment Guarantee upon verified pickup
-                </li>
-                <li className="flex items-start gap-2 text-white/50 text-sm">
-                  <Shield size={16} className="text-white/30 shrink-0 mt-0.5" />
-                  Bank-grade encryption (AES-256) for all data
-                </li>
-                <li className="flex items-start gap-2 text-white/50 text-sm">
-                  <Lock size={16} className="text-white/30 shrink-0 mt-0.5" />
-                  Your farm data is never sold to third parties
-                </li>
-              </ul>
-            </div>
+            <ul className="space-y-3 pt-6 border-t border-white/10">
+              {[
+                { icon: CreditCard, label: '100% payment guarantee upon verified pickup' },
+                { icon: Shield, label: 'Bank-grade encryption for sensitive trade data' },
+                { icon: Lock, label: 'Farm data is not sold to third parties' },
+              ].map((item) => {
+                const Icon = item.icon;
+                return (
+                  <li key={item.label} className="flex items-start gap-2 text-white/50 text-sm">
+                    <Icon size={16} className="text-white/35 shrink-0 mt-0.5" />
+                    <span>{item.label}</span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
 
-        {/* Team Story */}
-        <div className="pt-16 border-t border-white/5">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="mono text-[10px] text-white/40 font-medium normal-case tracking-widest mb-4 block">
-              THE TEAM
-            </span>
-            <h3 className="text-3xl text-white font-medium mb-6">Built by Farmers, Not Consultants.</h3>
-            <div className="text-white/60 leading-[1.6] space-y-4 text-left">
-              <p>Before writing a line of code, we farmed and traded our own crops.</p>
-              <p>Digital Orchard is led by a farmer and the son of a farmer who have lived the volatility of yields, prices, and payments first-hand.</p>
-              <p>We know what data farmers actually need because we've stood at the farm gate, bargained with commission agents, and moved produce through the same broken system we're now rebuilding from the ground up.</p>
-              <p>The same protocol that fixes this for one village in Tamil Nadu is being designed to scale to FMCG supply chains across India—and, over time, food systems in every geography that faces the same structural problems.</p>
+        <div className="pt-14 border-t border-white/5">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 items-start">
+            <div>
+              <span className="mono text-[10px] text-white/40 font-medium normal-case tracking-widest mb-4 block">
+                THE TEAM
+              </span>
+              <h3 className="text-3xl text-white font-medium leading-tight">Built by farmers, not consultants.</h3>
+            </div>
+            <div className="text-white/60 leading-[1.65] space-y-4">
+              <p className="text-white text-xl font-medium">Before writing a line of code, we farmed and traded our own crops.</p>
+              <p>
+                Digital Orchard is led by people who have lived the volatility of yields, prices, logistics failures and delayed payments first-hand.
+              </p>
+              <p>
+                We know what data farmers actually need because we have stood at the farm gate, negotiated with commission agents and moved produce through the same broken system we are rebuilding.
+              </p>
             </div>
           </div>
         </div>
-
-
       </div>
     </section>
   );
 };
-
-const TeamMember = ({ name, role, img }: any) => (
-  <div className="group">
-    <div className="aspect-square bg-white/5 rounded-xl overflow-hidden mb-4 border border-white/10 group-hover:border-primary/30 transition-colors">
-      <img src={img} alt={name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 mix-blend-luminosity hover:mix-blend-normal" />
-    </div>
-    <h4 className="text-white font-medium">{name}</h4>
-    <p className="text-white/50 text-[10px] uppercase tracking-wider mt-1">{role}</p>
-  </div>
-);
