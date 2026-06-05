@@ -1,7 +1,22 @@
 # Farmer.Company Beta - Bug Fixes
 
 **Date:** April 28, 2026  
-**Focus:** Critical and high-priority bugs identified in current codebase
+**Last reviewed:** June 5, 2026
+**Focus:** Critical/high-priority product bugs and deployment blockers identified in the current codebase
+
+---
+
+## Latest Deployment Check
+
+**Checked on:** June 5, 2026
+**Deployment source:** GitHub Deployments page shared by Arun
+**Latest failed deployment:** `Deploy static content to Pages #18` for commit `banner removal` on `main`
+**Last known successful deployment:** `Deploy static content to Pages #17` for commit `feat: add programmatic HTTP-to-HTTPS redirect in main.tsx`
+**Local verification:** `npm ci` and `npm run build` succeed on the current checkout.
+**Workflow fix applied locally:** docs-only pushes are ignored for Pages deploys, and the workflow now validates `dist/index.html`, `dist/404.html`, and `dist/CNAME` before uploading the Pages artifact.
+**Current repo state after fetch:** local `main` is ahead of `origin/main` by the README update commit and behind `origin/main` by the remote `banner removal` commit.
+
+**Access note:** GitHub CLI is not installed in the local environment, and unauthenticated GitHub API calls for this private repository return `404`. The exact failed Actions log for run #18 still needs to be checked from the authenticated GitHub UI.
 
 ---
 
@@ -232,14 +247,14 @@ export const LanguageProvider = ({ children }) => {
 
 ---
 
-### BUG-007: AuthContext Always Returns Authenticated
+### BUG-007: AuthContext / Protected Route Audit
 
 **Severity:** High  
 **File:** `src/lib/AuthContext.tsx` (44 lines - very minimal)
 
-**Issue:** Context likely has no real auth state management.
+**Issue:** Auth state management now exists through Firebase `onAuthStateChanged`, but the protected-route policy still needs to be audited. `App.tsx` exposes product routes directly, so the team must decide which routes are public, beta-gated, role-gated, or admin-only.
 
-**Impact:** "Protected" routes accessible without login.
+**Impact:** Sensitive beta workflows may be accessible without the intended login, role, or verification state.
 
 **Fix:**
 
@@ -269,7 +284,7 @@ export const AuthProvider = ({ children }) => {
 };
 ```
 
-**Status:** 🟠 Open  
+**Status:** 🟠 Open (auth context exists; route protection and role-gating still need review)
 **ETA:** 3 days
 
 ---
@@ -300,6 +315,54 @@ const loadMarketData = async () => {
 
 ---
 
+## Deployment and CI Bugs
+
+### BUG-017: Latest GitHub Pages Deployment Failed
+
+**Severity:** High
+**Files:** `.github/workflows/static.yml`, `public/CNAME`, `vite.config.ts`, GitHub Pages environment settings
+
+**Issue:** The latest GitHub Pages deployment shown in GitHub Deployments failed for `Deploy static content to Pages #18` on commit `banner removal`.
+
+**Evidence:**
+
+- GitHub Deployments page shows `banner removal` as the active failed deployment for `github-pages`.
+- Previous deployment `#17` for `feat: add programmatic HTTP-to-HTTPS redirect in main.tsx` completed successfully.
+- Local `npm run build` succeeds, so the current source can produce a production bundle.
+- Remote `origin/main` now points to `750a8b6 banner removal`, which only changes `README.md`.
+
+**Impact:** Production may remain pinned to the previous deployment. README-only or content-only releases can appear failed, creating confusion about release health and making it harder to know what is actually live.
+
+**Investigation Steps:**
+
+1. Open GitHub Actions run `Deploy static content to Pages #18`.
+2. Check which step failed: `Install dependencies`, `Build`, `Add SPA fallback`, `Upload artifact`, or `Deploy to GitHub Pages`.
+3. If the failure is in `Deploy to GitHub Pages`, inspect the `github-pages` environment, Pages permissions, artifact status, and any GitHub Pages service error.
+4. If the failure is transient, rerun workflow #18 from the GitHub UI.
+5. If the failure repeats, capture the log snippet and update this bug with the exact root cause.
+
+**Fix Applied Locally:**
+
+```yaml
+on:
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - "README.md"
+      - "Product_Docs/**"
+      - "artifacts/**"
+      - "design.md"
+
+# The workflow also validates dist/index.html, dist/404.html, and dist/CNAME
+# before uploading the GitHub Pages artifact.
+```
+
+**Status:** 🟡 Fixed locally - pending GitHub Actions verification after push
+**Assigned:** DevOps / Engineering
+**ETA:** 0.5 day
+
+---
+
 ## Medium-Priority Bugs
 
 ### BUG-009: Pagination Resets on Filter Change (Partially Fixed)
@@ -325,7 +388,7 @@ useEffect(() => {
 }, [filter, stateFilter, currentPage]);
 ```
 
-**Status:** 🟡 Open  
+**Status:** 🟡 Open
 **ETA:** 1 day
 
 ---
@@ -409,7 +472,7 @@ useEffect(() => {
 )}
 ```
 
-**Status:** 🟢 Open  
+**Status:** 🟡 Open
 **ETA:** 0.5 day
 
 ---
@@ -425,6 +488,8 @@ useEffect(() => {
 
 **Fix:** Create a `formatDate()` utility in `src/lib/utils.ts`
 
+**Status:** 🟡 Open
+
 ---
 
 ### BUG-014: Missing Alt Text for Images
@@ -436,6 +501,8 @@ useEffect(() => {
 
 **Fix:** Use ESLint plugin `jsx-a11y` to enforce alt text.
 
+**Status:** 🟡 Open
+
 ---
 
 ### BUG-015: No Loading State for Filters
@@ -446,6 +513,8 @@ useEffect(() => {
 **Issue:** When filters change, there's no loading indicator if data were fetched from API.
 
 **Fix:** Add loading skeleton while filter results update.
+
+**Status:** 🟡 Open
 
 ---
 
@@ -465,39 +534,39 @@ useEffect(() => {
 
 ## Bug Statistics
 
-| Severity  | Count  | Status                |
-| --------- | ------ | --------------------- |
-| Critical  | 4      | 🟢 3 Fixed, 🔴 1 Open |
-| High      | 3      | 🟢 1 Fixed, 🟠 2 Open |
-| Medium    | 5      | 🟢 2 Fixed, 🟡 3 Open |
-| Low       | 3      | 🟢 0 Fixed, 🟢 3 Open |
-| **Total** | **15** | **6 Fixed, 9 Open**   |
+| Severity  | Count  | Status |
+| --------- | ------ | ------ |
+| Critical  | 3      | 3 Fixed, 0 Open |
+| High      | 4      | 1 Fixed, 2 Open, 1 Pending verification |
+| Medium    | 6      | 2 Fixed, 4 Open |
+| Low       | 4      | 0 Fixed, 4 Open |
+| **Total** | **17** | **6 Fixed, 10 Open, 1 Pending verification** |
+
+Counts are based on each bug's `Severity` field, not on the section where the bug appears.
 
 ---
 
 ## Recommended Fix Order for Beta
 
-### Week 1 (Critical & High Priority)
+### Week 1 (Deployment & High Priority)
 
-1. **BUG-001:** Fix hardcoded prices (Prices.tsx)
-2. **BUG-002:** Fix hardcoded arbitrage prices (Market.tsx)
-3. **BUG-003:** Implement "Settle Node" functionality
-4. **BUG-005:** Firebase config validation
-5. **BUG-007:** Fix AuthContext
+1. **BUG-017:** Inspect and resolve latest GitHub Pages deployment failure
+2. **BUG-005:** Firebase config validation
+3. **BUG-007:** AuthContext / protected route audit
 
 ### Week 2 (Medium Priority)
 
-1. **BUG-004:** Settlement list functionality
-2. **BUG-006:** Language persistence
-3. **BUG-008:** Optimize Market.json loading
-4. **BUG-009:** URL state management
-5. **BUG-011:** Dynamic Insights page
+1. **BUG-008:** Optimize Market.json loading
+2. **BUG-009:** URL state management
+3. **BUG-011:** Dynamic Insights page
+4. **BUG-010:** Keyboard navigation
+5. **BUG-012:** Search error messages
 
 ### Week 3 (Remaining)
 
-1. **BUG-010:** Keyboard navigation
-2. **BUG-012:** Search error messages
-3. **BUG-013-015:** Low-priority fixes
+1. **BUG-013:** Standard date formatting utility
+2. **BUG-014:** Image alt text enforcement
+3. **BUG-015:** Loading states for filters
 
 ---
 
