@@ -38,6 +38,7 @@ import { StoryPage } from './components/Pages/Story';
 import { ResearchersPage } from './components/Pages/ResearchersPage';
 import { AgentsPage } from './components/Pages/AgentsPage';
 import { DemoPage } from './components/Pages/DemoPage';
+import { DigipinGuidePage } from './components/Pages/DigipinGuidePage';
 
 const HomePage = () => (
 <main>
@@ -60,7 +61,7 @@ export default function App() {
  <Router>
  <LanguageProvider>
  <AuthProvider>
- <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground relative">
+ <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground relative overflow-x-hidden">
  <ErrorBoundary>
  <Navbar />
  <LocationPanel />
@@ -74,6 +75,7 @@ export default function App() {
  <Route path="/insights" element={<InsightsPage />} />
  <Route path="/configure" element={<ConfigurePage />} />
  <Route path="/supply-crm" element={<SupplyCRMPage />} />
+ <Route path="/digipin" element={<DigipinGuidePage />} />
  <Route path="/farmers" element={<FarmersPage />} />
  <Route path="/vendors" element={<VendorsPage />} />
  <Route path="/logistics" element={<LogisticsPage />} />

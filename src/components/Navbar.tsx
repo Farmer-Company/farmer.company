@@ -21,6 +21,7 @@ const PLATFORM_NAV = [
   { label: 'Insights', path: '/insights' },
   { label: 'Configure', path: '/configure' },
   { label: 'Supply CRM', path: '/supply-crm' },
+  { label: 'DIGIPIN Guide', path: '/digipin' },
   { label: 'UI Showcase', path: '/demo' },
 ];
 
@@ -50,7 +51,7 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className="fixed top-0 left-0 z-[110] w-full px-4 md:px-8 h-[56px] bg-black/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-border flex flex-row justify-between items-center transition-all duration-300 opacity-100 translate-y-0 pointer-events-auto"
+        className="fixed top-0 left-0 right-0 z-[110] px-4 md:px-8 h-[56px] bg-black/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-border flex flex-row justify-between items-center transition-all duration-300 opacity-100 translate-y-0 pointer-events-auto"
       >
         <div className="flex-none z-[120]">
           <motion.div

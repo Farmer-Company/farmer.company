@@ -6,18 +6,68 @@ import { db, auth } from '@/src/lib/firebase';
 import { collection, addDoc, serverTimestamp, setDoc, doc, getDoc } from 'firebase/firestore';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 import { encodeDigipin } from '@/src/lib/digipin';
-import { MapPin } from 'lucide-react';
+import {
+  BarChart3,
+  CheckCircle2,
+  Landmark,
+  Loader2,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  ShoppingBasket,
+  Sprout,
+  Truck,
+} from 'lucide-react';
 import { countries } from '@/src/lib/countries';
 import type { UserRole } from '@/src/lib/os-types';
 
 type BetaRole = Exclude<UserRole, 'admin'>;
+type LocationStatus = 'idle' | 'loading' | 'ready' | 'unavailable' | 'blocked';
 
-const betaRoles: { value: BetaRole; label: string }[] = [
-  { value: 'farmer', label: 'Farmer / Seller' },
-  { value: 'vendor', label: 'Retailer / Buyer / Vendor' },
-  { value: 'logistics', label: 'Logistics Partner' },
-  { value: 'researcher', label: 'Researcher / Analyst' },
-  { value: 'government', label: 'Government / Institution' },
+type RoleOption = {
+  value: BetaRole;
+  action: string;
+  audience: string;
+  mode: 'Field Mode' | 'Trade Desk Mode' | 'Institution Access';
+  Icon: React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>;
+};
+
+const betaRoles: RoleOption[] = [
+  {
+    value: 'farmer',
+    action: 'Sell my crop',
+    audience: 'Farmers, FPOs, local sellers',
+    mode: 'Field Mode',
+    Icon: Sprout,
+  },
+  {
+    value: 'vendor',
+    action: 'Source crop supply',
+    audience: 'Traders, retailers, procurement teams',
+    mode: 'Trade Desk Mode',
+    Icon: ShoppingBasket,
+  },
+  {
+    value: 'logistics',
+    action: 'Move farm loads',
+    audience: 'Transporters and dispatch partners',
+    mode: 'Trade Desk Mode',
+    Icon: Truck,
+  },
+  {
+    value: 'researcher',
+    action: 'Use market intelligence',
+    audience: 'Researchers and analysts',
+    mode: 'Institution Access',
+    Icon: BarChart3,
+  },
+  {
+    value: 'government',
+    action: 'Government access',
+    audience: 'Public teams and institutions',
+    mode: 'Institution Access',
+    Icon: Landmark,
+  },
 ];
 
 export const AuthFlow = () => {
@@ -30,72 +80,105 @@ export const AuthFlow = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [verificationId, setVerificationId] = useState<ConfirmationResult | null>(null);
   const [error, setError] = useState('');
+  const [locationStatus, setLocationStatus] = useState<LocationStatus>('idle');
+  const [locationMessage, setLocationMessage] = useState('');
   const [locationData, setLocationData] = useState<{ lat: number, lon: number, accuracy: number, address: string, pin: string } | null>(null);
 
-  // Initialize Recaptcha
-  useEffect(() => {
+  const selectedRole = betaRoles.find((option) => option.value === role) ?? betaRoles[0];
+  const SelectedRoleIcon = selectedRole.Icon;
+
+  const getRecaptchaVerifier = () => {
     if (!(window as any).recaptchaVerifier) {
       (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        'size': 'invisible',
-        'callback': () => {
+        size: 'invisible',
+        callback: () => {
           console.log('Recaptcha resolved');
-        }
+        },
       });
     }
-  }, []);
 
-  // Capture Location for DIGIPIN
+    return (window as any).recaptchaVerifier as RecaptchaVerifier;
+  };
+
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        const accuracy = position.coords.accuracy;
-        let address = "Location captured";
-        
-        try {
-          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&email=contact@farmer.company`);
-          if (res.ok) {
-            const data = await res.json();
-            address = data.display_name || address;
-          }
-        } catch (e) {
-          // ignore
-        }
-        
-        // determine pin length based on accuracy
-        let pinLen = 8;
-        if (accuracy <= 1.5) pinLen = 16;
-        else if (accuracy <= 50) pinLen = 14;
-        else if (accuracy <= 1000) pinLen = 12;
-        else if (accuracy <= 30000) pinLen = 10;
-
-        const pin = encodeDigipin(lat, lon, pinLen);
-        setLocationData({ lat, lon, accuracy, address, pin });
-      }, (err) => {
-        console.log("Location not provided:", err);
-      }, { enableHighAccuracy: true });
-    }
+    getRecaptchaVerifier();
   }, []);
+
+  const captureLocation = () => {
+    setError('');
+    setLocationMessage('');
+
+    if (!('geolocation' in navigator)) {
+      setLocationStatus('unavailable');
+      setLocationMessage('Location is not available on this phone. You can still continue.');
+      return;
+    }
+
+    setLocationStatus('loading');
+
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+      let address = 'Location captured';
+
+      try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&email=contact@farmer.company`);
+        if (res.ok) {
+          const data = await res.json();
+          address = data.display_name || address;
+        }
+      } catch {
+        // DIGIPIN still works without the reverse-geocoded address.
+      }
+
+      let pinLen = 8;
+      if (accuracy <= 1.5) pinLen = 16;
+      else if (accuracy <= 50) pinLen = 14;
+      else if (accuracy <= 1000) pinLen = 12;
+      else if (accuracy <= 30000) pinLen = 10;
+
+      const pin = encodeDigipin(lat, lon, pinLen);
+      setLocationData({ lat, lon, accuracy, address, pin });
+      setLocationStatus('ready');
+      setLocationMessage('Location saved for pickup matching.');
+    }, () => {
+      setLocationStatus('blocked');
+      setLocationMessage('Location was not shared. You can add it later or ask for a callback.');
+    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 300000 });
+  };
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !mobile) return;
+    const cleanMobile = mobile.replace(/\D/g, '');
+
+    if (!name.trim()) {
+      setError('Please enter your name.');
+      return;
+    }
+
+    if (cleanMobile.length < 6) {
+      setError('Please enter a valid mobile number.');
+      return;
+    }
+
     setError('');
     setIsSubmitting(true);
     let appVerifier: RecaptchaVerifier | null = null;
 
     try {
-      appVerifier = (window as any).recaptchaVerifier;
-      const cleanMobile = mobile.replace(/\D/g, '');
+      appVerifier = getRecaptchaVerifier();
       const formattedMobile = `${countryCode}${cleanMobile}`;
-      
+
       const confirmationResult = await signInWithPhoneNumber(auth, formattedMobile, appVerifier);
       setVerificationId(confirmationResult);
     } catch (err: any) {
-      console.error("OTP Send Failed:", err);
-      setError(err.message || "Failed to send OTP. Please check the number format.");
-      if (appVerifier) appVerifier.clear();
+      console.error('OTP Send Failed:', err);
+      setError(err.message || 'We could not send the SMS code. Please check the number and try again.');
+      if (appVerifier) {
+        appVerifier.clear();
+        (window as any).recaptchaVerifier = null;
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -128,9 +211,9 @@ export const AuthFlow = () => {
               lat: locationData.lat,
               lon: locationData.lon,
               accuracy: locationData.accuracy,
-              address: locationData.address
-            }
-          })
+              address: locationData.address,
+            },
+          }),
         }, { merge: true });
       } else {
         await setDoc(userRef, {
@@ -147,13 +230,12 @@ export const AuthFlow = () => {
               lat: locationData.lat,
               lon: locationData.lon,
               accuracy: locationData.accuracy,
-              address: locationData.address
-            }
-          })
+              address: locationData.address,
+            },
+          }),
         });
       }
 
-      // Save to Beta Registrations
       await addDoc(collection(db, 'beta_registrations'), {
         uid: user.uid,
         fullName: name.trim(),
@@ -162,135 +244,196 @@ export const AuthFlow = () => {
         timestamp: serverTimestamp(),
         ...(locationData && {
           digipin: locationData.pin,
-          address: locationData.address
-        })
+          address: locationData.address,
+        }),
       });
-      
+
       navigate('/');
     } catch (err: any) {
-      console.error("Verification Failed:", err);
+      console.error('Verification Failed:', err);
       const authErrorCode = typeof err?.code === 'string' ? err.code : '';
       setError(
         authErrorCode.startsWith('auth/')
-          ? "Invalid OTP. Please try again."
-          : "Verification worked, but profile setup could not be saved. Please retry in a moment."
+          ? 'The SMS code did not match. Please try again.'
+          : 'The phone was verified, but profile setup could not be saved. Please retry in a moment.'
       );
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const renderRoleButton = (option: RoleOption) => {
+    const isSelected = role === option.value;
+    const Icon = option.Icon;
+
+    return (
+      <button
+        key={option.value}
+        type="button"
+        role="radio"
+        aria-checked={isSelected}
+        onClick={() => setRole(option.value)}
+        className={`w-full min-h-[68px] border p-3 text-left transition-all duration-200 ${
+          isSelected
+            ? 'border-primary bg-primary/10 text-white'
+            : 'border-white/10 bg-white/[0.03] text-white/72 hover:border-white/24 hover:bg-white/[0.06]'
+        }`}
+      >
+        <span className="flex items-center gap-3">
+          <span className={`flex size-10 shrink-0 items-center justify-center border ${
+            isSelected ? 'border-primary bg-primary text-black' : 'border-white/12 bg-black/30 text-primary'
+          }`}>
+            <Icon size={20} strokeWidth={2.2} />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-[15px] font-semibold leading-snug tracking-normal">{option.action}</span>
+            <span className="block text-[12px] leading-relaxed text-white/50">{option.audience}</span>
+          </span>
+          <span className={`hidden shrink-0 text-[10px] font-medium sm:block ${
+            isSelected ? 'text-primary' : 'text-white/28'
+          }`}>
+            {option.mode}
+          </span>
+        </span>
+      </button>
+    );
+  };
+
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-background w-full">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-background w-full pt-14">
       <div id="recaptcha-container"></div>
-      
-      {/* Left Panel - Branding (Hidden on small screens) */}
-      <div className="hidden lg:flex lg:w-1/2 bg-[#080808] border-r border-white/5 relative overflow-hidden flex-col justify-between p-12 noise-bg">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+
+      <div className="hidden lg:flex lg:w-[44%] bg-[#080808] border-r border-white/5 relative overflow-hidden flex-col justify-between p-10 xl:p-12 noise-bg">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-transparent pointer-events-none" />
         <div className="scanline"></div>
-        
+
         <div className="relative z-10">
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl font-light tracking-tight text-white mb-2">
-              DIGITAL<span className="text-primary"> ORCHARD</span>
+          <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <h1 className="text-4xl font-semibold tracking-tight text-white mb-3">
+              Farmer<span className="text-primary">.Company</span>
             </h1>
-            <p className="text-foreground-muted mono text-[10px] uppercase tracking-widest">Global Supply Chain Protocol</p>
+            <p className="text-white/50 text-sm leading-relaxed max-w-sm">
+              A phone-first beta for field sellers, with trade desk and institution tools after verification.
+            </p>
           </motion.div>
         </div>
 
-        <div className="relative z-10 space-y-8 max-w-md">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="border border-white/10 bg-black/40 backdrop-blur-md p-8 relative overflow-hidden group"
+        <div className="relative z-10 space-y-6 max-w-md">
+          <motion.div
+            initial={{ opacity: 0, x: -18 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="border border-white/10 bg-black/45 backdrop-blur-md p-7 relative overflow-hidden"
           >
-            <div className="absolute top-0 left-0 w-1 h-full bg-primary transition-all duration-500 group-hover:w-2" />
-            <p className="mono text-[10px] text-white/40 mb-3 uppercase tracking-widest">System Status</p>
-            <p className="text-white text-2xl font-light tracking-tight mb-6">Secure Identity Verification Node Active</p>
-            <div className="flex items-center gap-3 border-t border-white/5 pt-4">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              <p className="mono text-[10px] text-primary uppercase tracking-wider">End-to-End Encrypted</p>
+            <div className="absolute top-0 left-0 w-1 h-full bg-primary" />
+            <p className="text-primary text-sm font-semibold mb-3">Field Mode</p>
+            <p className="text-white text-2xl font-medium tracking-tight leading-tight mb-5">
+              Start with a phone number. Add crop details when you are ready.
+            </p>
+            <div className="grid gap-3 text-sm text-white/60">
+              <p className="flex gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-primary" /> Big fields and buttons for low-end phones.</p>
+              <p className="flex gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-primary" /> Location sharing is optional and explained first.</p>
+              <p className="flex gap-2"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-primary" /> Callback support for farmers who want help.</p>
             </div>
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex gap-4"
+          <motion.div
+            initial={{ opacity: 0, x: -18 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="grid grid-cols-2 gap-3"
           >
-            <div className="border border-white/5 bg-white/[0.02] p-4 flex-1">
-              <div className="text-primary text-xl font-light mb-1">01</div>
-              <div className="mono text-[9px] text-white/50 uppercase tracking-wider">Verify Identity</div>
+            <div className="border border-white/5 bg-white/[0.03] p-4">
+              <div className="text-primary text-sm font-semibold mb-1">Field</div>
+              <div className="text-[12px] text-white/54 leading-relaxed">Farmers, sellers, FPO helpers</div>
             </div>
-            <div className="border border-white/5 bg-white/[0.02] p-4 flex-1">
-              <div className="text-white/20 text-xl font-light mb-1">02</div>
-              <div className="mono text-[9px] text-white/50 uppercase tracking-wider">Access Network</div>
+            <div className="border border-white/5 bg-white/[0.03] p-4">
+              <div className="text-white text-sm font-semibold mb-1">Trade Desk</div>
+              <div className="text-[12px] text-white/54 leading-relaxed">Buyers, traders, logistics teams</div>
             </div>
           </motion.div>
         </div>
-        
+
         <div className="relative z-10 flex justify-between items-end">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="text-[9px] mono text-white/30 max-w-[250px] uppercase leading-relaxed">
-            Enterprise Grade Agricultural Identity Management Protocol. Authorized Access Only.
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }} className="text-[12px] text-white/38 max-w-[310px] leading-relaxed">
+            Farmers pay Rs 0 commission on crop sales. Buyer, logistics, research, and government workflows continue deeper inside the product.
           </motion.p>
-          <div className="vertical-meta">AUTH-V2.0.1</div>
+          <div className="vertical-meta">BETA ACCESS</div>
         </div>
       </div>
 
-      {/* Right Panel - Form */}
-      <div className="flex-1 flex flex-col justify-center items-center p-6 sm:p-12 relative w-full os-grid bg-background">
-        {/* Mobile Header */}
-        <div className="lg:hidden mb-12 text-center w-full mt-8">
-          <h1 className="text-3xl font-light text-white tracking-tight mb-2">
-            DIGITAL<span className="text-primary"> ORCHARD</span>
+      <div className="flex-1 flex flex-col justify-start lg:justify-center items-center px-4 py-6 sm:px-6 sm:py-10 relative w-full os-grid bg-background">
+        <div className="lg:hidden mb-6 text-left w-full max-w-md">
+          <h1 className="text-3xl font-semibold text-white tracking-tight mb-2">
+            Farmer<span className="text-primary">.Company</span>
           </h1>
-          <p className="text-foreground-muted mono text-[9px] uppercase tracking-widest">Identity Authorization</p>
+          <p className="text-white/58 text-sm leading-relaxed">Start with your phone number. Sell, source, move, or analyze farm supply after verification.</p>
         </div>
-        
-        <div className="w-full max-w-sm relative z-10">
-          <div className="hidden lg:block mb-10">
-            <h2 className="text-2xl font-light text-white mb-2">Welcome Back</h2>
-            <p className="text-white/40 text-sm">Please verify your identity to continue.</p>
+
+        <div className="w-full max-w-md relative z-10">
+          <div className="mb-6 hidden sm:block">
+            <div className="flex items-center gap-3 text-[13px] text-white/48">
+              <span className={`flex size-8 items-center justify-center border ${
+                verificationId ? 'border-primary bg-primary text-black' : 'border-primary/50 text-primary'
+              }`}>
+                {verificationId ? <CheckCircle2 size={16} /> : '1'}
+              </span>
+              <span className="h-px flex-1 bg-white/10" />
+              <span className={`flex size-8 items-center justify-center border ${
+                verificationId ? 'border-primary/50 text-primary' : 'border-white/10 text-white/34'
+              }`}>
+                2
+              </span>
+            </div>
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-6"
           >
             <AnimatePresence mode="wait">
               {!verificationId ? (
-                <motion.form 
+                <motion.form
                   key="step-1"
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -18 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  onSubmit={handleSendOtp} 
+                  exit={{ opacity: 0, x: 18 }}
+                  onSubmit={handleSendOtp}
                   className="space-y-5"
                 >
                   <div className="space-y-2">
-                    <label className="mono text-[10px] uppercase tracking-wider text-white/50 ml-1">Full Name</label>
-                    <input 
+                    <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Start with phone login</h2>
+                    <p className="text-sm leading-relaxed text-white/56">
+                      We will send one SMS code. Crop, company, or trade desk details can be added after this step.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium text-white" htmlFor="full-name">Your name</label>
+                    <input
+                      id="full-name"
                       required
-                      type="text" 
+                      type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Enter your name"
-                      className="w-full bg-white/[0.02] border border-white/10 h-14 px-4 mono text-sm text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-300"
+                      placeholder="Name"
+                      autoComplete="name"
+                      autoCapitalize="words"
+                      enterKeyHint="next"
+                      className="w-full bg-white/[0.04] border border-white/12 min-h-14 px-4 text-[16px] text-white placeholder:text-white/28 focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-200"
                     />
                   </div>
-                  
-                  <div className="space-y-2">
-                    <label className="mono text-[10px] uppercase tracking-wider text-white/50 ml-1">Mobile Number</label>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium text-white" htmlFor="mobile-number">Mobile number</label>
                     <div className="flex gap-2">
                       <select
-                        aria-label="Country Code"
-                        title="Country Code"
+                        aria-label="Country code"
+                        title="Country code"
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
-                        className="w-[110px] bg-white/[0.02] border border-white/10 h-14 px-3 mono text-sm text-white focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-300 cursor-pointer appearance-none"
+                        className="w-[104px] shrink-0 bg-white/[0.04] border border-white/12 min-h-14 px-3 text-[15px] text-white focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-200 cursor-pointer"
                       >
                         {countries.map((country) => (
                           <option key={country.code} value={country.dial_code} className="bg-background text-white py-2">
@@ -298,9 +441,11 @@ export const AuthFlow = () => {
                           </option>
                         ))}
                       </select>
-                      <input 
+                      <input
+                        id="mobile-number"
                         required
-                        type="tel" 
+                        type="tel"
+                        inputMode="tel"
                         value={mobile}
                         onChange={(e) => {
                           const val = e.target.value.replace(/\D/g, '');
@@ -308,132 +453,183 @@ export const AuthFlow = () => {
                         }}
                         placeholder="98765 43210"
                         maxLength={15}
-                        className="flex-1 bg-white/[0.02] border border-white/10 h-14 px-4 mono text-sm text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-300"
+                        autoComplete="tel-national"
+                        enterKeyHint="send"
+                        className="min-w-0 flex-1 bg-white/[0.04] border border-white/12 min-h-14 px-4 text-[16px] text-white placeholder:text-white/28 focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-200"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="mono text-[10px] uppercase tracking-wider text-white/50 ml-1">Beta Role</label>
-                    <select
-                      value={role}
-                      onChange={(e) => setRole(e.target.value as BetaRole)}
-                      className="w-full bg-white/[0.02] border border-white/10 h-14 px-4 mono text-sm text-white focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-300 cursor-pointer"
-                      title="Select beta role"
-                    >
-                      {betaRoles.map((option) => (
-                        <option key={option.value} value={option.value} className="bg-background text-white">
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {locationData && (
-                    <div className="space-y-2 mt-4">
-                      <label className="mono text-[10px] uppercase tracking-wider text-primary ml-1 flex items-center gap-1">
-                        <MapPin size={10} /> Verified Location (DIGIPIN)
-                      </label>
-                      <div className="w-full bg-primary/5 border border-primary/20 h-14 px-4 flex flex-col justify-center">
-                        <span className="mono text-sm text-primary tracking-widest">{locationData.pin}</span>
-                        <span className="text-[9px] text-white/40 truncate">{locationData.address}</span>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-sm font-medium text-white">What do you want to do?</p>
+                      <p className="mt-1 text-[12px] leading-relaxed text-white/45">Field Mode is selected for sellers. Trade desk and institution paths are one tap away.</p>
+                    </div>
+                    <div className="border border-primary bg-primary/10 p-3 text-left text-white">
+                      <div className="flex items-center gap-3">
+                        <span className="flex size-10 shrink-0 items-center justify-center bg-primary text-black">
+                          <SelectedRoleIcon size={20} strokeWidth={2.2} />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-[15px] font-semibold leading-snug tracking-normal">{selectedRole.action}</span>
+                          <span className="block text-[12px] leading-relaxed text-white/58">{selectedRole.audience}</span>
+                        </span>
+                        <span className="hidden shrink-0 text-[10px] font-medium text-primary sm:block">{selectedRole.mode}</span>
                       </div>
                     </div>
-                  )}
-
-                  {error && (
-                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[11px] text-red-400 mono px-1">
-                      {error}
-                    </motion.p>
-                  )}
-
-                  <Button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full h-14 bg-white hover:bg-primary text-black font-medium transition-all duration-300 mt-8 rounded-none group relative overflow-hidden"
-                  >
-                    <div className="absolute inset-0 w-0 bg-primary transition-all duration-[250ms] ease-out group-hover:w-full z-0"></div>
-                    <span className="relative z-10 mono text-[11px] font-semibold uppercase tracking-widest flex items-center justify-center gap-2">
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-3 h-3 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                          Sending Code...
-                        </>
-                      ) : 'Send Verification Code'}
-                    </span>
-                  </Button>
-                </motion.form>
-              ) : (
-                <motion.form 
-                  key="step-2"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  onSubmit={handleVerifyOtp} 
-                  className="space-y-5"
-                >
-                  <div className="space-y-2">
-                    <label className="mono text-[10px] uppercase tracking-wider text-white/50 ml-1">Enter 6-Digit OTP</label>
-                    <input 
-                      required
-                      autoFocus
-                      type="text" 
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                      placeholder="000000"
-                      maxLength={6}
-                      className="w-full bg-white/[0.02] border border-white/10 h-16 px-4 mono text-2xl tracking-[0.5em] text-center text-primary placeholder:text-white/10 focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-300"
-                    />
-                    <p className="text-[10px] text-white/40 text-center mt-2">
-                      Code sent to {countryCode} {mobile}
-                    </p>
+                    <details className="group border border-white/10 bg-white/[0.02]">
+                      <summary className="cursor-pointer list-none px-3 py-3 text-[13px] font-medium text-white/58 transition-colors group-open:text-white">
+                        Change path
+                      </summary>
+                      <div role="radiogroup" aria-label="Choose beta role" className="grid gap-2 border-t border-white/8 p-2">
+                        {betaRoles.filter((option) => option.value !== role).map(renderRoleButton)}
+                      </div>
+                    </details>
                   </div>
 
                   {error && (
-                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[11px] text-red-400 mono text-center">
+                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="border border-red-400/20 bg-red-400/10 px-3 py-2 text-sm leading-relaxed text-red-200">
                       {error}
                     </motion.p>
                   )}
 
-                  <div className="pt-4">
-                    <Button 
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full min-h-14 bg-primary hover:bg-primary/90 text-black font-semibold transition-all duration-200 mt-2 rounded-none group relative overflow-hidden"
+                  >
+                    <span className="relative z-10 text-[15px] font-semibold tracking-normal flex items-center justify-center gap-2">
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 size={17} className="animate-spin" />
+                          Sending SMS code
+                        </>
+                      ) : (
+                        <>
+                          <Phone size={17} />
+                          Send SMS code
+                        </>
+                      )}
+                    </span>
+                  </Button>
+
+                  <details className="group border border-white/10 bg-white/[0.03]">
+                    <summary className="flex min-h-12 cursor-pointer list-none items-center gap-3 px-3 py-3 text-sm font-medium text-white/62 transition-colors group-open:text-white">
+                      <MapPin size={17} className={locationData ? 'text-primary' : 'text-white/42'} />
+                      {locationData ? 'Pickup location saved' : 'Add pickup location if you want'}
+                    </summary>
+                    <div className="border-t border-white/8 p-3">
+                      <p className="text-[12px] leading-relaxed text-white/46">
+                        {locationData ? `DIGIPIN ${locationData.pin}` : 'Optional. Sharing location can help with pickup matching, but you can continue without it.'}
+                      </p>
+                      {locationData && <p className="mt-1 truncate text-[11px] text-white/34">{locationData.address}</p>}
+                      <button
+                        type="button"
+                        onClick={captureLocation}
+                        disabled={locationStatus === 'loading'}
+                        className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 border border-white/12 bg-black/30 px-4 text-sm font-medium text-white transition-colors hover:border-primary/40 hover:text-primary disabled:opacity-60"
+                      >
+                        {locationStatus === 'loading' ? <Loader2 size={16} className="animate-spin" /> : <MapPin size={16} />}
+                        {locationStatus === 'loading' ? 'Getting location...' : locationData ? 'Update location' : 'Use phone location'}
+                      </button>
+                      {locationMessage && (
+                        <p className={`mt-2 text-[12px] leading-relaxed ${
+                          locationStatus === 'ready' ? 'text-primary' : 'text-white/44'
+                        }`}>
+                          {locationMessage}
+                        </p>
+                      )}
+                    </div>
+                  </details>
+                </motion.form>
+              ) : (
+                <motion.form
+                  key="step-2"
+                  initial={{ opacity: 0, x: -18 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 18 }}
+                  onSubmit={handleVerifyOtp}
+                  className="space-y-5"
+                >
+                  <div className="space-y-3">
+                    <div className="flex size-12 items-center justify-center border border-primary/40 bg-primary/10 text-primary">
+                      <ShieldCheck size={23} />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Enter SMS code</h2>
+                      <p className="mt-2 text-sm leading-relaxed text-white/56">
+                        Sent to {countryCode} {mobile}. Selected path: <span className="text-white">{selectedRole.action}</span>.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium text-white" htmlFor="otp-code">6 digit code</label>
+                    <input
+                      id="otp-code"
+                      required
+                      autoFocus
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      autoComplete="one-time-code"
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      placeholder="000000"
+                      maxLength={6}
+                      className="w-full bg-white/[0.04] border border-white/12 min-h-16 px-4 text-center text-3xl tracking-[0.28em] text-primary placeholder:text-white/12 focus:border-primary focus:bg-primary/5 focus:outline-none transition-all duration-200"
+                    />
+                  </div>
+
+                  {error && (
+                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="border border-red-400/20 bg-red-400/10 px-3 py-2 text-sm leading-relaxed text-red-200">
+                      {error}
+                    </motion.p>
+                  )}
+
+                  <div className="pt-2">
+                    <Button
                       type="submit"
                       disabled={isSubmitting || otp.length < 6}
-                      className="w-full h-14 bg-primary hover:bg-primary/90 text-black font-medium transition-all duration-300 rounded-none disabled:opacity-50 disabled:bg-white/10 disabled:text-white/30"
+                      className="w-full min-h-14 bg-primary hover:bg-primary/90 text-black font-semibold transition-all duration-200 rounded-none disabled:opacity-50 disabled:bg-white/10 disabled:text-white/30"
                     >
-                      <span className="mono text-[11px] font-semibold uppercase tracking-widest flex items-center justify-center gap-2">
+                      <span className="text-[15px] font-semibold tracking-normal flex items-center justify-center gap-2">
                         {isSubmitting ? (
                           <>
-                            <div className="w-3 h-3 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-                            Verifying...
+                            <Loader2 size={17} className="animate-spin" />
+                            Verifying
                           </>
-                        ) : 'Complete Authorization'}
+                        ) : 'Verify and continue'}
                       </span>
                     </Button>
 
-                    <button 
+                    <button
                       type="button"
-                      onClick={() => setVerificationId(null)}
-                      className="w-full text-[10px] text-white/30 hover:text-white mono uppercase tracking-wider mt-6 transition-colors"
+                      onClick={() => {
+                        setVerificationId(null);
+                        setOtp('');
+                        setError('');
+                      }}
+                      className="mt-5 min-h-11 w-full text-sm font-medium text-white/46 hover:text-white transition-colors"
                     >
-                      ← Back to Phone Number
+                      Change phone number
                     </button>
                   </div>
                 </motion.form>
               )}
             </AnimatePresence>
 
-            <div className="relative py-8">
-              <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>
+            <div className="relative py-4">
+              <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/6"></div></div>
               <div className="relative flex justify-center">
-                <span className="bg-background px-4 mono text-[9px] uppercase tracking-widest text-white/20">
-                  Secure Gateway
+                <span className="bg-background px-4 text-[12px] text-white/28">
+                  Secure phone login
                 </span>
               </div>
             </div>
 
-            <p className="text-[10px] text-center text-white/30 leading-relaxed px-4">
-              By Authorizing, you agree to the Digital Orchard <a href="#" className="text-primary hover:underline">Architecture</a> and <a href="#" className="text-primary hover:underline">Data Integrity</a> protocols.
+            <p className="text-[12px] text-center text-white/38 leading-relaxed px-2">
+              By continuing, you agree to be contacted about beta access. Farmers pay Rs 0 commission on crop sales.
             </p>
           </motion.div>
         </div>
