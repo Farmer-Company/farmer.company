@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { rtdb } from '@/src/lib/firebase';
 import { ref, onValue } from 'firebase/database';
-import { useLanguage } from '@/src/lib/LanguageContext';
 import { Link } from 'react-router-dom';
 import { 
  Activity, 
@@ -24,27 +23,27 @@ const LoopingVideo = () => {
  const videoRef = useRef<HTMLVideoElement>(null);
  const rafRef = useRef<number>(0);
 
- const tick = useCallback(() => {
+ useEffect(() => {
  const video = videoRef.current;
- if (!video || !video.duration) {
+ if (!video) return;
+ video.style.opacity = '0';
+
+ const tick = () => {
+ const currentVideo = videoRef.current;
+ if (!currentVideo || !currentVideo.duration) {
  rafRef.current = requestAnimationFrame(tick);
  return;
  }
- const { currentTime, duration } = video;
+ const { currentTime, duration } = currentVideo;
  let opacity = 1;
  if (currentTime < FADE_DURATION) {
  opacity = currentTime / FADE_DURATION;
  } else if (currentTime > duration - FADE_DURATION) {
  opacity = (duration - currentTime) / FADE_DURATION;
  }
- video.style.opacity = String(opacity);
+ currentVideo.style.opacity = String(opacity);
  rafRef.current = requestAnimationFrame(tick);
- }, []);
-
- useEffect(() => {
- const video = videoRef.current;
- if (!video) return;
- video.style.opacity = '0';
+ };
 
  const handleEnded = () => {
  video.style.opacity = '0';
@@ -62,7 +61,7 @@ const LoopingVideo = () => {
  video.removeEventListener('ended', handleEnded);
  cancelAnimationFrame(rafRef.current);
  };
- }, [tick]);
+ }, []);
 
  return (
  <video
@@ -78,7 +77,6 @@ const LoopingVideo = () => {
 
 export const SocialProofSection = () => {
  const [tickerItems, setTickerItems] = useState<any[]>([]);
- const { t } = useLanguage();
 
  useEffect(() => {
  const tickerRef = ref(rtdb, '/live_ticker');
@@ -424,13 +422,3 @@ const PlayerCard = ({ role, tamil, icon, body, link }: any) => (
  </div>
 );
 
-const PARTNERS = [
- { name: 'KISAN-FPO' },
- { name: 'TAMIL-AGRI' },
- { name: 'FARMLINK' },
- { name: 'HARVEST-NET' },
- { name: 'GREEN-ROUTE' },
- { name: 'CROP-DIRECT' },
- { name: 'FIELD-BRIDGE' },
- { name: 'ORCHARD-HUB' },
-];
