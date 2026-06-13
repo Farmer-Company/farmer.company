@@ -16,6 +16,25 @@ export default defineConfig(({mode}) => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'firebase-auth': ['firebase/auth'],
+            'firebase-firestore': ['firebase/firestore'],
+            'firebase-database': ['firebase/database'],
+            'firebase-storage': ['firebase/storage'],
+            'firebase-app-check': ['firebase/app-check'],
+            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+
+            'ui-vendor': ['lucide-react', 'framer-motion', 'gsap'],
+            'map-vendor': ['maplibre-gl']
+          }
+        }
+      }
+    },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
