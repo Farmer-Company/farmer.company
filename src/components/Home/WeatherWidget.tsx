@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { fetchWeather, WeatherData } from '@/src/lib/WeatherService';
 import { Cloud, Sun, CloudRain, CloudLightning, Loader2, Thermometer } from 'lucide-react';
 
