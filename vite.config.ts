@@ -26,5 +26,18 @@ export default defineConfig(({mode}) => {
       globals: true,
       setupFiles: './src/setupTests.ts',
     },
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/firebase')) return 'firebase-vendor';
+            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router')) return 'react-vendor';
+            if (id.includes('node_modules/lucide-react') || id.includes('node_modules/framer-motion') || id.includes('node_modules/clsx') || id.includes('node_modules/tailwind-merge')) return 'ui-vendor';
+            if (id.includes('node_modules/maplibre-gl')) return 'map-vendor';
+          }
+        }
+      }
+    }
   };
 });
