@@ -21,6 +21,27 @@ export default defineConfig(({mode}) => {
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/firebase')) {
+              return 'firebase-vendor';
+            }
+            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('node_modules/lucide-react') || id.includes('node_modules/framer-motion') || id.includes('node_modules/@radix-ui') || id.includes('node_modules/gsap') || id.includes('node_modules/recharts')) {
+              return 'ui-vendor';
+            }
+            if (id.includes('node_modules/maplibre-gl') || id.includes('node_modules/three')) {
+              return 'map-vendor';
+            }
+          }
+        }
+      }
+    },
     test: {
       environment: 'jsdom',
       globals: true,
