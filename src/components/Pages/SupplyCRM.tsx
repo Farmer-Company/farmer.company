@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { 
  Globe, 
  FileText, 
@@ -8,9 +7,7 @@ import {
  Truck, 
  BarChart3, 
  ArrowRight,
- Plus,
- CheckCircle2,
- Clock
+ Plus
 } from 'lucide-react';
 
 export const SupplyCRMPage = () => {
