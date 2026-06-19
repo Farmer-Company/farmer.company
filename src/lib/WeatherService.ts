@@ -7,20 +7,24 @@ export interface WeatherData {
 
 export const fetchWeather = async (lat: number, lon: number): Promise<WeatherData> => {
  try {
- const response = await fetch(
+ const weatherPromise = fetch(
  `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
- );
- const data = await response.json();
- 
- let locationName = 'Local Region';
- try {
- const geoResponse = await fetch(
+ ).then((res) => res.json());
+
+ const geoPromise = fetch(
  `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
- );
- const geoData = await geoResponse.json();
- locationName = geoData.city || geoData.locality || geoData.principalSubdivision || 'Local Region';
- } catch (e) {
+ )
+ .then((res) => res.json())
+ .catch((e) => {
  console.warn('Reverse geocode failed:', e);
+ return null;
+ });
+
+ const [data, geoData] = await Promise.all([weatherPromise, geoPromise]);
+
+ let locationName = 'Local Region';
+ if (geoData) {
+ locationName = geoData.city || geoData.locality || geoData.principalSubdivision || 'Local Region';
  }
  
  // Simplistic condition mapping based on WMO code
