@@ -8,7 +8,7 @@ import { userService, farmerService } from '@/src/lib/os-services';
 import { UserRole } from '@/src/lib/os-types';
 
 export const ConfigurePage = () => {
- const { t } = useLanguage();
+ const languageContext = useLanguage();
  const { user, profile } = useAuth();
  const navigate = useNavigate();
  const [step, setStep] = useState(1);
@@ -84,7 +84,7 @@ export const ConfigurePage = () => {
  return (
  <div className="pt-32 px-10 min-h-screen bg-background text-white pb-32">
  <h1 className="display text-6xl font-light normal-case tracking-tight mb-4">
- {t('configure')}<span className="text-primary">.</span>
+ {languageContext.t('configure')}<span className="text-primary">.</span>
  </h1>
  <p className="text-foreground-muted normal-case text-sm">Configure your Digital Orchard Identity</p>
  
