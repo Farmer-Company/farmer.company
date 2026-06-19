@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLanguage } from '@/src/lib/LanguageContext';
 import { motion } from 'framer-motion';
 import { ArrowRight, Activity, TrendingUp, ShieldAlert, BarChart3, Globe } from 'lucide-react';
