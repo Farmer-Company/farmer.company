@@ -5,6 +5,18 @@ export interface WeatherData {
  icon: string;
 }
 
+// Simplistic condition mapping based on WMO code
+export const getCondition = (code: number) => {
+ if (code === 0) return 'Clear';
+ if (code <= 3) return 'Partly Cloudy';
+ if (code >= 45 && code <= 48) return 'Foggy';
+ if (code >= 51 && code <= 67) return 'Rainy';
+ if (code >= 71 && code <= 77) return 'Snowy';
+ if (code >= 80 && code <= 82) return 'Showers';
+ if (code >= 95) return 'Stormy';
+ return 'Cloudy';
+};
+
 export const fetchWeather = async (lat: number, lon: number): Promise<WeatherData> => {
  try {
  const response = await fetch(
@@ -22,18 +34,6 @@ export const fetchWeather = async (lat: number, lon: number): Promise<WeatherDat
  } catch (e) {
  console.warn('Reverse geocode failed:', e);
  }
- 
- // Simplistic condition mapping based on WMO code
- const getCondition = (code: number) => {
- if (code === 0) return 'Clear';
- if (code <= 3) return 'Partly Cloudy';
- if (code >= 45 && code <= 48) return 'Foggy';
- if (code >= 51 && code <= 67) return 'Rainy';
- if (code >= 71 && code <= 77) return 'Snowy';
- if (code >= 80 && code <= 82) return 'Showers';
- if (code >= 95) return 'Stormy';
- return 'Cloudy';
- };
 
  return {
  temp: Math.round(data.current_weather.temperature),
