@@ -14,7 +14,7 @@ import {
 import { useLanguage } from '@/src/lib/LanguageContext';
 import { useAuth } from '@/src/lib/AuthContext';
 import { Button } from '@/components/ui/button';
-import { markets, type MarketData } from '@/src/data/markets';
+import { markets } from '@/src/data/markets';
 import { getMarketSignal } from '@/src/lib/marketSignals';
 import {
  createTradeIntent,
@@ -39,7 +39,7 @@ type IntentFormState = {
 };
 
 const createIntentDraft = (
- market: MarketData,
+  market: (typeof markets)[number],
  type: TradeIntentType,
  fullName: string,
  phoneNumber: string
@@ -136,7 +136,7 @@ export const MarketPage = () => {
  });
  };
 
- const openIntentForm = (market: MarketData, type: TradeIntentType) => {
+ const openIntentForm = (market: (typeof markets)[number], type: TradeIntentType) => {
  setIntentStatus('');
  setIntentForm(
  createIntentDraft(
