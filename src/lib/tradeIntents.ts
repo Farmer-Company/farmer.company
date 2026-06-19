@@ -30,7 +30,7 @@ export interface SavedTradeIntent extends TradeIntentInput {
  failureReason?: string;
 }
 
-const readLocalIntents = (): SavedTradeIntent[] => {
+export const readLocalIntents = (): SavedTradeIntent[] => {
  if (typeof window === 'undefined') {
  return [];
  }
