@@ -13,8 +13,7 @@ import {
  where, 
  getDocs,
  onSnapshot,
- Timestamp,
- updateDoc
+ Timestamp
 } from 'firebase/firestore';
 import type { 
  AppUser, 
