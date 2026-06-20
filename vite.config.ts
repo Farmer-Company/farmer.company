@@ -33,7 +33,8 @@ export default defineConfig(({mode}) => {
           manualChunks: {
             'firebase-vendor': ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/database'],
             'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-            'ui-vendor': ['framer-motion', 'lucide-react', 'clsx', 'tailwind-merge']
+            'ui-vendor': ['framer-motion', 'lucide-react', 'clsx', 'tailwind-merge'],
+            'map-vendor': ['maplibre-gl']
           }
         }
       }
