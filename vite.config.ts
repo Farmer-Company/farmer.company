@@ -16,6 +16,25 @@ export default defineConfig(({mode}) => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('firebase')) return 'firebase-vendor';
+              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) return 'react-vendor';
+              if (id.includes('motion') || id.includes('framer-motion') || id.includes('lucide-react') || id.includes('clsx') || id.includes('tailwind-merge') || id.includes('@base-ui/react') || id.includes('@radix-ui/react-slot')) return 'ui-vendor';
+              if (id.includes('maplibre-gl')) return 'map-vendor';
+              if (id.includes('three') || id.includes('gsap')) return '3d-vendor';
+              if (id.includes('recharts')) return 'chart-vendor';
+              if (id.includes('@google/genai')) return 'genai-vendor';
+              if (id.includes('hls.js') || id.includes('react-markdown')) return 'other-vendor';
+            }
+          }
+        }
+      }
+    },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
