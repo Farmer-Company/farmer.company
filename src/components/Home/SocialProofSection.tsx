@@ -24,7 +24,7 @@ const LoopingVideo = () => {
  const videoRef = useRef<HTMLVideoElement>(null);
  const rafRef = useRef<number>(0);
 
- const tick = useCallback(() => {
+ const tick = useCallback(function tick() {
  const video = videoRef.current;
  if (!video || !video.duration) {
  rafRef.current = requestAnimationFrame(tick);
