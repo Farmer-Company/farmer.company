@@ -27,7 +27,6 @@ export default defineConfig(({mode}) => {
             'map-vendor': ['maplibre-gl'],
             '3d-vendor': ['three', 'gsap'],
             'chart-vendor': ['recharts'],
-            'genai-vendor': ['@google/genai'],
             'other-vendor': ['hls.js', 'react-markdown']
           }
         }
