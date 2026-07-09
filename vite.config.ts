@@ -34,6 +34,10 @@ export default defineConfig(({mode}) => {
             if (id.includes('node_modules/recharts')) return 'chart-vendor';
             if (id.includes('node_modules/@google/genai')) return 'genai-vendor';
             if (id.includes('node_modules/hls.js') || id.includes('node_modules/react-markdown')) return 'other-vendor';
+
+            if (id.includes('node_modules/')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString();
+            }
           },
         },
       },
