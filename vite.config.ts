@@ -21,6 +21,27 @@ export default defineConfig(({mode}) => {
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/firebase')) return 'firebase-vendor';
+            if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/') || id.includes('node_modules/react-router-dom/')) return 'react-vendor';
+            if (id.includes('node_modules/motion') || id.includes('node_modules/framer-motion') || id.includes('node_modules/lucide-react') || id.includes('node_modules/clsx') || id.includes('node_modules/tailwind-merge') || id.includes('node_modules/@base-ui/react') || id.includes('node_modules/@radix-ui/react-slot')) return 'ui-vendor';
+            if (id.includes('node_modules/maplibre-gl')) return 'map-vendor';
+            if (id.includes('node_modules/three') || id.includes('node_modules/gsap')) return '3d-vendor';
+            if (id.includes('node_modules/recharts')) return 'chart-vendor';
+            if (id.includes('node_modules/@google/genai')) return 'genai-vendor';
+            if (id.includes('node_modules/hls.js') || id.includes('node_modules/react-markdown')) return 'other-vendor';
+
+            if (id.includes('node_modules/')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString();
+            }
+          },
+        },
+      },
+    },
     test: {
       environment: 'jsdom',
       globals: true,
