@@ -1,13 +1,11 @@
 # Farmer.Company
 
-<<<<<<< HEAD
 ![Status](https://img.shields.io/badge/status-beta-yellow)
+
 ![React](https://img.shields.io/badge/react-19-61DAFB)
 ![Vite](https://img.shields.io/badge/vite-6-646CFF)
 ![TypeScript](https://img.shields.io/badge/typescript-5.8-3178C6)
 ![Firebase](https://img.shields.io/badge/firebase-enabled-FFCA28)
-=======
->>>>>>> 750a8b67faf73fe604be85fe567fe6c0a32d8403
 
 Farmer.Company is an India-first agricultural commerce and market intelligence platform for farmers, aggregators, vendors, logistics partners, researchers, institutions, and operations teams.
 
