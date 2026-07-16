@@ -43,6 +43,18 @@ export default defineConfig(({mode}) => {
             ) {
               return 'react-vendor';
             }
+            if (id.includes('node_modules/three')) {
+              return 'three-vendor';
+            }
+            if (id.includes('node_modules/gsap')) {
+              return 'gsap-vendor';
+            }
+            if (id.includes('node_modules/framer-motion')) {
+              return 'framer-motion-vendor';
+            }
+            if (id.includes('node_modules/maplibre-gl')) {
+              return 'maplibre-vendor';
+            }
             if (id.includes('node_modules/')) {
               return id.toString().split('node_modules/')[1].split('/')[0].toString();
             }
