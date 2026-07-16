@@ -20,7 +20,7 @@ import type {
  AppUser, 
  FarmerProfile, 
  Listing, 
- Order, 
+ Order,
  SKU,
  ProductionRecord,
  Forecast

@@ -26,5 +26,48 @@ export default defineConfig(({mode}) => {
       globals: true,
       setupFiles: './src/setupTests.ts',
     },
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/firebase')) {
+              return 'firebase-vendor';
+            }
+            if (
+              id.includes('node_modules/react/') ||
+              id.includes('node_modules/react-dom/') ||
+              id.includes('node_modules/react-router/') ||
+              id.includes('node_modules/react-router-dom/') ||
+              id.includes('node_modules/lucide-react/')
+            ) {
+              return 'react-vendor';
+            }
+            if (id.includes('node_modules/three')) {
+              return 'three-vendor';
+            }
+            if (id.includes('node_modules/gsap')) {
+              return 'gsap-vendor';
+            }
+            if (id.includes('node_modules/framer-motion')) {
+              return 'framer-motion-vendor';
+            }
+            if (id.includes('node_modules/maplibre-gl')) {
+              return 'maplibre-vendor';
+            }
+            if (id.includes('node_modules/recharts')) {
+              return 'recharts-vendor';
+            }
+            if (id.includes('node_modules/')) {
+              const parts = id.toString().split('node_modules/')[1].split('/');
+              if (parts[0].startsWith('@')) {
+                  return parts[0] + '/' + parts[1];
+              }
+              return parts[0].toString();
+            }
+          },
+        },
+      },
+    },
   };
 });
