@@ -55,8 +55,15 @@ export default defineConfig(({mode}) => {
             if (id.includes('node_modules/maplibre-gl')) {
               return 'maplibre-vendor';
             }
+            if (id.includes('node_modules/recharts')) {
+              return 'recharts-vendor';
+            }
             if (id.includes('node_modules/')) {
-              return id.toString().split('node_modules/')[1].split('/')[0].toString();
+              const parts = id.toString().split('node_modules/')[1].split('/');
+              if (parts[0].startsWith('@')) {
+                  return parts[0] + '/' + parts[1];
+              }
+              return parts[0].toString();
             }
           },
         },

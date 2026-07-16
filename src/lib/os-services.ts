@@ -13,13 +13,15 @@ import {
  where, 
  getDocs,
  onSnapshot,
- Timestamp
+ Timestamp,
+ updateDoc
 } from 'firebase/firestore';
 import type { 
  AppUser, 
  FarmerProfile, 
  Listing, 
  Order,
+ SKU,
  ProductionRecord,
  Forecast
 } from './os-types';

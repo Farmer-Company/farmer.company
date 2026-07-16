@@ -11,6 +11,7 @@ import {
  Search,
  ShoppingCart,
 } from 'lucide-react';
+import { useLanguage } from '@/src/lib/LanguageContext';
 import { useAuth } from '@/src/lib/AuthContext';
 import { Button } from '@/components/ui/button';
 import { markets, type MarketData } from '@/src/data/markets';
@@ -57,6 +58,7 @@ const createIntentDraft = (
 });
 
 export const MarketPage = () => {
+ const { t } = useLanguage();
  const { user, profile } = useAuth();
  const [filter, setFilter] = useState('');
  const [stateFilter, setStateFilter] = useState('');

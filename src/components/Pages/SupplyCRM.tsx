@@ -8,7 +8,9 @@ import {
  Truck, 
  BarChart3, 
  ArrowRight,
- Plus
+ Plus,
+ CheckCircle2,
+ Clock
 } from 'lucide-react';
 
 export const SupplyCRMPage = () => {
