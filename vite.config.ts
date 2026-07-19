@@ -31,7 +31,10 @@ export default defineConfig(({mode}) => {
       rollupOptions: {
         output: {
           manualChunks: (id) => {
-            if (id.includes('node_modules/firebase')) {
+            if (id.includes('src/data/Market.json')) {
+              return 'market-data';
+            }
+            if (id.includes('node_modules/firebase') || id.includes('node_modules/@firebase')) {
               return 'firebase-vendor';
             }
             if (
