@@ -11,10 +11,9 @@ import {
  Search,
  ShoppingCart,
 } from 'lucide-react';
-import { useLanguage } from '@/src/lib/LanguageContext';
 import { useAuth } from '@/src/lib/AuthContext';
 import { Button } from '@/components/ui/button';
-import { markets, type MarketData } from '@/src/data/markets';
+import { markets, type MarketData, allStates, allTiers, allDistricts, stateToDistrictsMap } from '@/src/data/markets';
 import { getMarketSignal } from '@/src/lib/marketSignals';
 import {
  createTradeIntent,
@@ -58,7 +57,6 @@ const createIntentDraft = (
 });
 
 export const MarketPage = () => {
- const { t } = useLanguage();
  const { user, profile } = useAuth();
  const [filter, setFilter] = useState('');
  const [stateFilter, setStateFilter] = useState('');
@@ -94,12 +92,7 @@ export const MarketPage = () => {
  setSavedIntentCount(getSavedTradeIntents().length);
  }, []);
 
- const states = useMemo(() => [...new Set(markets.map((m) => m.State))].sort(), []);
- const districts = useMemo(() => {
- const filtered = stateFilter ? markets.filter((m) => m.State === stateFilter) : markets;
- return [...new Set(filtered.map((m) => m.District))].sort();
- }, [stateFilter]);
- const tiers = useMemo(() => [...new Set(markets.map((m) => m.node_tier))].sort(), []);
+ const districts = stateFilter ? stateToDistrictsMap[stateFilter] || [] : allDistricts;
 
  const filteredNodes = useMemo(() => {
  return markets.filter((market) => {
@@ -246,7 +239,7 @@ export const MarketPage = () => {
  style={{ fontFamily: '"Inter", sans-serif' }}
  >
  <option value="" className="bg-black">All States</option>
- {states.map((state) => (
+ {allStates.map((state) => (
  <option key={state} value={state} className="bg-black">{state}</option>
  ))}
  </select>
@@ -278,7 +271,7 @@ export const MarketPage = () => {
  style={{ fontFamily: '"Inter", sans-serif' }}
  >
  <option value="" className="bg-black">All Tiers</option>
- {tiers.map((tier) => (
+ {allTiers.map((tier) => (
  <option key={tier} value={tier} className="bg-black">{tier}</option>
  ))}
  </select>
