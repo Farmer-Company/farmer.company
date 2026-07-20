@@ -1,0 +1,115 @@
+
+> react-example@0.0.0 lint
+> eslint . && tsc --noEmit
+
+
+/app/components/ui/button.tsx
+  52:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/app/components/ui/liquid-glass-button.tsx
+  59:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  59:34  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/app/src/components/ErrorBoundary.tsx
+  27:11  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+/app/src/components/Home/SocialProofSection.tsx
+   30:41  warning  Error: Cannot access variable before it is declared
+
+`tick` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+/app/src/components/Home/SocialProofSection.tsx:30:41
+  28 |  const video = videoRef.current;
+  29 |  if (!video || !video.duration) {
+> 30 |  rafRef.current = requestAnimationFrame(tick);
+     |                                         ^^^^ `tick` accessed before it is declared
+  31 |  return;
+  32 |  }
+  33 |  const { currentTime, duration } = video;
+
+/app/src/components/Home/SocialProofSection.tsx:27:2
+  25 |  const rafRef = useRef<number>(0);
+  26 |
+> 27 |  const tick = useCallback(() => {
+     |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 28 |  const video = videoRef.current;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 29 |  if (!video || !video.duration) {
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 41 |  rafRef.current = requestAnimationFrame(tick);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 42 |  }, []);
+     | ^^^^^^^^^ `tick` is declared here
+  43 |
+  44 |  useEffect(() => {
+  45 |  const video = videoRef.current;  react-hooks/immutability
+   81:10  warning  't' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  427:7   warning  'PARTNERS' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+
+/app/src/components/Home/WeatherWidget.tsx
+   2:18  warning  'AnimatePresence' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  18:11  warning  'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  62:3   warning  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+/app/src/components/Home/WeatherWidget.tsx:62:3
+  60 |  <span className="mono text-[10px] text-primary font-medium normal-case ">Atmosphere Node</span>
+  61 |  <div className="flex items-center gap-2">
+> 62 |  <WeatherIcon />
+     |   ^^^^^^^^^^^ This component is created during render
+  63 |  <span className="display text-3xl font-light text-white">{weather.temp}°C</span>
+  64 |  </div>
+  65 |  </div>
+
+/app/src/components/Home/WeatherWidget.tsx:43:22
+  41 |  if (error || !weather) return null;
+  42 |
+> 43 |  const WeatherIcon = () => {
+     |                      ^^^^^^^
+> 44 |  const condition = weather.condition.toLowerCase();
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 45 |  if (condition.includes('clear')) return <Sun size={20} className="text-yellow-500" />;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 46 |  if (condition.includes('rain')) return <CloudRain size={20} className="text-blue-500" />;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 47 |  if (condition.includes('storm')) return <CloudLightning size={20} className="text-primary" />;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 48 |  return <Cloud size={20} className="text-white/40" />;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 49 |  };
+     | ^^^ The component is created during render here
+  50 |
+  51 |  return (
+  52 |  <motion.div   react-hooks/static-components
+
+/app/src/components/Pages/DemoPage.tsx
+  3:71  warning  'ArrowRight' is defined but never used  @typescript-eslint/no-unused-vars
+
+/app/src/components/Pages/LogisticsPage.tsx
+   8:3  warning  'CheckCircle' is defined but never used  @typescript-eslint/no-unused-vars
+  21:3  warning  'PhoneCall' is defined but never used    @typescript-eslint/no-unused-vars
+
+/app/src/components/Pages/Market.tsx
+  61:10  warning  't' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/app/src/components/Pages/Story.tsx
+  1:36  warning  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+
+/app/src/components/Pages/SupplyCRM.tsx
+  12:2  warning  'CheckCircle2' is defined but never used  @typescript-eslint/no-unused-vars
+  13:2  warning  'Clock' is defined but never used         @typescript-eslint/no-unused-vars
+
+/app/src/lib/AuthContext.tsx
+  40:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/app/src/lib/LanguageContext.tsx
+  188:5   warning  React Hook useEffect has a missing dependency: 'language'. Either include it or remove the dependency array                     react-hooks/exhaustive-deps
+  201:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/app/src/lib/os-services.ts
+  17:2  warning  'updateDoc' is defined but never used  @typescript-eslint/no-unused-vars
+  24:2  warning  'SKU' is defined but never used        @typescript-eslint/no-unused-vars
+
+✖ 22 problems (0 errors, 22 warnings)
