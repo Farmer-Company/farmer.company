@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { rtdb } from '@/src/lib/firebase';
 import { ref, onValue } from 'firebase/database';
-import { useLanguage } from '@/src/lib/LanguageContext';
 import { Link } from 'react-router-dom';
 import { 
  Activity, 
@@ -24,7 +23,7 @@ const LoopingVideo = () => {
  const videoRef = useRef<HTMLVideoElement>(null);
  const rafRef = useRef<number>(0);
 
- const tick = useCallback(() => {
+ const tick = useCallback(function tick() {
  const video = videoRef.current;
  if (!video || !video.duration) {
  rafRef.current = requestAnimationFrame(tick);
@@ -78,7 +77,7 @@ const LoopingVideo = () => {
 
 export const SocialProofSection = () => {
  const [tickerItems, setTickerItems] = useState<any[]>([]);
- const { t } = useLanguage();
+
 
  useEffect(() => {
  const tickerRef = ref(rtdb, '/live_ticker');
@@ -424,13 +423,3 @@ const PlayerCard = ({ role, tamil, icon, body, link }: any) => (
  </div>
 );
 
-const PARTNERS = [
- { name: 'KISAN-FPO' },
- { name: 'TAMIL-AGRI' },
- { name: 'FARMLINK' },
- { name: 'HARVEST-NET' },
- { name: 'GREEN-ROUTE' },
- { name: 'CROP-DIRECT' },
- { name: 'FIELD-BRIDGE' },
- { name: 'ORCHARD-HUB' },
-];
