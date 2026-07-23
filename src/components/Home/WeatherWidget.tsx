@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { fetchWeather, WeatherData } from '@/src/lib/WeatherService';
 import { Cloud, Sun, CloudRain, CloudLightning, Loader2, Thermometer } from 'lucide-react';
 
@@ -15,7 +15,7 @@ export const WeatherWidget = () => {
  try {
  const data = await fetchWeather(position.coords.latitude, position.coords.longitude);
  setWeather(data);
- } catch (e) {
+ } catch {
  setError(true);
  } finally {
  setLoading(false);
@@ -40,13 +40,15 @@ export const WeatherWidget = () => {
 
  if (error || !weather) return null;
 
- const WeatherIcon = () => {
  const condition = weather.condition.toLowerCase();
- if (condition.includes('clear')) return <Sun size={20} className="text-yellow-500" />;
- if (condition.includes('rain')) return <CloudRain size={20} className="text-blue-500" />;
- if (condition.includes('storm')) return <CloudLightning size={20} className="text-primary" />;
- return <Cloud size={20} className="text-white/40" />;
- };
+ let weatherIcon = <Cloud size={20} className="text-white/40" />;
+ if (condition.includes('clear')) {
+   weatherIcon = <Sun size={20} className="text-yellow-500" />;
+ } else if (condition.includes('rain')) {
+   weatherIcon = <CloudRain size={20} className="text-blue-500" />;
+ } else if (condition.includes('storm')) {
+   weatherIcon = <CloudLightning size={20} className="text-primary" />;
+ }
 
  return (
  <motion.div 
@@ -59,7 +61,7 @@ export const WeatherWidget = () => {
  <div className="flex flex-col gap-1">
  <span className="mono text-[10px] text-primary font-medium normal-case ">Atmosphere Node</span>
  <div className="flex items-center gap-2">
- <WeatherIcon />
+ {weatherIcon}
  <span className="display text-3xl font-light text-white">{weather.temp}°C</span>
  </div>
  </div>
