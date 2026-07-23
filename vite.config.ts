@@ -26,5 +26,38 @@ export default defineConfig(({mode}) => {
       globals: true,
       setupFiles: './src/setupTests.ts',
     },
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'firebase-vendor': [
+              'firebase/app',
+              'firebase/auth',
+              'firebase/firestore',
+              'firebase/storage',
+              'firebase/database',
+              'firebase/app-check',
+              '@firebase/app',
+              '@firebase/auth',
+              '@firebase/firestore',
+              '@firebase/storage',
+              '@firebase/database',
+              '@firebase/app-check'
+            ],
+            'market-data': ['src/data/Market.json'],
+            'react-vendor': [
+              'react',
+              'react-dom',
+              'react-router',
+              'react-router-dom',
+              'lucide-react'
+            ],
+            'three-vendor': ['three'],
+            'maplibre-vendor': ['maplibre-gl'],
+          },
+        },
+      },
+    },
   };
 });
