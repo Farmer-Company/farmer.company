@@ -53,6 +53,8 @@ export default defineConfig(({mode}) => {
               'react-router-dom',
               'lucide-react'
             ],
+            'three-vendor': ['three'],
+            'maplibre-vendor': ['maplibre-gl'],
           },
         },
       },
