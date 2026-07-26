@@ -6,6 +6,7 @@ export interface MarketData {
  District: string;
  Market: string;
  total_arrivals: number;
+
  node_tier: string;
 }
 
