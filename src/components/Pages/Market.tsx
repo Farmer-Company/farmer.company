@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/src/lib/AuthContext';
 import { Button } from '@/components/ui/button';
-import { markets, type MarketData } from '@/src/data/markets';
+import { markets, allStates, allTiers, allDistricts, stateToDistrictsMap, type MarketData } from '@/src/data/markets';
 import { getMarketSignal } from '@/src/lib/marketSignals';
 import {
  createTradeIntent,
@@ -92,12 +92,14 @@ export const MarketPage = () => {
  setSavedIntentCount(getSavedTradeIntents().length);
  }, []);
 
- const states = useMemo(() => [...new Set(markets.map((m) => m.State))].sort(), []);
+ const states = useMemo(() => allStates, []);
  const districts = useMemo(() => {
- const filtered = stateFilter ? markets.filter((m) => m.State === stateFilter) : markets;
- return [...new Set(filtered.map((m) => m.District))].sort();
+ if (!stateFilter) {
+   return allDistricts;
+ }
+ return Array.from(stateToDistrictsMap[stateFilter] || []);
  }, [stateFilter]);
- const tiers = useMemo(() => [...new Set(markets.map((m) => m.node_tier))].sort(), []);
+ const tiers = useMemo(() => allTiers, []);
 
  const filteredNodes = useMemo(() => {
  return markets.filter((market) => {
