@@ -1,13 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 type Language = 'en' | 'hi' | 'ta' | 'kn' | 'te' | 'mr' | 'bn';
-
-interface LanguageContextType {
- language: Language;
- setLanguage: (lang: Language) => void;
- suggestedLanguage: Language | null;
- t: (key: string) => string;
-}
 
 const translations: Record<Language, Record<string, string>> = {
  en: {
@@ -147,25 +140,36 @@ const translations: Record<Language, Record<string, string>> = {
  }
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+import { create } from 'zustand';
+
+interface LanguageState {
+ language: Language;
+ suggestedLanguage: Language | null;
+ setLanguage: (lang: Language) => void;
+ setSuggestedLanguage: (lang: Language | null) => void;
+ t: (key: string) => string;
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useLanguage = create<LanguageState>((set, get) => ({
+ language: (typeof window !== 'undefined' && localStorage.getItem('farmer-company-language') as Language) || 'en',
+ suggestedLanguage: null,
+ setLanguage: (lang) => {
+  if (typeof window !== 'undefined') {
+   localStorage.setItem('farmer-company-language', lang);
+  }
+  set({ language: lang });
+ },
+ setSuggestedLanguage: (lang) => set({ suggestedLanguage: lang }),
+ t: (key: string) => {
+  const currentLang = get().language;
+  return translations[currentLang][key] || translations['en'][key] || key;
+ },
+}));
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
- const [language, setLanguageState] = useState<Language>(() => {
- if (typeof window !== 'undefined') {
- const stored = localStorage.getItem('farmer-company-language');
- if (stored) return stored as Language;
- }
- return 'en';
- });
-
- const setLanguage = (lang: Language) => {
- setLanguageState(lang);
- if (typeof window !== 'undefined') {
- localStorage.setItem('farmer-company-language', lang);
- }
- };
- 
- const [suggestedLanguage, setSuggestedLanguage] = useState<Language | null>(null);
+ const language = useLanguage((state) => state.language);
+ const setSuggestedLanguage = useLanguage((state) => state.setSuggestedLanguage);
 
  useEffect(() => {
  if (navigator.geolocation) {
@@ -185,21 +189,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
  }
  });
  }
+ // eslint-disable-next-line react-hooks/exhaustive-deps
  }, []);
 
- const t = (key: string) => {
- return translations[language][key] || translations['en'][key] || key;
- };
-
- return (
- <LanguageContext.Provider value={{ language, setLanguage, suggestedLanguage, t }}>
- {children}
- </LanguageContext.Provider>
- );
-};
-
-export const useLanguage = () => {
- const context = useContext(LanguageContext);
- if (!context) throw new Error('useLanguage must be used within LanguageProvider');
- return context;
+ return <>{children}</>;
 };
