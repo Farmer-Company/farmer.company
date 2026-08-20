@@ -1,44 +1,34 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { create } from 'zustand';
 import { auth } from './firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { userService } from './os-services';
 import { AppUser } from './os-types';
 
-interface AuthContextType {
- user: User | null;
- profile: AppUser | null;
- loading: boolean;
+interface AuthState {
+  user: User | null;
+  profile: AppUser | null;
+  loading: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const useAuth = create<AuthState>(() => ({
+  user: null,
+  profile: null,
+  loading: true,
+}));
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
- const [user, setUser] = useState<User | null>(null);
- const [profile, setProfile] = useState<AppUser | null>(null);
- const [loading, setLoading] = useState(true);
-
- useEffect(() => {
- return onAuthStateChanged(auth, async (u) => {
- setUser(u);
- if (u) {
- const p = await userService.get(u.uid);
- setProfile(p);
- } else {
- setProfile(null);
- }
- setLoading(false);
- });
- }, []);
-
- return (
- <AuthContext.Provider value={{ user, profile, loading }}>
- {children}
- </AuthContext.Provider>
- );
-};
-
-export const useAuth = () => {
- const context = useContext(AuthContext);
- if (context === undefined) throw new Error('useAuth must be used within AuthProvider');
- return context;
-};
+// Initialize auth listener
+if (typeof window !== 'undefined') {
+  onAuthStateChanged(auth, async (u) => {
+    if (u) {
+      useAuth.setState({ user: u, loading: true });
+      try {
+        const p = await userService.get(u.uid);
+        useAuth.setState({ profile: p, loading: false });
+      } catch (error) {
+        useAuth.setState({ profile: null, loading: false });
+      }
+    } else {
+      useAuth.setState({ user: null, profile: null, loading: false });
+    }
+  });
+}

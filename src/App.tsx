@@ -19,8 +19,6 @@ import { TestimonialsSection } from './components/Home/TestimonialsSection';
 import { TrustSection } from './components/Home/TrustSection';
 import { FAQSection } from './components/Home/FAQSection';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { LanguageProvider } from './lib/LanguageContext';
-import { AuthProvider } from './lib/AuthContext';
 import { MarketPage } from './components/Pages/Market';
 import { PricesPage } from './components/Pages/Prices';
 import { InsightsPage } from './components/Pages/Insights';
@@ -59,8 +57,6 @@ const HomePage = () => (
 export default function App() {
  return (
  <Router>
- <LanguageProvider>
- <AuthProvider>
  <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground relative overflow-x-hidden">
  <ErrorBoundary>
  <Navbar />
@@ -90,8 +86,6 @@ export default function App() {
  <Footer />
  </ErrorBoundary>
  </div>
- </AuthProvider>
- </LanguageProvider>
  </Router>
  );
 }
