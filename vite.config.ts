@@ -37,7 +37,6 @@ export default defineConfig(({mode}) => {
               'firebase/app-check'
             ],
             'three-vendor': ['three'],
-            'maplibre-vendor': ['maplibre-gl'],
             'market-data': ['./src/data/Market.json']
           }
         }

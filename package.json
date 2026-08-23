@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "NODE_OPTIONS='--max_old_space_size=4096' vite build",
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 vite build",
     "preview": "npm run build && vite preview --host=0.0.0.0",
     "clean": "rm -rf dist",
     "lint": "eslint . && tsc --noEmit",
