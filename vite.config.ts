@@ -20,20 +20,25 @@ export default defineConfig(({mode}) => {
       chunkSizeWarningLimit: 4000,
       rollupOptions: {
         output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom', 'react-router', 'react-router-dom', 'lucide-react'],
-            'firebase-vendor': [
-              'firebase/app',
-              'firebase/auth',
-              '@firebase/app',
-              'firebase/firestore',
-              'firebase/database',
-              'firebase/storage',
-              'firebase/app-check'
-            ],
-            'three-vendor': ['three'],
-            'maplibre-vendor': ['maplibre-gl'],
-            'market-data': ['./src/data/Market.json']
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') || id.includes('react-router-dom') || id.includes('lucide-react')) {
+                return 'react-vendor';
+              }
+              if (id.includes('firebase')) {
+                return 'firebase-vendor';
+              }
+              if (id.includes('three')) {
+                return 'three-vendor';
+              }
+              if (id.includes('maplibre-gl')) {
+                return 'maplibre-vendor';
+              }
+            }
+            // Explicitly chunk Market.json
+            if (id.includes('src/data/Market.json')) {
+              return 'market-data';
+            }
           }
         }
       }
