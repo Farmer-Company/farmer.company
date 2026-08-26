@@ -14,14 +14,12 @@ import {
  getDocs,
  onSnapshot,
  Timestamp,
- updateDoc
-} from 'firebase/firestore';
+ } from 'firebase/firestore';
 import type { 
  AppUser, 
  FarmerProfile, 
  Listing, 
  Order, 
- SKU,
  ProductionRecord,
  Forecast
 } from './os-types';
