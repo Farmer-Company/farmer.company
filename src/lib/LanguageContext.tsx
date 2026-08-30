@@ -1,13 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { create } from 'zustand';
 
 type Language = 'en' | 'hi' | 'ta' | 'kn' | 'te' | 'mr' | 'bn';
-
-interface LanguageContextType {
- language: Language;
- setLanguage: (lang: Language) => void;
- suggestedLanguage: Language | null;
- t: (key: string) => string;
-}
 
 const translations: Record<Language, Record<string, string>> = {
  en: {
@@ -147,59 +140,52 @@ const translations: Record<Language, Record<string, string>> = {
  }
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+interface LanguageStore {
+  language: Language;
+  suggestedLanguage: Language | null;
+  setLanguage: (lang: Language) => void;
+  setSuggestedLanguage: (lang: Language | null) => void;
+  t: (key: string) => string;
+}
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
- const [language, setLanguageState] = useState<Language>(() => {
- if (typeof window !== 'undefined') {
- const stored = localStorage.getItem('farmer-company-language');
- if (stored) return stored as Language;
- }
- return 'en';
- });
-
- const setLanguage = (lang: Language) => {
- setLanguageState(lang);
- if (typeof window !== 'undefined') {
- localStorage.setItem('farmer-company-language', lang);
- }
- };
- 
- const [suggestedLanguage, setSuggestedLanguage] = useState<Language | null>(null);
-
- useEffect(() => {
- if (navigator.geolocation) {
- navigator.geolocation.getCurrentPosition((position) => {
- const { latitude, longitude } = position.coords;
- let detected: Language | null = null;
- 
- if (latitude >= 8 && latitude <= 14 && longitude >= 76 && longitude <= 81) detected = 'ta';
- else if (latitude >= 11 && latitude <= 19 && longitude >= 74 && longitude <= 78.5) detected = 'kn';
- else if (latitude >= 15.5 && latitude <= 22 && longitude >= 72.5 && longitude <= 81) detected = 'mr';
- else if (latitude >= 12 && latitude <= 19.5 && longitude >= 77 && longitude <= 85) detected = 'te';
- else if (latitude >= 21.5 && latitude <= 27.5 && longitude >= 85.5 && longitude <= 90) detected = 'bn';
- else if (latitude >= 20 && latitude <= 37 && longitude >= 68 && longitude <= 97) detected = 'hi';
-
- if (detected && detected !== language) {
- setSuggestedLanguage(detected);
- }
- });
- }
- }, []);
-
- const t = (key: string) => {
- return translations[language][key] || translations['en'][key] || key;
- };
-
- return (
- <LanguageContext.Provider value={{ language, setLanguage, suggestedLanguage, t }}>
- {children}
- </LanguageContext.Provider>
- );
+const getInitialLanguage = (): Language => {
+  if (typeof window !== 'undefined') {
+    const stored = localStorage.getItem('farmer-company-language');
+    if (stored) return stored as Language;
+  }
+  return 'en';
 };
+export const useLanguage = create<LanguageStore>((set, get) => ({
+  language: getInitialLanguage(),
+  suggestedLanguage: null,
+  setLanguage: (lang) => {
+    set({ language: lang });
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('farmer-company-language', lang);
+    }
+  },
+  setSuggestedLanguage: (lang) => set({ suggestedLanguage: lang }),
+  t: (key: string) => {
+    const lang = get().language;
+    return translations[lang]?.[key] || translations['en']?.[key] || key;
+  },
+}));
 
-export const useLanguage = () => {
- const context = useContext(LanguageContext);
- if (!context) throw new Error('useLanguage must be used within LanguageProvider');
- return context;
-};
+if (typeof window !== 'undefined' && navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition((position) => {
+    const { latitude, longitude } = position.coords;
+    let detected: Language | null = null;
+
+    if (latitude >= 8 && latitude <= 14 && longitude >= 76 && longitude <= 81) detected = 'ta';
+    else if (latitude >= 11 && latitude <= 19 && longitude >= 74 && longitude <= 78.5) detected = 'kn';
+    else if (latitude >= 15.5 && latitude <= 22 && longitude >= 72.5 && longitude <= 81) detected = 'mr';
+    else if (latitude >= 12 && latitude <= 19.5 && longitude >= 77 && longitude <= 85) detected = 'te';
+    else if (latitude >= 21.5 && latitude <= 27.5 && longitude >= 85.5 && longitude <= 90) detected = 'bn';
+    else if (latitude >= 20 && latitude <= 37 && longitude >= 68 && longitude <= 97) detected = 'hi';
+
+    const currentLang = useLanguage.getState().language;
+    if (detected && detected !== currentLang) {
+      useLanguage.getState().setSuggestedLanguage(detected);
+    }
+  });
+}
