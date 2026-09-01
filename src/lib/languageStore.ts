@@ -1,11 +1,12 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { create } from 'zustand';
 
 type Language = 'en' | 'hi' | 'ta' | 'kn' | 'te' | 'mr' | 'bn';
 
-interface LanguageContextType {
+interface LanguageStore {
  language: Language;
  setLanguage: (lang: Language) => void;
  suggestedLanguage: Language | null;
+ setSuggestedLanguage: (lang: Language | null) => void;
  t: (key: string) => string;
 }
 
@@ -147,28 +148,31 @@ const translations: Record<Language, Record<string, string>> = {
  }
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
- const [language, setLanguageState] = useState<Language>(() => {
+const getInitialLanguage = (): Language => {
  if (typeof window !== 'undefined') {
  const stored = localStorage.getItem('farmer-company-language');
  if (stored) return stored as Language;
  }
  return 'en';
- });
+};
 
- const setLanguage = (lang: Language) => {
- setLanguageState(lang);
+export const useLanguage = create<LanguageStore>((set, get) => ({
+ language: getInitialLanguage(),
+ suggestedLanguage: null,
+ setLanguage: (lang: Language) => {
+ set({ language: lang });
  if (typeof window !== 'undefined') {
  localStorage.setItem('farmer-company-language', lang);
  }
- };
- 
- const [suggestedLanguage, setSuggestedLanguage] = useState<Language | null>(null);
+ },
+ setSuggestedLanguage: (lang: Language | null) => set({ suggestedLanguage: lang }),
+ t: (key: string) => {
+ const { language } = get();
+ return translations[language][key] || translations['en'][key] || key;
+ },
+}));
 
- useEffect(() => {
- if (navigator.geolocation) {
+if (typeof window !== 'undefined' && navigator.geolocation) {
  navigator.geolocation.getCurrentPosition((position) => {
  const { latitude, longitude } = position.coords;
  let detected: Language | null = null;
@@ -180,26 +184,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
  else if (latitude >= 21.5 && latitude <= 27.5 && longitude >= 85.5 && longitude <= 90) detected = 'bn';
  else if (latitude >= 20 && latitude <= 37 && longitude >= 68 && longitude <= 97) detected = 'hi';
 
- if (detected && detected !== language) {
- setSuggestedLanguage(detected);
+ const currentLang = useLanguage.getState().language;
+ if (detected && detected !== currentLang) {
+ useLanguage.setState({ suggestedLanguage: detected });
  }
  });
- }
- }, []);
-
- const t = (key: string) => {
- return translations[language][key] || translations['en'][key] || key;
- };
-
- return (
- <LanguageContext.Provider value={{ language, setLanguage, suggestedLanguage, t }}>
- {children}
- </LanguageContext.Provider>
- );
-};
-
-export const useLanguage = () => {
- const context = useContext(LanguageContext);
- if (!context) throw new Error('useLanguage must be used within LanguageProvider');
- return context;
-};
+}
