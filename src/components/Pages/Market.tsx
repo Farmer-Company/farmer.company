@@ -11,8 +11,8 @@ import {
  Search,
  ShoppingCart,
 } from 'lucide-react';
-import { useLanguage } from '@/src/lib/LanguageContext';
-import { useAuth } from '@/src/lib/AuthContext';
+import { useAuth } from '@/src/lib/authStore';
+import { useLanguage } from '@/src/lib/languageStore';
 import { Button } from '@/components/ui/button';
 import { markets, type MarketData } from '@/src/data/markets';
 import { getMarketSignal } from '@/src/lib/marketSignals';
