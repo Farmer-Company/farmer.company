@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLanguage } from '@/src/lib/LanguageContext';
+import { useLanguage } from '@/src/lib/languageStore';
 import { X } from 'lucide-react';
 
 export const LanguagePopup = () => {
