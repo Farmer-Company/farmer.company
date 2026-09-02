@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLanguage } from '@/src/lib/LanguageContext';
+import { useLanguage } from '@/src/lib/languageStore';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '@/src/lib/AuthContext';
+import { useAuth } from '@/src/lib/authStore';
 import { useNavigate } from 'react-router-dom';
 import { userService, farmerService } from '@/src/lib/os-services';
 import { UserRole } from '@/src/lib/os-types';

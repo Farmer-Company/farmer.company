@@ -8,7 +8,7 @@ import {
  Send,
  ShieldCheck,
 } from 'lucide-react';
-import { useAuth } from '@/src/lib/AuthContext';
+import { useAuth } from '@/src/lib/authStore';
 import { commodities } from '@/src/data/commodities';
 import { markets } from '@/src/data/markets';
 import { Button } from '@/components/ui/button';

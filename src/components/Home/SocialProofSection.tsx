@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { rtdb } from '@/src/lib/firebase';
 import { ref, onValue } from 'firebase/database';
-import { useLanguage } from '@/src/lib/LanguageContext';
+import { useLanguage } from '@/src/lib/languageStore';
 import { Link } from 'react-router-dom';
 import { 
  Activity, 
