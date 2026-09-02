@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { LocationPanel } from './components/LocationPanel';
@@ -19,24 +19,26 @@ import { TestimonialsSection } from './components/Home/TestimonialsSection';
 import { TrustSection } from './components/Home/TrustSection';
 import { FAQSection } from './components/Home/FAQSection';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { MarketPage } from './components/Pages/Market';
-import { PricesPage } from './components/Pages/Prices';
-import { InsightsPage } from './components/Pages/Insights';
-import { ConfigurePage } from './components/Pages/Configure';
-import { AuthFlow } from './components/AuthFlow';
-import { SupplyCRMPage } from './components/Pages/SupplyCRM';
-import { FarmersPage } from './components/Pages/FarmersPage';
-import { VendorsPage } from './components/Pages/VendorsPage';
-import { LogisticsPage } from './components/Pages/LogisticsPage';
-import { CustomersPage } from './components/Pages/CustomersPage';
-import { RetailersPage } from './components/Pages/RetailersPage';
-import { NotFound } from './pages/NotFound';
 import { Footer } from './components/Footer';
-import { StoryPage } from './components/Pages/Story';
-import { ResearchersPage } from './components/Pages/ResearchersPage';
-import { AgentsPage } from './components/Pages/AgentsPage';
-import { DemoPage } from './components/Pages/DemoPage';
-import { DigipinGuidePage } from './components/Pages/DigipinGuidePage';
+
+// Lazy load route components
+const MarketPage = lazy(() => import('./components/Pages/Market').then(m => ({ default: m.MarketPage })));
+const PricesPage = lazy(() => import('./components/Pages/Prices').then(m => ({ default: m.PricesPage })));
+const InsightsPage = lazy(() => import('./components/Pages/Insights').then(m => ({ default: m.InsightsPage })));
+const ConfigurePage = lazy(() => import('./components/Pages/Configure').then(m => ({ default: m.ConfigurePage })));
+const AuthFlow = lazy(() => import('./components/AuthFlow').then(m => ({ default: m.AuthFlow })));
+const SupplyCRMPage = lazy(() => import('./components/Pages/SupplyCRM').then(m => ({ default: m.SupplyCRMPage })));
+const FarmersPage = lazy(() => import('./components/Pages/FarmersPage').then(m => ({ default: m.FarmersPage })));
+const VendorsPage = lazy(() => import('./components/Pages/VendorsPage').then(m => ({ default: m.VendorsPage })));
+const LogisticsPage = lazy(() => import('./components/Pages/LogisticsPage').then(m => ({ default: m.LogisticsPage })));
+const CustomersPage = lazy(() => import('./components/Pages/CustomersPage').then(m => ({ default: m.CustomersPage })));
+const RetailersPage = lazy(() => import('./components/Pages/RetailersPage').then(m => ({ default: m.RetailersPage })));
+const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
+const StoryPage = lazy(() => import('./components/Pages/Story').then(m => ({ default: m.StoryPage })));
+const ResearchersPage = lazy(() => import('./components/Pages/ResearchersPage').then(m => ({ default: m.ResearchersPage })));
+const AgentsPage = lazy(() => import('./components/Pages/AgentsPage').then(m => ({ default: m.AgentsPage })));
+const DemoPage = lazy(() => import('./components/Pages/DemoPage').then(m => ({ default: m.DemoPage })));
+const DigipinGuidePage = lazy(() => import('./components/Pages/DigipinGuidePage').then(m => ({ default: m.DigipinGuidePage })));
 
 const HomePage = () => (
 <main>
@@ -54,6 +56,12 @@ const HomePage = () => (
 </main>
 );
 
+const PageLoader = () => (
+  <div className="flex h-[50vh] items-center justify-center">
+    <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+  </div>
+);
+
 export default function App() {
  return (
  <Router>
@@ -61,6 +69,7 @@ export default function App() {
  <ErrorBoundary>
  <Navbar />
  <LocationPanel />
+ <Suspense fallback={<PageLoader />}>
  <Routes>
  <Route path="/" element={<HomePage />} />
  <Route path="/story" element={<StoryPage />} />
@@ -82,12 +91,10 @@ export default function App() {
  <Route path="/demo" element={<DemoPage />} />
  <Route path="*" element={<NotFound />} />
  </Routes>
- 
+ </Suspense>
  <Footer />
  </ErrorBoundary>
  </div>
  </Router>
  );
 }
-
-
