@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { LocationPanel } from './components/LocationPanel';
@@ -21,24 +21,25 @@ import { FAQSection } from './components/Home/FAQSection';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LanguageProvider } from './lib/LanguageContext';
 import { AuthProvider } from './lib/AuthContext';
-import { MarketPage } from './components/Pages/Market';
-import { PricesPage } from './components/Pages/Prices';
-import { InsightsPage } from './components/Pages/Insights';
-import { ConfigurePage } from './components/Pages/Configure';
-import { AuthFlow } from './components/AuthFlow';
-import { SupplyCRMPage } from './components/Pages/SupplyCRM';
-import { FarmersPage } from './components/Pages/FarmersPage';
-import { VendorsPage } from './components/Pages/VendorsPage';
-import { LogisticsPage } from './components/Pages/LogisticsPage';
-import { CustomersPage } from './components/Pages/CustomersPage';
-import { RetailersPage } from './components/Pages/RetailersPage';
-import { NotFound } from './pages/NotFound';
 import { Footer } from './components/Footer';
-import { StoryPage } from './components/Pages/Story';
-import { ResearchersPage } from './components/Pages/ResearchersPage';
-import { AgentsPage } from './components/Pages/AgentsPage';
-import { DemoPage } from './components/Pages/DemoPage';
-import { DigipinGuidePage } from './components/Pages/DigipinGuidePage';
+
+const MarketPage = lazy(() => import('./components/Pages/Market').then(m => ({ default: m.MarketPage })));
+const PricesPage = lazy(() => import('./components/Pages/Prices').then(m => ({ default: m.PricesPage })));
+const InsightsPage = lazy(() => import('./components/Pages/Insights').then(m => ({ default: m.InsightsPage })));
+const ConfigurePage = lazy(() => import('./components/Pages/Configure').then(m => ({ default: m.ConfigurePage })));
+const AuthFlow = lazy(() => import('./components/AuthFlow').then(m => ({ default: m.AuthFlow })));
+const SupplyCRMPage = lazy(() => import('./components/Pages/SupplyCRM').then(m => ({ default: m.SupplyCRMPage })));
+const FarmersPage = lazy(() => import('./components/Pages/FarmersPage').then(m => ({ default: m.FarmersPage })));
+const VendorsPage = lazy(() => import('./components/Pages/VendorsPage').then(m => ({ default: m.VendorsPage })));
+const LogisticsPage = lazy(() => import('./components/Pages/LogisticsPage').then(m => ({ default: m.LogisticsPage })));
+const CustomersPage = lazy(() => import('./components/Pages/CustomersPage').then(m => ({ default: m.CustomersPage })));
+const RetailersPage = lazy(() => import('./components/Pages/RetailersPage').then(m => ({ default: m.RetailersPage })));
+const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
+const StoryPage = lazy(() => import('./components/Pages/Story').then(m => ({ default: m.StoryPage })));
+const ResearchersPage = lazy(() => import('./components/Pages/ResearchersPage').then(m => ({ default: m.ResearchersPage })));
+const AgentsPage = lazy(() => import('./components/Pages/AgentsPage').then(m => ({ default: m.AgentsPage })));
+const DemoPage = lazy(() => import('./components/Pages/DemoPage').then(m => ({ default: m.DemoPage })));
+const DigipinGuidePage = lazy(() => import('./components/Pages/DigipinGuidePage').then(m => ({ default: m.DigipinGuidePage })));
 
 const HomePage = () => (
 <main>
@@ -65,27 +66,29 @@ export default function App() {
  <ErrorBoundary>
  <Navbar />
  <LocationPanel />
- <Routes>
- <Route path="/" element={<HomePage />} />
- <Route path="/story" element={<StoryPage />} />
- <Route path="/researchers" element={<ResearchersPage />} />
- <Route path="/agents" element={<AgentsPage />} />
- <Route path="/market" element={<MarketPage />} />
- <Route path="/prices" element={<PricesPage />} />
- <Route path="/insights" element={<InsightsPage />} />
- <Route path="/configure" element={<ConfigurePage />} />
- <Route path="/supply-crm" element={<SupplyCRMPage />} />
- <Route path="/digipin" element={<DigipinGuidePage />} />
- <Route path="/farmers" element={<FarmersPage />} />
- <Route path="/vendors" element={<VendorsPage />} />
- <Route path="/logistics" element={<LogisticsPage />} />
- <Route path="/retailers" element={<RetailersPage />} />
- <Route path="/customers" element={<CustomersPage />} />
- <Route path="/signin" element={<AuthFlow />} />
- <Route path="/get-started" element={<AuthFlow />} />
- <Route path="/demo" element={<DemoPage />} />
- <Route path="*" element={<NotFound />} />
- </Routes>
+ <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-background text-foreground"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div></div>}>
+   <Routes>
+   <Route path="/" element={<HomePage />} />
+   <Route path="/story" element={<StoryPage />} />
+   <Route path="/researchers" element={<ResearchersPage />} />
+   <Route path="/agents" element={<AgentsPage />} />
+   <Route path="/market" element={<MarketPage />} />
+   <Route path="/prices" element={<PricesPage />} />
+   <Route path="/insights" element={<InsightsPage />} />
+   <Route path="/configure" element={<ConfigurePage />} />
+   <Route path="/supply-crm" element={<SupplyCRMPage />} />
+   <Route path="/digipin" element={<DigipinGuidePage />} />
+   <Route path="/farmers" element={<FarmersPage />} />
+   <Route path="/vendors" element={<VendorsPage />} />
+   <Route path="/logistics" element={<LogisticsPage />} />
+   <Route path="/retailers" element={<RetailersPage />} />
+   <Route path="/customers" element={<CustomersPage />} />
+   <Route path="/signin" element={<AuthFlow />} />
+   <Route path="/get-started" element={<AuthFlow />} />
+   <Route path="/demo" element={<DemoPage />} />
+   <Route path="*" element={<NotFound />} />
+   </Routes>
+ </Suspense>
  
  <Footer />
  </ErrorBoundary>

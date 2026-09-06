@@ -23,8 +23,8 @@ export const InteractiveDemo = () => {
   // Calculate states based on role
   let legacyRevenue = 0;
   let protocolRevenue = 0;
-  let legacyBars = [];
-  let protocolBars = [];
+  let legacyBars: { label: string; percent: number; color: string }[] = [];
+  let protocolBars: { label: string; percent: number; color: string }[] = [];
   let accentColor = '';
 
   if (role === 'farmer') {
