@@ -33,7 +33,6 @@ export default defineConfig(({mode}) => {
           manualChunks: {
             'react-vendor': ['react', 'react-dom', 'react-router', 'react-router-dom', 'lucide-react'],
             'three-vendor': ['three'],
-            'maplibre-vendor': ['maplibre-gl'],
             'firebase-vendor': [
               'firebase/app',
               'firebase/auth',
