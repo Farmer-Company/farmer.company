@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { Suspense } from 'react';
+import { LoadingScreen } from './components/LoadingScreen';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { LocationPanel } from './components/LocationPanel';
@@ -21,24 +22,24 @@ import { FAQSection } from './components/Home/FAQSection';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LanguageProvider } from './lib/LanguageContext';
 import { AuthProvider } from './lib/AuthContext';
-import { MarketPage } from './components/Pages/Market';
-import { PricesPage } from './components/Pages/Prices';
-import { InsightsPage } from './components/Pages/Insights';
-import { ConfigurePage } from './components/Pages/Configure';
-import { AuthFlow } from './components/AuthFlow';
-import { SupplyCRMPage } from './components/Pages/SupplyCRM';
-import { FarmersPage } from './components/Pages/FarmersPage';
-import { VendorsPage } from './components/Pages/VendorsPage';
-import { LogisticsPage } from './components/Pages/LogisticsPage';
-import { CustomersPage } from './components/Pages/CustomersPage';
-import { RetailersPage } from './components/Pages/RetailersPage';
-import { NotFound } from './pages/NotFound';
+const MarketPage = React.lazy(() => import('./components/Pages/Market').then(module => ({ default: module.MarketPage })));
+const PricesPage = React.lazy(() => import('./components/Pages/Prices').then(module => ({ default: module.PricesPage })));
+const InsightsPage = React.lazy(() => import('./components/Pages/Insights').then(module => ({ default: module.InsightsPage })));
+const ConfigurePage = React.lazy(() => import('./components/Pages/Configure').then(module => ({ default: module.ConfigurePage })));
+const AuthFlow = React.lazy(() => import('./components/AuthFlow').then(module => ({ default: module.AuthFlow })));
+const SupplyCRMPage = React.lazy(() => import('./components/Pages/SupplyCRM').then(module => ({ default: module.SupplyCRMPage })));
+const FarmersPage = React.lazy(() => import('./components/Pages/FarmersPage').then(module => ({ default: module.FarmersPage })));
+const VendorsPage = React.lazy(() => import('./components/Pages/VendorsPage').then(module => ({ default: module.VendorsPage })));
+const LogisticsPage = React.lazy(() => import('./components/Pages/LogisticsPage').then(module => ({ default: module.LogisticsPage })));
+const CustomersPage = React.lazy(() => import('./components/Pages/CustomersPage').then(module => ({ default: module.CustomersPage })));
+const RetailersPage = React.lazy(() => import('./components/Pages/RetailersPage').then(module => ({ default: module.RetailersPage })));
+const NotFound = React.lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
 import { Footer } from './components/Footer';
-import { StoryPage } from './components/Pages/Story';
-import { ResearchersPage } from './components/Pages/ResearchersPage';
-import { AgentsPage } from './components/Pages/AgentsPage';
-import { DemoPage } from './components/Pages/DemoPage';
-import { DigipinGuidePage } from './components/Pages/DigipinGuidePage';
+const StoryPage = React.lazy(() => import('./components/Pages/Story').then(module => ({ default: module.StoryPage })));
+const ResearchersPage = React.lazy(() => import('./components/Pages/ResearchersPage').then(module => ({ default: module.ResearchersPage })));
+const AgentsPage = React.lazy(() => import('./components/Pages/AgentsPage').then(module => ({ default: module.AgentsPage })));
+const DemoPage = React.lazy(() => import('./components/Pages/DemoPage').then(module => ({ default: module.DemoPage })));
+const DigipinGuidePage = React.lazy(() => import('./components/Pages/DigipinGuidePage').then(module => ({ default: module.DigipinGuidePage })));
 
 const HomePage = () => (
 <main>
@@ -65,6 +66,7 @@ export default function App() {
  <ErrorBoundary>
  <Navbar />
  <LocationPanel />
+ <Suspense fallback={<LoadingScreen />}>
  <Routes>
  <Route path="/" element={<HomePage />} />
  <Route path="/story" element={<StoryPage />} />
@@ -86,6 +88,7 @@ export default function App() {
  <Route path="/demo" element={<DemoPage />} />
  <Route path="*" element={<NotFound />} />
  </Routes>
+ </Suspense>
  
  <Footer />
  </ErrorBoundary>
