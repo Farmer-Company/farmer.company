@@ -21,6 +21,27 @@ export default defineConfig(({mode}) => {
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'firebase-vendor': [
+              'firebase/app',
+              'firebase/auth',
+              '@firebase/app',
+              'firebase/firestore',
+              'firebase/database',
+              'firebase/storage',
+              'firebase/app-check'
+            ],
+            'market-data': ['./src/data/Market.json'],
+            'react-vendor': ['react', 'react-dom'],
+            'three-vendor': ['three']
+          }
+        }
+      }
+    },
     test: {
       environment: 'jsdom',
       globals: true,

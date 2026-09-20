@@ -240,6 +240,7 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
       styleTimeoutRef.current = setTimeout(() => {
         setIsStyleLoaded(true);
         if (projection) {
+          // @ts-expect-error maplibre v4 missing types for setProjection
           map.setProjection(projection);
         }
       }, 100);
