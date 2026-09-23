@@ -239,7 +239,8 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
       // else we have to force update every layer on setStyle change
       styleTimeoutRef.current = setTimeout(() => {
         setIsStyleLoaded(true);
-        if (projection) {
+        if (projection && 'setProjection' in map) {
+           // @ts-expect-error maplibre v4 missing types for setProjection
           map.setProjection(projection);
         }
       }, 100);
