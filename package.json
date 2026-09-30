@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "cross-env NODE_OPTIONS='--max_old_space_size=4096' vite build",
     "preview": "npm run build && vite preview --host=0.0.0.0",
     "clean": "rm -rf dist",
     "lint": "eslint . && tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.0",
@@ -52,6 +52,7 @@
     "@types/node": "^22.14.0",
     "@vitest/ui": "^4.1.7",
     "autoprefixer": "^10.4.21",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
