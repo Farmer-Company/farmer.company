@@ -21,6 +21,8 @@ import {
  getSavedTradeIntents,
  type TradeIntentType,
 } from '@/src/lib/tradeIntents';
+import { useVirtualizer } from '@tanstack/react-virtual';
+import { useRef } from 'react';
 
 const SAVED_MARKETS_KEY = 'farmer-company-saved-markets';
 
@@ -121,6 +123,15 @@ export const MarketPage = () => {
  currentPage * itemsPerPage
  );
  }, [currentPage, filteredNodes]);
+
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: paginatedNodes.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 200,
+    overscan: 5,
+  });
 
  const toggleSavedMarket = (marketId: number) => {
  setSavedMarketIds((prev) => {
@@ -385,104 +396,129 @@ export const MarketPage = () => {
  initial={{ opacity: 0, y: 10 }}
  animate={{ opacity: 1, y: 0 }}
  exit={{ opacity: 0, y: -10 }}
- className="space-y-4"
  >
- {paginatedNodes.map((market) => {
- const signal = getMarketSignal(market);
- const isSaved = savedMarketIds.includes(market.node_id);
+          <div
+            ref={parentRef}
+            className="w-full overflow-auto max-h-[800px] scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+          >
+            <div
+              style={{
+                height: `${rowVirtualizer.getTotalSize()}px`,
+                width: '100%',
+                position: 'relative',
+              }}
+            >
+              {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                const market = paginatedNodes[virtualRow.index];
+                const signal = getMarketSignal(market);
+                const isSaved = savedMarketIds.includes(market.node_id);
 
- return (
- <div
- key={market.node_id}
- className="p-8 bg-black/50 border border-white/10 hover:border-[#4ADE80]/50 transition-all group relative overflow-hidden rounded-sm backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
- tabIndex={0}
- >
- <div className="absolute inset-0 bg-[#4ADE80]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                return (
+                  <div
+                    key={market.node_id}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: `${virtualRow.size}px`,
+                      transform: `translateY(${virtualRow.start}px)`,
+                    }}
+                    className="pb-4"
+                  >
+                    <div
+                      className="p-8 bg-black/50 border border-white/10 hover:border-[#4ADE80]/50 transition-all group relative overflow-hidden rounded-sm backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] h-full"
+                      tabIndex={0}
+                    >
+                      <div className="absolute inset-0 bg-[#4ADE80]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
- <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative z-10">
- <div className="space-y-5 flex-1">
- <div className="flex items-center gap-4">
- <span className="px-2 py-1 bg-[#4ADE80]/10 text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest border border-[#4ADE80]/20 rounded-sm" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
- Node Active
- </span>
- <span className="text-[11px] text-white/40 font-mono">
- UID: {market.node_id.toString().padStart(4, '0')}
- </span>
- </div>
+                      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative z-10 h-full">
+                        <div className="space-y-5 flex-1">
+                          <div className="flex items-center gap-4">
+                            <span className="px-2 py-1 bg-[#4ADE80]/10 text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest border border-[#4ADE80]/20 rounded-sm" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+                              Node Active
+                            </span>
+                            <span className="text-[11px] text-white/40 font-mono">
+                              UID: {market.node_id.toString().padStart(4, '0')}
+                            </span>
+                          </div>
 
- <h3 className="text-3xl md:text-4xl font-extrabold uppercase tracking-tighter group-hover:text-[#4ADE80] transition-colors" style={{ fontFamily: '"Inter", sans-serif' }}>
- {market.Market}
- </h3>
+                          <h3 className="text-3xl md:text-4xl font-extrabold uppercase tracking-tighter group-hover:text-[#4ADE80] transition-colors" style={{ fontFamily: '"Inter", sans-serif' }}>
+                            {market.Market}
+                          </h3>
 
- <div className="flex flex-wrap gap-x-12 gap-y-6">
- <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-sm border border-white/5">
- <MapPin size={16} className="text-[#4ADE80]" />
- <div className="flex flex-col">
- <span className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
- {market.District}
- </span>
- <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mt-0.5" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
- {market.State}
- </span>
- </div>
- </div>
+                          <div className="flex flex-wrap gap-x-12 gap-y-6">
+                            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-sm border border-white/5">
+                              <MapPin size={16} className="text-[#4ADE80]" />
+                              <div className="flex flex-col">
+                                <span className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+                                  {market.District}
+                                </span>
+                                <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mt-0.5" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+                                  {market.State}
+                                </span>
+                              </div>
+                            </div>
 
- <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-sm border border-white/5">
- <Activity size={16} className="text-[#4ADE80]" />
- <div className="flex flex-col">
- <span className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
- {market.total_arrivals.toLocaleString()} MT
- </span>
- <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mt-0.5" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
- Total Volume
- </span>
- </div>
- </div>
- </div>
- </div>
-
- <div className="flex items-center gap-6 w-full md:w-auto pt-8 md:pt-0 border-t border-white/10 md:border-t-0">
- <div className="flex-1 md:text-right space-y-2">
- <div className="text-[10px] font-bold text-[#4ADE80] uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
- Signal Intelligence
- </div>
- <div className="text-2xl md:text-3xl font-extrabold tracking-tighter text-white" style={{ fontFamily: '"Inter", sans-serif' }}>
- {signal.label}
- </div>
- <p className="max-w-xs md:ml-auto text-xs leading-relaxed text-white/60 font-medium" style={{ fontFamily: '"Inter", sans-serif' }}>
- {signal.guidance}
- </p>
- <div className="text-[10px] text-white/30 font-mono mt-2">
- SRC: {signal.source} | V: {signal.freshness}
- </div>
+                            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-sm border border-white/5">
+                              <Activity size={16} className="text-[#4ADE80]" />
+                              <div className="flex flex-col">
+                                <span className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+                                  {market.total_arrivals.toLocaleString()} MT
+                                </span>
+                                <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mt-0.5" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+                                  Total Volume
+                                </span>
+                              </div>
+                            </div>
+                          </div>
  </div>
 
- <div className="flex flex-col gap-3 shrink-0">
- <Button
- className="h-12 bg-white text-black font-bold uppercase tracking-widest text-[10px] px-8 hover:bg-[#4ADE80] transition-colors rounded-sm shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(74,222,128,0.2)]"
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
- onClick={() => openIntentForm(market, 'buy')}
- >
- Request Match
- </Button>
- <button
- onClick={() => toggleSavedMarket(market.node_id)}
- className={`h-12 w-full flex items-center justify-center border transition-all rounded-sm font-bold text-[10px] uppercase tracking-widest gap-2 ${
- isSaved
- ? 'border-[#4ADE80] bg-[#4ADE80]/10 text-[#4ADE80]'
- : 'border-white/10 bg-black hover:border-white/30 text-white/60'
- }`}
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
- >
- <ShoppingCart size={14} className={isSaved ? 'text-[#4ADE80]' : ''} />
- {isSaved ? 'Saved' : 'Save Node'}
- </button>
+                        <div className="flex items-center gap-6 w-full md:w-auto pt-8 md:pt-0 border-t border-white/10 md:border-t-0">
+                          <div className="flex-1 md:text-right space-y-2">
+                            <div className="text-[10px] font-bold text-[#4ADE80] uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+                              Signal Intelligence
+                            </div>
+                            <div className="text-2xl md:text-3xl font-extrabold tracking-tighter text-white" style={{ fontFamily: '"Inter", sans-serif' }}>
+                              {signal.label}
+                            </div>
+                            <p className="max-w-xs md:ml-auto text-xs leading-relaxed text-white/60 font-medium" style={{ fontFamily: '"Inter", sans-serif' }}>
+                              {signal.guidance}
+                            </p>
+                            <div className="text-[10px] text-white/30 font-mono mt-2">
+                              SRC: {signal.source} | V: {signal.freshness}
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col gap-3 shrink-0">
+                            <Button
+                              className="h-12 bg-white text-black font-bold uppercase tracking-widest text-[10px] px-8 hover:bg-[#4ADE80] transition-colors rounded-sm shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(74,222,128,0.2)]"
+                              style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+                              onClick={() => openIntentForm(market, 'buy')}
+                            >
+                              Request Match
+                            </Button>
+                            <button
+                              onClick={() => toggleSavedMarket(market.node_id)}
+                              className={`h-12 w-full flex items-center justify-center border transition-all rounded-sm font-bold text-[10px] uppercase tracking-widest gap-2 ${
+                                isSaved
+                                  ? 'border-[#4ADE80] bg-[#4ADE80]/10 text-[#4ADE80]'
+                                  : 'border-white/10 bg-black hover:border-white/30 text-white/60'
+                              }`}
+                              style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+                            >
+                              <ShoppingCart size={14} className={isSaved ? 'text-[#4ADE80]' : ''} />
+                              {isSaved ? 'Saved' : 'Save Node'}
+                            </button>
+                          </div>
  </div>
  </div>
  </div>
  </div>
- );
- })}
+                );
+              })}
+            </div>
+          </div>
  </motion.div>
  </AnimatePresence>
 
