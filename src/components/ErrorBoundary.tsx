@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<Props, State> {
  if (parsed.error && parsed.operationType) {
  errorInfo = `Firestore ${parsed.operationType.toUpperCase()} error at ${parsed.path || 'unknown path'}: ${parsed.error}`;
  }
- } catch (e) {
+ } catch {
  // Not JSON, use raw message
  }
 
