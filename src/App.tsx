@@ -21,12 +21,12 @@ import { FAQSection } from './components/Home/FAQSection';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LanguageProvider } from './lib/LanguageContext';
 import { AuthProvider } from './lib/AuthContext';
-import { MarketPage } from './components/Pages/Market';
-import { PricesPage } from './components/Pages/Prices';
-import { InsightsPage } from './components/Pages/Insights';
+const MarketPage = React.lazy(() => import('./components/Pages/Market').then(m => ({ default: m.MarketPage })));
+const PricesPage = React.lazy(() => import('./components/Pages/Prices').then(m => ({ default: m.PricesPage })));
+const InsightsPage = React.lazy(() => import('./components/Pages/Insights').then(m => ({ default: m.InsightsPage })));
 import { ConfigurePage } from './components/Pages/Configure';
 import { AuthFlow } from './components/AuthFlow';
-import { SupplyCRMPage } from './components/Pages/SupplyCRM';
+const SupplyCRMPage = React.lazy(() => import('./components/Pages/SupplyCRM').then(m => ({ default: m.SupplyCRMPage })));
 import { FarmersPage } from './components/Pages/FarmersPage';
 import { VendorsPage } from './components/Pages/VendorsPage';
 import { LogisticsPage } from './components/Pages/LogisticsPage';
@@ -65,6 +65,7 @@ export default function App() {
  <ErrorBoundary>
  <Navbar />
  <LocationPanel />
+ <React.Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-black text-white">Loading...</div>}>
  <Routes>
  <Route path="/" element={<HomePage />} />
  <Route path="/story" element={<StoryPage />} />
@@ -86,6 +87,7 @@ export default function App() {
  <Route path="/demo" element={<DemoPage />} />
  <Route path="*" element={<NotFound />} />
  </Routes>
+ </React.Suspense>
  
  <Footer />
  </ErrorBoundary>

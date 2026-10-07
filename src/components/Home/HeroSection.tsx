@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const HeroMapBackground = lazy(() => import('./HeroMapBackground').then(m => ({ default: m.HeroMapBackground })));
+const HeroMapBackground = lazy(() => import('./HeroMapBackground'));
 
 type IdleWindow = Window & {
   requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => number;
