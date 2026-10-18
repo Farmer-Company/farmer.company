@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -94,8 +94,7 @@ export function StoryPage() {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
+      touchMultiplier: 2 });
 
     function raf(time: number) {
       lenis.raf(time);
@@ -133,8 +132,7 @@ export function StoryPage() {
     const material = new THREE.ShaderMaterial({
       vertexShader,
       fragmentShader,
-      uniforms,
-    });
+      uniforms });
     materialRef.current = material;
 
     const mesh = new THREE.Mesh(geometry, material);
@@ -199,8 +197,7 @@ export function StoryPage() {
             trigger: section,
             start: "top 60%",
             end: "top 20%",
-            toggleActions: "play reverse play reverse",
-          }
+            toggleActions: "play reverse play reverse" }
         }
       );
 
@@ -210,8 +207,7 @@ export function StoryPage() {
         start: "top center",
         end: "bottom center",
         onEnter: () => transitionColors(chapters[index].color1, chapters[index].color2),
-        onEnterBack: () => transitionColors(chapters[index].color1, chapters[index].color2),
-      });
+        onEnterBack: () => transitionColors(chapters[index].color1, chapters[index].color2) });
     });
 
     return () => {

@@ -5,7 +5,6 @@ import {
   Boxes,
   Calculator,
   CalendarCheck,
-  CheckCircle,
   ChevronDown,
   ClipboardCheck,
   Database,
@@ -18,7 +17,6 @@ import {
   MapPinned,
   PackageCheck,
   Plane,
-  PhoneCall,
   QrCode,
   ReceiptText,
   Route,
@@ -29,8 +27,7 @@ import {
   Thermometer,
   Tractor,
   Truck,
-  Warehouse,
-} from 'lucide-react';
+  Warehouse } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
@@ -107,8 +104,7 @@ const estimateModes: EstimateMode[] = [
     perKm: 36,
     perTon: 420,
     minCost: 2200,
-    icon: Tractor,
-  },
+    icon: Tractor },
   {
     id: 'national',
     label: 'National truck freight',
@@ -117,8 +113,7 @@ const estimateModes: EstimateMode[] = [
     perKm: 72,
     perTon: 950,
     minCost: 12000,
-    icon: Truck,
-  },
+    icon: Truck },
   {
     id: 'cold-chain',
     label: 'Cold-chain freight',
@@ -127,8 +122,7 @@ const estimateModes: EstimateMode[] = [
     perKm: 125,
     perTon: 1500,
     minCost: 18000,
-    icon: Thermometer,
-  },
+    icon: Thermometer },
   {
     id: 'export-fcl',
     label: 'Port + export container',
@@ -137,8 +131,7 @@ const estimateModes: EstimateMode[] = [
     perKm: 62,
     perTon: 2400,
     minCost: 95000,
-    icon: Ship,
-  },
+    icon: Ship },
   {
     id: 'lcl',
     label: 'LCL export consolidation',
@@ -147,8 +140,7 @@ const estimateModes: EstimateMode[] = [
     perKm: 48,
     perTon: 5200,
     minCost: 42000,
-    icon: Boxes,
-  },
+    icon: Boxes },
   {
     id: 'air',
     label: 'Air cargo desk',
@@ -157,8 +149,7 @@ const estimateModes: EstimateMode[] = [
     perKm: 28,
     perTon: 82000,
     minCost: 90000,
-    icon: Plane,
-  },
+    icon: Plane },
 ];
 
 const routeRates: RouteRate[] = [
@@ -168,135 +159,114 @@ const routeRates: RouteRate[] = [
     distanceKm: 175,
     vehicleType: '14-19 ft open / reefer',
     rateRange: 'Rs 18,000-28,000 per trip',
-    preferredCrops: 'Grapes, onions, vegetables',
-  },
+    preferredCrops: 'Grapes, onions, vegetables' },
   {
     from: 'Guntur chilli belt',
     to: 'Chennai processor cluster',
     distanceKm: 415,
     vehicleType: '20-22 ft container',
     rateRange: 'Rs 42,000-58,000 per trip',
-    preferredCrops: 'Chillies, spices',
-  },
+    preferredCrops: 'Chillies, spices' },
   {
     from: 'Kolar vegetable belt',
     to: 'Bengaluru wholesale market',
     distanceKm: 70,
     vehicleType: 'Mini truck / tractor trolley',
     rateRange: 'Rs 4,500-9,000 per trip',
-    preferredCrops: 'Tomato, cabbage, beans',
-  },
+    preferredCrops: 'Tomato, cabbage, beans' },
   {
     from: 'Indore grain belt',
     to: 'Delhi NCR buyers',
     distanceKm: 820,
     vehicleType: '24-32 ft container',
     rateRange: 'Rs 72,000-96,000 per trip',
-    preferredCrops: 'Wheat, pulses, soybean',
-  },
+    preferredCrops: 'Wheat, pulses, soybean' },
   {
     from: 'Coimbatore mandi',
     to: 'Kochi distribution hub',
     distanceKm: 195,
     vehicleType: '14-19 ft open / container',
     rateRange: 'Rs 20,000-32,000 per trip',
-    preferredCrops: 'Spices, coconut, plantation goods',
-  },
+    preferredCrops: 'Spices, coconut, plantation goods' },
   {
     from: 'Vellore collection center',
     to: 'Chennai city buyer',
     distanceKm: 140,
     vehicleType: 'Mini truck / 14 ft truck',
     rateRange: 'Rs 8,000-16,000 per trip',
-    preferredCrops: 'Vegetables, flowers, inputs',
-  },
+    preferredCrops: 'Vegetables, flowers, inputs' },
   {
     from: 'Tuticorin port lane',
     to: 'Colombo feeder export',
     distanceKm: 210,
     vehicleType: '20 ft container / LCL',
     rateRange: 'Rs 95,000-1.6L inland + ocean estimate',
-    preferredCrops: 'Spices, processed foods, coconut products',
-  },
+    preferredCrops: 'Spices, processed foods, coconut products' },
   {
     from: 'Bengaluru cargo terminal',
     to: 'Dubai buyer desk',
     distanceKm: 45,
     vehicleType: 'Reefer + air cargo',
     rateRange: 'Rs 1.2L-2.4L small shipment estimate',
-    preferredCrops: 'Flowers, premium fruits, samples',
-  },
+    preferredCrops: 'Flowers, premium fruits, samples' },
 ];
 
 const operatingTools: OperatingTool[] = [
   {
     title: 'Hub',
     description: 'An overview of your Farmer.Company logistics products, active lanes, bookings, finance, customs, and support tasks.',
-    icon: Gauge,
-  },
+    icon: Gauge },
   {
     title: 'Manage bookings',
     description: 'View, track, edit, assign, and manage farm pickups, mandi transfers, port runs, and buyer deliveries in one place.',
-    icon: CalendarCheck,
-  },
+    icon: CalendarCheck },
   {
     title: 'MyFinance',
     description: 'View, pay, reconcile, and dispute freight invoices, advances, detention, loading charges, and transporter payouts.',
-    icon: IndianRupee,
-  },
+    icon: IndianRupee },
   {
     title: 'MyCustoms',
     description: 'Add and manage customs products, export paperwork, origin proof, quality documents, and port handoff tasks.',
-    icon: Globe2,
-  },
+    icon: Globe2 },
   {
     title: 'Cold Chain Watch',
     description: 'Visibility for in-transit reefer goods with temperature status, delay alerts, route notes, and spoilage-risk flags.',
-    icon: Thermometer,
-  },
+    icon: Thermometer },
   {
     title: 'Case management',
     description: 'Manage open cases for delays, shortages, temperature breaches, buyer rejections, document gaps, and payment disputes.',
-    icon: LifeBuoy,
-  },
+    icon: LifeBuoy },
   {
     title: 'Supply chain control tower',
     description: 'Control, manage, and monitor procurement lots, warehouses, carriers, buyer orders, documents, finance, and settlement.',
-    icon: Route,
-  },
+    icon: Route },
   {
     title: 'Order secure paper',
     description: 'Request secure paper for printable bills of lading, lorry receipts, e-way bills, quality certificates, and export packs.',
-    icon: FileText,
-  },
+    icon: FileText },
   {
     title: 'Allocations',
     description: 'View and manage seasonal truck, reefer, warehouse, port, and buyer capacity allocations across crop windows.',
-    icon: Boxes,
-  },
+    icon: Boxes },
   {
     title: 'Data integrations',
     description: 'Stream booking, tracking, inventory, invoice, and document events into buyer ERP or partner systems.',
-    icon: Database,
-  },
+    icon: Database },
 ];
 
 const managementFeatures: Feature[] = [
   {
     title: 'Booking status from one place',
     description: 'View bookings, latest tracking details, LR/BL status updates, document health, and pending farm-to-buyer tasks.',
-    icon: ClipboardCheck,
-  },
+    icon: ClipboardCheck },
   {
     title: 'Add time or delivery after booking',
     description: 'Purchase additional waiting time, cold-store handling, packaging support, or inland delivery after the booking is confirmed.',
-    icon: PackageCheck,
-  },
+    icon: PackageCheck },
   {
     title: 'Change tracking across every load',
     description: 'Track vehicle changes, pickup delays, revised freight, document edits, case updates, and buyer-side approvals from one audit trail.',
-    icon: Route,
-  },
+    icon: Route },
 ];
 
 const serviceLanes: ServiceLane[] = [
@@ -305,43 +275,37 @@ const serviceLanes: ServiceLane[] = [
     description: 'Move produce from farm gate to collection point, mandi, local buyer, or nearby cold store.',
     icon: Tractor,
     reach: 'Village to district',
-    examples: ['Tractor trolley', 'Mini truck', 'FPO pooling routes'],
-  },
+    examples: ['Tractor trolley', 'Mini truck', 'FPO pooling routes'] },
   {
     title: 'National agri trucking',
     description: 'Move bulk lots between mandis, processors, warehouses, retailers, and institutional buyers.',
     icon: Truck,
     reach: 'District to national',
-    examples: ['Open truck', 'Container truck', 'Buyer dock delivery'],
-  },
+    examples: ['Open truck', 'Container truck', 'Buyer dock delivery'] },
   {
     title: 'Cold-chain logistics',
     description: 'Protect fruits, dairy, flowers, and vegetables with reefer placement and temperature visibility.',
     icon: Thermometer,
     reach: 'Cold store to market',
-    examples: ['Reefer', 'Pre-cooling handoff', 'Temperature alerts'],
-  },
+    examples: ['Reefer', 'Pre-cooling handoff', 'Temperature alerts'] },
   {
     title: 'Port and export movement',
     description: 'Coordinate inland trucking, documents, container planning, and port-ready agri export cargo.',
     icon: Ship,
     reach: 'Farm belt to global',
-    examples: ['Container run', 'Customs docs', 'Export milestone tracking'],
-  },
+    examples: ['Container run', 'Customs docs', 'Export milestone tracking'] },
   {
     title: 'LCL consolidation',
     description: 'Pool smaller export lots across FPOs and processors for ocean consolidation.',
     icon: Boxes,
     reach: 'Small cargo to global',
-    examples: ['Spices', 'Processed foods', 'Shared container planning'],
-  },
+    examples: ['Spices', 'Processed foods', 'Shared container planning'] },
   {
     title: 'Air cargo desk',
     description: 'Fast-track urgent or high-value perishables where speed is more important than freight cost.',
     icon: Plane,
     reach: 'Fast domestic or export',
-    examples: ['Flowers', 'Premium fruits', 'Urgent samples'],
-  },
+    examples: ['Flowers', 'Premium fruits', 'Urgent samples'] },
 ];
 
 const vehicleTypes: VehicleType[] = [
@@ -352,8 +316,7 @@ const vehicleTypes: VehicleType[] = [
     payloadTons: '0.8-1.5 tonnes',
     volumeCuFt: '120-180 cu ft',
     ratePerKmRange: 'Rs 28-45/km',
-    bestFor: ['Vegetable crates', 'Milk cans', 'Flowers', 'Small FPO pickups'],
-  },
+    bestFor: ['Vegetable crates', 'Milk cans', 'Flowers', 'Small FPO pickups'] },
   {
     id: 'open-truck',
     name: '14-19 ft Open Truck',
@@ -361,8 +324,7 @@ const vehicleTypes: VehicleType[] = [
     payloadTons: '4-9 tonnes',
     volumeCuFt: '700-1,200 cu ft',
     ratePerKmRange: 'Rs 55-90/km',
-    bestFor: ['Grain bags', 'Onion sacks', 'Fertilizer', 'Mandi transfers'],
-  },
+    bestFor: ['Grain bags', 'Onion sacks', 'Fertilizer', 'Mandi transfers'] },
   {
     id: 'container-22',
     name: '20-22 ft Container Truck',
@@ -370,8 +332,7 @@ const vehicleTypes: VehicleType[] = [
     payloadTons: '7-12 tonnes',
     volumeCuFt: '1,100-1,500 cu ft',
     ratePerKmRange: 'Rs 75-120/km',
-    bestFor: ['Packed foods', 'Spices', 'Retail-ready cartons', 'Weather protection'],
-  },
+    bestFor: ['Packed foods', 'Spices', 'Retail-ready cartons', 'Weather protection'] },
   {
     id: 'container-32',
     name: '24-32 ft Container Truck',
@@ -379,8 +340,7 @@ const vehicleTypes: VehicleType[] = [
     payloadTons: '12-21 tonnes',
     volumeCuFt: '1,800-2,600 cu ft',
     ratePerKmRange: 'Rs 105-160/km',
-    bestFor: ['Bulk grains', 'Processor lots', 'Long-haul buyer deliveries', 'Export cargo'],
-  },
+    bestFor: ['Bulk grains', 'Processor lots', 'Long-haul buyer deliveries', 'Export cargo'] },
   {
     id: 'reefer',
     name: 'Reefer / Cold-Chain Truck',
@@ -388,8 +348,7 @@ const vehicleTypes: VehicleType[] = [
     payloadTons: '2-16 tonnes',
     volumeCuFt: '400-2,000 cu ft',
     ratePerKmRange: 'Rs 95-220/km',
-    bestFor: ['Fruits', 'Dairy', 'Leafy vegetables', 'High-value perishables'],
-  },
+    bestFor: ['Fruits', 'Dairy', 'Leafy vegetables', 'High-value perishables'] },
   {
     id: 'tractor-trolley',
     name: 'Tractor Trolley',
@@ -397,51 +356,42 @@ const vehicleTypes: VehicleType[] = [
     payloadTons: '2-6 tonnes',
     volumeCuFt: 'Varies by trolley',
     ratePerKmRange: 'Local quote',
-    bestFor: ['Farm to nearby mandi', 'Collection centers', 'Short rural lanes', 'Harvest pooling'],
-  },
+    bestFor: ['Farm to nearby mandi', 'Collection centers', 'Short rural lanes', 'Harvest pooling'] },
 ];
 
 const features: Feature[] = [
   {
     title: 'Transparent freight rates',
     description: 'See route, distance, vehicle, and load-based estimates before you confirm.',
-    icon: ReceiptText,
-  },
+    icon: ReceiptText },
   {
     title: 'Verified rural transporters',
     description: 'Every truck, tractor, and driver profile is reviewed before it joins the network.',
-    icon: ShieldCheck,
-  },
+    icon: ShieldCheck },
   {
     title: 'Harvest-time placement',
     description: 'Reserve capacity for peak crop movement windows and urgent mandi dispatches.',
-    icon: Truck,
-  },
+    icon: Truck },
   {
     title: 'Real-time tracking',
     description: 'Track loading, movement, unloading, and delay status from phone or desktop.',
-    icon: MapPinned,
-  },
+    icon: MapPinned },
   {
     title: 'Instant digital documents',
     description: 'Generate LR, e-POD, invoices, and settlement proof from the same trip record.',
-    icon: FileText,
-  },
+    icon: FileText },
   {
     title: 'Local language support',
     description: 'Phone and WhatsApp support for farmers, transporters, and field coordinators.',
-    icon: Languages,
-  },
+    icon: Languages },
   {
     title: 'Connected to the agri OS',
     description: 'Link each load to procurement lots, storage slots, buyer orders, and payouts.',
-    icon: Sprout,
-  },
+    icon: Sprout },
   {
     title: 'Local and global reach',
     description: 'Start with village pickup and continue into national freight, port movement, export, LCL, or air cargo.',
-    icon: Globe2,
-  },
+    icon: Globe2 },
 ];
 
 const testimonials: Testimonial[] = [
@@ -450,62 +400,52 @@ const testimonials: Testimonial[] = [
     role: 'FPO Manager',
     region: 'Nashik, Maharashtra',
     quote: 'Earlier we called five brokers before every dispatch. Now our route, truck, documents, and buyer updates sit in one place.',
-    metric: 'Cut booking calls by 60%',
-  },
+    metric: 'Cut booking calls by 60%' },
   {
     name: 'Lakshmi Narayan',
     role: 'Vegetable Farmer',
     region: 'Kolar, Karnataka',
     quote: 'The truck arrived during the harvest window and the buyer received live updates. We avoided a full day of delay.',
-    metric: 'Same-day mandi movement',
-  },
+    metric: 'Same-day mandi movement' },
   {
     name: 'Imran Shaikh',
     role: 'Truck Owner',
     region: 'Vellore, Tamil Nadu',
     quote: 'I can see nearby loads and return trips. Empty running has reduced, and payments are easier to follow.',
-    metric: 'More return loads',
-  },
+    metric: 'More return loads' },
   {
     name: 'Meena Foods',
     role: 'Processor',
     region: 'Chennai, Tamil Nadu',
     quote: 'Cold-chain alerts help our procurement team intervene early instead of discovering issues at unloading.',
-    metric: 'Fewer quality escalations',
-  },
+    metric: 'Fewer quality escalations' },
 ];
 
 const faqs: FAQ[] = [
   {
     category: 'Freight Rates & Costs',
     question: 'Are the rates final?',
-    answer: 'The first estimate is indicative. Final rates depend on date, loading time, waiting time, fuel movement, crop season, and verified vehicle availability.',
-  },
+    answer: 'The first estimate is indicative. Final rates depend on date, loading time, waiting time, fuel movement, crop season, and verified vehicle availability.' },
   {
     category: 'Truck Types & Sizes',
     question: 'Which vehicle should I choose for vegetables?',
-    answer: 'Small harvests usually move well in mini trucks. Larger FPO lots often need 14-19 ft trucks. Leafy or high-value produce may need reefer support.',
-  },
+    answer: 'Small harvests usually move well in mini trucks. Larger FPO lots often need 14-19 ft trucks. Leafy or high-value produce may need reefer support.' },
   {
     category: 'Booking & Process',
     question: 'Can a field coordinator book on behalf of farmers?',
-    answer: 'Yes. Coordinators can create a route, add crop and tonnage, share loading details, and keep farmers updated by phone or WhatsApp.',
-  },
+    answer: 'Yes. Coordinators can create a route, add crop and tonnage, share loading details, and keep farmers updated by phone or WhatsApp.' },
   {
     category: 'Tracking & Delivery',
     question: 'How do I know where the truck is?',
-    answer: 'The trip timeline shows booking, vehicle placement, loading, in-transit status, unloading, document upload, and payment milestones.',
-  },
+    answer: 'The trip timeline shows booking, vehicle placement, loading, in-transit status, unloading, document upload, and payment milestones.' },
   {
     category: 'Payments & Documents',
     question: 'What documents are supported?',
-    answer: 'The logistics record can hold LR, e-POD, invoice, weighbridge slip, GRN, quality note, and settlement proof.',
-  },
+    answer: 'The logistics record can hold LR, e-POD, invoice, weighbridge slip, GRN, quality note, and settlement proof.' },
   {
     category: 'About Digital Orchard Logistics',
     question: 'How does this fit into the agriculture operating system?',
-    answer: 'Logistics is connected to procurement, market demand, storage, finance, advisory, and settlement workflows so the harvest can move as one managed operating flow.',
-  },
+    answer: 'Logistics is connected to procurement, market demand, storage, finance, advisory, and settlement workflows so the harvest can move as one managed operating flow.' },
 ];
 
 const popularBelts = [
@@ -525,8 +465,7 @@ const vehicleOptions = ['Mini truck', '14 ft truck', '19 ft truck', '20-32 ft co
 const SectionHeader = ({
   eyebrow,
   title,
-  copy,
-}: {
+  copy }: {
   eyebrow: string;
   title: string;
   copy?: string;
@@ -544,8 +483,7 @@ const formatRupees = (value: number) =>
   new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency: 'INR',
-    maximumFractionDigits: 0,
-  }).format(Math.round(value));
+    maximumFractionDigits: 0 }).format(Math.round(value));
 
 const FreightEstimator = ({ onBook }: { onBook: () => void }) => {
   const [modeId, setModeId] = useState(estimateModes[1].id);

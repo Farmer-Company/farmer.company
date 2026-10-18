@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { LiquidButton, MetalButton } from "@/components/ui/liquid-glass-button"
-import { Shield, Sparkles, CheckCircle2, AlertTriangle, Coins, Award, ArrowRight } from 'lucide-react'
+import { Shield, Sparkles, CheckCircle2, AlertTriangle, Coins, Award } from 'lucide-react'
 
 export const DemoPage = () => {
   const [clickCount, setClickCount] = useState(0)
