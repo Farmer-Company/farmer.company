@@ -47,7 +47,9 @@ export const HeroSection = () => {
       <div className="hero-map-static absolute inset-0 z-0" aria-hidden="true" />
       {shouldLoadMap && (
         <Suspense fallback={null}>
-          <HeroMapBackground />
+          <React.Suspense fallback={null}>
+        <HeroMapBackground />
+      </React.Suspense>
         </Suspense>
       )}
 
