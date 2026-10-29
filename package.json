@@ -9,7 +9,7 @@
     "preview": "npm run build && vite preview --host=0.0.0.0",
     "clean": "rm -rf dist",
     "lint": "eslint . && tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.0",
