@@ -149,6 +149,7 @@ const translations: Record<Language, Record<string, string>> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
  const [language, setLanguageState] = useState<Language>(() => {
  if (typeof window !== 'undefined') {
@@ -185,7 +186,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
  }
  });
  }
- }, []);
+ }, [language]);
 
  const t = (key: string) => {
  return translations[language][key] || translations['en'][key] || key;
@@ -198,6 +199,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
  );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLanguage = () => {
  const context = useContext(LanguageContext);
  if (!context) throw new Error('useLanguage must be used within LanguageProvider');
