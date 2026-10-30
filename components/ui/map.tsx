@@ -240,7 +240,7 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
       styleTimeoutRef.current = setTimeout(() => {
         setIsStyleLoaded(true);
         if (projection) {
-          map.setProjection(projection);
+          if (typeof (map as any).setProjection === 'function') { (map as any).setProjection(projection); }
         }
       }, 100);
     };
