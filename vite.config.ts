@@ -9,7 +9,7 @@ export default defineConfig(({mode}) => {
     base: mode === 'production' ? './' : '/',
     plugins: [react(), tailwindcss()],
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || ''),
     },
     resolve: {
       alias: {
@@ -20,6 +20,29 @@ export default defineConfig(({mode}) => {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
+    },
+    build: {
+      chunkSizeWarningLimit: 4000,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'firebase-vendor': [
+              'firebase/app',
+              'firebase/auth',
+              '@firebase/app',
+              'firebase/firestore',
+              'firebase/database',
+              'firebase/storage',
+              'firebase/app-check'
+            ],
+            'market-data': ['./src/data/Market.json'],
+            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+            'three-vendor': ['three'],
+            'lucide-icons': ['lucide-react'],
+            'ui-vendor': ['@base-ui/react', '@radix-ui/react-slot', 'framer-motion', 'motion']
+          }
+        }
+      }
     },
     test: {
       environment: 'jsdom',
