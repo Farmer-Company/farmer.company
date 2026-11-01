@@ -58,7 +58,7 @@ const createIntentDraft = (
 });
 
 export const MarketPage = () => {
- const { t } = useLanguage();
+
  const { user, profile } = useAuth();
  const [filter, setFilter] = useState('');
  const [stateFilter, setStateFilter] = useState('');
