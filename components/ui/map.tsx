@@ -239,9 +239,7 @@ const Map = forwardRef<MapRef, MapProps>(function Map(
       // else we have to force update every layer on setStyle change
       styleTimeoutRef.current = setTimeout(() => {
         setIsStyleLoaded(true);
-        if (projection) {
-          map.setProjection(projection);
-        }
+        if (projection && typeof (map as any).setProjection === 'function') { (map as any).setProjection(projection); }
       }, 100);
     };
     const loadHandler = () => setIsLoaded(true);
