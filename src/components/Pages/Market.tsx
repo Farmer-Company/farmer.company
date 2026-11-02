@@ -85,8 +85,7 @@ export const MarketPage = () => {
  );
  }
  }
- } catch {
- }
+ } catch { /* ignore */ }
 
  setSavedIntentCount(getSavedTradeIntents().length);
  }, []);
