@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { rtdb } from '@/src/lib/firebase';
 import { ref, onValue } from 'firebase/database';
-import { useLanguage } from '@/src/lib/LanguageContext';
 import { Link } from 'react-router-dom';
 import { 
  Activity, 
@@ -24,7 +23,7 @@ const LoopingVideo = () => {
  const videoRef = useRef<HTMLVideoElement>(null);
  const rafRef = useRef<number>(0);
 
- const tick = useCallback(() => {
+ const tick = useCallback(function tick() {
  const video = videoRef.current;
  if (!video || !video.duration) {
  rafRef.current = requestAnimationFrame(tick);
@@ -67,7 +66,6 @@ const LoopingVideo = () => {
  return (
  <video
  ref={videoRef}
- src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260308_114720_3dabeb9e-2c39-4907-b747-bc3544e2d5b7.mp4"
  autoPlay
  muted
  playsInline
@@ -78,7 +76,6 @@ const LoopingVideo = () => {
 
 export const SocialProofSection = () => {
  const [tickerItems, setTickerItems] = useState<any[]>([]);
- const { t } = useLanguage();
 
  useEffect(() => {
  const tickerRef = ref(rtdb, '/live_ticker');
@@ -296,7 +293,6 @@ export const SocialProofSection = () => {
  </div>
  </div>
  <div className="relative h-full min-h-[300px] md:min-h-[500px] bg-[#021f0d] flex items-center justify-center border border-white/5 rounded-sm overflow-hidden group">
- <img src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?auto=format&fit=crop&w=1200&q=80" alt="Farmer in Tamil Nadu" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700" />
  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
  </div>
  </div>
@@ -424,13 +420,3 @@ const PlayerCard = ({ role, tamil, icon, body, link }: any) => (
  </div>
 );
 
-const PARTNERS = [
- { name: 'KISAN-FPO' },
- { name: 'TAMIL-AGRI' },
- { name: 'FARMLINK' },
- { name: 'HARVEST-NET' },
- { name: 'GREEN-ROUTE' },
- { name: 'CROP-DIRECT' },
- { name: 'FIELD-BRIDGE' },
- { name: 'ORCHARD-HUB' },
-];
