@@ -193,13 +193,13 @@ export const MarketPage = () => {
  <div className="max-w-7xl mx-auto relative z-10">
  <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
  <div className="space-y-4">
- <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block">
  INTELLIGENCE PROTOCOL
  </span>
- <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <h1 className="font-sans text-5xl md:text-7xl font-extrabold uppercase tracking-tighter leading-[1.05]">
  Market <span className="text-[#4ADE80]">OS</span>
  </h1>
- <p className="text-white/60 text-lg md:text-xl font-normal leading-relaxed max-w-3xl" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <p className="font-sans text-white/60 text-lg md:text-xl font-normal leading-relaxed max-w-3xl">
  6,944 global market nodes mapped and tracked. Use predictive indices and regional signals to execute trade opportunities.
  </p>
  </div>
@@ -218,14 +218,14 @@ export const MarketPage = () => {
  setCurrentPage(1);
  }}
  className="w-full bg-black border border-white/10 h-14 pl-12 pr-6 focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] outline-none text-sm transition-all rounded-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  />
  </div>
  </div>
 
  {/* Filters */}
  <div className="flex flex-wrap gap-4 mb-12 p-6 bg-black/50 border border-white/10 rounded-sm items-center backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
- <div className="flex items-center gap-3 text-[11px] font-bold text-white/50 uppercase tracking-widest mr-4" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <div className="font-sans flex items-center gap-3 text-[11px] font-bold text-white/50 uppercase tracking-widest mr-4">
  <Filter size={16} className="text-[#4ADE80]" />
  <span>Network Matrix</span>
  </div>
@@ -239,7 +239,7 @@ export const MarketPage = () => {
  }}
  className="flex-1 md:flex-none bg-black/80 border border-white/10 px-4 py-3 text-sm font-medium text-white/80 focus:border-[#4ADE80] outline-none min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors rounded-sm"
  title="Filter by state"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  >
  <option value="" className="bg-black">All States</option>
  {states.map((state) => (
@@ -255,7 +255,7 @@ export const MarketPage = () => {
  }}
  className="flex-1 md:flex-none bg-black/80 border border-white/10 px-4 py-3 text-sm font-medium text-white/80 focus:border-[#4ADE80] outline-none min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors rounded-sm"
  title="Filter by district"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  >
  <option value="" className="bg-black">All Districts</option>
  {districts.map((district) => (
@@ -271,7 +271,7 @@ export const MarketPage = () => {
  }}
  className="flex-1 md:flex-none bg-black/80 border border-white/10 px-4 py-3 text-sm font-medium text-white/80 focus:border-[#4ADE80] outline-none min-w-[160px] cursor-pointer hover:bg-white/5 transition-colors rounded-sm"
  title="Filter by node tier"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  >
  <option value="" className="bg-black">All Tiers</option>
  {tiers.map((tier) => (
@@ -279,7 +279,7 @@ export const MarketPage = () => {
  ))}
  </select>
 
- <div className="w-full md:w-auto md:ml-auto text-[11px] text-[#4ADE80] font-bold uppercase tracking-widest bg-[#4ADE80]/10 px-5 py-3 border border-[#4ADE80]/20 rounded-sm text-center" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <div className="font-sans w-full md:w-auto md:ml-auto text-[11px] text-[#4ADE80] font-bold uppercase tracking-widest bg-[#4ADE80]/10 px-5 py-3 border border-[#4ADE80]/20 rounded-sm text-center">
  {filteredNodes.length.toLocaleString()} Nodes Identified
  </div>
  </div>
@@ -289,10 +289,10 @@ export const MarketPage = () => {
  {/* Active Markets Panel */}
  <div className="p-8 bg-black/80 border border-white/10 rounded-sm space-y-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] backdrop-blur-md">
  <div className="space-y-2">
- <span className="text-[11px] font-bold text-white/40 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[11px] font-bold text-white/40 uppercase tracking-widest">
  Active OS Nodes
  </span>
- <div className="text-5xl font-extrabold text-[#4ADE80] tracking-tighter" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <div className="font-sans text-5xl font-extrabold text-[#4ADE80] tracking-tighter">
  {filteredNodes.length.toLocaleString()}
  </div>
  </div>
@@ -301,10 +301,10 @@ export const MarketPage = () => {
 
  <div className="space-y-4">
  <div className="flex items-center justify-between">
- <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[10px] font-bold text-white/40 uppercase tracking-widest">
  Network Status
  </span>
- <span className="text-[10px] font-bold text-[#4ADE80] uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Live Sync</span>
+ <span className="font-sans text-[10px] font-bold text-[#4ADE80] uppercase tracking-widest">Live Sync</span>
  </div>
  <div className="w-full h-1 bg-white/10 overflow-hidden rounded-full">
  <motion.div
@@ -317,17 +317,17 @@ export const MarketPage = () => {
  </div>
 
  <div className="space-y-2 pt-4">
- <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[10px] font-bold text-white/40 uppercase tracking-widest">
  Cryptographic Validation
  </span>
- <div className="text-sm font-normal leading-relaxed text-white/60" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <div className="font-sans text-sm font-normal leading-relaxed text-white/60">
  Market discovery utilizes continuous institutional data feeds. Execution requires smart contract validation.
  </div>
  </div>
 
  <Button
  className="w-full bg-[#4ADE80] text-black font-bold uppercase tracking-widest text-[11px] h-14 hover:bg-white transition-colors rounded-sm"
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+
  onClick={() => window.scrollTo({ top: 520, behavior: 'smooth' })}
  >
  Browse Global Network
@@ -338,19 +338,19 @@ export const MarketPage = () => {
  <div className="p-8 border border-[#4ADE80]/20 bg-[#4ADE80]/5 rounded-sm flex flex-col gap-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] backdrop-blur-md">
  <CheckCircle2 size={28} className="text-[#4ADE80]" />
  <div className="space-y-4">
- <p className="text-sm font-normal leading-relaxed text-white/80" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <p className="font-sans text-sm font-normal leading-relaxed text-white/80">
  All nodes in the Global Agri OS are mapped against predictive indices. Save nodes or push intents directly to the institutional matching engine.
  </p>
  <div className="grid grid-cols-2 gap-4">
  <div className="border border-[#4ADE80]/20 bg-black/40 px-4 py-4 rounded-sm">
- <span className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Saved Nodes</span>
- <span className="text-2xl font-extrabold text-[#4ADE80]" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <span className="font-sans block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">Saved Nodes</span>
+ <span className="font-sans text-2xl font-extrabold text-[#4ADE80]">
  {savedMarketIds.length}
  </span>
  </div>
  <div className="border border-[#4ADE80]/20 bg-black/40 px-4 py-4 rounded-sm">
- <span className="block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Intent Queue</span>
- <span className="text-2xl font-extrabold text-[#4ADE80]" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <span className="font-sans block text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">Intent Queue</span>
+ <span className="font-sans text-2xl font-extrabold text-[#4ADE80]">
  {savedIntentCount}
  </span>
  </div>
@@ -364,12 +364,12 @@ export const MarketPage = () => {
 
  <div className="lg:col-span-3 space-y-6">
  <div className="flex items-center justify-between mb-8 px-2">
- <span className="text-[11px] font-bold text-white/40 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[11px] font-bold text-white/40 uppercase tracking-widest">
  Verified Institutional Nodes
  </span>
  <div className="flex items-center gap-3">
  <div className="w-2.5 h-2.5 rounded-full bg-[#4ADE80] animate-pulse" />
- <span className="text-[10px] text-[#4ADE80] uppercase tracking-widest font-bold" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[10px] text-[#4ADE80] uppercase tracking-widest font-bold">
  Network Live
  </span>
  </div>
@@ -398,7 +398,7 @@ export const MarketPage = () => {
  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative z-10">
  <div className="space-y-5 flex-1">
  <div className="flex items-center gap-4">
- <span className="px-2 py-1 bg-[#4ADE80]/10 text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest border border-[#4ADE80]/20 rounded-sm" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans px-2 py-1 bg-[#4ADE80]/10 text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest border border-[#4ADE80]/20 rounded-sm">
  Node Active
  </span>
  <span className="text-[11px] text-white/40 font-mono">
@@ -406,7 +406,7 @@ export const MarketPage = () => {
  </span>
  </div>
 
- <h3 className="text-3xl md:text-4xl font-extrabold uppercase tracking-tighter group-hover:text-[#4ADE80] transition-colors" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <h3 className="font-sans text-3xl md:text-4xl font-extrabold uppercase tracking-tighter group-hover:text-[#4ADE80] transition-colors">
  {market.Market}
  </h3>
 
@@ -414,10 +414,10 @@ export const MarketPage = () => {
  <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-sm border border-white/5">
  <MapPin size={16} className="text-[#4ADE80]" />
  <div className="flex flex-col">
- <span className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <span className="font-sans text-sm font-bold text-white tracking-tight">
  {market.District}
  </span>
- <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mt-0.5" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[10px] text-white/50 uppercase tracking-widest font-bold mt-0.5">
  {market.State}
  </span>
  </div>
@@ -426,10 +426,10 @@ export const MarketPage = () => {
  <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-sm border border-white/5">
  <Activity size={16} className="text-[#4ADE80]" />
  <div className="flex flex-col">
- <span className="text-sm font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <span className="font-sans text-sm font-bold text-white tracking-tight">
  {market.total_arrivals.toLocaleString()} MT
  </span>
- <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mt-0.5" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[10px] text-white/50 uppercase tracking-widest font-bold mt-0.5">
  Total Volume
  </span>
  </div>
@@ -439,13 +439,13 @@ export const MarketPage = () => {
 
  <div className="flex items-center gap-6 w-full md:w-auto pt-8 md:pt-0 border-t border-white/10 md:border-t-0">
  <div className="flex-1 md:text-right space-y-2">
- <div className="text-[10px] font-bold text-[#4ADE80] uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <div className="font-sans text-[10px] font-bold text-[#4ADE80] uppercase tracking-widest">
  Signal Intelligence
  </div>
- <div className="text-2xl md:text-3xl font-extrabold tracking-tighter text-white" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <div className="font-sans text-2xl md:text-3xl font-extrabold tracking-tighter text-white">
  {signal.label}
  </div>
- <p className="max-w-xs md:ml-auto text-xs leading-relaxed text-white/60 font-medium" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <p className="font-sans max-w-xs md:ml-auto text-xs leading-relaxed text-white/60 font-medium">
  {signal.guidance}
  </p>
  <div className="text-[10px] text-white/30 font-mono mt-2">
@@ -456,7 +456,7 @@ export const MarketPage = () => {
  <div className="flex flex-col gap-3 shrink-0">
  <Button
  className="h-12 bg-white text-black font-bold uppercase tracking-widest text-[10px] px-8 hover:bg-[#4ADE80] transition-colors rounded-sm shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(74,222,128,0.2)]"
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+
  onClick={() => openIntentForm(market, 'buy')}
  >
  Request Match
@@ -468,7 +468,7 @@ export const MarketPage = () => {
  ? 'border-[#4ADE80] bg-[#4ADE80]/10 text-[#4ADE80]'
  : 'border-white/10 bg-black hover:border-white/30 text-white/60'
  }`}
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+
  >
  <ShoppingCart size={14} className={isSaved ? 'text-[#4ADE80]' : ''} />
  {isSaved ? 'Saved' : 'Save Node'}
@@ -488,15 +488,15 @@ export const MarketPage = () => {
  <div className="space-y-3">
  <div className="flex items-center gap-3 text-[#4ADE80]">
  <PhoneCall size={18} />
- <span className="text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[11px] font-bold uppercase tracking-widest">
  Secure Network Channel
  </span>
  </div>
- <h3 className="text-3xl font-extrabold tracking-tight text-white" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <h3 className="font-sans text-3xl font-extrabold tracking-tight text-white">
  {intentForm.type === 'buy' ? 'Initialize Procurement' : 'Publish Supply'} for{' '}
  <span className="text-[#4ADE80]">{intentForm.marketName}</span>
  </h3>
- <p className="text-base text-white/60 leading-relaxed font-normal max-w-2xl" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <p className="font-sans text-base text-white/60 leading-relaxed font-normal max-w-2xl">
  Submit parameters. The cryptographic matching engine will validate the request and assign an execution specialist if offline verification is required.
  </p>
  </div>
@@ -504,7 +504,7 @@ export const MarketPage = () => {
  type="button"
  onClick={closeIntentForm}
  className="text-[11px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors bg-white/5 px-4 py-2 rounded-sm border border-white/10"
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+
  >
  Cancel Action
  </button>
@@ -520,7 +520,7 @@ export const MarketPage = () => {
  }
  placeholder="Commodity Specification"
  className="h-14 px-5 bg-black border border-white/10 focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] outline-none text-sm text-white rounded-sm placeholder:text-white/30 transition-all"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  />
  <input
  required
@@ -533,7 +533,7 @@ export const MarketPage = () => {
  }
  placeholder="Volume (Metric Tonnes)"
  className="h-14 px-5 bg-black border border-white/10 focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] outline-none text-sm text-white rounded-sm placeholder:text-white/30 transition-all"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  />
  <input
  required
@@ -544,7 +544,7 @@ export const MarketPage = () => {
  }
  placeholder="Authorized Representative"
  className="h-14 px-5 bg-black border border-white/10 focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] outline-none text-sm text-white rounded-sm placeholder:text-white/30 transition-all"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  />
  <input
  required
@@ -553,7 +553,7 @@ export const MarketPage = () => {
  onChange={(e) => setIntentForm({ ...intentForm, phone: e.target.value })}
  placeholder="Secure Contact Number"
  className="h-14 px-5 bg-black border border-white/10 focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] outline-none text-sm text-white rounded-sm placeholder:text-white/30 transition-all"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  />
  <input
  type="number"
@@ -565,7 +565,7 @@ export const MarketPage = () => {
  }
  placeholder="Target Execution Price (₹/Qtl) - Optional"
  className="h-14 px-5 bg-black border border-white/10 focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] outline-none text-sm text-white rounded-sm placeholder:text-white/30 transition-all"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  />
  <select
  value={intentForm.type}
@@ -577,7 +577,7 @@ export const MarketPage = () => {
  }
  className="h-14 px-5 bg-black border border-white/10 focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] outline-none text-sm text-white rounded-sm transition-all"
  title="Intent type"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  >
  <option value="buy">Execute Buy Contract</option>
  <option value="sell">Publish Sell Volume</option>
@@ -587,17 +587,17 @@ export const MarketPage = () => {
  onChange={(e) => setIntentForm({ ...intentForm, notes: e.target.value })}
  placeholder="Additional specifications, delivery windows, or compliance requirements."
  className="md:col-span-2 min-h-[140px] px-5 py-5 bg-black border border-white/10 focus:border-[#4ADE80] focus:ring-1 focus:ring-[#4ADE80] outline-none text-sm text-white leading-relaxed rounded-sm placeholder:text-white/30 transition-all resize-y"
- style={{ fontFamily: '"Inter", sans-serif' }}
+
  />
  <div className="md:col-span-2 flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-6 border-t border-white/5 mt-2">
- <p className="text-[11px] font-bold uppercase tracking-widest text-white/40" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <p className="font-sans text-[11px] font-bold uppercase tracking-widest text-white/40">
  Routing to: {intentForm.marketName} Node ({intentForm.district})
  </p>
  <Button
  type="submit"
  disabled={isSubmittingIntent}
  className="h-14 bg-[#4ADE80] text-black font-bold uppercase tracking-widest text-[11px] px-10 hover:bg-white transition-colors rounded-sm"
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+
  >
  {isSubmittingIntent ? 'Encrypting Request...' : 'Transmit Intent'}
  </Button>
@@ -615,20 +615,20 @@ export const MarketPage = () => {
  }}
  disabled={currentPage === 1}
  className="group flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest text-white/40 hover:text-[#4ADE80] disabled:opacity-20 disabled:pointer-events-none transition-all bg-white/5 px-6 py-3 rounded-sm border border-white/5"
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+
  >
  <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
  Previous Block
  </button>
 
  <div className="flex items-center gap-6 px-8 py-4 bg-black/50 border border-white/10 rounded-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
- <span className="text-[11px] font-bold uppercase tracking-widest text-white/40" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[11px] font-bold uppercase tracking-widest text-white/40">
  Ledger
  </span>
- <div className="text-2xl font-bold text-white tracking-tighter w-12 text-center" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <div className="font-sans text-2xl font-bold text-white tracking-tighter w-12 text-center">
  {currentPage.toString().padStart(2, '0')}
  </div>
- <span className="text-[11px] font-bold uppercase tracking-widest text-white/40" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[11px] font-bold uppercase tracking-widest text-white/40">
  of {totalPages.toLocaleString()}
  </span>
  </div>
@@ -640,7 +640,7 @@ export const MarketPage = () => {
  }}
  disabled={currentPage === totalPages}
  className="group flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest text-white/40 hover:text-[#4ADE80] disabled:opacity-20 disabled:pointer-events-none transition-all bg-white/5 px-6 py-3 rounded-sm border border-white/5"
- style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+
  >
  Next Block
  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -649,7 +649,7 @@ export const MarketPage = () => {
  )}
 
  <div className="pt-20 text-center relative z-10">
- <p className="text-[11px] font-bold uppercase tracking-widest text-white/30" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <p className="font-sans text-[11px] font-bold uppercase tracking-widest text-white/30">
  Global Market Directory — 6,944 Nodes Secured. Execution validation powered by Digital Orchard OS.
  </p>
  </div>

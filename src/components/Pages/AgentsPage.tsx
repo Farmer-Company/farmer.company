@@ -108,7 +108,7 @@ export const AgentsPage = () => {
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full text-xs font-mono uppercase tracking-widest mb-4">
             <BrainCircuit size={14} /> System Architecture
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-5xl md:text-7xl font-extrabold tracking-tighter text-white leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-sans text-5xl md:text-7xl font-extrabold tracking-tighter text-white leading-[1.05]">
             AN ORCHESTRATION OF <span className="text-primary block md:inline">INTELLIGENCE.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="text-lg md:text-xl text-white/60 leading-relaxed max-w-2xl mx-auto">
@@ -180,7 +180,7 @@ export const AgentsPage = () => {
                     {activeAgent.icon}
                   </div>
                   <div className="space-y-2">
-                    <h2 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>{activeAgent.name}</h2>
+                    <h2 className="font-sans text-2xl font-bold text-white tracking-tight">{activeAgent.name}</h2>
                     <p className="text-white/60 leading-relaxed text-sm md:text-base max-w-lg">{activeAgent.description}</p>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ export const AgentsPage = () => {
 
         {/* Bottom Explanation */}
         <div className="max-w-3xl mx-auto text-center border-t border-white/10 pt-16 space-y-6">
-           <h3 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Humans in the Loop.</h3>
+           <h3 className="font-sans text-2xl font-bold text-white tracking-tight">Humans in the Loop.</h3>
            <p className="text-white/60 leading-relaxed">
              While these agents operate continuously to forecast, route, and match—all high-stakes financial, contractual, and regulatory decisions remain explicitly human-approved. The AI drafts the smart contract, but the farmer signs it.
            </p>

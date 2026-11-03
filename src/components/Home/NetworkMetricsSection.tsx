@@ -44,15 +44,15 @@ export const NetworkMetricsSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-end mb-12">
           <div>
-            <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block mb-4" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+            <span className="font-sans text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block mb-4">
               NETWORK & ROADMAP
             </span>
-            <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tighter uppercase leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+            <h2 className="font-sans text-4xl md:text-6xl font-extrabold text-white tracking-tighter uppercase leading-[1.05]">
               Beta infrastructure,<br />
               live now.
             </h2>
           </div>
-          <p className="text-white/60 text-lg leading-relaxed max-w-2xl" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <p className="font-sans text-white/60 text-lg leading-relaxed max-w-2xl">
             Current coverage, roadmap targets, and live market signals sit in one band so buyers, farmers, fleets, and researchers can understand what is operational today.
           </p>
         </div>

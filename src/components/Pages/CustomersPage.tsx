@@ -17,10 +17,10 @@ export const CustomersPage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-6"
         >
-          <span className="text-[#A78BFA] text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+          <span className="font-sans text-[#A78BFA] text-[11px] font-bold uppercase tracking-widest">
             FOR GLOBAL BUYERS, FMCG & PROCESSORS
           </span>
-          <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-white leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h1 className="font-sans text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-white leading-[1.05]">
             Direct sourcing.<br />
             <span className="text-[#A78BFA]">Traceable at scale.</span>
           </h1>
@@ -31,7 +31,7 @@ export const CustomersPage = () => {
 
         {/* 1. What you get in 10 seconds */}
         <div className="space-y-8 border-t border-white/10 pt-12">
-          <h2 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h2 className="font-sans text-2xl font-bold text-white tracking-tight">
             What you get in 10 seconds
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -52,7 +52,7 @@ export const CustomersPage = () => {
 
         {/* 2. How it works in 3 steps */}
         <div className="space-y-8 border-t border-white/10 pt-12">
-          <h2 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h2 className="font-sans text-2xl font-bold text-white tracking-tight">
             How it works
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -83,7 +83,7 @@ export const CustomersPage = () => {
         {/* 3. Agent Mode Panel */}
         <div className="bg-[#111] border border-white/10 p-8 md:p-12 rounded-xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#A78BFA] to-transparent opacity-50" />
-          <h2 className="text-2xl font-bold text-white tracking-tight mb-8" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h2 className="font-sans text-2xl font-bold text-white tracking-tight mb-8">
             Use Digital Orchard with or without an agent.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
