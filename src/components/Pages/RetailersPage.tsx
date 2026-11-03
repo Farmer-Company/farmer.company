@@ -148,10 +148,10 @@ export const RetailersPage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-7"
         >
-          <span className="text-[#C084FC] text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+          <span className="font-sans text-[#C084FC] text-[11px] font-bold uppercase tracking-widest">
             FOR RETAILERS, BULK BUYERS & MSMES
           </span>
-          <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-white leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h1 className="font-sans text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-white leading-[1.05]">
             Source farm supply.<br />
             <span className="text-[#C084FC]">Run repeat procurement.</span>
           </h1>

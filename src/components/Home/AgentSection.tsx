@@ -13,7 +13,7 @@ export const AgentSection = () => {
           <div className="w-12 h-12 bg-[#4ADE80]/10 border border-[#4ADE80]/30 rounded-full flex items-center justify-center mx-auto mb-6">
             <Bot size={24} className="text-[#4ADE80]" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h2 className="font-sans text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
             Your own AI agent in the agricultural protocol.
           </h2>
         </div>
@@ -29,7 +29,7 @@ export const AgentSection = () => {
             className="bg-[#111] border border-white/10 p-8 rounded-xl hover:border-white/20 transition-colors"
           >
             <LineChart size={28} className="text-[#4ADE80] mb-6" />
-            <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: '"Inter", sans-serif' }}>Farm Agent</h3>
+            <h3 className="font-sans text-xl font-bold text-white mb-3">Farm Agent</h3>
             <p className="text-white/60 leading-relaxed text-sm">
               Watches prices, demand and logistics. Suggests when to plant, when to sell, and to whom.
             </p>
@@ -44,7 +44,7 @@ export const AgentSection = () => {
             className="bg-[#111] border border-white/10 p-8 rounded-xl hover:border-white/20 transition-colors"
           >
             <FileText size={28} className="text-[#A78BFA] mb-6" />
-            <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: '"Inter", sans-serif' }}>Buyer Agent</h3>
+            <h3 className="font-sans text-xl font-bold text-white mb-3">Buyer Agent</h3>
             <p className="text-white/60 leading-relaxed text-sm">
               Scans thousands of farms and vendors for your exact quality and price band, then drafts escrow-backed contracts for you to approve.
             </p>
@@ -59,7 +59,7 @@ export const AgentSection = () => {
             className="bg-[#111] border border-white/10 p-8 rounded-xl hover:border-white/20 transition-colors"
           >
             <Route size={28} className="text-[#FBBF24] mb-6" />
-            <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: '"Inter", sans-serif' }}>Logistics Agent</h3>
+            <h3 className="font-sans text-xl font-bold text-white mb-3">Logistics Agent</h3>
             <p className="text-white/60 leading-relaxed text-sm">
               Fills your trucks with pre-matched loads, reducing empty miles and spoilage.
             </p>
@@ -74,7 +74,7 @@ export const AgentSection = () => {
           transition={{ delay: 0.6 }}
           className="text-center mt-16 max-w-2xl mx-auto"
         >
-          <p className="text-white/40 text-sm font-medium tracking-wide uppercase" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+          <p className="font-sans text-white/40 text-sm font-medium tracking-wide uppercase">
             Every agent is linked to a real human account. <br className="md:hidden" />
             <span className="text-white/80">You set the limits; the agent does the heavy lifting.</span>
           </p>

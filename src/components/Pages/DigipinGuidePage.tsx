@@ -86,10 +86,10 @@ export const DigipinGuidePage = () => {
       <section className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10 lg:gap-16 items-start">
         <div className="space-y-10">
           <div className="space-y-6">
-            <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+            <span className="font-sans text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest">
               DIGIPIN ADDRESSING GUIDE
             </span>
-            <h1 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-white leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+            <h1 className="font-sans text-5xl md:text-7xl font-extrabold uppercase tracking-tighter text-white leading-[1.05]">
               One field code.<br />
               <span className="text-[#4ADE80]">Many precision levels.</span>
             </h1>

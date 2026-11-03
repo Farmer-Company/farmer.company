@@ -11,13 +11,13 @@ export const EcosystemSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest mb-4 block" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+          <span className="font-sans text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest mb-4 block">
             THE FOUR-PLAYER ECOSYSTEM
           </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-6" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h2 className="font-sans text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
             Digital Orchard is a four-player protocol.
           </h2>
-          <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <p className="font-sans text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">
             Each player runs their own dashboard and agent: FarmerOS, VendorOS, LogisticsOS, and ResearchOS, with Global Buyers plugged into the same unified fabric.
           </p>
         </div>
@@ -45,7 +45,7 @@ export const EcosystemSection = () => {
           >
             <div className="absolute inset-2 rounded-full border border-white/5 flex flex-col items-center justify-center bg-[#050505]">
               <Network size={28} className="text-[#4ADE80] mb-2" />
-              <div className="text-white font-bold text-sm tracking-tight text-center" style={{ fontFamily: '"Inter", sans-serif' }}>
+              <div className="font-sans text-white font-bold text-sm tracking-tight text-center">
                 Protocol<br />+ AI Agents
               </div>
             </div>

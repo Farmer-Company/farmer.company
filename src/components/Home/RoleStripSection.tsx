@@ -61,10 +61,10 @@ export const RoleStripSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <h2 className="font-sans text-3xl font-extrabold text-white tracking-tight">
             Choose your role in the ecosystem
           </h2>
-          <p className="text-white/50 mt-3" style={{ fontFamily: '"Inter", sans-serif' }}>
+          <p className="font-sans text-white/50 mt-3">
             Select your path to see how the protocol works for you.
           </p>
         </div>
@@ -87,7 +87,7 @@ export const RoleStripSection = () => {
                   <Icon size={18} style={{ color: role.color }} />
                 </div>
                 
-                <h3 className="text-white font-bold text-[16px] mb-3" style={{ fontFamily: '"Inter", sans-serif' }}>
+                <h3 className="font-sans text-white font-bold text-[16px] mb-3">
                   {role.title}
                 </h3>
                 
@@ -95,12 +95,12 @@ export const RoleStripSection = () => {
                   {role.outcomes.map((outcome, idx) => (
                     <li key={idx} className="text-white/60 text-[13px] leading-relaxed flex items-start gap-2">
                       <span className="text-white/30 mt-0.5">•</span>
-                      <span style={{ fontFamily: '"Inter", sans-serif' }}>{outcome}</span>
+                      <span>{outcome}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="flex items-center gap-2 text-[13px] font-bold tracking-wide uppercase transition-colors mt-auto" style={{ color: role.color, fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+                <div className="font-sans flex items-center gap-2 text-[13px] font-bold tracking-wide uppercase transition-colors mt-auto" style={{ color: role.color }}>
                   Explore <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </div>
               </button>

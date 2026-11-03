@@ -10,14 +10,14 @@ export const TestimonialsSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-20">
           <div className="space-y-6 max-w-2xl">
-            <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+            <span className="font-sans text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block">
               FIELD VALIDATION
             </span>
-            <h2 className="text-4xl md:text-6xl font-extrabold text-white tracking-tighter uppercase leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+            <h2 className="font-sans text-4xl md:text-6xl font-extrabold text-white tracking-tighter uppercase leading-[1.05]">
               Built in the field.<br />
               Proven by <span className="text-[#4ADE80]">volume.</span>
             </h2>
-            <p className="text-white/60 text-lg font-normal leading-[1.6]" style={{ fontFamily: '"Inter", sans-serif' }}>
+            <p className="font-sans text-white/60 text-lg font-normal leading-[1.6]">
               Tamil Nadu operations, farm gate trading, market data and verified transaction stories give the protocol its proof base before global scale.
             </p>
           </div>
@@ -27,8 +27,8 @@ export const TestimonialsSection = () => {
               <Activity size={20} />
             </div>
             <div>
-              <p className="text-white font-bold text-2xl tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>Tamil Nadu</p>
-              <p className="text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest mt-1" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Active Field Grounding</p>
+              <p className="font-sans text-white font-bold text-2xl tracking-tight">Tamil Nadu</p>
+              <p className="font-sans text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest mt-1">Active Field Grounding</p>
             </div>
           </div>
         </div>
@@ -44,14 +44,14 @@ export const TestimonialsSection = () => {
             <div className="absolute inset-0 opacity-40 grayscale mix-blend-luminosity" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?auto=format&fit=crop&w=800&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
             <div className="absolute bottom-10 left-10 right-10">
-              <span className="bg-[#4ADE80] text-black text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-widest mb-4 inline-block" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Enterprise Case Study</span>
-              <h3 className="text-white text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: '"Inter", sans-serif' }}>K. Muthusamy</h3>
-              <p className="text-white/50 text-sm font-medium uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>FPO Lead - 500+ Acres</p>
+              <span className="font-sans bg-[#4ADE80] text-black text-[10px] font-bold px-3 py-1 rounded-sm uppercase tracking-widest mb-4 inline-block">Enterprise Case Study</span>
+              <h3 className="font-sans text-white text-3xl font-bold tracking-tight mb-1">K. Muthusamy</h3>
+              <p className="font-sans text-white/50 text-sm font-medium uppercase tracking-widest">FPO Lead - 500+ Acres</p>
             </div>
           </div>
           <div className="lg:w-3/5 p-10 md:p-16 flex flex-col justify-center relative">
             <Quote className="absolute top-10 right-10 text-[#4ADE80]/10 w-32 h-32" />
-            <h4 className="text-2xl md:text-3xl text-white font-medium leading-[1.4] mb-10 relative z-10" style={{ fontFamily: '"Instrument Serif", serif', fontStyle: 'italic' }}>
+            <h4 className="font-serif italic text-2xl md:text-3xl text-white font-medium leading-[1.4] mb-10 relative z-10">
               "Before the OS, we accepted whatever the local agent offered. Last season, we aggregated 50 tons of tomatoes and executed a direct contract with a verified buyer. Our net realization increased, with capital secured in escrow."
             </h4>
             <div className="grid grid-cols-3 gap-8 pt-10 border-t border-white/10 relative z-10">
@@ -90,7 +90,7 @@ export const TestimonialsSection = () => {
 
 const CaseMetric = ({ label, value, primary = false, muted = false }: { label: string; value: string; primary?: boolean; muted?: boolean }) => (
   <div>
-    <p className={`${primary ? 'text-[#4ADE80]/50' : 'text-white/40'} text-[10px] font-bold uppercase tracking-widest mb-2`} style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{label}</p>
+    <p className={`${primary ? 'text-[#4ADE80]/50' : 'text-white/40'} text-[10px] font-bold uppercase tracking-widest mb-2`}>{label}</p>
     <p className={`${primary ? 'text-[#4ADE80] font-bold' : muted ? 'text-white' : 'text-white font-bold'} text-2xl font-mono tracking-tight`}>{value}</p>
   </div>
 );
@@ -110,16 +110,16 @@ const TestimonialCard = ({ quote, name, role, location, isBuyer }: any) => (
       <Star size={14} fill="currentColor" />
       <Star size={14} fill="currentColor" />
     </div>
-    <p className="text-white/80 text-base leading-[1.7] mb-10 flex-1" style={{ fontFamily: '"Inter", sans-serif' }}>
+    <p className="font-sans text-white/80 text-base leading-[1.7] mb-10 flex-1">
       "{quote}"
     </p>
     <div className="flex items-center gap-4 border-t border-white/5 pt-6 mt-auto">
-      <div className={`w-10 h-10 rounded-sm flex items-center justify-center font-bold text-lg ${isBuyer ? 'bg-white/10 text-white' : 'bg-[#4ADE80]/20 text-[#4ADE80]'}`} style={{ fontFamily: '"Inter", sans-serif' }}>
+      <div className={`w-10 h-10 rounded-sm flex items-center justify-center font-bold text-lg ${isBuyer ? 'bg-white/10 text-white' : 'bg-[#4ADE80]/20 text-[#4ADE80]'}`}>
         {name.charAt(0)}
       </div>
       <div>
-        <p className="text-white font-bold text-sm tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>{name}</p>
-        <p className="text-white/40 text-[10px] uppercase tracking-widest mt-0.5" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{role} - {location}</p>
+        <p className="font-sans text-white font-bold text-sm tracking-tight">{name}</p>
+        <p className="font-sans text-white/40 text-[10px] uppercase tracking-widest mt-0.5">{role} - {location}</p>
       </div>
     </div>
   </motion.div>

@@ -28,19 +28,19 @@ export const SupplyCRMPage = () => {
   className="space-y-8 max-w-3xl"
  >
  <div className="flex items-center gap-4">
- <span className="px-3 py-1.5 bg-[#4ADE80]/10 text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest rounded-sm border border-[#4ADE80]/20" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans px-3 py-1.5 bg-[#4ADE80]/10 text-[#4ADE80] text-[10px] font-bold uppercase tracking-widest rounded-sm border border-[#4ADE80]/20">
  Institutional Protocol
  </span>
- <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Global Trade Enabled</span>
+ <span className="font-sans text-white/40 text-[10px] font-bold uppercase tracking-widest">Global Trade Enabled</span>
  </div>
- <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tighter uppercase leading-[1.05]" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <h1 className="font-sans text-5xl md:text-7xl font-extrabold text-white tracking-tighter uppercase leading-[1.05]">
  Supply <span className="text-[#4ADE80]">CRM</span>
  </h1>
- <p className="text-white/60 text-lg md:text-xl font-normal leading-relaxed" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <p className="font-sans text-white/60 text-lg md:text-xl font-normal leading-relaxed">
  Manage your supply node as a global enterprise. Direct institutional contracting, automated compliance, and real-time escrow settlement—all within a single cryptographic protocol.
  </p>
  <div className="flex flex-wrap gap-4 pt-6">
- <button className="px-8 py-4 bg-[#4ADE80] text-black font-bold uppercase tracking-wider text-[11px] flex items-center gap-3 hover:bg-white transition-colors rounded-sm" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <button className="font-sans px-8 py-4 bg-[#4ADE80] text-black font-bold uppercase tracking-wider text-[11px] flex items-center gap-3 hover:bg-white transition-colors rounded-sm">
  Access Procurement Network <ArrowRight size={16} />
  </button>
  </div>
@@ -66,7 +66,7 @@ export const SupplyCRMPage = () => {
  <section className="max-w-7xl mx-auto mb-40 relative z-10">
  <div className="flex items-center gap-6 mb-16">
  <div className="h-px flex-1 bg-white/10" />
- <h2 className="text-[11px] text-white/40 font-bold uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>Protocol Modules</h2>
+ <h2 className="font-sans text-[11px] text-white/40 font-bold uppercase tracking-widest">Protocol Modules</h2>
  <div className="h-px flex-1 bg-white/10" />
  </div>
 
@@ -115,10 +115,10 @@ export const SupplyCRMPage = () => {
  <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#4ADE80]/5 blur-[150px] rounded-full pointer-events-none" />
  
  <div className="relative z-10">
- <span className="text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block mb-6" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <span className="font-sans text-[#4ADE80] text-[11px] font-bold uppercase tracking-widest block mb-6">
  EXECUTION PROTOCOL
  </span>
- <h2 className="text-4xl md:text-5xl font-extrabold text-white uppercase tracking-tighter mb-20" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <h2 className="font-sans text-4xl md:text-5xl font-extrabold text-white uppercase tracking-tighter mb-20">
  Institutional Workflow
  </h2>
  
@@ -136,13 +136,13 @@ export const SupplyCRMPage = () => {
  <div className="w-20 h-20 bg-[#4ADE80]/10 border border-[#4ADE80]/20 rounded-full flex items-center justify-center mx-auto mb-10 shadow-[0_0_50px_rgba(74,222,128,0.1)]">
  <ShieldCheck className="text-[#4ADE80]" size={36} />
  </div>
- <h2 className="text-4xl md:text-6xl font-extrabold text-white uppercase tracking-tighter mb-8" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <h2 className="font-sans text-4xl md:text-6xl font-extrabold text-white uppercase tracking-tighter mb-8">
  Request Node Access
  </h2>
- <p className="text-white/60 text-lg font-normal leading-relaxed mb-12" style={{ fontFamily: '"Inter", sans-serif' }}>
+ <p className="font-sans text-white/60 text-lg font-normal leading-relaxed mb-12">
  The Global Agri OS is currently in private beta. We are onboarding verified exporters, commercial farms, and institutional buyers in limited cohorts. Apply below for network clearance.
  </p>
- <button className="px-12 py-5 bg-white text-black font-bold uppercase tracking-widest text-[11px] hover:bg-[#4ADE80] transition-colors rounded-sm shadow-2xl" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <button className="font-sans px-12 py-5 bg-white text-black font-bold uppercase tracking-widest text-[11px] hover:bg-[#4ADE80] transition-colors rounded-sm shadow-2xl">
  Initialize Application
  </button>
  </section>
@@ -153,12 +153,12 @@ export const SupplyCRMPage = () => {
 const MetricBox = ({ value, label, sub, isPrimary }: any) => (
  <div className="bg-black/50 p-10 flex flex-col justify-between group hover:bg-[#4ADE80]/5 transition-colors">
  <div className="space-y-2">
- <span className={`text-4xl font-extrabold tracking-tighter ${isPrimary ? 'text-[#4ADE80]' : 'text-white'}`} style={{ fontFamily: '"Inter", sans-serif' }}>{value}</span>
- <p className="text-[11px] font-bold text-white/40 uppercase tracking-widest" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{label}</p>
+ <span className={`text-4xl font-extrabold tracking-tighter ${isPrimary ? 'text-[#4ADE80]' : 'text-white'}`}>{value}</span>
+ <p className="font-sans text-[11px] font-bold text-white/40 uppercase tracking-widest">{label}</p>
  </div>
  <div className="mt-8 flex items-center gap-3">
  <div className={`w-1.5 h-1.5 rounded-full ${isPrimary ? 'bg-[#4ADE80]' : 'bg-white/20'}`} />
- <span className="text-[10px] text-white/40 uppercase tracking-widest font-bold" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>{sub}</span>
+ <span className="font-sans text-[10px] text-white/40 uppercase tracking-widest font-bold">{sub}</span>
  </div>
  </div>
 );
@@ -173,12 +173,12 @@ const FeatureCard = ({ icon, title, desc, action }: any) => (
  {icon}
  </div>
  <div className="space-y-4">
- <h3 className="text-2xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>{title}</h3>
- <p className="text-base text-white/50 leading-relaxed font-normal" style={{ fontFamily: '"Inter", sans-serif' }}>{desc}</p>
+ <h3 className="font-sans text-2xl font-bold text-white tracking-tight">{title}</h3>
+ <p className="font-sans text-base text-white/50 leading-relaxed font-normal">{desc}</p>
  </div>
  </div>
  <div className="mt-12">
- <button className="flex items-center gap-2 text-[11px] font-bold text-[#4ADE80] uppercase tracking-widest border-b border-[#4ADE80]/20 pb-1 hover:border-[#4ADE80] transition-all" style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}>
+ <button className="font-sans flex items-center gap-2 text-[11px] font-bold text-[#4ADE80] uppercase tracking-widest border-b border-[#4ADE80]/20 pb-1 hover:border-[#4ADE80] transition-all">
  {action} <Plus size={14} />
  </button>
  </div>
@@ -187,10 +187,10 @@ const FeatureCard = ({ icon, title, desc, action }: any) => (
 
 const WorkflowStep = ({ num, title, desc }: any) => (
  <div className="space-y-6 relative">
- <span className="text-8xl font-extrabold text-white/5 tracking-tighter leading-none block -ml-2" style={{ fontFamily: '"Inter", sans-serif' }}>{num}</span>
+ <span className="font-sans text-8xl font-extrabold text-white/5 tracking-tighter leading-none block -ml-2">{num}</span>
  <div className="space-y-4 relative z-10 -mt-10">
- <h4 className="text-xl font-bold text-white tracking-tight" style={{ fontFamily: '"Inter", sans-serif' }}>{title}</h4>
- <p className="text-sm text-white/50 leading-relaxed font-normal" style={{ fontFamily: '"Inter", sans-serif' }}>{desc}</p>
+ <h4 className="font-sans text-xl font-bold text-white tracking-tight">{title}</h4>
+ <p className="font-sans text-sm text-white/50 leading-relaxed font-normal">{desc}</p>
  </div>
  </div>
 );
