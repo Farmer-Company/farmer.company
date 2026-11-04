@@ -21,12 +21,12 @@ import { FAQSection } from './components/Home/FAQSection';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LanguageProvider } from './lib/LanguageContext';
 import { AuthProvider } from './lib/AuthContext';
-import { MarketPage } from './components/Pages/Market';
-import { PricesPage } from './components/Pages/Prices';
-import { InsightsPage } from './components/Pages/Insights';
-import { ConfigurePage } from './components/Pages/Configure';
+
+
+
+
 import { AuthFlow } from './components/AuthFlow';
-import { SupplyCRMPage } from './components/Pages/SupplyCRM';
+
 import { FarmersPage } from './components/Pages/FarmersPage';
 import { VendorsPage } from './components/Pages/VendorsPage';
 import { LogisticsPage } from './components/Pages/LogisticsPage';
@@ -39,6 +39,13 @@ import { ResearchersPage } from './components/Pages/ResearchersPage';
 import { AgentsPage } from './components/Pages/AgentsPage';
 import { DemoPage } from './components/Pages/DemoPage';
 import { DigipinGuidePage } from './components/Pages/DigipinGuidePage';
+
+
+const MarketPage = React.lazy(() => import('./components/Pages/Market').then(m => ({ default: m.MarketPage })));
+const PricesPage = React.lazy(() => import('./components/Pages/Prices').then(m => ({ default: m.PricesPage })));
+const InsightsPage = React.lazy(() => import('./components/Pages/Insights').then(m => ({ default: m.InsightsPage })));
+const ConfigurePage = React.lazy(() => import('./components/Pages/Configure').then(m => ({ default: m.ConfigurePage })));
+const SupplyCRMPage = React.lazy(() => import('./components/Pages/SupplyCRM').then(m => ({ default: m.SupplyCRMPage })));
 
 const HomePage = () => (
 <main>
@@ -65,6 +72,7 @@ export default function App() {
  <ErrorBoundary>
  <Navbar />
  <LocationPanel />
+ <React.Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
  <Routes>
  <Route path="/" element={<HomePage />} />
  <Route path="/story" element={<StoryPage />} />
@@ -86,6 +94,7 @@ export default function App() {
  <Route path="/demo" element={<DemoPage />} />
  <Route path="*" element={<NotFound />} />
  </Routes>
+ </React.Suspense>
  
  <Footer />
  </ErrorBoundary>
