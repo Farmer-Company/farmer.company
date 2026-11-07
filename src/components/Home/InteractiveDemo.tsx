@@ -11,6 +11,12 @@ const CROPS = [
 
 type Role = 'farmer' | 'buyer' | 'logistics';
 
+interface Bar {
+  label: string;
+  percent: number;
+  color: string;
+}
+
 export const InteractiveDemo = () => {
   const [selectedCrop, setSelectedCrop] = useState(CROPS[0]);
   const [volume, setVolume] = useState<number>(1000);
@@ -23,8 +29,8 @@ export const InteractiveDemo = () => {
   // Calculate states based on role
   let legacyRevenue = 0;
   let protocolRevenue = 0;
-  let legacyBars = [];
-  let protocolBars = [];
+  let legacyBars: Bar[] = [];
+  let protocolBars: Bar[] = [];
   let accentColor = '';
 
   if (role === 'farmer') {
